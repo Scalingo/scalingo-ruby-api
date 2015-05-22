@@ -1,7 +1,4 @@
 module Scalingo
-  MAJOR = '1'
-  MINOR = '0'
-  PATCH = '0'
-  VERSION = [MAJOR, MINOR, PATCH].join('.')
+  VERSION = '1.0.0.alpha1'
 end
 
