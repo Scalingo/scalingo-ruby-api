@@ -4,12 +4,8 @@ A ruby wrapper for the Scalingo API
 
 ## Installation
 
-This gem is not yet deployed on rubygems.
-
-Add this line to your application's Gemfile:
-
 ```ruby
-gem 'scalingo-ruby-api', github: 'Aethelflaed/scalingo-ruby-api'
+gem 'scalingo-ruby-api', '1.0.0.alpha1'
 ```
 
 And then execute:
@@ -21,7 +17,7 @@ bundle
 Or install it yourself as:
 
 ```
-gem install slack-api
+gem install scalingo-ruby-api --prerelease
 ```
 
 ## Usage
