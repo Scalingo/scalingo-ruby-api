@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 require_relative 'scalingo/error'
 require_relative 'scalingo/configuration'
 require_relative 'scalingo/api'
