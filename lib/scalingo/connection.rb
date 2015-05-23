@@ -10,6 +10,8 @@ module Scalingo
 
     private
     def connection
+      raise MissingToken.new if !token
+
       options = {
         :headers => {
           'Accept' => 'application/json; charset=utf-8',
