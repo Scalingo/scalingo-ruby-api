@@ -77,7 +77,7 @@ module Scalingo
         @resource_class ||= begin
                               Scalingo::Endpoint.const_get(self.class.name.singularize.split('::').last)
                             rescue
-                              OpenStruct
+                              Resource
                             end
       end
 
