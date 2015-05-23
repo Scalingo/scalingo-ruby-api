@@ -9,7 +9,8 @@ SimpleCov.start if ENV['COVERAGE']
 
 require 'minitest/autorun'
 require 'webmock/minitest'
-require 'active_support/test_case'
+require 'active_support'
+ActiveSupport.test_order = :random
 
 require File.expand_path("../../lib/scalingo", __FILE__)
 
