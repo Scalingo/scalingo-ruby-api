@@ -3,11 +3,6 @@ Dir[File.expand_path('../../faraday/*.rb', __FILE__)].each{|f| require f}
 
 module Scalingo
   module Connection
-    protected
-    def parse_json
-      true
-    end
-
     private
     def connection
       raise MissingToken.new if !token
@@ -28,7 +23,7 @@ module Scalingo
         connection.use Faraday::Response::ParseJson if parse_json
         connection.use FaradayMiddleware::RaiseHttpException
         connection.adapter(adapter)
-        connection.basic_auth('', token) if token
+        connection.basic_auth('', token)
       end
     end
   end

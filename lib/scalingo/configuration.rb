@@ -10,7 +10,8 @@ module Scalingo
       :token,
       :endpoint,
       :user_agent,
-      :proxy
+      :proxy,
+      :parse_json,
     ].freeze
 
     # The adapter that will be used to connect if none is set
@@ -31,6 +32,9 @@ module Scalingo
 
     # The user agent that will be sent to the Api endpoint if none is set
     DEFAULT_USER_AGENT = "Scalingo Ruby Gem #{Scalingo::VERSION}".freeze
+
+    # Parse json by default, only changed when getting text result (e.g. Logs)
+    DEFAULT_PARSE_JSON = true
 
     # @private
     attr_accessor *VALID_OPTIONS_KEYS
@@ -59,6 +63,7 @@ module Scalingo
       self.endpoint   = DEFAULT_ENDPOINT
       self.user_agent = DEFAULT_USER_AGENT
       self.proxy      = DEFAULT_PROXY
+      self.parse_json = DEFAULT_PARSE_JSON
     end
   end
 end

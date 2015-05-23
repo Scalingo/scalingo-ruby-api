@@ -6,6 +6,7 @@ module Scalingo
 
     def initialize(app)
       super({endpoint: ''})
+      self.parse_json = false
       @app = app
     end
 
@@ -21,10 +22,6 @@ module Scalingo
     def log_token
       self.endpoint, log_token = app.logs_url.split('?')
       @log_token = log_token.split('=').last
-    end
-
-    def parse_json
-      false
     end
 
     def request(method, path, options)
