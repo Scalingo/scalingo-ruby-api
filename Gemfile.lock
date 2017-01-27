@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    scalingo-ruby-api (1.0.0.alpha2)
+    scalingo-ruby-api (1.0.0)
       activesupport (>= 4, < 6)
       faraday (>= 0.7, <= 0.9)
       faraday_middleware (~> 0.8)
