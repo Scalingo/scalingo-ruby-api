@@ -19,7 +19,7 @@ class ScalingoTest < BaseTestCase
 
   test 'method_missing' do
     stub(:get, '').to_return(status: 200)
-    assert_equal Scalingo.client.get(''), Scalingo.get('')
+    assert Scalingo.client.get('') == Scalingo.get('')
   end
 end
 

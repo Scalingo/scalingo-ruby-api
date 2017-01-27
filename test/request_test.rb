@@ -22,19 +22,19 @@ class RequestTest < BaseTestCase
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
       assert_equal '', @request.path
-      assert_equal nil, @request.body
+      assert_nil @request.body
 
       Scalingo.public_send(sym, 'hello')
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
       assert_equal 'hello', @request.path
-      assert_equal nil, @request.body
+      assert_nil @request.body
 
       Scalingo.public_send(sym, 'hello', {hello: :world})
       assert_equal sym, @request.http_method
       assert_equal({"hello" => "world"}, @request.query)
       assert_equal 'hello', @request.path
-      assert_equal nil, @request.body
+      assert_nil @request.body
     end
   end
 
