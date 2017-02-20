@@ -5,7 +5,7 @@ A ruby wrapper for the Scalingo API
 ## Installation
 
 ```ruby
-gem 'scalingo-ruby-api', '1.0.0.alpha1'
+gem 'scalingo-ruby-api', '1.0.0'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ bundle
 Or install it yourself as:
 
 ```
-gem install scalingo-ruby-api --prerelease
+gem install scalingo-ruby-api
 ```
 
 ## Usage
