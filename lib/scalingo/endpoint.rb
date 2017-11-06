@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module Scalingo
   module Endpoint
     def self.included(base)

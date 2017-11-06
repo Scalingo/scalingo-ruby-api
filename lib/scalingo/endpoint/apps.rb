@@ -53,6 +53,7 @@ module Scalingo
       resources :collaborators
       resources :deployments
       resources :domains
+      resources :stats
       resources :variables
       resources :events, collection_only: true
     end
