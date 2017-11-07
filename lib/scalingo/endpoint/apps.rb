@@ -51,6 +51,7 @@ module Scalingo
 
       resources :addons
       resources :collaborators
+      resources :containers
       resources :deployments
       resources :domains
       resources :stats
