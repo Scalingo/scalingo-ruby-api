@@ -1,3 +1,7 @@
+## 1.1.1 - 2019/01/08
+
+* Update metadata on rubygems
+
 ## 1.1.0 - 2019/01/08
 
 * Add /apps/:id/containers and /apps/:id/stats endpoints
