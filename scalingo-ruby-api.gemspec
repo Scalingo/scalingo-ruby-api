@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.name        = 'scalingo-ruby-api'
   s.version     = Scalingo::VERSION
-  s.authors     = ['Geoffroy Planquart']
-  s.email       = ['geoffroy@planquart.fr']
-  s.homepage    = 'https://github.com/Aethelflaed/scalingo-ruby-api'
+  s.authors     = ['Leo Unbekandt', 'Geoffroy Planquart']
+  s.email       = ['leo@scalingo.com', 'geoffroy@planquart.fr']
+  s.homepage    = 'https://github.com/Scalingo/scalingo-ruby-api'
   s.summary     = 'Ruby API for the awesome scalingo project !'
   s.description = 'Ruby wrapper around the web API of scalingo.io'
 
