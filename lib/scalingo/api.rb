@@ -1,7 +1,9 @@
 require_relative 'connection'
+require_relative 'jwt'
 require_relative 'request'
 require_relative 'configuration'
 require_relative 'endpoint'
+require_relative 'regions_cache'
 
 module Scalingo
   class Api
@@ -15,8 +17,10 @@ module Scalingo
     end
 
     include Connection
+    include JWT
     include Request
     include Endpoint
+    include RegionsCache
   end
 end
 

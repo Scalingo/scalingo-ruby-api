@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'simplecov'
+require 'jwt'
 require 'pry'
 
 SimpleCov.configure do
@@ -26,17 +27,57 @@ class BaseTestCase < ActiveSupport::TestCase
     WebMock.reset!
   end
 
-  def endpoint_uri
-    Scalingo.endpoint.split('://').join("://:#{Scalingo.token}@")
+  def auth_endpoint_uri
+    Scalingo.auth_endpoint
   end
 
-  def stub(method, path)
+  def url_with_basic_auth(url)
+    return url.split('://').join("://:#{Scalingo.token}@")
+  end
+
+  def stub(method, path, auth_api: false, region: 'test-1')
+    uri = "https://api.#{region}.scalingo.com"
+    uri = auth_endpoint_uri if auth_api
     case path
     when String
-      stub_request(method, "#{endpoint_uri}#{path}")
+      uri = url_with_basic_auth(uri) if path == '/tokens/exchange'
+      return stub_request(method, "#{uri}#{path}")
     when Regexp
-      stub_request(method, /#{Regexp.quote(endpoint_uri)}#{path}/)
+      return stub_request(method, /#{Regexp.quote(uri)}#{path}/)
     end
+  end
+
+  def stub_regions(region)
+    stub(
+      :get, '/regions', auth_api: true,
+    ).to_return(
+      status: 200,
+      body: { regions: [
+        {
+          name: region,
+          api: "api.#{region}.scalingo.com",
+          database_api: "db-api.#{region}.scalingo.com",
+        },
+      ] }.to_json,
+    )
+  end
+
+  def stub_token_exchange
+    stub(
+      :post, '/tokens/exchange', auth_api: true,
+    ).to_return(
+      status: 200,
+      body: { token: generate_test_jwt }.to_json,
+    )
+  end
+
+  def generate_test_jwt
+    payload = {
+      iss: 'Scalingo Test', iat: Time.current.utc.to_i, uuid: SecureRandom.uuid,
+      rnd: SecureRandom.hex, exp: (Time.now.utc.to_i + 3600),
+    }
+    token = JWT.encode payload, '0' * 100, 'HS512'
+    return token
   end
 end
 

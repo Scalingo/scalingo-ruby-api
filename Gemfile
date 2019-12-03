@@ -2,8 +2,11 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'pry'
 gem 'rake'
-gem 'simplecov'
-gem 'webmock'
 
+group :development, :test do
+  gem 'jwt'
+  gem 'pry-byebug'
+  gem 'simplecov'
+  gem 'webmock'
+end

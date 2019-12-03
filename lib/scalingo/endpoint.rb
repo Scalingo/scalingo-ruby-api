@@ -9,8 +9,13 @@ module Scalingo
     module ClassMethods
       def resources(name, opts = {})
         name = name.to_s
+
+        endpoint_opts = { auth_api: opts[:auth_api], always_json: opts[:always_json] }
+
         define_method(name.pluralize.underscore) do
-          Scalingo::Endpoint.const_get(name.pluralize.camelize).new(self)
+          Scalingo::Endpoint.const_get(
+            name.pluralize.camelize,
+          ).new(self, nil, endpoint_opts)
         end
 
         return if opts[:collection_only]
@@ -26,19 +31,28 @@ module Scalingo
     resources :account_keys
     resources :addon_providers,  collection_only: true
     resources :addon_categories, collection_only: true
+    resources :regions,          collection_only: true, auth_api: true, always_json: true
 
     module Base
       attr_accessor :api
       attr_accessor :prefix
+      attr_accessor :auth_api
+      attr_accessor :always_json
 
-      def initialize(api, prefix = nil)
+      def initialize(api, prefix = nil, opts = {})
         self.api = api
+        self.auth_api = opts.fetch(:auth_api, false)
+        self.always_json = opts.fetch(:always_json, false)
         self.prefix = prefix || self.class.name.split('::').last.underscore.pluralize
       end
 
       Request::REQUEST_METHODS.each do |method|
         define_method(method) do |path = nil, options = {}|
-          api.send(method, "#{prefix}/#{path}", options)
+          req_path = prefix
+          req_path += "/#{path}" if !path.nil? && path != ''
+          options.merge!(auth_api: auth_api) if auth_api
+          options.merge!(always_json: always_json) if always_json
+          api.send(method, req_path, options)
         end
       end
     end
@@ -47,8 +61,8 @@ module Scalingo
       include Base
       include Endpoint
 
-      def initialize(api, prefix, data = {})
-        Base.instance_method(:initialize).bind(self).call(api, prefix)
+      def initialize(api, prefix, opts = {}, data = {})
+        Base.instance_method(:initialize).bind(self).call(api, prefix, opts)
         OpenStruct.instance_method(:initialize).bind(self).call(data)
       end
     end
@@ -59,16 +73,16 @@ module Scalingo
       include Enumerable
 
       def all
-        get[collection_name].map{|r| resource_class.new(self, r[find_by], r)}
+        get[collection_name].map { |r| resource_class.new(self, r[find_by], {}, r) }
       end
-      alias_method :to_a, :all
+      alias to_a all
 
       def each
         block_given? ? all.each(&Proc.new) : all.each
       end
 
       def find(id)
-        detect{|r| r[find_by] == id}
+        detect { |r| r[find_by] == id }
       end
 
       def collection_name

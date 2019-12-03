@@ -9,55 +9,64 @@ class RequestTest < BaseTestCase
         http_method: request.method,
         headers: request.headers,
         uri: request.uri,
-        query: request.uri.query ? Hash[request.uri.query.split('&').map{|q| q.split('=')}] : {},
+        query: request.uri.query ? Hash[request.uri.query.split('&').map { |q| q.split('=') }] : {},
         path: request.uri.path[4..-1],
       )
-      {status: 200}
+      { status: 200 }
     end
   end
 
   [:get, :delete].each do |sym|
-    test "#{sym}" do
-      Scalingo.public_send(sym, '')
+    test sym.to_s do
+      client = Scalingo::Client.new(region: 'test-1')
+
+      stub_regions('test-1')
+      stub_token_exchange
+
+      client.public_send(sym, '')
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
-      assert_equal '', @request.path
+      assert_equal nil, @request.path
       assert_nil @request.body
 
-      Scalingo.public_send(sym, 'hello')
+      client.public_send(sym, 'hello')
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
       assert_equal 'hello', @request.path
       assert_nil @request.body
 
-      Scalingo.public_send(sym, 'hello', {hello: :world})
+      client.public_send(sym, 'hello', hello: :world)
       assert_equal sym, @request.http_method
-      assert_equal({"hello" => "world"}, @request.query)
+      assert_equal({ 'hello' => 'world' }, @request.query)
       assert_equal 'hello', @request.path
       assert_nil @request.body
     end
   end
 
   [:post, :patch, :put].each do |sym|
-    test "#{sym}" do
-      Scalingo.public_send(sym, '')
+    test sym.to_s do
+      client = Scalingo::Client.new(region: 'test-1')
+
+      stub_token_exchange
+      stub_regions('test-1')
+
+      client.public_send(sym, '')
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
-      assert_equal '', @request.path
+      assert_equal nil, @request.path
       assert_equal '', @request.body
 
-      Scalingo.public_send(sym, 'hello')
+      client.public_send(sym, 'hello')
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
       assert_equal 'hello', @request.path
       assert_equal '', @request.body
 
-      Scalingo.public_send(sym, 'hello', {hello: :world})
+      client.public_send(sym, 'hello', hello: :world)
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
       assert_equal 'hello', @request.path
-      assert_equal({hello: :world}, @request.body)
+      assert_equal({ hello: :world }, @request.body)
     end
   end
 end
-

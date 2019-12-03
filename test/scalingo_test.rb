@@ -11,15 +11,4 @@ class ScalingoTest < BaseTestCase
   test 'client' do
     assert_equal Scalingo::Client, Scalingo.client.class
   end
-
-  test 'respond_to' do
-    assert !Scalingo.methods.include?(:get)
-    assert Scalingo.respond_to?(:get)
-  end
-
-  test 'method_missing' do
-    stub(:get, '').to_return(status: 200)
-    assert Scalingo.client.get('') == Scalingo.get('')
-  end
 end
-

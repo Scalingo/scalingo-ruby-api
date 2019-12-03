@@ -21,26 +21,28 @@ class EndpointBaseTest < BaseTestCase
   end
 
   Scalingo::Request::REQUEST_METHODS.each do |method|
-    test "#{method}" do
+    test method.to_s do
+      default_opts = {}
+
       @base.send(method)
       assert_equal method, @api.method_called.http_method
-      assert_equal "#{@prefix}/", @api.method_called.path
-      assert_equal({}, @api.method_called.options)
+      assert_equal @prefix.to_s, @api.method_called.path
+      assert_equal(default_opts, @api.method_called.options)
 
       @base.send(method, 'test')
       assert_equal method, @api.method_called.http_method
       assert_equal "#{@prefix}/test", @api.method_called.path
-      assert_equal({}, @api.method_called.options)
+      assert_equal(default_opts, @api.method_called.options)
 
-      @base.send(method, nil, {a: 1})
+      @base.send(method, nil, a: 1)
       assert_equal method, @api.method_called.http_method
-      assert_equal "#{@prefix}/", @api.method_called.path
-      assert_equal({a: 1}, @api.method_called.options)
+      assert_equal @prefix.to_s, @api.method_called.path
+      assert_equal(default_opts.merge(a: 1), @api.method_called.options)
 
-      @base.send(method, 'test', {a: 1})
+      @base.send(method, 'test', a: 1)
       assert_equal method, @api.method_called.http_method
       assert_equal "#{@prefix}/test", @api.method_called.path
-      assert_equal({a: 1}, @api.method_called.options)
+      assert_equal(default_opts.merge(a: 1), @api.method_called.options)
     end
   end
 
@@ -49,4 +51,3 @@ class EndpointBaseTest < BaseTestCase
     assert_equal 'endpoint_base_classes', @base.prefix
   end
 end
-

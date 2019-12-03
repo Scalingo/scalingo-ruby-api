@@ -2,7 +2,9 @@ require 'test_helper'
 
 class EndpointResourceTest < BaseTestCase
   test 'initialize' do
-    resource = Scalingo::Endpoint::Resource.new('api', 'prefix', {hello: :world, world: :hello})
+    resource = Scalingo::Endpoint::Resource.new(
+      'api', 'prefix', {}, hello: :world, world: :hello,
+    )
     assert_equal 'api', resource.api
     assert_equal 'prefix', resource.prefix
 

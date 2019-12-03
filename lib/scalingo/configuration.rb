@@ -9,6 +9,8 @@ module Scalingo
       :adapter,
       :token,
       :endpoint,
+      :auth_endpoint,
+      :region,
       :user_agent,
       :proxy,
       :parse_json,
@@ -23,9 +25,10 @@ module Scalingo
     DEFAULT_TOKEN = nil
 
     # The endpoint that will be used to connect if none is set
-    #
-    # @note There is no reason to use any other endpoint at this time
-    DEFAULT_ENDPOINT = 'https://api.scalingo.com/v1/'.freeze
+    DEFAULT_ENDPOINT = 'https://api.scalingo.com/v1'.freeze
+
+    # The endpoint to exchange the token with a JWT
+    DEFAULT_AUTH_ENDPOINT = 'https://auth.scalingo.com/v1'.freeze
 
     # By default, don't use a proxy server
     DEFAULT_PROXY = nil
@@ -58,12 +61,14 @@ module Scalingo
 
     # Reset all configuration options to defaults
     def reset
-      self.adapter    = DEFAULT_ADAPTER
-      self.token      = DEFAULT_TOKEN
-      self.endpoint   = DEFAULT_ENDPOINT
-      self.user_agent = DEFAULT_USER_AGENT
-      self.proxy      = DEFAULT_PROXY
-      self.parse_json = DEFAULT_PARSE_JSON
+      self.adapter       = DEFAULT_ADAPTER
+      self.token         = DEFAULT_TOKEN
+      self.endpoint      = DEFAULT_ENDPOINT
+      self.auth_endpoint = DEFAULT_AUTH_ENDPOINT
+      self.region        = nil
+      self.user_agent    = DEFAULT_USER_AGENT
+      self.proxy         = DEFAULT_PROXY
+      self.parse_json    = DEFAULT_PARSE_JSON
     end
   end
 end

@@ -6,7 +6,6 @@ end
 class EndpointCollectionTest < BaseTestCase
   class ApiMock
     def get(path, options = {})
-      path = path[0..-2]
       {
         path => collection,
       }

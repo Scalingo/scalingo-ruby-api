@@ -1,6 +1,7 @@
 module Scalingo
   module Endpoint
-    class Events < Collection
+    class Regions < Collection
     end
   end
 end
+
