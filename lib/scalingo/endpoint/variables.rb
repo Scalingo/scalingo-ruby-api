@@ -2,16 +2,16 @@ module Scalingo
   module Endpoint
     class Variables < Collection
       def all(aliases = true)
-        get(nil, {aliases: aliases})[collection_name]
+        get(nil, aliases: aliases)[collection_name]
       end
 
       def create(name, value)
-        post(nil, {variable: {name: name, value: value}})
+        post(nil, variable: { name: name, value: value })
       end
     end
     class Variable < Resource
       def update(value)
-        patch(nil, {variable: {value: value}})
+        patch(nil, variable: { value: value })
       end
 
       def destroy
@@ -20,4 +20,3 @@ module Scalingo
     end
   end
 end
-

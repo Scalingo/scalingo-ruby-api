@@ -5,7 +5,7 @@ A ruby wrapper for the Scalingo API
 ## Installation
 
 ```ruby
-gem 'scalingo-ruby-api', '1.0.0'
+gem 'scalingo-ruby-api', '~> 2'
 ```
 
 And then execute:
@@ -22,33 +22,69 @@ gem install scalingo-ruby-api
 
 ## Usage
 
+### Global configuration
+
 ```ruby
 require 'scalingo'
 
-Scalingo.token = "YOUR TOKEN"
+Scalingo.token = 'tk-your-token'
+Scalingo.region = 'osc-fr1'
+
 # Or
 
 Scalingo.configure do |config|
-  config.token = "YOUR TOKEN"
+  config.token = 'tk-your-token'
+  config.region = 'osc-fr1'
 end
 
-Scalingo.apps.all
-Scalingo.apps.first.logs.dump
+client = Scalingo::Client.new
 ```
 
-## Todo
+### Client configuration
 
-Before any release:
+```ruby
+client = Scalingo::Client.new(region: 'osc-fr1', token: 'tk-your-token')
 
-* Test ! I wrote most of this in a few hours rush, but more as a proof of concept than a gem.
-Most of the code *should probably* work, but we're never sure.
+# Or both can be combined
+
+Scalingo.token = 'tk-your-token'
+
+client_region1 = Scalingo::Client.new(region: 'osc-fr1')
+client_region2 = Scalingo::Client.new(region: 'agora-fr1')
+```
+
+### Examples
+
+```ruby
+# Get all apps
+apps = client.apps.all
+
+# Get logs of one app
+app = client.apps.find('my-app')
+puts app.logs.dump
+```
+
+### Notes
+
+Client contains a cache with the regions endpoints and the current valid bearer
+token used for authentication.
+
+If a lot of calls are done and to avoid making useless requests and slowing
+down your queries, it is encouraged to re-use your client.
+
+## Hacking
+
+Using another authentication endpoint for hacking is possible through
+
+```
+client = Scalingo::Client.new(auth_endpoint: 'http://172.17.0.1:1234/v1', region: 'local')
+apps = client.apps.all
+```
 
 ## Special Thanks
 
 To aki017 who made [slack-ruby-gem](http://github.com/aki017/slack-ruby-gem).
 
-I used most of this project source code and mostly changed only the endpoints.
+It was used as an inspirational source for this project.
 
-Thanks to [scalingo](http://scalingo.io) for their awesome product and API ^.^
-Thanks [Soulou](https://github.com/Soulou) for his support implementing this gem.
-
+Thanks [Aethelflaed](https://github.com/Aethelflaed) for the original implementation of this gem

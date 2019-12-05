@@ -24,7 +24,7 @@ module Scalingo
     end
 
     def exchange_token_jwt
-      jwt_connection = build_connection(always_json: true)
+      jwt_connection = build_connection
       jwt_connection.basic_auth('', token)
       jwt_connection.url_prefix = auth_endpoint
 

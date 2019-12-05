@@ -1,8 +1,8 @@
 module Scalingo
   module Endpoint
     class AccountKeys < Collection
-      def initialize(api)
-        super(api, 'account/keys')
+      def initialize(api, _, opts = {})
+        super(api, 'keys', opts)
       end
 
       def collection_name
@@ -10,7 +10,7 @@ module Scalingo
       end
 
       def create(name, content)
-        post(nil, {key: {name: name, content: content}})
+        post(nil, key: { name: name, content: content })
       end
     end
     class AccountKey < Resource
@@ -20,4 +20,3 @@ module Scalingo
     end
   end
 end
-

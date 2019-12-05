@@ -2,7 +2,7 @@ module Scalingo
   module Endpoint
     class Apps < Collection
       def create(name)
-        post(nil, {app: {name: name}})
+        post(nil, app: { name: name })
       end
 
       def find_by
@@ -11,15 +11,15 @@ module Scalingo
     end
     class App < Resource
       def scale(containers)
-        post('scale', {containers: containers})
+        post('scale', containers: containers)
       end
 
       def restart(*scopes)
-        post('restart', {scope: scopes})
+        post('restart', scope: scopes)
       end
 
       def destroy(current_name)
-        delete(nil, {current_name: current_name})
+        delete(nil, current_name: current_name)
       end
 
       def destroy!
@@ -27,14 +27,15 @@ module Scalingo
       end
 
       def rename(new_name, current_name)
-        post('rename', {new_name: new_name, current_name: current_name})
+        post('rename', new_name: new_name, current_name: current_name)
       end
+
       def rename!(new_name)
         rename(new_name, prefix)
       end
 
       def transfer(email)
-        patch(nil, {app: {owner: {email: email}}})
+        patch(nil, app: { owner: { email: email } })
       end
 
       def logs_url
@@ -46,7 +47,7 @@ module Scalingo
       end
 
       def run(command, env = {})
-        post('run', {command: command, env: env})
+        post('run', command: command, env: env)
       end
 
       resources :addons
@@ -56,8 +57,10 @@ module Scalingo
       resources :domains
       resources :stats
       resources :variables
+      resources :notifiers
+      resources :alerts
+      resources :autoscalers
       resources :events, collection_only: true
     end
   end
 end
-

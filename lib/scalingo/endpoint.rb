@@ -10,7 +10,7 @@ module Scalingo
       def resources(name, opts = {})
         name = name.to_s
 
-        endpoint_opts = { auth_api: opts[:auth_api], always_json: opts[:always_json] }
+        endpoint_opts = { auth_api: opts[:auth_api] }
 
         define_method(name.pluralize.underscore) do
           Scalingo::Endpoint.const_get(
@@ -28,21 +28,19 @@ module Scalingo
 
     extend ClassMethods
     resources :apps
-    resources :account_keys
+    resources :account_keys,     auth_api: true
     resources :addon_providers,  collection_only: true
     resources :addon_categories, collection_only: true
-    resources :regions,          collection_only: true, auth_api: true, always_json: true
+    resources :regions,          collection_only: true, auth_api: true
 
     module Base
       attr_accessor :api
       attr_accessor :prefix
       attr_accessor :auth_api
-      attr_accessor :always_json
 
       def initialize(api, prefix = nil, opts = {})
         self.api = api
         self.auth_api = opts.fetch(:auth_api, false)
-        self.always_json = opts.fetch(:always_json, false)
         self.prefix = prefix || self.class.name.split('::').last.underscore.pluralize
       end
 
@@ -51,7 +49,6 @@ module Scalingo
           req_path = prefix
           req_path += "/#{path}" if !path.nil? && path != ''
           options.merge!(auth_api: auth_api) if auth_api
-          options.merge!(always_json: always_json) if always_json
           api.send(method, req_path, options)
         end
       end

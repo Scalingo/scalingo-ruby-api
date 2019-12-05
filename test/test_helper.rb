@@ -52,11 +52,14 @@ class BaseTestCase < ActiveSupport::TestCase
       :get, '/regions', auth_api: true,
     ).to_return(
       status: 200,
+      headers: {
+        'Content-Type' => 'application/json',
+      },
       body: { regions: [
         {
           name: region,
-          api: "api.#{region}.scalingo.com",
-          database_api: "db-api.#{region}.scalingo.com",
+          api: "https://api.#{region}.scalingo.com",
+          database_api: "https://db-api.#{region}.scalingo.com",
         },
       ] }.to_json,
     )
@@ -67,6 +70,9 @@ class BaseTestCase < ActiveSupport::TestCase
       :post, '/tokens/exchange', auth_api: true,
     ).to_return(
       status: 200,
+      headers: {
+        'Content-Type' => 'application/json',
+      },
       body: { token: generate_test_jwt }.to_json,
     )
   end

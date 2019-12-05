@@ -18,13 +18,14 @@ module Scalingo
 
     def request(method, path, options)
       auth_api = options.delete(:auth_api)
-      always_json = options.delete(:always_json)
+      endpoint = options.delete(:endpoint)
 
-      connection = build_connection(always_json: always_json)
+      connection = build_connection
 
       if auth_api
-        connection.basic_auth('', token)
-        connection.url_prefix = URI(auth_endpoint) if auth_api
+        connection.url_prefix = URI(auth_endpoint)
+      elsif endpoint
+        connection.url_prefix = endpoint
       else
         raise MissingRegion if !region
 

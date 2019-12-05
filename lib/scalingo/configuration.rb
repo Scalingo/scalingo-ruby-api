@@ -13,7 +13,6 @@ module Scalingo
       :region,
       :user_agent,
       :proxy,
-      :parse_json,
     ].freeze
 
     # The adapter that will be used to connect if none is set
@@ -24,9 +23,6 @@ module Scalingo
     # By default, don't set an token
     DEFAULT_TOKEN = nil
 
-    # The endpoint that will be used to connect if none is set
-    DEFAULT_ENDPOINT = 'https://api.scalingo.com/v1'.freeze
-
     # The endpoint to exchange the token with a JWT
     DEFAULT_AUTH_ENDPOINT = 'https://auth.scalingo.com/v1'.freeze
 
@@ -35,9 +31,6 @@ module Scalingo
 
     # The user agent that will be sent to the Api endpoint if none is set
     DEFAULT_USER_AGENT = "Scalingo Ruby Gem #{Scalingo::VERSION}".freeze
-
-    # Parse json by default, only changed when getting text result (e.g. Logs)
-    DEFAULT_PARSE_JSON = true
 
     # @private
     attr_accessor *VALID_OPTIONS_KEYS
@@ -63,12 +56,11 @@ module Scalingo
     def reset
       self.adapter       = DEFAULT_ADAPTER
       self.token         = DEFAULT_TOKEN
-      self.endpoint      = DEFAULT_ENDPOINT
+      self.endpoint      = nil
       self.auth_endpoint = DEFAULT_AUTH_ENDPOINT
       self.region        = nil
       self.user_agent    = DEFAULT_USER_AGENT
       self.proxy         = DEFAULT_PROXY
-      self.parse_json    = DEFAULT_PARSE_JSON
     end
   end
 end

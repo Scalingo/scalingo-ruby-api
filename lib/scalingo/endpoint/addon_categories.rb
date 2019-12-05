@@ -4,4 +4,3 @@ module Scalingo
     end
   end
 end
-

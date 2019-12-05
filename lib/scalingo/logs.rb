@@ -5,9 +5,8 @@ module Scalingo
     attr_reader :app
 
     def initialize(app)
-      super({endpoint: ''})
-      self.parse_json = false
       @app = app
+      super()
     end
 
     def dump(lines = 10)
@@ -19,15 +18,12 @@ module Scalingo
     end
 
     protected
-    def log_token
-      self.endpoint, log_token = app.logs_url.split('?')
-      @log_token = log_token.split('=').last
-    end
 
     def request(method, path, options)
-      options.merge!(token: log_token)
+      endpoint, query = app.logs_url.split('?')
+      log_token = query.split('=').last
+      options.merge!(token: log_token, endpoint: endpoint)
       super(method, path, options)
     end
   end
 end
-

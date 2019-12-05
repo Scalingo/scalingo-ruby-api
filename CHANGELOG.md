@@ -1,3 +1,9 @@
+## 2.0.0 - 2019/12/05
+
+* Compatibility with new API tokens
+* Compatibility with multi-region infrastructure
+* Add missing resources: `regions`, `autoscalers`, `notifiers`, `alerts`
+
 ## 1.1.1 - 2019/01/08
 
 * Update metadata on rubygems

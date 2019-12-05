@@ -26,12 +26,10 @@ module Scalingo
 
           ws.on :message do |event|
             data = JSON.parse(event.data)
-            if data['event'] == 'log'
-              @callbacks.each{|c| c.call(data['log'])}
-            end
+            @callbacks.each { |c| c.call(data['log']) } if data['event'] == 'log'
           end
 
-          ws.on :close do |event|
+          ws.on :close do
             ws = nil
           end
 
@@ -41,8 +39,10 @@ module Scalingo
       end
 
       protected
+
       def url
-        "#{app.logs_url}&stream=true"
+        url = app.logs_url.gsub(/^http/, 'ws')
+        return "#{url}&stream=true"
       end
     end
   end

@@ -1,5 +1,4 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 require 'scalingo/version'
 
@@ -16,10 +15,11 @@ Gem::Specification.new do |s|
   s.files       = Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files  = Dir['test/**/*']
 
+  s.add_dependency 'activesupport', ['>= 4', '< 6']
   s.add_dependency 'faraday', ['>= 0.7', '<= 0.17.0']
   s.add_dependency 'faraday_middleware', '~> 0.13'
-  s.add_dependency 'multi_json', '>= 1.0.3', '~> 1.0'
   s.add_dependency 'faye-websocket', '~> 0.9.2'
-  s.add_dependency 'activesupport', ['>= 4', '< 6']
+  s.add_dependency 'jwt', '~> 2.2.1'
+  s.add_dependency 'multi_json', '>= 1.0.3', '~> 1.0'
 end
 
