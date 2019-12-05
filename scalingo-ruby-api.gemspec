@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.email       = ['leo@scalingo.com', 'geoffroy@planquart.fr']
   s.homepage    = 'https://github.com/Scalingo/scalingo-ruby-api'
   s.summary     = 'Ruby API for the awesome scalingo project !'
-  s.description = 'Ruby wrapper around the web API of scalingo.io'
+  s.description = 'Ruby wrapper around the web API of scalingo.com'
 
-  s.files       = Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
+  s.files       = Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md', 'CHANGELOG.md']
   s.test_files  = Dir['test/**/*']
 
   s.add_dependency 'activesupport', ['>= 4', '< 6']
