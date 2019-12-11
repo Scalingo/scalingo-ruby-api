@@ -12,7 +12,8 @@ module Scalingo
         connection.use Faraday::Request::Multipart
         connection.use Faraday::Request::UrlEncoded
         connection.use FaradayMiddleware::RaiseHttpException
-        connection.response :json, :content_type => /\bjson$/
+        connection.response :json, content_type: /\bjson$/
+        connection.request :json
         connection.adapter(adapter)
       end
     end
