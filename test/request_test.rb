@@ -66,7 +66,7 @@ class RequestTest < BaseTestCase
       assert_equal sym, @request.http_method
       assert_equal({}, @request.query)
       assert_equal 'hello', @request.path
-      assert_equal({ hello: :world }, @request.body)
+      assert_equal({ hello: :world }.to_json, @request.body)
     end
   end
 end
