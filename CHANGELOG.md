@@ -1,3 +1,7 @@
+## 2.0.1 - 2019/12/11
+
+* Bugfix: payload was not correctly serialized to JSON for POST/PUT/PATCH queries
+
 ## 2.0.0 - 2019/12/05
 
 * Compatibility with new API tokens
