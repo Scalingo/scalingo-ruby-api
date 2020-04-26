@@ -71,12 +71,37 @@ class Scalingo::Mocks::Auth::API < Sinatra::Base
     json_response(request, :destroy, code: 204)
   end
 
+  get "/v1/keys" do
+    check_token!
+
+    json_response(request, :all)
+  end
+
+  post "/v1/keys" do
+    check_token!
+
+    json_response(request, :create, code: 201)
+  end
+
+  get "/v1/keys/54dcde4a54636101231a0000" do
+    check_token!
+
+    json_response(request, :show)
+  end
+
+  delete "/v1/keys/54dcde4a54636101231a0000" do
+    check_token!
+
+    json_response(request, :destroy, code: 204)
+  end
+
   private
 
   def response_path(request, *parts, code: 200)
+    sections = request.path.split("/").select(&:present?)[0, 2]
     file_name = parts.compact.join(".") + ".json"
 
-    File.join(File.dirname(__FILE__), "v1", "tokens", file_name)
+    File.join(File.dirname(__FILE__), *sections, file_name)
   end
 
   def json_response(request, *parts, code: 200)
