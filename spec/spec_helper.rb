@@ -1,5 +1,12 @@
 require "bundler/setup"
-require "scalingo/ruby/auth/client"
+require "scalingo"
+
+pattern = File.join(File.expand_path(__dir__), "support", "**", "*.rb")
+
+Dir[pattern].sort.each { |f| require f }
+
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

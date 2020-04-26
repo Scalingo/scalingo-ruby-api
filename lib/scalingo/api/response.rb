@@ -17,7 +17,9 @@ module Scalingo
       end
 
       def self.transform_meta(body)
-        body[:meta] && Meta.new(body[:meta])
+        if body.present? && body.key?(:meta)
+          Meta.new(body[:meta])
+        end
       end
 
       def self.unpack(response, key: nil, resource_class: nil)
@@ -44,8 +46,12 @@ module Scalingo
         @meta = meta
       end
 
-      def success?
+      def successful?
         status >= 200 && status < 300
+      end
+
+      def paginated?
+        meta&.dig(:pagination).present?
       end
     end
   end

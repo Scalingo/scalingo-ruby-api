@@ -43,21 +43,21 @@ module Scalingo
         expiration = Time.now + API::BearerToken::EXCHANGED_TOKEN_DURATION
         response = auth.tokens.exchange(token: access_token)
 
-        if response.success?
+        if response.successful?
           @token = API::BearerToken.new(
             response.data[:token],
             expires_in: expiration
           )
         end
 
-        return response.success?
+        return response.successful?
       end
 
       if bearer_token
         if bearer_token.is_a?(API::BearerToken)
           @token = bearer_token
         else
-          @token = API::BearerToken(bearer_token.to_s, expires_in: expires_in)
+          @token = API::BearerToken.new(bearer_token.to_s, expires_in: expires_in)
         end
       end
     end

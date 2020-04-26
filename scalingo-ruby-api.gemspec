@@ -37,5 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "rake", "~> 10.0"
   s.add_development_dependency "rspec", "~> 3.0"
+  s.add_development_dependency "sinatra"
   s.add_development_dependency "pry"
+  s.add_development_dependency "webmock"
 end
