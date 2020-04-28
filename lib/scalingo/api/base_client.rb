@@ -17,13 +17,21 @@ module Scalingo
         { url: url, headers: client.request_headers }
       end
 
+      def connection(allow_guest: false)
+        if allow_guest
+          authenticated_connection rescue unauthenticated_connection
+        else
+          authenticated_connection
+        end
+      end
+
       def unauthenticated_connection
         @unauthenticated_conn ||= Faraday.new(connection_options) do |conn|
           conn.response :json, content_type: /\bjson$/, parser_options: client.response_parser_options
         end
       end
 
-      def connection
+      def authenticated_connection
         return @connection if @connection
 
         if !client.token&.value
