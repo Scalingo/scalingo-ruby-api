@@ -5,12 +5,11 @@ module Scalingo
 
       attr_reader :client
 
-      config_accessor :url do
-        "https://auth.scalingo.com/v1"
-      end
+      config_accessor :url
 
-      def initialize(client)
+      def initialize(client, url)
         @client = client
+        config.url = url
       end
 
       ## Faraday objects
