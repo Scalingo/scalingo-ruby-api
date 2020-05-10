@@ -12,6 +12,21 @@ module Scalingo
         config.url = url
       end
 
+      def self.register_handlers!(handlers)
+        handlers.each do |method_name, klass|
+          define_method(method_name) do
+            value = instance_variable_get("@#{method_name}")
+
+            if value.nil?
+              value = klass.new(self)
+              instance_variable_set("@#{method_name}", value)
+            end
+
+            value
+          end
+        end
+      end
+
       ## Faraday objects
       def connection_options
         { url: url, headers: client.request_headers }

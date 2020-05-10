@@ -12,25 +12,25 @@ module Scalingo
     end
 
     def all
-      response = client.connection.get("tokens")
+      response = connection.get("tokens")
 
       unpack(response, key: :tokens)
     end
 
     def create(name:)
-      response = client.connection.post("tokens", {name: name})
+      response = connection.post("tokens", {name: name})
 
       unpack(response, key: :token)
     end
 
     def renew(id)
-      response = client.connection.patch("tokens/#{id}/renew")
+      response = connection.patch("tokens/#{id}/renew")
 
       unpack(response, key: :token)
     end
 
     def destroy(id)
-      response = client.connection.delete("tokens/#{id}")
+      response = connection.delete("tokens/#{id}")
 
       unpack(response)
     end

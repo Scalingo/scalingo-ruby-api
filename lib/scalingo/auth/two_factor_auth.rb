@@ -7,7 +7,7 @@ module Scalingo
     SUPPORTED_PROVIDERS = [TOTP_PROVIDER]
 
     def status
-      response = client.connection.get("client/tfa")
+      response = connection.get("client/tfa")
 
       unpack(response, key: :tfa)
     end
@@ -15,7 +15,7 @@ module Scalingo
     def initiate(provider = DEFAULT_PROVIDER)
       data = {tfa: {provider: provider}}
 
-      response = client.connection.post('client/tfa', data)
+      response = connection.post('client/tfa', data)
 
       unpack(response, key: :tfa)
     end
@@ -23,13 +23,13 @@ module Scalingo
     def validate(attempt)
       data = {tfa: {attempt: attempt}}
 
-      response = client.connection.get("client/tfa/validate", data)
+      response = connection.get("client/tfa/validate", data)
 
       unpack(response, key: :tfa)
     end
 
     def disable
-      response = client.connection.delete('client/tfa')
+      response = connection.delete('client/tfa')
 
       unpack(response)
     end

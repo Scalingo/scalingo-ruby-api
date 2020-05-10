@@ -6,16 +6,10 @@ module Scalingo
     require "scalingo/regional/apps"
     require "scalingo/regional/container_sizes"
 
-    def addons
-      @addons ||= Addons.new(self)
-    end
-
-    def apps
-      @apps ||= Apps.new(self)
-    end
-
-    def container_sizes
-      @container_sizes ||= ContainerSizes.new(self)
-    end
+    register_handlers!(
+      addons: Addons,
+      apps: Apps,
+      container_sizes: ContainerSizes,
+    )
   end
 end
