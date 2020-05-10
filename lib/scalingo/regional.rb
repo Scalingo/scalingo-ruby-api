@@ -9,6 +9,7 @@ module Scalingo
     require "scalingo/regional/deployments"
     require "scalingo/regional/domains"
     require "scalingo/regional/environment"
+    require "scalingo/regional/events"
 
     register_handlers!(
       addons: Addons,
@@ -18,6 +19,7 @@ module Scalingo
       deployments: Deployments,
       domains: Domains,
       environment: Environment,
+      events: Events,
     )
   end
 end
