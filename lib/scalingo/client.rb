@@ -21,6 +21,8 @@ module Scalingo
     def_delegator :auth, :keys
     def_delegator :auth, :scm_integrations
     def_delegator :auth, :tokens
+    def_delegator :auth, :two_factor_auth
+    def_delegator :auth, :tfa
     def_delegator :auth, :user
   end
 end

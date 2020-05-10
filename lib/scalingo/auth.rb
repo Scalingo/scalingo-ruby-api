@@ -5,6 +5,7 @@ module Scalingo
     require "scalingo/auth/keys"
     require "scalingo/auth/scm_integrations"
     require "scalingo/auth/tokens"
+    require "scalingo/auth/two_factor_auth"
     require "scalingo/auth/user"
 
     def keys
@@ -19,8 +20,14 @@ module Scalingo
       @tokens ||= Tokens.new(self)
     end
 
+    def two_factor_auth
+      @two_factor_auth ||= TwoFactorAuth.new(self)
+    end
+
     def user
       @user ||= User.new(self)
     end
+
+    alias_method :tfa, :two_factor_auth
   end
 end
