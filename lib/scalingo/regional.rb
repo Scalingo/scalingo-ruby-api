@@ -5,13 +5,13 @@ module Scalingo
     require "scalingo/regional/addons"
     require "scalingo/regional/apps"
     require "scalingo/regional/collaborators"
-    require "scalingo/regional/container_sizes"
+    require "scalingo/regional/containers"
 
     register_handlers!(
       addons: Addons,
       apps: Apps,
       collaborators: Collaborators,
-      container_sizes: ContainerSizes,
+      containers: Containers,
     )
   end
 end

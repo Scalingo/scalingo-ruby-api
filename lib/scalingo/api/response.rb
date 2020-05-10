@@ -53,6 +53,14 @@ module Scalingo
       def paginated?
         meta&.dig(:pagination).present?
       end
+
+      def operation
+        headers[:location]
+      end
+
+      def operation?
+        operation.present
+      end
     end
   end
 end
