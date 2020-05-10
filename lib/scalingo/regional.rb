@@ -12,6 +12,7 @@ module Scalingo
     require "scalingo/regional/events"
     require "scalingo/regional/logs"
     require "scalingo/regional/metrics"
+    require "scalingo/regional/notifiers"
 
     register_handlers!(
       addons: Addons,
@@ -24,6 +25,7 @@ module Scalingo
       events: Events,
       logs: Logs,
       metrics: Metrics,
+      notifiers: Notifiers,
     )
   end
 end
