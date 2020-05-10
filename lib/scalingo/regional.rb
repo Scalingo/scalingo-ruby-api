@@ -13,6 +13,8 @@ module Scalingo
     require "scalingo/regional/logs"
     require "scalingo/regional/metrics"
     require "scalingo/regional/notifiers"
+    require "scalingo/regional/operations"
+    require "scalingo/regional/scm_repo_links"
 
     register_handlers!(
       addons: Addons,
@@ -26,6 +28,8 @@ module Scalingo
       logs: Logs,
       metrics: Metrics,
       notifiers: Notifiers,
+      operations: Operations,
+      scm_repo_links: ScmRepoLinks,
     )
   end
 end
