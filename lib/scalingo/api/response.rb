@@ -18,7 +18,7 @@ module Scalingo
 
       def self.transform_meta(body)
         if body.present? && body.key?(:meta)
-          Meta.new(body[:meta])
+          body[:meta]
         end
       end
 
