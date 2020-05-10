@@ -4,6 +4,7 @@ module Scalingo
   class Regional < API::BaseClient
     require "scalingo/regional/addon_categories"
     require "scalingo/regional/addon_providers"
+    require "scalingo/regional/apps"
     require "scalingo/regional/container_sizes"
 
     def addon_categories
@@ -12,6 +13,10 @@ module Scalingo
 
     def addon_providers
       @addon_providers ||= AddonProviders.new(self)
+    end
+
+    def apps
+      @apps ||= Apps.new(self)
     end
 
     def container_sizes
