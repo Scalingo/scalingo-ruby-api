@@ -8,6 +8,7 @@ module Scalingo
     require "scalingo/regional/containers"
     require "scalingo/regional/deployments"
     require "scalingo/regional/domains"
+    require "scalingo/regional/environment"
 
     register_handlers!(
       addons: Addons,
@@ -16,6 +17,7 @@ module Scalingo
       containers: Containers,
       deployments: Deployments,
       domains: Domains,
+      environment: Environment,
     )
   end
 end
