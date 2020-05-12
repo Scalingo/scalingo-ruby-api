@@ -1,0 +1,30 @@
+{
+  "path": "/scm_integrations",
+  "method": "post",
+  "recorded_at": "2020-05-12T18:24:07Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "scm_integration": {
+        "key": "value"
+      }
+    }
+  },
+  "response": {
+    "status": 422,
+    "json_body": {
+      "errors": {
+        "access_token": [
+          "can't be blank"
+        ],
+        "scm_type": [
+          "can't be blank",
+          "Unknown scm integration type"
+        ]
+      }
+    }
+  }
+}

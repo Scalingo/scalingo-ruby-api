@@ -1,0 +1,16 @@
+{
+  "path": "/scm_integrations/5bb2e877-9e5c-a83f-8e0e-7c75eebf212c",
+  "method": "delete",
+  "recorded_at": "2020-05-12T18:31:49Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 404,
+    "json_body": {
+      "error": "SCM integration not found"
+    }
+  }
+}

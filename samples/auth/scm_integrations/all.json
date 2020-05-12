@@ -1,0 +1,51 @@
+{
+  "path": "/scm_integrations",
+  "method": "get",
+  "recorded_at": "2020-05-12T18:16:33Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "json_body": {
+      "scm_integrations": [
+        {
+          "id": "70bf275e-e0ee-483e-9e5c-21e5bb2e877c",
+          "scm_type": "github-enterprise",
+          "url": "https://ghe.example.com",
+          "access_token": "a64fe9744da5e6ce790ca3a9084bd66cf433b24b",
+          "created_at": "2019-08-12T11:59:37.298Z",
+          "uid": "8",
+          "username": "test-user",
+          "avatar_url": "https://ghe.example.com/avatars/u/8?",
+          "email": "test-user@example.com",
+          "profile_url": "https://ghe.example.com/test-user",
+          "owner": {
+            "id": "us-c4e889d8-9bbc-4dfa-b39f-5d41c888349d",
+            "email": "test-user@example.com",
+            "username": "test-user"
+          }
+        },
+        {
+          "id": "5bb2e877-9e5c-a83f-8e0e-7c75eebf212c",
+          "scm_type": "gitlab",
+          "url": "https://gitlab.example2.com",
+          "access_token": "a64fe9744da5e6ce790ca3a9084bd66cf433b24b",
+          "created_at": "2019-08-12T11:59:37.298Z",
+          "uid": "42",
+          "username": "test_user",
+          "avatar_url": "https://secure.gravatar.com/avatar/4d65e90ca34da7a9084b6ce6c?s=80&d=identicon",
+          "email": "test-user@example.com",
+          "profile_url": "https://gitlab.example2.com/test-user",
+          "owner": {
+            "id": "us-88c4e9af-f93c-8284-c67a-fa414d49c5de",
+            "email": "test-user@example.com",
+            "username": "test-user"
+          }
+        }
+      ]
+    }
+  }
+}
