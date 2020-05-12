@@ -1,14 +1,10 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Auth::Keys do
-  let(:client) {
-    client = Scalingo::Client.new
-    client.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN)
-    client.auth.keys
-  }
+  let(:endpoint) { auth.keys }
 
   context "all" do
-    let(:response) { client.all }
+    let(:response) { endpoint.all }
     let(:expected_count) { 2 }
     let(:stub_pattern) { "all" }
 
@@ -17,7 +13,7 @@ RSpec.describe Scalingo::Auth::Keys do
   end
 
   context "create" do
-    let(:response) { client.create(name: "Key", content: "value") }
+    let(:response) { endpoint.create(name: "Key", content: "value") }
 
     context "success" do
       let(:stub_pattern) { "create-201" }
@@ -33,7 +29,7 @@ RSpec.describe Scalingo::Auth::Keys do
   end
 
   context "show" do
-    let(:response) { client.show("54dcde4a54636101231a0000") }
+    let(:response) { endpoint.show("54dcde4a54636101231a0000") }
 
     context "success" do
       let(:stub_pattern) { "show-200" }
@@ -49,7 +45,7 @@ RSpec.describe Scalingo::Auth::Keys do
   end
 
   context "destroy" do
-    let(:response) { client.destroy("54dcde4a54636101231a0000") }
+    let(:response) { endpoint.destroy("54dcde4a54636101231a0000") }
 
     context "success" do
       let(:stub_pattern) { "delete-204" }

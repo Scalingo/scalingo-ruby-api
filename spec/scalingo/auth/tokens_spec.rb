@@ -1,16 +1,10 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Auth::Tokens do
-  let(:guest_client) { Scalingo::Client.new.auth.tokens }
-
-  let(:client) {
-    client = Scalingo::Client.new
-    client.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN)
-    client.auth.tokens
-  }
+  let(:endpoint) { auth.tokens }
 
   context "exchange" do
-    subject { guest_client }
+    subject { auth_guest.tokens }
 
     context "with a valid token" do
       let(:stub_pattern) { "exchange-200" }
@@ -35,7 +29,7 @@ RSpec.describe Scalingo::Auth::Tokens do
   end
 
   context "all" do
-    let(:response) { client.all }
+    let(:response) { endpoint.all }
     let(:expected_count) { 2 }
     let(:stub_pattern) { "all" }
 
@@ -44,7 +38,7 @@ RSpec.describe Scalingo::Auth::Tokens do
   end
 
   context "create" do
-    let(:response) { client.create(name: "Test Token") }
+    let(:response) { endpoint.create(name: "Test Token") }
 
     context "success" do
       let(:stub_pattern) { "create" }
@@ -54,7 +48,7 @@ RSpec.describe Scalingo::Auth::Tokens do
   end
 
   context "renew" do
-    let(:response) { client.renew("00ac4742-8ff5-4306-932f-3078e28ecaff") }
+    let(:response) { endpoint.renew("00ac4742-8ff5-4306-932f-3078e28ecaff") }
 
     context "success" do
       let(:stub_pattern) { "renew-200" }
@@ -70,7 +64,7 @@ RSpec.describe Scalingo::Auth::Tokens do
   end
 
   context "destroy" do
-    let(:response) { client.destroy("00ac4742-4306-932f-8ff5-3078e28ecaff") }
+    let(:response) { endpoint.destroy("00ac4742-4306-932f-8ff5-3078e28ecaff") }
 
     context "success" do
       let(:stub_pattern) { "destroy-204" }

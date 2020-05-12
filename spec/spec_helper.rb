@@ -20,6 +20,7 @@ RSpec.configure do |config|
   end
 
   config.include Scalingo::StubHelpers
+  config.include Scalingo::Common
 
   config.before(:example) do |example|
     if defined?(stub_pattern)

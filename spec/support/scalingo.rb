@@ -2,11 +2,11 @@ module Scalingo
   VALID_ACCESS_TOKEN = "lala"
   VALID_BEARER_TOKEN = "the-bearer-token"
 
-  module StubHelpers
-    ENDPOINTS = {
-      auth: "https://auth.scalingo.com/v1"
-    }
+  ENDPOINTS = {
+    auth: "https://auth.scalingo.test"
+  }
 
+  module StubHelpers
     def project_root
       File.expand_path("../..", File.dirname(__FILE__))
     end
@@ -62,5 +62,14 @@ module Scalingo
         stub_request(method, url).with(request_options).to_return(response_options)
       end
     end
+  end
+
+  module Common
+    extend RSpec::SharedContext
+
+    let(:scalingo_guest) { Scalingo::Client.new }
+    let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) }}
+    let(:auth) { Scalingo::Auth.new(scalingo, ENDPOINTS[:auth]) }
+    let(:auth_guest) { Scalingo::Auth.new(scalingo_guest, ENDPOINTS[:auth]) }
   end
 end

@@ -1,14 +1,10 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Auth::ScmIntegrations do
-  let(:client) {
-    client = Scalingo::Client.new
-    client.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN)
-    client.auth.scm_integrations
-  }
+  let(:endpoint) { auth.scm_integrations }
 
   context "all" do
-    let(:response) { client.all }
+    let(:response) { endpoint.all }
     let(:expected_count) { 2 }
     let(:stub_pattern) { "all" }
 
@@ -19,7 +15,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
   context "create" do
     context "success" do
       let(:response) {
-        client.create(
+        endpoint.create(
           scm_type: "gitlab-self-hosted",
           url: "https://gitlab.example.com",
           access_token: "e9740ca2466cf4da5e6c3a9e79a64f84bdf4b3b2"
@@ -32,7 +28,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
     end
 
     context "failure" do
-      let(:response) { client.create(key: :value) }
+      let(:response) { endpoint.create(key: :value) }
 
       let(:stub_pattern) { "create-422" }
 
@@ -41,7 +37,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
   end
 
   context "show" do
-    let(:response) { client.show("5bb2e877-9e5c-a83f-8e0e-7c75eebf212c") }
+    let(:response) { endpoint.show("5bb2e877-9e5c-a83f-8e0e-7c75eebf212c") }
 
     context "success" do
       let(:stub_pattern) { "show-200" }
@@ -57,7 +53,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
   end
 
   context "destroy" do
-    let(:response) { client.destroy("5bb2e877-9e5c-a83f-8e0e-7c75eebf212c") }
+    let(:response) { endpoint.destroy("5bb2e877-9e5c-a83f-8e0e-7c75eebf212c") }
 
     context "success" do
       let(:stub_pattern) { "destroy-204" }
