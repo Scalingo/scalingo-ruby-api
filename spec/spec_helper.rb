@@ -18,4 +18,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include Scalingo::StubHelpers
+
+  config.before(:example) do |example|
+    if defined?(stub_pattern)
+      register_stubs!(stub_pattern)
+    end
+  end
 end

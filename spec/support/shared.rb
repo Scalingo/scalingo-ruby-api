@@ -3,6 +3,28 @@ RSpec.shared_examples "a successful response" do |code = 200|
 
   it "should be succesful" do
     expect(response).to be_successful
+    expect(response.status).to eq code
+  end
+end
+
+RSpec.shared_examples "a not found response" do
+  it "cannot be found" do
+    expect(response).not_to be_successful
+    expect(response.status).to eq 404
+  end
+end
+
+RSpec.shared_examples "a client error" do
+  it "is a generic client error" do
+    expect(response).not_to be_successful
+    expect(response.status).to eq 400
+  end
+end
+
+RSpec.shared_examples "an unprocessable request" do
+  it "cannot be found" do
+    expect(response).not_to be_successful
+    expect(response.status).to eq 422
   end
 end
 
