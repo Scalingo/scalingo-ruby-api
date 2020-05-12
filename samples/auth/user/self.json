@@ -1,0 +1,45 @@
+{
+  "path": "/users/self",
+  "method": "get",
+  "recorded_at": "2020-05-12T18:38:20Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "json_body": {
+      "user": {
+        "id": "us-9b313d78-b1a9-4aec-bab5-7da7a55561ed",
+        "created_at": "2013-09-06T11:42:48.000Z",
+        "email": "test@example.fr",
+        "username": "test-username",
+        "uuid": "us-9b313d78-b1a9-4aec-bab5-7da7a55561ed",
+        "company": null,
+        "location": "Somewhere",
+        "fullname": "Test Username",
+        "github": {
+          "username": null,
+          "email": null,
+          "avatar_url": null,
+          "profile_url": null
+        },
+        "tos_accepted": true,
+        "unconfirmed_email": null,
+        "flags": {
+          "agora-fr1": true
+        },
+        "limits": {
+        },
+        "referral_url": "https://sclng.io/r/test-username",
+        "referral_clicks": 0,
+        "free_trial_started_at": "2013-09-06T11:42:48.000Z",
+        "free_trial_end_time": "2013-10-06T11:42:48.000Z",
+        "suspended_at": null,
+        "suspension_reason": null,
+        "intercom_hash": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      }
+    }
+  }
+}
