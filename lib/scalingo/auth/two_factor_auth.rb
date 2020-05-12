@@ -23,7 +23,7 @@ module Scalingo
     def validate(attempt)
       data = {tfa: {attempt: attempt}}
 
-      response = connection.get("client/tfa/validate", data)
+      response = connection.post("client/tfa/validate", data)
 
       unpack(response, key: :tfa)
     end

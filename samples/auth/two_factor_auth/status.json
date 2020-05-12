@@ -1,0 +1,21 @@
+{
+  "path": "/client/tfa",
+  "method": "get",
+  "recorded_at": "2020-05-12T17:34:55Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "json_body": {
+      "tfa": {
+        "id": "us-929974f8-b6b3-ab5e-4fa5-cb4354cb61f4",
+        "uuid": "us-929974f8-b6b3-ab5e-4fa5-cb4354cb61f4",
+        "enabled": false,
+        "provider": null
+      }
+    }
+  }
+}

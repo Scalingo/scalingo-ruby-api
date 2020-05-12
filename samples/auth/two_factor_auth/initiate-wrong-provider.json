@@ -1,0 +1,22 @@
+{
+  "path": "/client/tfa",
+  "method": "post",
+  "recorded_at": "2020-05-12T17:35:30Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "tfa": {
+        "provider": "wrong"
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "json_body": {
+      "error": "invalid provider"
+    }
+  }
+}

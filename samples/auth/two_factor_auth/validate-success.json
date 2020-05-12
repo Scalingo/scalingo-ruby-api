@@ -1,0 +1,41 @@
+{
+  "path": "/client/tfa/validate",
+  "method": "post",
+  "recorded_at": "2020-05-12T17:36:41Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "tfa": {
+        "attempt": 123456
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "json_body": {
+      "tfa": {
+        "codes": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        ],
+        "user": {
+          "id": "us-929974f8-b6b3-ab5e-4fa5-cb4354cb61f4",
+          "uuid": "us-929974f8-b6b3-ab5e-4fa5-cb4354cb61f4",
+          "enabled": true,
+          "provider": "totp"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "path": "/client/tfa/validate",
+  "method": "post",
+  "recorded_at": "2020-05-12T17:35:20Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "tfa": {
+        "attempt": 123456
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "json_body": {
+      "error": "otp not created"
+    }
+  }
+}

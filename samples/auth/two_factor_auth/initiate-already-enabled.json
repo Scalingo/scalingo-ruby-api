@@ -1,0 +1,22 @@
+{
+  "path": "/client/tfa",
+  "method": "post",
+  "recorded_at": "2020-05-12T17:36:51Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "tfa": {
+        "provider": "totp"
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "json_body": {
+      "error": "2fa already enabled"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "path": "/client/tfa",
+  "method": "post",
+  "recorded_at": "2020-05-12T17:35:37Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "tfa": {
+        "provider": "totp"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "json_body": {
+      "tfa": {
+        "id": "us-929974f8-b6b3-ab5e-4fa5-cb4354cb61f4",
+        "uuid": "us-929974f8-b6b3-ab5e-4fa5-cb4354cb61f4",
+        "enabled": false,
+        "provider": null,
+        "uri": "otpauth://totp/Scalingo:scalingo@ksol.fr?secret=gxeedc5dqwsq6nhgpr6ilyng&issuer=Scalingo"
+      }
+    }
+  }
+}

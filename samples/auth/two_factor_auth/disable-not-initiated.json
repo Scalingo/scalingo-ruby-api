@@ -1,0 +1,16 @@
+{
+  "path": "/client/tfa",
+  "method": "delete",
+  "recorded_at": "2020-05-12T17:35:11Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 400,
+    "json_body": {
+      "error": "2fa not enabled for this account"
+    }
+  }
+}
