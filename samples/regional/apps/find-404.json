@@ -1,0 +1,17 @@
+{
+  "path": "/apps/51e938266edff4fac9100005",
+  "method": "get",
+  "recorded_at": "2020-05-12T19:43:42Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 404,
+    "json_body": {
+      "resource": "app",
+      "error": "not found"
+    }
+  }
+}

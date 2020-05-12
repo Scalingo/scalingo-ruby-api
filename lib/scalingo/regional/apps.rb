@@ -14,13 +14,12 @@ module Scalingo
       unpack(response, key: :app)
     end
 
-    def create(name:, **opts)
-      app = { name: name }
-      app.update(opts.slice(:git_source, :parent_id, :stack_id))
+    def create(payload = {})
+      dry_run = !!(payload[:dry_run] || payload["dry_run"])
 
       response = connection.post("apps") do |req|
-        req.body = { app: app }
-        req.headers["X-Dry-Run"] = "true" if opts[:dry_run]
+        req.body = { app: payload }
+        req.headers["X-Dry-Run"] = "true" if dry_run
       end
 
       unpack(response, key: :app)

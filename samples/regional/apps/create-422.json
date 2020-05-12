@@ -1,0 +1,26 @@
+{
+  "path": "/apps",
+  "method": "post",
+  "recorded_at": "2020-05-12T19:50:01Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "app": {
+        "name": "example-app"
+      }
+    }
+  },
+  "response": {
+    "status": 422,
+    "json_body": {
+      "errors": {
+        "name": [
+          "should contain between 6 and 32 characters"
+        ]
+      }
+    }
+  }
+}

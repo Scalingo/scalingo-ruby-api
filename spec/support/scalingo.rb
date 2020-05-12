@@ -3,7 +3,8 @@ module Scalingo
   VALID_BEARER_TOKEN = "the-bearer-token"
 
   ENDPOINTS = {
-    auth: "https://auth.scalingo.test"
+    auth: "https://auth.scalingo.test",
+    regional: "https://regional.scalingo.test",
   }
 
   module StubHelpers
@@ -71,5 +72,7 @@ module Scalingo
     let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) }}
     let(:auth) { Scalingo::Auth.new(scalingo, ENDPOINTS[:auth]) }
     let(:auth_guest) { Scalingo::Auth.new(scalingo_guest, ENDPOINTS[:auth]) }
+    let(:regional) { Scalingo::Regional.new(scalingo, ENDPOINTS[:regional]) }
+    let(:regional_guest) { Scalingo::Regional.new(scalingo_guest, ENDPOINTS[:regional]) }
   end
 end

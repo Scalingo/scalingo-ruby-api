@@ -1,0 +1,40 @@
+{
+  "path": "/apps",
+  "method": "post",
+  "recorded_at": "2020-05-12T19:50:01Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "app": {
+        "name": "example-app"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "json_body": {
+      "app": {
+          "created_at": "2014-09-10T10:17:52.690+02:00",
+          "git_url": "git@scalingo.com:example-app.git",
+          "id": "54100930736f7563d5030000",
+          "name": "example-app",
+          "last_deployed_at": "2017-02-02T10:17:53.690+02:00",
+          "last_deployed_by": "john",
+          "last_deployment_id": "58c2b15af1453a0001e24d23",
+           "owner": {
+              "username": "john",
+              "email": "user@example.com",
+              "id": "54100245736f7563d5000000"
+          },
+          "updated_at": "2014-09-10T10:17:52.690+02:00",
+          "url": "https://example-app.scalingo.io",
+          "links": {
+            "deployments_stream": "wss://deployments.scalingo.com/apps/example-app"
+          }
+      }
+    }
+  }
+}
