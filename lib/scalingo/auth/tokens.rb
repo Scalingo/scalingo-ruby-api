@@ -17,8 +17,8 @@ module Scalingo
       unpack(response, key: :tokens)
     end
 
-    def create(name:)
-      response = connection.post("tokens", {name: name})
+    def create(payload)
+      response = connection.post("tokens", {token: payload})
 
       unpack(response, key: :token)
     end

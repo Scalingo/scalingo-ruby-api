@@ -1,0 +1,28 @@
+{
+  "path": "/tokens",
+  "method": "post",
+  "recorded_at": "2020-05-12T16:05:52Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "token": {
+        "name": "Test Token"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "json_body": {
+      "token": {
+        "id": "e061a292-bab4-bb08-47fa-d7f7895ae5b6",
+        "name": "Test Token",
+        "created_at": "2018-03-28T19:56:09.433Z",
+        "last_used_at": null,
+        "token": "tk-us-some-token"
+      }
+    }
+  }
+}
