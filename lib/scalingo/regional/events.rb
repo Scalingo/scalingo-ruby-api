@@ -1,17 +1,13 @@
 module Scalingo
   class Regional::Events < API::Endpoint
-    def all(**params)
-      params = params.slice(:page, :per_page, :from).compact
-
-      response = connection.get("events", params)
+    def all(payload = {})
+      response = connection.get("events", payload.compact)
 
       unpack(response)
     end
 
-    def for(app_id, **params)
-      params = params.slice(:page, :per_page, :from).compact
-
-      response = connection.get("apps/#{app_id}/events", params)
+    def for(app_id, payload = {})
+      response = connection.get("apps/#{app_id}/events", payload.compact)
 
       unpack(response)
     end

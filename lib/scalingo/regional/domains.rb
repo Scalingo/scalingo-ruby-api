@@ -2,10 +2,8 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class Regional::Domains < API::Endpoint
-    def for(app_id, page: nil, per_page: nil)
-      data = { page: page, per_page: per_page }.compact
-
-      response = connection.get("apps/#{app_id}/domains", data)
+    def for(app_id, payload = {})
+      response = connection.get("apps/#{app_id}/domains", payload.compact)
 
       unpack(response, key: :domains)
     end
@@ -16,15 +14,15 @@ module Scalingo
       unpack(response, key: :domain)
     end
 
-    def create(app_id, **domain)
-      response = connection.post("apps/#{app_id}/domains", { domain: domain })
+    def create(app_id, payload = {})
+      response = connection.post("apps/#{app_id}/domains", { domain: payload })
 
       unpack(response, key: :domain)
     end
 
-    def update(app_id, domain_id, **domain)
+    def update(app_id, domain_id, payload = {})
 
-      response = connection.patch("apps/#{app_id}/domains/#{domain_id}", { domain: domain })
+      response = connection.patch("apps/#{app_id}/domains/#{domain_id}", { domain: payload })
 
       unpack(response, key: :domain)
     end

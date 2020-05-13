@@ -14,23 +14,18 @@ module Scalingo
       unpack(response, key: :addon)
     end
 
-    def provision(app_id, plan_id:, addon_provider_id:)
-      data = {
-        addon: {
-          plan_id: plan_id,
-          addon_provider_id: addon_provider_id,
-        },
-      }
+    def provision(app_id, payload = {})
+      data = { addon: payload }
 
       response = connection.post("apps/#{app_id}/addons", data)
 
       unpack(response, key: :addon)
     end
 
-    def update(app_id, addon_id, **opts)
+    def update(app_id, addon_id, payload = {})
       response = connection.patch(
         "apps/#{app_id}/addons/#{addon_id}",
-        { addon: opts }
+        { addon: payload }
       )
 
       unpack(response, key: :addon)

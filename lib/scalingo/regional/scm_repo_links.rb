@@ -8,16 +8,16 @@ module Scalingo
       unpack(response, key: :scm_repo_link)
     end
 
-    def create(app_id, opts = {})
-      data = { scm_repo_link: opts }
+    def create(app_id, payload = {})
+      data = { scm_repo_link: payload }
 
       response = connection.post("apps/#{app_id}/scm_repo_link", data)
 
       unpack(response, key: :scm_repo_link)
     end
 
-    def update(app_id, opts = {})
-      data = { scm_repo_link: opts }
+    def update(app_id, payload = {})
+      data = { scm_repo_link: payload }
 
       response = connection.patch("apps/#{app_id}/scm_repo_link", data)
 

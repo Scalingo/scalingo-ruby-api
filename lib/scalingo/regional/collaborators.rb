@@ -14,12 +14,8 @@ module Scalingo
       unpack(response)
     end
 
-    def invite(app_id, email)
-      data = {
-        collaborator: {
-          email: email,
-        },
-      }
+    def invite(app_id, payload = {})
+      data = { collaborator: payload }
 
       response = connection.post("apps/#{app_id}/collaborators", data)
 

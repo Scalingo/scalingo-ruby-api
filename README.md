@@ -43,4 +43,7 @@ scalingo.keys.all
 
 # Show one SSH Key
 scalingo.keys.show("my-key-id")
+
+# List your apps on osc-fr1
+scalingo.osc_fr1.apps.all
 ```

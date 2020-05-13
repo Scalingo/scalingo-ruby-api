@@ -8,8 +8,8 @@ module Scalingo
       unpack(response, key: :variables)
     end
 
-    def create(app_id, name:, value: )
-      response = connection.post("apps/#{app_id}/variables", { variable: variable })
+    def create(app_id, payload = {})
+      response = connection.post("apps/#{app_id}/variables", { variable: payload })
 
       unpack(response, key: :variable)
     end
