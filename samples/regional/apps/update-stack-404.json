@@ -1,0 +1,23 @@
+{
+  "path": "/apps/example-app",
+  "method": "patch",
+  "recorded_at": "2020-05-13T08:35:30Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "app": {
+        "stack_id": "stack-not-found"
+      }
+    }
+  },
+  "response": {
+    "status": 404,
+    "json_body": {
+      "resource": "stack",
+      "error": "not found"
+    }
+  }
+}

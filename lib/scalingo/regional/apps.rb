@@ -25,8 +25,8 @@ module Scalingo
       unpack(response, key: :app)
     end
 
-    def update(id, **settings)
-      data = { app: settings }
+    def update(id, payload = {})
+      data = { app: payload }
 
       response = connection.patch("apps/#{id}", data)
 
@@ -39,31 +39,20 @@ module Scalingo
       unpack(response, key: :logs_url)
     end
 
-    def destroy(id, current_name:)
-      data = { current_name: current_name }
-
-      response = connection.delete("apps/#{id}", data)
+    def destroy(id, payload = {})
+      response = connection.delete("apps/#{id}") { |req| req.params.update(payload) }
 
       unpack(response)
     end
 
-    def rename(id, current_name:, new_name:)
-      data = { current_name: current_name, new_name: new_name }
-
-      response = connection.post("apps/#{id}/rename", data)
+    def rename(id, payload = {})
+      response = connection.post("apps/#{id}/rename", payload)
 
       unpack(response, key: :app)
     end
 
-    def transfer(id, current_name:, owner_email:)
-      data = {
-        current_name: current_name,
-        app: {
-          owner: owner_email,
-        },
-      }
-
-      response = connection.patch("apps/#{id}", data)
+    def transfer(id, payload = {})
+      response = connection.patch("apps/#{id}", payload)
 
       unpack(response, key: :app)
     end

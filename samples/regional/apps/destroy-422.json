@@ -1,0 +1,20 @@
+{
+  "path": "/apps/example-app?current_name=wrong-name",
+  "method": "delete",
+  "recorded_at": "2020-05-13T08:52:30Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 422,
+    "json_body": {
+      "errors": {
+        "current_name": [
+          "Provided name does not match app name"
+        ]
+      }
+    }
+  }
+}

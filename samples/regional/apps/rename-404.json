@@ -1,0 +1,22 @@
+{
+  "path": "/apps/example-app/rename",
+  "method": "post",
+  "recorded_at": "2020-05-13T08:58:44Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "current_name": "example-app",
+      "new_name": "example-app-2"
+    }
+  },
+  "response": {
+    "status": 404,
+    "json_body": {
+      "resource": "app",
+      "error": "not found"
+    }
+  }
+}

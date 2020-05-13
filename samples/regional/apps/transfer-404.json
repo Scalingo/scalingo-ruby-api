@@ -1,0 +1,24 @@
+{
+  "path": "/apps/example-app",
+  "method": "patch",
+  "recorded_at": "2020-05-13T09:03:02Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "current_name": "example-app",
+      "app": {
+        "owner": "user@example.com"
+      }
+    }
+  },
+  "response": {
+    "status": 404,
+    "json_body": {
+      "resource": "app",
+      "error": "not found"
+    }
+  }
+}

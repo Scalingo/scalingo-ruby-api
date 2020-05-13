@@ -1,0 +1,27 @@
+{
+  "path": "/apps/example-app",
+  "method": "patch",
+  "recorded_at": "2020-05-13T09:06:08Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "current_name": "example-app",
+      "app": {
+        "owner": "user@example.com"
+      }
+    }
+  },
+  "response": {
+    "status": 422,
+    "json_body": {
+      "errors": {
+        "owner": [
+          "Sorry, user@example.com should be part of the collaborators"
+        ]
+      }
+    }
+  }
+}

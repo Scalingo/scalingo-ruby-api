@@ -1,0 +1,42 @@
+{
+  "path": "/apps/example-app/rename",
+  "method": "post",
+  "recorded_at": "2020-05-13T08:57:52Z",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "current_name": "example-app",
+      "new_name": "example-app-2"
+    }
+  },
+  "response": {
+    "status": 200,
+    "json_body": {
+      "app": {
+        "id" : "51e938266edff4fac9100005",
+        "name" : "example-app-2",
+        "owner" : {
+           "email" : "user@example.com",
+           "id" : "51d73c1e6edfeab537000001",
+           "username" : "example-user"
+        },
+        "git_url" : "git@scalingo.com:example-app-2.git",
+        "last_deployed_at" : "2014-11-16T12:17:16.137+01:00",
+        "status" : "running",
+        "updated_at" : "2015-02-02T18:00:18.041+01:00",
+        "created_at" : "2013-07-19T14:59:18.329+02:00",
+        "last_deployed_by" : "example-user",
+        "url": "https://example-app-2.scalingo.io",
+        "links": {
+          "deployments_stream": "wss://deployments.scalingo.com/apps/example-app-2"
+        },
+        "force_https": true,
+        "sticky_session": false,
+        "router_logs": true
+      }
+    }
+  }
+}
