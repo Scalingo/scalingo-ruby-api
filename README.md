@@ -32,11 +32,9 @@ Scalingo.configure do |config|
   config.regions = %i[osc_fr1 osc_secnum_fr1]
 
   # Endpoints URLS
-  config.urls do
-    config.auth = "https://auth.scalingo.com/v1"
-    config.osc_fr1 = "https://api.osc-fr1.scalingo.com/v1"
-    config.osc_secnum_fr1 = "https://api.osc-secnum-fr1.scalingo.com/v1"
-  end
+  config.urls.auth = "https://auth.scalingo.com/v1"
+  config.urls.osc_fr1 = "https://api.osc-fr1.scalingo.com/v1"
+  config.urls.osc_secnum_fr1 = "https://api.osc-secnum-fr1.scalingo.com/v1"
 
   # Configure the User Agent header
   config.user_agent = "Scalingo Ruby Client v#{Scalingo::VERSION}"
