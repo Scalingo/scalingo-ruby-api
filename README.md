@@ -51,6 +51,34 @@ Scalingo.configure do |config|
 end
 ```
 
+:warning: If you change the settings for the list of regions, you **cannot** use `require "scalingo"`; you must follow this template :
+
+```ruby
+
+require "scalingo/config"
+
+Scalingo.configure do |config|
+  config.regions = %i[my-regions]
+end
+
+require "scalingo/client"
+```
+
+### Response object
+
+Responses are parsed with the keys symbolized and then encapsulated in a `Scalingo::API::Response` object:
+* `response.status` containts the HTTP status code
+* `response.data` contains the "relevant" data, without the json root key (when relevant)
+* `response.full_data` contains the full response body
+* `response.meta` contains the meta object, if there's any
+* `response.headers` containts all the response headers
+
+Some helper methods are defined on thise object:
+* `response.successful?` returns true when the code is 2XX
+* `response.paginated?` returns true if the reponse has metadata relative to pagination
+* `response.operation?` returns true if the response contains a header relative to an ongoing operation
+* `response.operation` returns the URL to query to get the status of the operation
+
 ### Examples
 
 ```ruby
