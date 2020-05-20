@@ -1,6 +1,5 @@
 require "forwardable"
 
-require "active_support/configurable"
 require "faraday"
 require "faraday_middleware"
 
@@ -10,17 +9,6 @@ require "scalingo/errors"
 module Scalingo
   class BasicClient
     extend Forwardable
-    include ActiveSupport::Configurable
-
-    config_accessor :response_parser_options do
-      { symbolize_names: true }
-    end
-
-    config_accessor :request_headers do
-      {
-        "User-Agent" => "Scalingo Ruby Client v#{Scalingo::VERSION}",
-      }
-    end
 
     attr_reader :token
 
@@ -43,7 +31,7 @@ module Scalingo
       end
 
       if access_token
-        expiration = Time.now + API::BearerToken::EXCHANGED_TOKEN_DURATION
+        expiration = Time.now + Scalingo.config.exchanged_token_validity
         response = auth.tokens.exchange(token: access_token)
 
         if response.successful?

@@ -1,2 +1,2 @@
-require_relative 'scalingo/version'
-require_relative 'scalingo/client'
+require "scalingo/config"
+require "scalingo/client"

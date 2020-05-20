@@ -1,15 +1,11 @@
 module Scalingo
   module API
     class BaseClient
-      include ActiveSupport::Configurable
-
-      attr_reader :client
-
-      config_accessor :url
+      attr_reader :client, :url
 
       def initialize(client, url)
         @client = client
-        config.url = url
+        @url = url
       end
 
       def self.register_handlers!(handlers)
@@ -29,7 +25,12 @@ module Scalingo
 
       ## Faraday objects
       def connection_options
-        { url: url, headers: client.request_headers }
+        {
+          url: url,
+          headers: {
+            "User-Agent" => Scalingo.config.user_agent
+          }
+        }
       end
 
       def connection(allow_guest: false)
@@ -42,23 +43,25 @@ module Scalingo
 
       def unauthenticated_connection
         @unauthenticated_conn ||= Faraday.new(connection_options) do |conn|
-          conn.response :json, content_type: /\bjson$/, parser_options: client.response_parser_options
+          conn.response :json, content_type: /\bjson$/, parser_options: { symbolize_names: true }
         end
       end
 
       def authenticated_connection
         return @connection if @connection
 
-        if !client.token&.value
+        if Scalingo.config.raise_on_missing_authentication && !client.token&.value
           raise Error::Unauthenticated
         end
 
         @connection = Faraday.new(connection_options) do |conn|
-          conn.response :json, content_type: /\bjson$/, parser_options: client.response_parser_options
+          conn.response :json, content_type: /\bjson$/, parser_options: { symbolize_names: true }
           conn.request :json
 
-          auth_header = Faraday::Request::Authorization.header "Bearer", client.token.value
-          conn.headers[Faraday::Request::Authorization::KEY] = auth_header
+          if client.token&.value
+            auth_header = Faraday::Request::Authorization.header "Bearer", client.token.value
+            conn.headers[Faraday::Request::Authorization::KEY] = auth_header
+          end
         end
       end
     end

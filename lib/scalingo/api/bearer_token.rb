@@ -1,10 +1,6 @@
-require "active_support/core_ext/numeric/time"
-
 module Scalingo
   module API
     class BearerToken
-      EXCHANGED_TOKEN_DURATION = 1.hour
-
       attr_reader :expires_in
 
       def initialize(value, expires_in: nil)

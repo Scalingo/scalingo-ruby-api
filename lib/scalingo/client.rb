@@ -9,12 +9,22 @@ module Scalingo
       @auth ||= Auth.new(self, "https://auth.scalingo.com/v1")
     end
 
-    def osc_fr1
-      @osc_fr1 ||= Regional.new(self, "https://api.osc-fr1.scalingo.com/v1")
-    end
+    Scalingo.config.regions.each do |region|
+      if Scalingo.config.urls[region].blank?
+        raise ArgumentError, "Scalingo: no url configured for region #{region}"
+      end
 
-    def osc_secnum_fr1
-      @osc_secnum_fr1 ||= Regional.new(self, "https://api.osc-secnum-fr1.scalingo.com/v1")
+      define_method(region) do
+        region_client = instance_variable_get :"@#{region}"
+
+        if !region_client
+          region_client = Regional.new(self, Scalingo.config.urls[region])
+
+          instance_variable_set :"@#{region}", region_client
+        end
+
+        region_client
+      end
     end
 
     ## Delegations
