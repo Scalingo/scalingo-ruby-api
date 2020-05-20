@@ -15,7 +15,7 @@ module Scalingo
     def initiate(provider = DEFAULT_PROVIDER)
       data = {tfa: {provider: provider}}
 
-      response = connection.post('client/tfa', data)
+      response = connection.post("client/tfa", data)
 
       unpack(response, key: :tfa)
     end
@@ -29,7 +29,7 @@ module Scalingo
     end
 
     def disable
-      response = connection.delete('client/tfa')
+      response = connection.delete("client/tfa")
 
       unpack(response)
     end

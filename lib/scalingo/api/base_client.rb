@@ -35,16 +35,20 @@ module Scalingo
 
       def connection(allow_guest: false)
         if allow_guest
-          authenticated_connection rescue unauthenticated_connection
+          begin
+            authenticated_connection
+          rescue
+            unauthenticated_connection
+          end
         else
           authenticated_connection
         end
       end
 
       def unauthenticated_connection
-        @unauthenticated_conn ||= Faraday.new(connection_options) do |conn|
-          conn.response :json, content_type: /\bjson$/, parser_options: { symbolize_names: true }
-        end
+        @unauthenticated_conn ||= Faraday.new(connection_options) { |conn|
+          conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
+        }
       end
 
       def authenticated_connection
@@ -54,15 +58,15 @@ module Scalingo
           raise Error::Unauthenticated
         end
 
-        @connection = Faraday.new(connection_options) do |conn|
-          conn.response :json, content_type: /\bjson$/, parser_options: { symbolize_names: true }
+        @connection = Faraday.new(connection_options) { |conn|
+          conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
 
           if client.token&.value
             auth_header = Faraday::Request::Authorization.header "Bearer", client.token.value
             conn.headers[Faraday::Request::Authorization::KEY] = auth_header
           end
-        end
+        }
       end
     end
   end

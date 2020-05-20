@@ -17,16 +17,16 @@ module Scalingo
     def create(payload = {})
       dry_run = !!(payload[:dry_run] || payload["dry_run"])
 
-      response = connection.post("apps") do |req|
-        req.body = { app: payload }
+      response = connection.post("apps") { |req|
+        req.body = {app: payload}
         req.headers["X-Dry-Run"] = "true" if dry_run
-      end
+      }
 
       unpack(response, key: :app)
     end
 
     def update(id, payload = {})
-      data = { app: payload }
+      data = {app: payload}
 
       response = connection.patch("apps/#{id}", data)
 

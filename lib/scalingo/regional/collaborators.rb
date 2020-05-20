@@ -15,7 +15,7 @@ module Scalingo
     end
 
     def invite(app_id, payload = {})
-      data = { collaborator: payload }
+      data = {collaborator: payload}
 
       response = connection.post("apps/#{app_id}/collaborators", data)
 
@@ -23,7 +23,7 @@ module Scalingo
     end
 
     def accept(token)
-      response = connection.get("apps/collaboration", { token: token })
+      response = connection.get("apps/collaboration", {token: token})
 
       unpack(response)
     end

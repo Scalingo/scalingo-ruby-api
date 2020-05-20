@@ -18,7 +18,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
         endpoint.create(
           scm_type: "gitlab-self-hosted",
           url: "https://gitlab.example.com",
-          access_token: "e9740ca2466cf4da5e6c3a9e79a64f84bdf4b3b2"
+          access_token: "e9740ca2466cf4da5e6c3a9e79a64f84bdf4b3b2",
         )
       }
 

@@ -23,10 +23,10 @@ module Scalingo
       end
 
       def self.unpack(response, key: nil, resource_class: nil)
-        if response.body.respond_to?(:key?) && key.present?
-          data = response.body[key]
+        data = if response.body.respond_to?(:key?) && key.present?
+          response.body[key]
         else
-          data = response.body
+          response.body
         end
 
         parsed = transform_body(data, resource_class: resource_class)
@@ -37,7 +37,7 @@ module Scalingo
           headers: response.headers,
           data: parsed,
           meta: meta,
-          full_body: response.body
+          full_body: response.body,
         )
       end
 

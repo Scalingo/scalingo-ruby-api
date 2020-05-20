@@ -3,10 +3,10 @@ require "scalingo/api/endpoint"
 module Scalingo
   class Auth::Tokens < API::Endpoint
     def exchange(token:)
-      response = client.unauthenticated_connection.post("tokens/exchange") do |req|
+      response = client.unauthenticated_connection.post("tokens/exchange") { |req|
         req.headers[Faraday::Request::Authorization::KEY] =
-          Faraday::Request::BasicAuthentication.header('', token)
-      end
+          Faraday::Request::BasicAuthentication.header("", token)
+      }
 
       unpack(response)
     end

@@ -11,7 +11,7 @@ RSpec.describe Scalingo::Auth::User do
   end
 
   context "update" do
-    let(:response) { endpoint.update(email: "email@email.email")  }
+    let(:response) { endpoint.update(email: "email@email.email") }
 
     context "success" do
       let(:stub_pattern) { "update" }

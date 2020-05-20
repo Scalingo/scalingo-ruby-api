@@ -37,7 +37,7 @@ module Scalingo
         if response.successful?
           @token = API::BearerToken.new(
             response.data[:token],
-            expires_in: expiration
+            expires_in: expiration,
           )
         end
 
@@ -45,10 +45,10 @@ module Scalingo
       end
 
       if bearer_token
-        if bearer_token.is_a?(API::BearerToken)
-          @token = bearer_token
+        @token = if bearer_token.is_a?(API::BearerToken)
+          bearer_token
         else
-          @token = API::BearerToken.new(bearer_token.to_s, expires_in: expires_in)
+          API::BearerToken.new(bearer_token.to_s, expires_in: expires_in)
         end
       end
     end

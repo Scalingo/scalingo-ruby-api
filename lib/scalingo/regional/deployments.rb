@@ -3,7 +3,7 @@ require "scalingo/api/endpoint"
 module Scalingo
   class Regional::Deployments < API::Endpoint
     def for(app_id, page: nil, per_page: nil)
-      data = { page: page, per_page: per_page }.compact
+      data = {page: page, per_page: per_page}.compact
 
       response = connection.get("apps/#{app_id}/deployments", data)
 

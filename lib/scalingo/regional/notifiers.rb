@@ -15,7 +15,7 @@ module Scalingo
     end
 
     def create(app_id, payload = {})
-      data = { notifier: payload }
+      data = {notifier: payload}
 
       response = connection.post("apps/#{app_id}/notifiers", data)
 
@@ -23,7 +23,7 @@ module Scalingo
     end
 
     def update(app_id, notifier_id, payload = {})
-      data = { notifier: payload }
+      data = {notifier: payload}
 
       response = connection.patch("apps/#{app_id}/notifiers/#{notifier_id}", data)
 

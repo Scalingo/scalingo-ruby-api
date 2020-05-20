@@ -9,13 +9,13 @@ module Scalingo
     end
 
     def scale(app_id, formation)
-      response = connection.post("apps/#{app_id}/scale", { containers: formation })
+      response = connection.post("apps/#{app_id}/scale", {containers: formation})
 
       unpack(response, key: :containers)
     end
 
     def restart(app_id, scope = [])
-      response = connection.post("apps/#{app_id}/restart", { scope: scope })
+      response = connection.post("apps/#{app_id}/restart", {scope: scope})
 
       unpack(response)
     end

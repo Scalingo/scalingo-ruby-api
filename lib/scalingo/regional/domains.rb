@@ -15,14 +15,13 @@ module Scalingo
     end
 
     def create(app_id, payload = {})
-      response = connection.post("apps/#{app_id}/domains", { domain: payload })
+      response = connection.post("apps/#{app_id}/domains", {domain: payload})
 
       unpack(response, key: :domain)
     end
 
     def update(app_id, domain_id, payload = {})
-
-      response = connection.patch("apps/#{app_id}/domains/#{domain_id}", { domain: payload })
+      response = connection.patch("apps/#{app_id}/domains/#{domain_id}", {domain: payload})
 
       unpack(response, key: :domain)
     end

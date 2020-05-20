@@ -17,7 +17,7 @@ module Scalingo
       define_method(region) do
         region_client = instance_variable_get :"@#{region}"
 
-        if !region_client
+        unless region_client
           region_client = Regional.new(self, Scalingo.config.urls[region])
 
           instance_variable_set :"@#{region}", region_client

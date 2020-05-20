@@ -4,7 +4,7 @@ module Scalingo
 
   ENDPOINTS = {
     auth: "https://auth.scalingo.test",
-    regional: "https://regional.scalingo.test",
+    regional: "https://regional.scalingo.test"
   }
 
   module StubHelpers
@@ -32,8 +32,8 @@ module Scalingo
           headers: {
             "Accept" => "*/*",
             "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-            "User-Agent" => "Scalingo Ruby Client v3.0.0-pre",
-          },
+            "User-Agent" => "Scalingo Ruby Client v3.0.0-pre"
+          }
         }
 
         if stub_data[:request].present?
@@ -51,14 +51,13 @@ module Scalingo
 
         response_options = {
           status: stub_data.dig(:response, :status) || 200,
-          headers: {},
+          headers: {}
         }
 
         if stub_data.dig(:response, :json_body).present?
           response_options[:headers]["Content-Type"] = "application/json"
-          response_options[:body] = JSON.pretty_generate( stub_data[:response][:json_body])
+          response_options[:body] = JSON.pretty_generate(stub_data[:response][:json_body])
         end
-
 
         stub_request(method, url).with(request_options).to_return(response_options)
       end
@@ -69,7 +68,7 @@ module Scalingo
     extend RSpec::SharedContext
 
     let(:scalingo_guest) { Scalingo::Client.new }
-    let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) }}
+    let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) } }
     let(:auth) { Scalingo::Auth.new(scalingo, ENDPOINTS[:auth]) }
     let(:auth_guest) { Scalingo::Auth.new(scalingo_guest, ENDPOINTS[:auth]) }
     let(:regional) { Scalingo::Regional.new(scalingo, ENDPOINTS[:regional]) }

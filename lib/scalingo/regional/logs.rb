@@ -5,7 +5,7 @@ module Scalingo
 
       return logs_response unless logs_response.successful?
 
-      data = { n: count }.compact
+      data = {n: count}.compact
       response = connection(allow_guest: true).get(logs_response.data, data)
 
       unpack(response)

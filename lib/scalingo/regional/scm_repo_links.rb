@@ -9,7 +9,7 @@ module Scalingo
     end
 
     def create(app_id, payload = {})
-      data = { scm_repo_link: payload }
+      data = {scm_repo_link: payload}
 
       response = connection.post("apps/#{app_id}/scm_repo_link", data)
 
@@ -17,7 +17,7 @@ module Scalingo
     end
 
     def update(app_id, payload = {})
-      data = { scm_repo_link: payload }
+      data = {scm_repo_link: payload}
 
       response = connection.patch("apps/#{app_id}/scm_repo_link", data)
 
@@ -31,7 +31,7 @@ module Scalingo
     end
 
     def deploy(app_id, branch)
-      data = { branch: branch }
+      data = {branch: branch}
 
       response = connection.post("apps/#{app_id}/scm_repo_link/manual_deploy", data)
 
@@ -39,7 +39,7 @@ module Scalingo
     end
 
     def review_app(review_app, pull_request_id)
-      data = { pull_request_id: pull_request_id }
+      data = {pull_request_id: pull_request_id}
 
       response = connection.post("apps/#{app_id}/scm_repo_link/manual_review_app", data)
 

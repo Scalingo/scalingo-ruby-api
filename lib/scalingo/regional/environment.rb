@@ -9,13 +9,13 @@ module Scalingo
     end
 
     def create(app_id, payload = {})
-      response = connection.post("apps/#{app_id}/variables", { variable: payload })
+      response = connection.post("apps/#{app_id}/variables", {variable: payload})
 
       unpack(response, key: :variable)
     end
 
     def update(app_id, variable_id, value)
-      data = { variable: { value: value } }
+      data = {variable: {value: value}}
 
       response = connection.patch("apps/#{app_id}/variables/#{variable_id}", data)
 
@@ -29,7 +29,7 @@ module Scalingo
     end
 
     def bulk_update(app_id, variables)
-      data = { variables: variables }
+      data = {variables: variables}
 
       response = connection.put("apps/#{app_id}/variables", data)
 
@@ -37,7 +37,7 @@ module Scalingo
     end
 
     def bulk_destroy(app_id, variable_ids)
-      data = { variable_ids: variable_ids }
+      data = {variable_ids: variable_ids}
 
       response = connection.delete("apps/#{app_id}/variables", data)
 

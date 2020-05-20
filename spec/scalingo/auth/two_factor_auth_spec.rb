@@ -54,7 +54,6 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
 
       it_behaves_like "a client error"
     end
-
   end
 
   context "disable" do
