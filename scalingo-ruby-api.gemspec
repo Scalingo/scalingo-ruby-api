@@ -6,12 +6,12 @@ require "scalingo/version"
 Gem::Specification.new do |s|
   s.name = "scalingo-ruby-api"
   s.version = Scalingo::VERSION
-  s.authors = ["Leo Unbekandt", "Geoffroy Planquart"]
-  s.email = ["leo@scalingo.com", "geoffroy@planquart.fr"]
+  s.authors = ["Leo Unbekandt", "Geoffroy Planquart", "Kevin Soltysiak"]
+  s.email = ["leo@scalingo.com", "geoffroy@planquart.fr", "kevin@scalingo.com"]
 
   s.homepage = "https://github.com/Scalingo/scalingo-ruby-api"
-  s.summary = "Ruby API for the awesome scalingo project !"
-  s.description = "Ruby wrapper around the web API of scalingo.com"
+  s.summary = "Ruby client for Scalingo's API"
+  s.description = "Ruby client library around the web APIs of scalingo.com"
   s.license = "MIT"
 
   # Specify which files should be added to the gem when it is released.
@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir["spec/**/*_spec.rb"]
 
-  s.add_dependency "activesupport", ">= 5"
-  s.add_dependency "activemodel", ">= 5"
+  s.add_dependency "activesupport", [">= 5", "< 7"]
+  s.add_dependency "activemodel", [">= 5", "< 7"]
   s.add_dependency "dry-configurable", "~> 0.11"
   s.add_dependency "faraday", "~> 1.0.1"
   s.add_dependency "faraday_middleware", "~> 1.0.0"
@@ -36,8 +36,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "rake", "~> 10.0"
   s.add_development_dependency "rspec", "~> 3.0"
-  s.add_development_dependency "rubocop"
+  s.add_development_dependency "rubocop", "~> 0.83.0"
   s.add_development_dependency "standard", "~> 0.4.2"
-  s.add_development_dependency "pry"
-  s.add_development_dependency "webmock"
+  s.add_development_dependency "pry", "~> 0.13.1"
+  s.add_development_dependency "webmock", "~> 3.8.0"
 end

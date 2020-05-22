@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    scalingo-ruby-api (3.0.0.pre.pre)
-      activemodel (>= 5)
-      activesupport (>= 5)
+    scalingo-ruby-api (3.0.0.beta.1)
+      activemodel (>= 5, < 7)
+      activesupport (>= 5, < 7)
       dry-configurable (~> 0.11)
       faraday (~> 1.0.1)
       faraday_middleware (~> 1.0.0)
@@ -98,13 +98,13 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  pry
+  pry (~> 0.13.1)
   rake (~> 10.0)
   rspec (~> 3.0)
-  rubocop
+  rubocop (~> 0.83.0)
   scalingo-ruby-api!
   standard (~> 0.4.2)
-  webmock
+  webmock (~> 3.8.0)
 
 BUNDLED WITH
    2.1.4
