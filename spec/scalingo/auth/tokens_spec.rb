@@ -10,7 +10,7 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:stub_pattern) { "exchange-200" }
 
       it "should be succesful" do
-        response = subject.exchange(token: Scalingo::VALID_ACCESS_TOKEN)
+        response = subject.exchange(Scalingo::VALID_ACCESS_TOKEN)
 
         expect(response).to be_successful
         expect(response.data[:token]).to be_present
@@ -21,7 +21,7 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:stub_pattern) { "exchange-401" }
 
       it "should be rejected with an valid token" do
-        response = subject.exchange(token: "other")
+        response = subject.exchange("other")
 
         expect(response.status).to eq 401
       end

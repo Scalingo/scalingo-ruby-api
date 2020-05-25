@@ -32,7 +32,7 @@ module Scalingo
 
       if access_token
         expiration = Time.now + Scalingo.config.exchanged_token_validity
-        response = auth.tokens.exchange(token: access_token)
+        response = auth.tokens.exchange(access_token)
 
         if response.successful?
           @token = API::BearerToken.new(
