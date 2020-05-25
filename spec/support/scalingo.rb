@@ -29,11 +29,7 @@ module Scalingo
         method = (stub_data[:method] || :get).to_sym
 
         request_options = {
-          headers: {
-            "Accept" => "*/*",
-            "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-            "User-Agent" => "Scalingo Ruby Client v3.0.0-pre"
-          }
+          headers: {}
         }
 
         if stub_data[:request].present?

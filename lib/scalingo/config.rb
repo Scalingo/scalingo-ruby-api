@@ -25,4 +25,8 @@ module Scalingo
   # Raise an exception when trying to use an authenticated connection without a bearer token set
   # Having this setting to true prevents performing requests that would fail due to lack of authentication headers.
   setting :raise_on_missing_authentication, true
+
+  # These headers will be added to every request. Individual methods may override them.
+  # This should be a hash or a callable object that returns a hash.
+  setting :additional_headers, {}
 end

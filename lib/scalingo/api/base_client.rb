@@ -25,11 +25,17 @@ module Scalingo
 
       ## Faraday objects
       def connection_options
+        headers = {
+          "User-Agent" => Scalingo.config.user_agent
+        }
+
+        if (extra = Scalingo.config.additional_headers).present?
+          extra.respond_to?(:call) ? headers.update(extra.call) : headers.update(extra)
+        end
+
         {
           url: url,
-          headers: {
-            "User-Agent" => Scalingo.config.user_agent
-          }
+          headers: headers
         }
       end
 
