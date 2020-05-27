@@ -1,7 +1,7 @@
-require "scalingo/api/base_client"
+require "scalingo/api/client"
 
 module Scalingo
-  class Regional < API::BaseClient
+  class Regional < API::Client
     require "scalingo/regional/addons"
     require "scalingo/regional/apps"
     require "scalingo/regional/collaborators"

@@ -31,6 +31,9 @@ Scalingo.configure do |config|
   # Known regions. Each region should have a corresponding entry in the urls settings below
   config.regions = %i[osc_fr1 osc_secnum_fr1]
 
+  # Default region
+  config.defaul_region = :osc_fr1
+
   # Endpoints URLS
   config.urls.auth = "https://auth.scalingo.com/v1"
   config.urls.osc_fr1 = "https://api.osc-fr1.scalingo.com/v1"
@@ -96,10 +99,13 @@ scalingo.authenticate_with(bearer_token: "my_bearer_jwt")
 scalingo.self
 
 # List your SSH Keys
-scalingo.keys.all
+scalingo.keys.all # OR scalingo.auth.keys.all
 
 # Show one SSH Key
 scalingo.keys.show("my-key-id")
+
+# List your apps on the default region
+scalingo.apps.all # OR scalingo.region.apps.all
 
 # List your apps on osc-fr1
 scalingo.osc_fr1.apps.all

@@ -1,10 +1,10 @@
 module Scalingo
   module API
-    class BaseClient
-      attr_reader :client, :url
+    class Client
+      attr_reader :scalingo, :url
 
-      def initialize(client, url)
-        @client = client
+      def initialize(scalingo, url)
+        @scalingo = scalingo
         @url = url
       end
 
@@ -60,7 +60,7 @@ module Scalingo
       def authenticated_connection
         return @connection if @connection
 
-        if Scalingo.config.raise_on_missing_authentication && !client.token&.value
+        if Scalingo.config.raise_on_missing_authentication && !scalingo.token&.value
           raise Error::Unauthenticated
         end
 
@@ -68,8 +68,8 @@ module Scalingo
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
 
-          if client.token&.value
-            auth_header = Faraday::Request::Authorization.header "Bearer", client.token.value
+          if scalingo.token&.value
+            auth_header = Faraday::Request::Authorization.header "Bearer", scalingo.token.value
             conn.headers[Faraday::Request::Authorization::KEY] = auth_header
           end
         }

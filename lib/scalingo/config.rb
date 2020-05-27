@@ -8,6 +8,9 @@ module Scalingo
   # Known regions. Each region should have a corresponding entry in the urls settings below
   setting :regions, %i[osc_fr1 osc_secnum_fr1]
 
+  # Default region
+  setting :default_region, :osc_fr1
+
   # Endpoints URLS
   setting :urls do
     setting :auth, "https://auth.scalingo.com/v1"
