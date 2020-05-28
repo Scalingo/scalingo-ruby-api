@@ -23,7 +23,7 @@ module Scalingo
     end
 
     def destroy(app_id, variable_id)
-      response = connection.destroy("apps/#{app_id}/variables/#{variable_id}")
+      response = connection.delete("apps/#{app_id}/variables/#{variable_id}")
 
       unpack(response)
     end

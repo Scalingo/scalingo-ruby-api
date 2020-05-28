@@ -2,8 +2,8 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class Regional::Domains < API::Endpoint
-    def for(app_id, payload = {})
-      response = connection.get("apps/#{app_id}/domains", payload.compact)
+    def for(app_id)
+      response = connection.get("apps/#{app_id}/domains")
 
       unpack(response, key: :domains)
     end
