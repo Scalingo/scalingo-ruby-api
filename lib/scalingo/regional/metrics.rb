@@ -3,10 +3,11 @@ require "active_support/core_ext/hash/indifferent_access"
 
 module Scalingo
   class Regional::Metrics < API::Endpoint
-    def for(app_id, metric, payload = {})
+    def for(app_id, payload = {})
       payload = payload.with_indifferent_access
-      query = payload.except(:container_type, :container_index).compact
+      query = payload.except(:metric, :container_type, :container_index).compact
 
+      metric = payload[:metric]
       url = "apps/#{app_id}/stats/#{metric}"
 
       if payload[:container_type]
