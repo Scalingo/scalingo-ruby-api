@@ -1,4 +1,5 @@
 require "scalingo/api/endpoint"
+require "active_support/core_ext/hash/indifferent_access"
 
 module Scalingo
   class Regional::Metrics < API::Endpoint
