@@ -1,12 +1,9 @@
 module Scalingo
   class Regional::Logs < API::Endpoint
-    def for(app_id, count: nil)
-      logs_response = client.apps.logs_url(app_id)
+    def get(url, payload = {})
+      data = payload.compact
 
-      return logs_response unless logs_response.successful?
-
-      data = {n: count}.compact
-      response = connection(allow_guest: true).get(logs_response.data, data)
+      response = connection(allow_guest: true).get(url, data)
 
       unpack(response)
     end
@@ -15,6 +12,15 @@ module Scalingo
       response = connection.get("apps/#{app_id}/logs_archives")
 
       unpack(response, key: :archives)
+    end
+
+    ## Helper method to avoid having to manually chain two operations
+    def for(app_id, payload = {})
+      logs_response = scalingo.apps.logs_url(app_id)
+
+      return logs_response unless logs_response.successful?
+
+      get(logs_response.data, payload)
     end
   end
 end
