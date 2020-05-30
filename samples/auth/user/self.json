@@ -1,7 +1,6 @@
 {
   "path": "/users/self",
   "method": "get",
-  "recorded_at": "2020-05-12T18:38:20Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token"
@@ -9,16 +8,25 @@
   },
   "response": {
     "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:46:32 GMT",
+      "Etag": "W/\"08bf4adf1520d417f7f03783353a3b5d\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "user": {
-        "id": "us-9b313d78-b1a9-4aec-bab5-7da7a55561ed",
-        "created_at": "2013-09-06T11:42:48.000Z",
-        "email": "test@example.fr",
-        "username": "test-username",
-        "uuid": "us-9b313d78-b1a9-4aec-bab5-7da7a55561ed",
+        "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5",
+        "created_at": "2020-05-13T19:03:47.606Z",
+        "email": "example@null.scalingo.com",
+        "username": "example-username",
+        "uuid": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5",
         "company": null,
-        "location": "Somewhere",
-        "fullname": "Test Username",
+        "location": "Somecity",
+        "fullname": "Example Username",
         "github": {
           "username": null,
           "email": null,
@@ -28,17 +36,18 @@
         "tos_accepted": true,
         "unconfirmed_email": null,
         "flags": {
-          "agora-fr1": true
+          "": true,
+          "admin": true
         },
         "limits": {
         },
-        "referral_url": "https://sclng.io/r/test-username",
+        "referral_url": "https://staging.sclng.io/r/dc4830c8190baf25",
         "referral_clicks": 0,
-        "free_trial_started_at": "2013-09-06T11:42:48.000Z",
-        "free_trial_end_time": "2013-10-06T11:42:48.000Z",
+        "free_trial_started_at": "2020-05-13T19:03:47.603Z",
+        "free_trial_end_time": "2020-05-29T13:02:23.469Z",
         "suspended_at": null,
         "suspension_reason": null,
-        "intercom_hash": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        "intercom_hash": "4a5880451125eef5aa30e0e10b67057086e2c0faa99de3eda3d7b8310bfda235"
       }
     }
   }

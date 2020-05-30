@@ -1,7 +1,6 @@
 {
-  "path": "/apps/51e938266edff4fac9100005",
+  "path": "/apps/wrong-id",
   "method": "get",
-  "recorded_at": "2020-05-12T19:43:42Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token"
@@ -9,6 +8,14 @@
   },
   "response": {
     "status": 404,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:52:08 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "resource": "app",
       "error": "not found"

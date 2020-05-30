@@ -1,21 +1,31 @@
 {
-  "path": "/tokens/00ac4742-8ff5-4306-932f-3078e28ecaff/renew",
+  "path": "/tokens/b0c18b26-2a26-4032-a4d9-245877478bf1/renew",
   "method": "patch",
-  "recorded_at": "2020-05-12T16:02:13Z",
   "request": {
     "headers": {
-      "Authorization": "Bearer the-bearer-token"
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Length": "0"
     }
   },
   "response": {
     "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 12:05:29 GMT",
+      "Etag": "W/\"10a925ef481d672b13115d602f6af880\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "token": {
-        "id": "00ac4742-8ff5-4306-932f-3078e28ecaff",
-        "name": "CLI",
-        "created_at": "2018-03-28T20:52:59.641Z",
+        "id": "b0c18b26-2a26-4032-a4d9-245877478bf1",
+        "name": "test-token",
+        "created_at": "2020-05-29T12:05:29.039Z",
         "last_used_at": null,
-        "token": "tk-us-test-token"
+        "issued_at": "2020-05-29T12:05:29.599Z",
+        "token": "tk-us-MUAlvyVTirb9mwMXLrJ32gKb7SCwEFmmdL4-2INSgD0HTDRr"
       }
     }
   }

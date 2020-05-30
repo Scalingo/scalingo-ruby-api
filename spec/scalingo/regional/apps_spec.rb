@@ -13,15 +13,15 @@ RSpec.describe Scalingo::Regional::Apps do
   end
 
   context "create" do
-    let(:response) { endpoint.create(name: "example-app") }
-
     context "success" do
+      let(:response) { endpoint.create(meta[:create][:valid]) }
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a successful response", 201
     end
 
-    context "success" do
+    context "failure" do
+      let(:response) { endpoint.create(meta[:create][:invalid]) }
       let(:stub_pattern) { "create-422" }
 
       it_behaves_like "an unprocessable request"
@@ -29,15 +29,15 @@ RSpec.describe Scalingo::Regional::Apps do
   end
 
   context "find" do
-    let(:response) { endpoint.find("51e938266edff4fac9100005") }
-
     context "success" do
+      let(:response) { endpoint.find(meta[:id]) }
       let(:stub_pattern) { "find-200" }
 
       it_behaves_like "a successful response"
     end
 
     context "not found" do
+      let(:response) { endpoint.find(meta[:not_found_id]) }
       let(:stub_pattern) { "find-404" }
 
       it_behaves_like "a not found response"
@@ -46,14 +46,14 @@ RSpec.describe Scalingo::Regional::Apps do
 
   context "update" do
     context "success" do
-      let(:response) { endpoint.update("example-app", force_https: false) }
+      let(:response) { endpoint.update(meta[:id], meta[:update][:valid]) }
       let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a successful response"
     end
 
     context "invalid stack" do
-      let(:response) { endpoint.update("example-app", stack_id: "stack-not-found") }
+      let(:response) { endpoint.update(meta[:id], meta[:update][:invalid]) }
       let(:stub_pattern) { "update-stack-404" }
 
       it_behaves_like "a not found response"
@@ -61,9 +61,8 @@ RSpec.describe Scalingo::Regional::Apps do
   end
 
   context "logs_url" do
-    let(:response) { endpoint.logs_url("example-app") }
-
     context "success" do
+      let(:response) { endpoint.logs_url(meta[:id]) }
       let(:stub_pattern) { "logs_url" }
 
       it_behaves_like "a successful response"
@@ -72,21 +71,21 @@ RSpec.describe Scalingo::Regional::Apps do
 
   context "destroy" do
     context "success" do
-      let(:response) { endpoint.destroy("example-app", current_name: "example-app") }
+      let(:response) { endpoint.destroy(meta[:id], meta[:destroy][:valid]) }
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
     end
 
     context "not found" do
-      let(:response) { endpoint.destroy("example-app-2") }
+      let(:response) { endpoint.destroy(meta[:not_found_id], meta[:destroy][:valid]) }
       let(:stub_pattern) { "destroy-404" }
 
       it_behaves_like "a not found response"
     end
 
     context "unprocessable" do
-      let(:response) { endpoint.destroy("example-app", current_name: "wrong-name") }
+      let(:response) { endpoint.destroy(meta[:id], meta[:destroy][:invalid]) }
       let(:stub_pattern) { "destroy-422" }
 
       it_behaves_like "an unprocessable request"
@@ -95,21 +94,21 @@ RSpec.describe Scalingo::Regional::Apps do
 
   context "rename" do
     context "success" do
-      let(:response) { endpoint.rename("example-app", current_name: "example-app", new_name: "example-app-2") }
+      let(:response) { endpoint.rename(meta[:id], meta[:rename][:valid]) }
       let(:stub_pattern) { "rename-200" }
 
       it_behaves_like "a successful response"
     end
 
     context "not found" do
-      let(:response) { endpoint.rename("example-app", current_name: "example-app", new_name: "example-app-2") }
+      let(:response) { endpoint.rename(meta[:not_found_id], meta[:rename][:valid]) }
       let(:stub_pattern) { "rename-404" }
 
       it_behaves_like "a not found response"
     end
 
     context "unprocessable" do
-      let(:response) { endpoint.rename("example-app", current_name: "example-app", new_name: "example-app--") }
+      let(:response) { endpoint.rename(meta[:id], meta[:rename][:invalid]) }
       let(:stub_pattern) { "rename-422" }
 
       it_behaves_like "an unprocessable request"
@@ -118,21 +117,21 @@ RSpec.describe Scalingo::Regional::Apps do
 
   context "transfer" do
     context "success" do
-      let(:response) { endpoint.transfer("example-app", current_name: "example-app", app: {owner: "user@example.com"}) }
+      let(:response) { endpoint.transfer(meta[:id], meta[:transfer][:valid]) }
       let(:stub_pattern) { "transfer-200" }
 
       it_behaves_like "a successful response"
     end
 
     context "not found" do
-      let(:response) { endpoint.transfer("example-app", current_name: "example-app", app: {owner: "user@example.com"}) }
+      let(:response) { endpoint.transfer(meta[:not_found_id], meta[:transfer][:valid]) }
       let(:stub_pattern) { "transfer-404" }
 
       it_behaves_like "a not found response"
     end
 
     context "unprocessable" do
-      let(:response) { endpoint.transfer("example-app", current_name: "example-app", app: {owner: "user@example.com"}) }
+      let(:response) { endpoint.transfer(meta[:id], meta[:transfer][:invalid]) }
       let(:stub_pattern) { "transfer-422" }
 
       it_behaves_like "an unprocessable request"

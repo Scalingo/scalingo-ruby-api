@@ -31,6 +31,12 @@ end
 RSpec.shared_examples "a collection response" do |code = 200|
   it_behaves_like "a successful response", code
 
+  it "should be an array" do
+    expect(response.data).to be_a_kind_of(Array)
+  end
+
+  let(:expected_count) { 1 } unless method_defined?(:expected_count)
+
   it "should have the number of expected elements" do
     expect(response.data.size).to eq(expected_count)
   end

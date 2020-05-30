@@ -2,7 +2,7 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class Regional::ScmRepoLinks < API::Endpoint
-    def find(app_id)
+    def show(app_id)
       response = connection.get("apps/#{app_id}/scm_repo_link")
 
       unpack(response, key: :scm_repo_link)

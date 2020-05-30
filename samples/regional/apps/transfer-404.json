@@ -1,21 +1,24 @@
 {
-  "path": "/apps/example-app",
+  "path": "/apps/wrong-id",
   "method": "patch",
-  "recorded_at": "2020-05-13T09:03:02Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token",
       "Content-Type": "application/json"
     },
     "json_body": {
-      "current_name": "example-app",
-      "app": {
-        "owner": "user@example.com"
-      }
     }
   },
   "response": {
     "status": 404,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:52:08 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "resource": "app",
       "error": "not found"

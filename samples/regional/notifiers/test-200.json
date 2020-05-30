@@ -1,0 +1,22 @@
+{
+  "path": "/apps/5ed12291f112e2000f9f93ed/notifiers/no-a0354d81-4a89-49c3-9ee3-3a1b41678703/test",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Length": "0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 14:56:20 GMT",
+      "Content-Type": "text/plain; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": ""
+  }
+}

@@ -1,25 +1,32 @@
 {
-  "path": "/apps/example-app",
+  "path": "/apps/5ed12fa6f112e2000f9f93f7",
   "method": "patch",
-  "recorded_at": "2020-05-13T09:06:08Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token",
       "Content-Type": "application/json"
     },
     "json_body": {
-      "current_name": "example-app",
+      "current_name": "some-example-app--",
       "app": {
-        "owner": "user@example.com"
+        "owner": "not-existent@account.test"
       }
     }
   },
   "response": {
     "status": 422,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:52:09 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "errors": {
-        "owner": [
-          "Sorry, user@example.com should be part of the collaborators"
+        "current_name": [
+          "Provided name does not match app name"
         ]
       }
     }

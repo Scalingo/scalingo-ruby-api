@@ -1,0 +1,58 @@
+{
+  "path": "/apps/5ed10967884fef000f5e4fff/addons/ad-6733873b-1628-4b8e-8e74-c30f1c3f3b63",
+  "method": "patch",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "addon": {
+        "plan_id": "5d1e03af3e6b3b000eefa82a"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:09:01 GMT",
+      "Etag": "W/\"69a96804e2f24161ce80443e2d140034\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "addon": {
+        "id": "ad-6733873b-1628-4b8e-8e74-c30f1c3f3b63",
+        "app_id": "5ed10967884fef000f5e4fff",
+        "resource_id": "some_example_5629",
+        "addon_provider": {
+          "id": "postgresql",
+          "name": "PostgreSQL",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_Postgresql.svg"
+        },
+        "plan": {
+          "id": "5d1e03af3e6b3b000eefa82a",
+          "name": "postgresql-starter-512",
+          "display_name": "Starter 512M",
+          "price": 0.0,
+          "description": "<p>Biniou</p>\n",
+          "position": null,
+          "on_demand": false,
+          "disabled": false,
+          "disabled_alternative_plan_id": null,
+          "sku": "ovh-st-fr1-postgresql-starter-512"
+        },
+        "provisioned_at": "2020-05-29T13:09:01.093Z",
+        "deprovisioned_at": null,
+        "status": "provisioning",
+        "message": "Database plan is being changed",
+        "variables": null
+      },
+      "variables": null,
+      "message": "Database plan is being changed"
+    }
+  }
+}

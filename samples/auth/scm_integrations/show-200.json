@@ -1,7 +1,6 @@
 {
   "path": "/scm_integrations/5bb2e877-9e5c-a83f-8e0e-7c75eebf212c",
   "method": "get",
-  "recorded_at": "2020-05-12T18:21:18Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token"
@@ -9,6 +8,9 @@
   },
   "response": {
     "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
     "json_body": {
       "scm_integration": {
         "id": "5bb2e877-9e5c-a83f-8e0e-7c75eebf212c",

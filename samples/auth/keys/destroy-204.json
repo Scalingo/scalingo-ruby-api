@@ -1,0 +1,19 @@
+{
+  "path": "/keys/73c35bc1-c809-4a53-9409-a70e0f424c13",
+  "method": "delete",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Date": "Fri, 29 May 2020 12:04:35 GMT",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": ""
+  }
+}

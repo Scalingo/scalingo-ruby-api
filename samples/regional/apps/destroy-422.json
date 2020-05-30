@@ -1,7 +1,6 @@
 {
-  "path": "/apps/example-app?current_name=wrong-name",
+  "path": "/apps/5ed12fa6f112e2000f9f93f7?current_name=some-example-app-wrong",
   "method": "delete",
-  "recorded_at": "2020-05-13T08:52:30Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token"
@@ -9,6 +8,14 @@
   },
   "response": {
     "status": 422,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:52:14 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "errors": {
         "current_name": [

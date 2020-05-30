@@ -24,6 +24,7 @@ RSpec.configure do |config|
 
   config.before(:example) do |example|
     if defined?(stub_pattern)
+      load_meta!
       register_stubs!(stub_pattern)
     end
   end

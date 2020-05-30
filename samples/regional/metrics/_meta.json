@@ -1,0 +1,15 @@
+{
+  "app_id": "example-running-application",
+  "for": {
+    "valid_cpu": {
+      "metric": "cpu",
+      "container_type": "web"
+    },
+    "valid_router": {
+      "metric": "router"
+    },
+    "invalid": {
+      "metric": "cpu"
+    }
+  }
+}

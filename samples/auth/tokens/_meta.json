@@ -1,0 +1,13 @@
+{
+  "id": "b0c18b26-2a26-4032-a4d9-245877478bf1",
+  "not_found_id": "wrong-token-id",
+  "exchange": {
+    "invalid": "wrong-token",
+    "valid": "tk-us-UNTgs7Rep5M56UGf9SadYSN-Qqsv1iymenYmHSRXdz2Q6tEB"
+  },
+  "create": {
+    "valid": {
+      "name": "test-token"
+    }
+  }
+}

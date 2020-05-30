@@ -1,7 +1,6 @@
 {
   "path": "/client/tfa",
   "method": "delete",
-  "recorded_at": "2020-05-12T17:35:11Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token"
@@ -9,6 +8,14 @@
   },
   "response": {
     "status": 400,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:51:26 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "error": "2fa not enabled for this account"
     }

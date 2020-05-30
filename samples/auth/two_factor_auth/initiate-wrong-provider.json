@@ -1,7 +1,6 @@
 {
   "path": "/client/tfa",
   "method": "post",
-  "recorded_at": "2020-05-12T17:35:30Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token",
@@ -9,12 +8,20 @@
     },
     "json_body": {
       "tfa": {
-        "provider": "wrong"
+        "provider": "wrong-provider"
       }
     }
   },
   "response": {
     "status": 400,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:51:26 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "error": "invalid provider"
     }

@@ -19,7 +19,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
     end
 
     context "wrong provider" do
-      let(:response) { endpoint.initiate("wrong") }
+      let(:response) { endpoint.initiate(meta[:initiate][:invalid]) }
       let(:stub_pattern) { "initiate-wrong-provider" }
 
       it_behaves_like "a client error"
@@ -35,21 +35,21 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
 
   context "validate" do
     context "success" do
-      let(:response) { endpoint.validate(123456) }
+      let(:response) { endpoint.validate(meta[:validate][:valid]) }
       let(:stub_pattern) { "validate-success" }
 
       it_behaves_like "a successful response", 201
     end
 
     context "wrong provider" do
-      let(:response) { endpoint.validate("wrong") }
+      let(:response) { endpoint.validate(meta[:validate][:invalid]) }
       let(:stub_pattern) { "validate-wrong" }
 
       it_behaves_like "a client error"
     end
 
     context "already enabled" do
-      let(:response) { endpoint.validate(123456) }
+      let(:response) { endpoint.validate(meta[:validate][:invalid]) }
       let(:stub_pattern) { "validate-not-initiated" }
 
       it_behaves_like "a client error"

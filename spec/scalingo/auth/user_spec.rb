@@ -11,12 +11,18 @@ RSpec.describe Scalingo::Auth::User do
   end
 
   context "update" do
-    let(:response) { endpoint.update(email: "email@email.email") }
-
     context "success" do
-      let(:stub_pattern) { "update" }
+      let(:response) { endpoint.update(meta[:update][:valid]) }
+      let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a successful response"
+    end
+
+    context "unprocessable" do
+      let(:response) { endpoint.update(meta[:update][:invalid]) }
+      let(:stub_pattern) { "update-422" }
+
+      it_behaves_like "an unprocessable request"
     end
   end
 end

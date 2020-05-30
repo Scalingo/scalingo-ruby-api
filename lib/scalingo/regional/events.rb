@@ -3,13 +3,13 @@ module Scalingo
     def all(payload = {})
       response = connection.get("events", payload.compact)
 
-      unpack(response)
+      unpack(response, key: :events)
     end
 
     def for(app_id, payload = {})
       response = connection.get("apps/#{app_id}/events", payload.compact)
 
-      unpack(response)
+      unpack(response, key: :events)
     end
 
     def types

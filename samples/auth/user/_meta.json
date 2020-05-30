@@ -1,0 +1,10 @@
+{
+  "update": {
+    "invalid": {
+      "username": "soulou"
+    },
+    "valid": {
+      "location": "Some other city"
+    }
+  }
+}

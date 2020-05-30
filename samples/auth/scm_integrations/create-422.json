@@ -1,7 +1,6 @@
 {
   "path": "/scm_integrations",
   "method": "post",
-  "recorded_at": "2020-05-12T18:24:07Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token",
@@ -9,19 +8,26 @@
     },
     "json_body": {
       "scm_integration": {
-        "key": "value"
+        "scm_type": "wrong"
       }
     }
   },
   "response": {
     "status": 422,
+    "headers": {
+      "Date": "Sat, 30 May 2020 12:26:36 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "errors": {
         "access_token": [
           "can't be blank"
         ],
         "scm_type": [
-          "can't be blank",
           "Unknown scm integration type"
         ]
       }

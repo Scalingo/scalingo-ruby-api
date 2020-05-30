@@ -1,0 +1,11 @@
+{
+  "app_id": "example-running-application",
+  "urls": {
+    "guest": "https://logs-staging.scalingo.com/apps/5ed0fe5d884fef000f5e4fd1/logs?token=72Yh1hk8Q94k2nUkIrNQQ5OX1ZihdQVZZ7A5jKmvNcQBdxMSxd_XAGSS1hLpIZIE",
+    "logged": "https://logs-staging.scalingo.com/apps/5ed0fe5d884fef000f5e4fd1/logs?token=ZU5KAqQMdulCUukmHKd6iSAWJRdfNGsGL_5FZQkWJVRAmEW4JkR_LZPMQaPvDKLe",
+    "with_limit": "https://logs-staging.scalingo.com/apps/5ed0fe5d884fef000f5e4fd1/logs?token=ZU5KAqQMdulCUukmHKd6iSAWJRdfNGsGL_5FZQkWJVRAmEW4JkR_LZPMQaPvDKLe"
+  },
+  "options": {
+    "n": 2
+  }
+}

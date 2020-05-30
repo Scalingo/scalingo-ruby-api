@@ -1,7 +1,6 @@
 {
   "path": "/keys",
   "method": "post",
-  "recorded_at": "2020-05-12T16:02:13Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token",
@@ -9,18 +8,25 @@
     },
     "json_body": {
       "key": {
-        "name": "Key",
-        "content": "value"
+        "name": "example key"
       }
     }
   },
   "response": {
     "status": 422,
+    "headers": {
+      "Date": "Fri, 29 May 2020 12:04:33 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
     "json_body": {
       "errors": {
         "content": [
-          "is too short (minimum is 10 characters)",
-          "is not a valid public SSH key"
+          "can't be blank",
+          "is too short (minimum is 10 characters)"
         ]
       }
     }

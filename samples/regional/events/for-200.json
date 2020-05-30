@@ -1,0 +1,404 @@
+{
+  "path": "/apps/example-running-application/events",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:57:47 GMT",
+      "Etag": "W/\"fa2e15ebf7c8122b84ce6dcad8342571\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "events": [
+        {
+          "id": "5ed10de6884fef000f5e502a",
+          "created_at": "2020-05-29T13:28:06.846Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed10ddcf112e2000f9f93e3",
+          "created_at": "2020-05-29T13:27:56.095Z",
+          "type": "restart",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "scope": [
+              "web"
+            ]
+          }
+        },
+        {
+          "id": "5ed10dd1f112e2000f9f93e2",
+          "created_at": "2020-05-29T13:27:45.574Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed1020b884fef000f5e4fe1",
+          "created_at": "2020-05-29T12:37:31.892Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed10201884fef000f5e4fde",
+          "created_at": "2020-05-29T12:37:21.141Z",
+          "type": "restart",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "scope": [
+              "web"
+            ]
+          }
+        },
+        {
+          "id": "5ed101f6884fef000f5e4fdd",
+          "created_at": "2020-05-29T12:37:10.668Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed101eaf112e2000f9f9396",
+          "created_at": "2020-05-29T12:36:58.335Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed10153d59250000fc19d93",
+          "created_at": "2020-05-29T12:34:27.633Z",
+          "type": "restart",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "scope": [
+
+            ]
+          }
+        },
+        {
+          "id": "5ed1013cf112e2000f9f9394",
+          "created_at": "2020-05-29T12:34:04.534Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed1010d884fef000f5e4fdb",
+          "created_at": "2020-05-29T12:33:17.097Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed10099d59250000fc19d92",
+          "created_at": "2020-05-29T12:31:21.888Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed1004ad59250000fc19d90",
+          "created_at": "2020-05-29T12:30:02.275Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed10010f112e2000f9f9392",
+          "created_at": "2020-05-29T12:29:04.394Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "1:S",
+              "clock": "0:M"
+            },
+            "containers": {
+              "web": "3:S",
+              "clock": "0:M"
+            }
+          }
+        },
+        {
+          "id": "5ed0fec0884fef000f5e4fd9",
+          "created_at": "2020-05-29T12:23:28.360Z",
+          "type": "rename_app",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-application",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "old_name": "example-running-app",
+            "new_name": "example-running-application"
+          }
+        },
+        {
+          "id": "5ed0fe5f884fef000f5e4fd7",
+          "created_at": "2020-05-29T12:21:51.334Z",
+          "type": "deployment",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-app",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "deployment_id": "5ed0fe5f884fef000f5e4fd6",
+            "pusher": "example-username",
+            "git_ref": "a5dca8ec8f48630c07c56fd8370e4f5535fe0fd8",
+            "stack": "scalingo-18",
+            "last_commits": {
+              "commits": [
+
+              ],
+              "remaining": 0
+            },
+            "git_ref_url": null,
+            "deployment_type": "deployment",
+            "status": "success",
+            "duration": 92,
+            "finished_at": "2020-05-29T12:23:25.688+00:00"
+          }
+        },
+        {
+          "id": "5ed0febe884fef000f5e4fd8",
+          "created_at": "2020-05-29T12:21:51.275Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-app",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+              "web": "0:M"
+            },
+            "containers": {
+              "web": "1:M"
+            }
+          }
+        },
+        {
+          "id": "5ed0fe5e884fef000f5e4fd5",
+          "created_at": "2020-05-29T12:21:50.356Z",
+          "type": "scale",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-app",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "previous_containers": {
+            },
+            "containers": {
+              "web": "1:S"
+            }
+          }
+        },
+        {
+          "id": "5ed0fe5d884fef000f5e4fd2",
+          "created_at": "2020-05-29T12:21:49.552Z",
+          "type": "new_app",
+          "app_id": "5ed0fe5d884fef000f5e4fd1",
+          "app_name": "example-running-app",
+          "user": {
+            "username": "example-username",
+            "email": "example@null.scalingo.com",
+            "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5"
+          },
+          "type_data": {
+            "git_source": "https://github.com/Scalingo/sample-node-express"
+          }
+        }
+      ],
+      "meta": {
+        "pagination": {
+          "current_page": 1,
+          "next_page": null,
+          "previous_page": null,
+          "total_pages": 1,
+          "total_count": 18
+        }
+      }
+    }
+  }
+}

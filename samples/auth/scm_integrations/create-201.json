@@ -1,7 +1,6 @@
 {
   "path": "/scm_integrations",
   "method": "post",
-  "recorded_at": "2020-05-12T18:24:07Z",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token",
@@ -11,12 +10,15 @@
       "scm_integration": {
         "scm_type":"gitlab-self-hosted",
         "url":"https://gitlab.example.com",
-        "access_token": "e9740ca2466cf4da5e6c3a9e79a64f84bdf4b3b2"
+        "access_token": "some-access-token"
       }
     }
   },
   "response": {
     "status": 201,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
     "json_body": {
       "scm_integration": {
         "id": "5bb2e877-9e5c-a83f-8e0e-7c75eebf212c",

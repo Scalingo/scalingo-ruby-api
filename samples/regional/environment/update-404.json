@@ -1,0 +1,30 @@
+{
+  "path": "/apps/5ed10d73884fef000f5e5024/variables/not-found",
+  "method": "patch",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "variable": {
+        "value": "newvalue"
+      }
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:26:13 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "resource": "variable",
+      "error": "not found"
+    }
+  }
+}

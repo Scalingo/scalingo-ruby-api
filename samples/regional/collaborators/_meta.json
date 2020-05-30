@@ -1,0 +1,17 @@
+{
+  "app_id": "5ed12f4c884fef000f5e5047",
+  "id": "5ed12f4df112e2000f9f93f2",
+  "not_found_id": "not-found-collaborator",
+  "invite": {
+    "valid": {
+      "email": "collaborator@null.scalingo.com"
+    },
+    "invalid": {
+      "wrong": "params"
+    }
+  },
+  "accept": {
+    "valid": "edd8badd0538816f6f80f3bf40a06bffbb85c443",
+    "invalid": "some-token"
+  }
+}
