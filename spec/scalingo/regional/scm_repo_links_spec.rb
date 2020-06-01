@@ -9,6 +9,13 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:stub_pattern) { "show-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "show" }
+        let(:valid_arguments) { meta[:app_id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -18,6 +25,13 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "create" }
+        let(:valid_arguments) { [meta[:app_id], meta[:create][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -27,6 +41,13 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "update" }
+        let(:valid_arguments) { [meta[:app_id], meta[:update][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -36,6 +57,13 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:stub_pattern) { "manual-deploy-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "deploy" }
+        let(:valid_arguments) { [meta[:app_id], meta[:deploy][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -45,6 +73,13 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "destroy" }
+        let(:valid_arguments) { meta[:app_id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 end

@@ -21,6 +21,12 @@ RSpec.describe Scalingo::Regional::Containers do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "sizes" }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -32,6 +38,13 @@ RSpec.describe Scalingo::Regional::Containers do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "for" }
+        let(:valid_arguments) { meta[:app_id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -41,6 +54,13 @@ RSpec.describe Scalingo::Regional::Containers do
       let(:stub_pattern) { "restart-202" }
 
       it_behaves_like "a successful response", 202
+
+      context "request customization" do
+        let(:method_name) { "restart" }
+        let(:valid_arguments) { [meta[:app_id], meta[:restart][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "success" do
@@ -57,6 +77,13 @@ RSpec.describe Scalingo::Regional::Containers do
       let(:stub_pattern) { "scale-202" }
 
       it_behaves_like "a successful response", 202
+
+      context "request customization" do
+        let(:method_name) { "scale" }
+        let(:valid_arguments) { [meta[:app_id], meta[:scale][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "success" do

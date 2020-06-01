@@ -3,9 +3,9 @@ require "active_support/core_ext/hash/indifferent_access"
 
 module Scalingo
   class Regional::Metrics < API::Endpoint
-    def for(app_id, payload = {})
+    def for(app_id, payload = {}, headers = nil, &block)
       payload = payload.with_indifferent_access
-      query = payload.except(:metric, :container_type, :container_index).compact
+      data = payload.except(:metric, :container_type, :container_index).compact
 
       metric = payload[:metric]
       url = "apps/#{app_id}/stats/#{metric}"
@@ -15,13 +15,25 @@ module Scalingo
         url = "#{url}/#{payload[:container_index]}" if payload[:container_index]
       end
 
-      response = connection.get(url, query)
+      response = connection.get(
+        url,
+        data,
+        headers,
+        &block
+      )
 
       unpack(response)
     end
 
-    def types
-      response = connection(allow_guest: true).get("features/metrics")
+    def types(headers = nil, &block)
+      data = nil
+
+      response = connection(allow_guest: true).get(
+        "features/metrics",
+        data,
+        headers,
+        &block
+      )
 
       unpack(response, key: :metrics)
     end

@@ -21,6 +21,12 @@ RSpec.describe Scalingo::Regional::Events do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "categories" }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -41,6 +47,12 @@ RSpec.describe Scalingo::Regional::Events do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "types" }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -52,6 +64,13 @@ RSpec.describe Scalingo::Regional::Events do
 
       it_behaves_like "a collection response"
       it_behaves_like "a paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "all" }
+        let(:valid_arguments) { {} }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -63,6 +82,13 @@ RSpec.describe Scalingo::Regional::Events do
 
       it_behaves_like "a collection response"
       it_behaves_like "a paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "for" }
+        let(:valid_arguments) { [meta[:app_id], {}] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 end

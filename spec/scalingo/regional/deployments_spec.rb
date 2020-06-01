@@ -10,6 +10,13 @@ RSpec.describe Scalingo::Regional::Deployments do
 
       it_behaves_like "a collection response"
       it_behaves_like "a paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "for" }
+        let(:valid_arguments) { [meta[:app_id], {}] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -19,6 +26,13 @@ RSpec.describe Scalingo::Regional::Deployments do
       let(:stub_pattern) { "find-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "find" }
+        let(:valid_arguments) { [meta[:app_id], meta[:id]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do
@@ -35,6 +49,13 @@ RSpec.describe Scalingo::Regional::Deployments do
       let(:stub_pattern) { "logs-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "logs" }
+        let(:valid_arguments) { [meta[:app_id], meta[:id]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do

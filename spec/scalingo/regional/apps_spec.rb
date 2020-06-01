@@ -10,6 +10,12 @@ RSpec.describe Scalingo::Regional::Apps do
 
     it_behaves_like "a collection response"
     it_behaves_like "a non-paginated collection"
+
+    context "request customization" do
+      let(:method_name) { "all" }
+
+      it_behaves_like "a method with a configurable request"
+    end
   end
 
   context "create" do
@@ -18,6 +24,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "create" }
+        let(:valid_arguments) { meta[:create][:valid] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do
@@ -34,6 +47,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "find-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "find" }
+        let(:valid_arguments) { meta[:id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
@@ -50,6 +70,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "update" }
+        let(:valid_arguments) { [meta[:id], meta[:update][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "invalid stack" do
@@ -66,6 +93,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "logs_url" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "logs_url" }
+        let(:valid_arguments) { meta[:id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -75,6 +109,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "destroy" }
+        let(:valid_arguments) { [meta[:id], meta[:destroy][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
@@ -98,6 +139,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "rename-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "rename" }
+        let(:valid_arguments) { [meta[:id], meta[:rename][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
@@ -121,6 +169,13 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:stub_pattern) { "transfer-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "transfer" }
+        let(:valid_arguments) { [meta[:id], meta[:transfer][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do

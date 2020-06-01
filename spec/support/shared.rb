@@ -60,15 +60,31 @@ RSpec.shared_examples "a method with a configurable request" do
 
   it "can configure the request via a block" do
     expect { |block|
-      endpoint.send(*[method_name, valid_arguments].compact, &block)
+      if valid_arguments.is_a?(Array)
+        endpoint.public_send(*[method_name, *valid_arguments].compact, &block)
+      else
+        endpoint.public_send(*[method_name, valid_arguments].compact, &block)
+      end
     }.to yield_with_args(Faraday::Request)
   end
 
   it "can configure headers via the last argument" do
-    expect { |b| endpoint.send(*[method_name, valid_arguments].compact, &b) }.to yield_control
-
-    endpoint.send(*[method_name, valid_arguments, custom_headers].compact) do |conn|
+    checker = Proc.new do |conn|
       expect(conn.headers["X-Custom-Header"]).to eq "custom"
+    end
+
+    if valid_arguments.is_a?(Array)
+      expect { |b|
+        endpoint.public_send(*[method_name, *valid_arguments].compact, &b)
+      }.to yield_control
+
+      endpoint.public_send(*[method_name, *valid_arguments, custom_headers].compact, &checker)
+    else
+      expect { |b|
+        endpoint.public_send(*[method_name, valid_arguments].compact, &b)
+      }.to yield_control
+
+      endpoint.public_send(*[method_name, valid_arguments, custom_headers].compact, &checker)
     end
   end
 end

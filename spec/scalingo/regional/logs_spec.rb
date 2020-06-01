@@ -24,6 +24,13 @@ RSpec.describe Scalingo::Regional::Logs do
       let(:stub_pattern) { "get-with-limit-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "get" }
+        let(:valid_arguments) { [meta[:urls][:with_limit], meta[:options]]}
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -35,6 +42,13 @@ RSpec.describe Scalingo::Regional::Logs do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "archives" }
+        let(:valid_arguments) { meta[:app_id]}
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 end

@@ -17,6 +17,12 @@ RSpec.describe Scalingo::Regional::Metrics do
       let(:stub_pattern) { "types-logged" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "types" }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -28,6 +34,14 @@ RSpec.describe Scalingo::Regional::Metrics do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+
+      context "request customization" do
+        let(:method_name) { "for" }
+        let(:valid_arguments) { [meta[:app_id], meta[:for][:valid_cpu]]}
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "router" do

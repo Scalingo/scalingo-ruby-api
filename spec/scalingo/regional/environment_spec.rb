@@ -10,6 +10,13 @@ RSpec.describe Scalingo::Regional::Environment do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "for" }
+        let(:valid_arguments) { meta[:app_id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -19,6 +26,13 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "create" }
+        let(:valid_arguments) { [meta[:app_id], meta[:create][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do
@@ -35,6 +49,13 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "update" }
+        let(:valid_arguments) { [meta[:app_id], meta[:id], meta[:update][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
@@ -51,6 +72,13 @@ RSpec.describe Scalingo::Regional::Environment do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+      context "request customization" do
+        let(:method_name) { "bulk_update" }
+        let(:valid_arguments) { [meta[:app_id], meta[:update][:bulk]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -60,6 +88,13 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "destroy" }
+        let(:valid_arguments) { [meta[:app_id], meta[:id]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "bulk" do
@@ -67,6 +102,13 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:stub_pattern) { "bulk-destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "bulk_destroy" }
+        let(:valid_arguments) { [meta[:app_id], meta[:destroy][:bulk]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do

@@ -9,6 +9,13 @@ RSpec.describe Scalingo::Regional::Operations do
       let(:stub_pattern) { "find-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "find" }
+        let(:valid_arguments) { [meta[:app_id], meta[:id]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do

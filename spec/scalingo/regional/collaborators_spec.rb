@@ -10,6 +10,14 @@ RSpec.describe Scalingo::Regional::Collaborators do
 
       it_behaves_like "a collection response"
       it_behaves_like "a non-paginated collection"
+
+
+      context "request customization" do
+        let(:method_name) { "for" }
+        let(:valid_arguments) { meta[:app_id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -19,6 +27,13 @@ RSpec.describe Scalingo::Regional::Collaborators do
       let(:stub_pattern) { "invite-201" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "invite" }
+        let(:valid_arguments) { [meta[:app_id], meta[:invite][:valid]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do
@@ -35,6 +50,13 @@ RSpec.describe Scalingo::Regional::Collaborators do
       let(:stub_pattern) { "accept-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "accept" }
+        let(:valid_arguments) { meta[:accept][:valid] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "already collaborating" do
@@ -58,6 +80,13 @@ RSpec.describe Scalingo::Regional::Collaborators do
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "destroy" }
+        let(:valid_arguments) { [meta[:app_id], meta[:id]] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
