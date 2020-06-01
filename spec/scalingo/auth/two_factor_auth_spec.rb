@@ -8,6 +8,12 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
     let(:stub_pattern) { "status" }
 
     it_behaves_like "a successful response"
+
+    context "request customization" do
+      let(:method_name) { "status" }
+
+      it_behaves_like "a method with a configurable request"
+    end
   end
 
   context "initiate" do
@@ -16,6 +22,13 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
       let(:stub_pattern) { "initiate-success" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "initiate" }
+        let(:valid_arguments) { Scalingo::Auth::TwoFactorAuth::DEFAULT_PROVIDER }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "wrong provider" do
@@ -39,6 +52,13 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
       let(:stub_pattern) { "validate-success" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "validate" }
+        let(:valid_arguments) { meta[:validate][:valid] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "wrong provider" do
@@ -62,6 +82,12 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
       let(:stub_pattern) { "disable-success" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "disable" }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not enabled" do

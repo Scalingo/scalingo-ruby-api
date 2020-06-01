@@ -9,6 +9,12 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
 
     it_behaves_like "a collection response"
     it_behaves_like "a non-paginated collection"
+
+    context "request customization" do
+      let(:method_name) { "all" }
+
+      it_behaves_like "a method with a configurable request"
+    end
   end
 
   context "create" do
@@ -17,6 +23,13 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "create" }
+        let(:valid_arguments) { meta[:create][:valid] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "failure" do
@@ -33,6 +46,13 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
       let(:stub_pattern) { "show-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "show" }
+        let(:valid_arguments) { meta[:id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
@@ -49,6 +69,13 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "destroy" }
+        let(:valid_arguments) { meta[:id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do

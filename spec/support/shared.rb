@@ -53,3 +53,22 @@ RSpec.shared_examples "a non-paginated collection" do |code = 200|
     expect(response).not_to be_paginated
   end
 end
+
+RSpec.shared_examples "a method with a configurable request" do
+  let(:valid_arguments) { nil } unless method_defined?(:valid_arguments)
+  let(:custom_headers) { { "X-Custom-Header" => "custom"} } unless method_defined?(:custom_headers)
+
+  it "can configure the request via a block" do
+    expect { |block|
+      endpoint.send(*[method_name, valid_arguments].compact, &block)
+    }.to yield_with_args(Faraday::Request)
+  end
+
+  it "can configure headers via the last argument" do
+    expect { |b| endpoint.send(*[method_name, valid_arguments].compact, &b) }.to yield_control
+
+    endpoint.send(*[method_name, valid_arguments, custom_headers].compact) do |conn|
+      expect(conn.headers["X-Custom-Header"]).to eq "custom"
+    end
+  end
+end

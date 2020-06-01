@@ -10,9 +10,17 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:response) { subject.exchange(meta[:exchange][:valid]) }
       let(:stub_pattern) { "exchange-200" }
 
-      it "should be succesful" do
+      it "should be successful" do
         expect(response).to be_successful
         expect(response.data[:token]).to be_present
+      end
+
+      context "request customization" do
+        let(:method_name) { "exchange" }
+        let(:valid_arguments) { meta[:exchange][:valid] }
+        let(:endpoint) { subject }
+
+        it_behaves_like "a method with a configurable request"
       end
     end
 
@@ -32,6 +40,12 @@ RSpec.describe Scalingo::Auth::Tokens do
 
     it_behaves_like "a collection response"
     it_behaves_like "a non-paginated collection"
+
+    context "request customization" do
+      let(:method_name) { "all" }
+
+      it_behaves_like "a method with a configurable request"
+    end
   end
 
   context "create" do
@@ -40,6 +54,13 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a successful response", 201
+
+      context "request customization" do
+        let(:method_name) { "create" }
+        let(:valid_arguments) { meta[:create][:valid] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
   end
 
@@ -49,6 +70,13 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:stub_pattern) { "renew-200" }
 
       it_behaves_like "a successful response"
+
+      context "request customization" do
+        let(:method_name) { "renew" }
+        let(:valid_arguments) { meta[:id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
@@ -65,6 +93,13 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "a successful response", 204
+
+      context "request customization" do
+        let(:method_name) { "destroy" }
+        let(:valid_arguments) { meta[:id] }
+
+        it_behaves_like "a method with a configurable request"
+      end
     end
 
     context "not found" do
