@@ -1,7 +1,5 @@
 require "scalingo/api/endpoint"
-{
-  "pull_request_id": 42
-}
+
 module Scalingo
   class Regional::ScmRepoLinks < API::Endpoint
     def show(app_id, headers = nil, &block)

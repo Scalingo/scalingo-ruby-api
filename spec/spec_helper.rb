@@ -21,6 +21,7 @@ RSpec.configure do |config|
 
   config.include Scalingo::StubHelpers
   config.include Scalingo::Common
+  config.extend Scalingo::DescribedMethod
 
   config.before(:example) do |example|
     if defined?(stub_pattern)

@@ -20,7 +20,7 @@ module Scalingo
       api, folder = described_class.to_s.underscore.split("/").last(2)
       path = [samples_root, api, folder, "_meta.json"].compact.join("/")
 
-      if File.exists?(path)
+      if File.exist?(path)
         @meta = JSON.parse(File.read(path), symbolize_names: true)
       end
     end
@@ -72,9 +72,31 @@ module Scalingo
     end
   end
 
+  module DescribedMethod
+    def describe_method(method_name, &block)
+      unless described_class.instance_methods.include?(method_name.to_sym)
+        raise NameError, "No method named `#{method_name}` for class #{described_class}"
+      end
+
+      context(method_name) do
+        let(:method_name) { method_name }
+        let(:arguments) { nil }
+
+        let(:response) {
+          if arguments.is_a?(Array)
+            subject.public_send(*[method_name, *arguments].compact)
+          else
+            subject.public_send(*[method_name, arguments].compact)
+          end
+        }
+
+        instance_exec(&block)
+      end
+    end
+  end
+
   module Common
     extend RSpec::SharedContext
-
     let(:scalingo_guest) { Scalingo::Client.new }
     let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) } }
     let(:auth) { Scalingo::Auth.new(scalingo, ENDPOINTS[:auth]) }
@@ -82,5 +104,23 @@ module Scalingo
     let(:regional) { Scalingo::Regional.new(scalingo, ENDPOINTS[:regional]) }
     let(:regional_guest) { Scalingo::Regional.new(scalingo_guest, ENDPOINTS[:regional]) }
     let(:meta) { @meta }
+
+    let(:endpoint) do
+      if described_class < Scalingo::API::Endpoint
+        api = described_class.to_s.split("::")[-2].downcase
+
+        described_class.new(send(api))
+      end
+    end
+
+    let(:guest_endpoint) do
+      if described_class < Scalingo::API::Endpoint
+        api = described_class.to_s.split("::")[-2].downcase
+
+        described_class.new(send("#{api}_guest"))
+      end
+    end
+
+    subject { endpoint }
   end
 end

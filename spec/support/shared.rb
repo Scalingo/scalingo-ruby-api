@@ -1,9 +1,34 @@
 RSpec.shared_examples "a successful response" do |code = 200|
   let(:expected_code) { code }
+  let(:custom_headers) { {"X-Custom-Header" => "custom"} }
 
-  it "should be succesful" do
+  it "should be successful" do
     expect(response).to be_successful
     expect(response.status).to eq code
+  end
+
+  # Checking that the method accepts a block and passes the faraday object
+  it "can configure the request via a block" do
+    expect { |block|
+      if arguments.is_a?(Array)
+        subject.public_send(*[method_name, *arguments].compact, &block)
+      else
+        subject.public_send(*[method_name, arguments].compact, &block)
+      end
+    }.to yield_with_args(Faraday::Request)
+  end
+
+  # Leverages the block version to check that the headers can also be set with an argument
+  it "can configure headers via the last argument" do
+    checker = proc { |conn|
+      expect(conn.headers["X-Custom-Header"]).to eq "custom"
+    }
+
+    if arguments.is_a?(Array)
+      subject.public_send(*[method_name, *arguments, custom_headers].compact, &checker)
+    else
+      subject.public_send(*[method_name, arguments, custom_headers].compact, &checker)
+    end
   end
 end
 
@@ -55,36 +80,4 @@ RSpec.shared_examples "a non-paginated collection" do |code = 200|
 end
 
 RSpec.shared_examples "a method with a configurable request" do
-  let(:valid_arguments) { nil } unless method_defined?(:valid_arguments)
-  let(:custom_headers) { { "X-Custom-Header" => "custom"} } unless method_defined?(:custom_headers)
-
-  it "can configure the request via a block" do
-    expect { |block|
-      if valid_arguments.is_a?(Array)
-        endpoint.public_send(*[method_name, *valid_arguments].compact, &block)
-      else
-        endpoint.public_send(*[method_name, valid_arguments].compact, &block)
-      end
-    }.to yield_with_args(Faraday::Request)
-  end
-
-  it "can configure headers via the last argument" do
-    checker = Proc.new do |conn|
-      expect(conn.headers["X-Custom-Header"]).to eq "custom"
-    end
-
-    if valid_arguments.is_a?(Array)
-      expect { |b|
-        endpoint.public_send(*[method_name, *valid_arguments].compact, &b)
-      }.to yield_control
-
-      endpoint.public_send(*[method_name, *valid_arguments, custom_headers].compact, &checker)
-    else
-      expect { |b|
-        endpoint.public_send(*[method_name, valid_arguments].compact, &b)
-      }.to yield_control
-
-      endpoint.public_send(*[method_name, valid_arguments, custom_headers].compact, &checker)
-    end
-  end
 end

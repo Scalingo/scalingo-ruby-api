@@ -10,7 +10,7 @@ module Scalingo
         data,
         headers,
         &block
-       )
+      )
 
       unpack(response, key: :apps)
     end
@@ -23,7 +23,7 @@ module Scalingo
         data,
         headers,
         &block
-       )
+      )
 
       unpack(response, key: :app)
     end
