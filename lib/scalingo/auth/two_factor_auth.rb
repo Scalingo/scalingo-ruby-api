@@ -55,7 +55,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack(response, key: :tfa)
     end
   end
 end

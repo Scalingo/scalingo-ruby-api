@@ -25,6 +25,7 @@ RSpec.describe Scalingo::Regional::Containers do
     context "success" do
       let(:arguments) { meta[:app_id] }
       let(:expected_count) { 2 }
+      let(:expected_keys) { %i[name] }
       let(:stub_pattern) { "for-200" }
 
       it_behaves_like "a collection response"
@@ -37,7 +38,7 @@ RSpec.describe Scalingo::Regional::Containers do
       let(:arguments) { [meta[:app_id], meta[:restart][:valid]] }
       let(:stub_pattern) { "restart-202" }
 
-      it_behaves_like "a successful response", 202
+      it_behaves_like "a singular object response", 202
     end
 
     context "success" do
@@ -53,7 +54,7 @@ RSpec.describe Scalingo::Regional::Containers do
       let(:arguments) { [meta[:app_id], meta[:scale][:valid]] }
       let(:stub_pattern) { "scale-202" }
 
-      it_behaves_like "a successful response", 202
+      it_behaves_like "a singular object response", 202
     end
 
     context "success" do

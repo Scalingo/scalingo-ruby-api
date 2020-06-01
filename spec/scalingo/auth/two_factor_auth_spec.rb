@@ -4,7 +4,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
   describe_method "status" do
     let(:stub_pattern) { "status" }
 
-    it_behaves_like "a successful response"
+    it_behaves_like "a singular object response"
   end
 
   describe_method "initiate" do
@@ -12,7 +12,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
       let(:arguments) { Scalingo::Auth::TwoFactorAuth::DEFAULT_PROVIDER }
       let(:stub_pattern) { "initiate-success" }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
 
     context "wrong provider" do
@@ -33,8 +33,9 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
     context "success" do
       let(:arguments) { meta[:validate][:valid] }
       let(:stub_pattern) { "validate-success" }
+      let(:expected_keys) { %i[codes user] }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
 
     context "wrong provider" do
@@ -56,7 +57,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
     context "success" do
       let(:stub_pattern) { "disable-success" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "not enabled" do

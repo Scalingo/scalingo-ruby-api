@@ -4,7 +4,7 @@ RSpec.describe Scalingo::Auth::User do
   describe_method "self" do
     let(:stub_pattern) { "self" }
 
-    it_behaves_like "a successful response"
+    it_behaves_like "a singular object response"
   end
 
   describe_method "update" do
@@ -12,7 +12,7 @@ RSpec.describe Scalingo::Auth::User do
       let(:arguments) { meta[:update][:valid] }
       let(:stub_pattern) { "update-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "unprocessable" do

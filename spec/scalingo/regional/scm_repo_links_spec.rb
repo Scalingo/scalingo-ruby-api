@@ -6,7 +6,7 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:arguments) { meta[:app_id] }
       let(:stub_pattern) { "show-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
   end
 
@@ -15,7 +15,7 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:arguments) { [meta[:app_id], meta[:create][:valid]] }
       let(:stub_pattern) { "create-201" }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:arguments) { [meta[:app_id], meta[:update][:valid]] }
       let(:stub_pattern) { "update-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:arguments) { [meta[:app_id], meta[:deploy][:valid]] }
       let(:stub_pattern) { "manual-deploy-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks do
       let(:arguments) { meta[:app_id] }
       let(:stub_pattern) { "destroy-204" }
 
-      it_behaves_like "a successful response", 204
+      it_behaves_like "an empty response"
     end
   end
 end

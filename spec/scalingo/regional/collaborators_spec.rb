@@ -16,7 +16,7 @@ RSpec.describe Scalingo::Regional::Collaborators do
       let(:arguments) { [meta[:app_id], meta[:invite][:valid]] }
       let(:stub_pattern) { "invite-201" }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
 
     context "failure" do
@@ -31,8 +31,9 @@ RSpec.describe Scalingo::Regional::Collaborators do
     context "success" do
       let(:arguments) { meta[:accept][:valid] }
       let(:stub_pattern) { "accept-200" }
+      let(:expected_keys) { %i[app] }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "already collaborating" do
@@ -55,7 +56,7 @@ RSpec.describe Scalingo::Regional::Collaborators do
       let(:arguments) { [meta[:app_id], meta[:id]] }
       let(:stub_pattern) { "destroy-204" }
 
-      it_behaves_like "a successful response", 204
+      it_behaves_like "an empty response"
     end
 
     context "not found" do

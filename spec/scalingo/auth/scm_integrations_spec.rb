@@ -13,7 +13,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
       let(:arguments) { meta[:create][:valid] }
       let(:stub_pattern) { "create-201" }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
 
     context "failure" do
@@ -29,7 +29,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
       let(:arguments) { meta[:id] }
       let(:stub_pattern) { "show-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "not found" do
@@ -45,7 +45,7 @@ RSpec.describe Scalingo::Auth::ScmIntegrations do
       let(:arguments) { meta[:id] }
       let(:stub_pattern) { "destroy-204" }
 
-      it_behaves_like "a successful response", 204
+      it_behaves_like "an empty response"
     end
 
     context "not found" do

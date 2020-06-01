@@ -16,7 +16,7 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:arguments) { [meta[:app_id], meta[:create][:valid]] }
       let(:stub_pattern) { "create-201" }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
 
     context "failure" do
@@ -32,7 +32,7 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:arguments) { [meta[:app_id], meta[:id], meta[:update][:valid]] }
       let(:stub_pattern) { "update-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "not found" do
@@ -57,7 +57,7 @@ RSpec.describe Scalingo::Regional::Environment do
       let(:arguments) { [meta[:app_id], meta[:id]] }
       let(:stub_pattern) { "destroy-204" }
 
-      it_behaves_like "a successful response", 204
+      it_behaves_like "an empty response"
     end
 
     context "not found" do
@@ -72,6 +72,6 @@ RSpec.describe Scalingo::Regional::Environment do
     let(:arguments) { [meta[:app_id], meta[:destroy][:bulk]] }
     let(:stub_pattern) { "bulk-destroy-204" }
 
-    it_behaves_like "a successful response", 204
+    it_behaves_like "an empty response"
   end
 end

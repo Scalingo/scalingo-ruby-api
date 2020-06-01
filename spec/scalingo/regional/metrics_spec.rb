@@ -7,17 +7,19 @@ RSpec.describe Scalingo::Regional::Metrics do
 
       let(:stub_pattern) { "types-guest" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "logged" do
       let(:stub_pattern) { "types-logged" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
   end
 
   describe_method "for" do
+    let(:expected_keys) { %i[time value] }
+
     context "cpu" do
       let(:arguments) { [meta[:app_id], meta[:for][:valid_cpu]] }
       let(:expected_count) { 181 }

@@ -8,21 +8,21 @@ RSpec.describe Scalingo::Regional::Logs do
       let(:arguments) { [meta[:urls][:guest], {}] }
       let(:stub_pattern) { "get-guest-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "logged" do
       let(:arguments) { [meta[:urls][:logged], {}] }
       let(:stub_pattern) { "get-logged-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "with limit" do
       let(:arguments) { [meta[:urls][:with_limit], meta[:options]] }
       let(:stub_pattern) { "get-with-limit-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
   end
 

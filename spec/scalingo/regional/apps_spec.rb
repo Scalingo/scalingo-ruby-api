@@ -14,7 +14,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { meta[:create][:valid] }
       let(:stub_pattern) { "create-201" }
 
-      it_behaves_like "a successful response", 201
+      it_behaves_like "a singular object response", 201
     end
 
     context "failure" do
@@ -30,7 +30,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { meta[:id] }
       let(:stub_pattern) { "find-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "not found" do
@@ -46,7 +46,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { [meta[:id], meta[:update][:valid]] }
       let(:stub_pattern) { "update-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "invalid stack" do
@@ -62,7 +62,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { meta[:id] }
       let(:stub_pattern) { "logs_url" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { [meta[:id], meta[:destroy][:valid]] }
       let(:stub_pattern) { "destroy-204" }
 
-      it_behaves_like "a successful response", 204
+      it_behaves_like "an empty response"
     end
 
     context "not found" do
@@ -94,7 +94,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { [meta[:id], meta[:rename][:valid]] }
       let(:stub_pattern) { "rename-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "not found" do
@@ -117,7 +117,7 @@ RSpec.describe Scalingo::Regional::Apps do
       let(:arguments) { [meta[:id], meta[:transfer][:valid]] }
       let(:stub_pattern) { "transfer-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "not found" do

@@ -53,17 +53,56 @@ RSpec.shared_examples "an unprocessable request" do
   end
 end
 
+RSpec.shared_examples "a singular object response" do |code = 200|
+  it_behaves_like "a successful response", code
+
+  let(:expected_type) { Object } unless method_defined?(:expected_type)
+  let(:expected_keys) { %i[id] } unless method_defined?(:expected_keys)
+
+  it "should be an object of the expected type (and if applicable, the expected keys)" do
+    expect(response.data).to be_a_kind_of(expected_type)
+
+    if response.data.respond_to?(:key?)
+      expected_keys.each do |key|
+        expect(response.data.key?(key)).to be true
+      end
+    end
+  end
+end
+
+RSpec.shared_examples "an empty response" do |code = 204|
+  it_behaves_like "a successful response", code
+
+  it "should be empty" do
+    expect(response.data).to eq("")
+  end
+end
+
 RSpec.shared_examples "a collection response" do |code = 200|
   it_behaves_like "a successful response", code
+
+  let(:expected_count) { 1 } unless method_defined?(:expected_count)
+  let(:expected_type) { Object } unless method_defined?(:expected_type)
+  let(:expected_keys) { %i[id] } unless method_defined?(:expected_keys)
 
   it "should be an array" do
     expect(response.data).to be_a_kind_of(Array)
   end
 
-  let(:expected_count) { 1 } unless method_defined?(:expected_count)
-
   it "should have the number of expected elements" do
     expect(response.data.size).to eq(expected_count)
+  end
+
+  it "items should be of the expected type (and if applicable, the expected keys)" do
+    response.data.each do |item|
+      expect(item).to be_a_kind_of(expected_type)
+
+      if item.respond_to?(:key?)
+        expected_keys.each do |key|
+          expect(item.key?(key)).to be true
+        end
+      end
+    end
   end
 end
 

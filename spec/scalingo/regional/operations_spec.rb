@@ -6,7 +6,7 @@ RSpec.describe Scalingo::Regional::Operations do
       let(:arguments) { [meta[:app_id], meta[:id]] }
       let(:stub_pattern) { "find-200" }
 
-      it_behaves_like "a successful response"
+      it_behaves_like "a singular object response"
     end
 
     context "failure" do
