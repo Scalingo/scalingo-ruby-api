@@ -32,4 +32,7 @@ module Scalingo
   # These headers will be added to every request. Individual methods may override them.
   # This should be a hash or a callable object that returns a hash.
   setting :additional_headers, {}
+
+  # Raise an exception when the bearer token in use is supposed to be invalid
+  setting :raise_on_expired_token, false
 end

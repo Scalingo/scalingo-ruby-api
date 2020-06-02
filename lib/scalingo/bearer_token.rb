@@ -12,7 +12,7 @@ module Scalingo
     end
 
     def value
-      raise Error::ExpiredToken if expired?
+      raise Error::ExpiredToken if expired? && Scalingo.config.raise_on_expired_token
 
       @value
     end

@@ -24,6 +24,22 @@ scalingo.authenticate_with(access_token: ENV["SCALINGO_TOKEN"])
 scalingo.user.self
 ```
 
+## Conventions
+
+Most methods map to one (and only one) request, and their signature follows this format:
+
+```ruby
+client.section.request(id, payload = {}, headers = nil, &block)
+```
+
+* Depending on the request, there may be no id (collection and/or singular resource, such as `user`), one, or two ids (many resources are nested under an app).
+* Most of the time, this library won't do any processing of the payload, but there's a few things to know:
+  * the root key shouldn't be specified, the library handles it
+  * in some cases, the payload isn't passed as supplied (`metrics`, for instance, extracts the parts that are meant to be used as url fragments)
+* headers can be supplied on a per-request basis, using either the last argument or the block version:
+  * when using the last argument, you may have to pass an empty hash payload (`{}`)
+  * when using the block form, the faraday object is supplied as argument, and you can do any kind of treatment you would like
+
 ## Configuration
 
 ```ruby
@@ -53,6 +69,9 @@ Scalingo.configure do |config|
   # These headers will be added to every request. Individual methods may override them.
   # This should be a hash or a callable object that returns a hash.
   config.additional_headers = {}
+
+  # Raise an exception when the bearer token in use is supposed to be invalid
+  config.raise_on_expired_token = false
 end
 ```
 
@@ -69,7 +88,7 @@ end
 require "scalingo/client"
 ```
 
-### Response object
+## Response object
 
 Responses are parsed with the keys symbolized and then encapsulated in a `Scalingo::API::Response` object:
 * `response.status` containts the HTTP status code
@@ -78,13 +97,13 @@ Responses are parsed with the keys symbolized and then encapsulated in a `Scalin
 * `response.meta` contains the meta object, if there's any
 * `response.headers` containts all the response headers
 
-Some helper methods are defined on thise object:
+Some helper methods are defined on this object:
 * `response.successful?` returns true when the code is 2XX
 * `response.paginated?` returns true if the reponse has metadata relative to pagination
 * `response.operation?` returns true if the response contains a header relative to an ongoing operation
 * `response.operation` returns the URL to query to get the status of the operation
 
-### Examples
+## Examples
 
 ```ruby
 require "scalingo"
@@ -109,4 +128,7 @@ scalingo.apps.all # OR scalingo.region.apps.all
 
 # List your apps on osc-fr1
 scalingo.osc_fr1.apps.all
+
+# Preview the creation of an app on the default region
+scalingo.apps.create(name: "my-new-app", dry_run: true)
 ```
