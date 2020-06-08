@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files       = Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md', 'CHANGELOG.md']
   s.test_files  = Dir['test/**/*']
 
-  s.add_dependency 'activesupport', ['>= 4', '< 6']
+  s.add_dependency 'activesupport', '>= 4', '< 7'
   s.add_dependency 'faraday', ['>= 0.7', '<= 0.17.0']
   s.add_dependency 'faraday_middleware', '~> 0.13'
   s.add_dependency 'faye-websocket', '~> 0.9.2'
