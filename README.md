@@ -2,6 +2,12 @@
 
 A ruby wrapper for the Scalingo API
 
+:warning: :warning: :warning: **This gem had been renamed** :warning: :warning: :warning:
+
+This gem is renamed to `scalingo` (instead of `scalingo-ruby-api`) and its API has changed in a breaking way. Please refer to the [master branch](https://github.com/Scalingo/scalingo-ruby-api/tree/master) for up to date examples and instruction.
+
+This branch will stay up to help transition from the v2 version of the gem, but it will not receive any updates.
+
 ## Installation
 
 ```ruby
