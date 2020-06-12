@@ -1,0 +1,9 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.5.8
+  - 2.6.6
+  - 2.7.1
+before_install:
+  - gem install bundler
+install: bundle update --jobs=3 --retry=3
