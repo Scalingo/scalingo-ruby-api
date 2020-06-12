@@ -14,6 +14,7 @@ module Scalingo
   # Endpoints URLS
   setting :urls do
     setting :auth, "https://auth.scalingo.com/v1"
+    setting :billing, "https://cashmachine.scalingo.com/"
     setting :osc_fr1, "https://api.osc-fr1.scalingo.com/v1"
     setting :osc_secnum_fr1, "https://api.osc-secnum-fr1.scalingo.com/v1"
   end

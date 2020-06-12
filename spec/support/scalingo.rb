@@ -4,6 +4,7 @@ module Scalingo
 
   ENDPOINTS = {
     auth: "https://auth.scalingo.test",
+    billing: "https://billing.scalingo.test",
     regional: "https://regional.scalingo.test"
   }
 
@@ -101,6 +102,8 @@ module Scalingo
     let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) } }
     let(:auth) { Scalingo::Auth.new(scalingo, ENDPOINTS[:auth]) }
     let(:auth_guest) { Scalingo::Auth.new(scalingo_guest, ENDPOINTS[:auth]) }
+    let(:billing) { Scalingo::Billing.new(scalingo, ENDPOINTS[:billing]) }
+    let(:billing_guest) { Scalingo::Billing.new(scalingo_guest, ENDPOINTS[:billing]) }
     let(:regional) { Scalingo::Regional.new(scalingo, ENDPOINTS[:regional]) }
     let(:regional_guest) { Scalingo::Regional.new(scalingo_guest, ENDPOINTS[:regional]) }
     let(:meta) { @meta }
