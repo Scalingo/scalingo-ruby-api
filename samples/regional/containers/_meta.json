@@ -1,0 +1,25 @@
+{
+  "app_id": "example-running-application",
+  "scale": {
+    "valid": [
+      {
+        "name": "web",
+        "amount": 3
+      }
+    ],
+    "invalid": [
+      {
+        "name": "web",
+        "amount": 11
+      }
+    ]
+  },
+  "restart": {
+    "valid": [
+      "web"
+    ],
+    "invalid": [
+      "wrong"
+    ]
+  }
+}

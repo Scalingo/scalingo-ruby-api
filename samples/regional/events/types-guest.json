@@ -1,0 +1,288 @@
+{
+  "path": "/event_types",
+  "method": "get",
+  "request": {
+    "headers": {
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:57:46 GMT",
+      "Etag": "W/\"636300ce2f0f2825b0a7e168a1d16a4a\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "event_types": [
+        {
+          "id": "595cf85e6bb8f100167429df",
+          "name": "addon_db_upgraded",
+          "display_name": "Addon database upgraded",
+          "description": "A database addon was upgraded",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cb"
+        },
+        {
+          "id": "595cf85d6bb8f100167429d1",
+          "name": "app_deployed",
+          "display_name": "App deployed",
+          "description": "An app was deployed",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e0",
+          "name": "addon_deleted",
+          "display_name": "Addon deleted",
+          "description": "An addon was deleted",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cb"
+        },
+        {
+          "id": "595cf85e6bb8f100167429d9",
+          "name": "app_renamed",
+          "display_name": "App renamed",
+          "description": "An app was renamed",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e2",
+          "name": "collaborator_accepted",
+          "display_name": "Collaborator accepted",
+          "description": "A collaborator invitation was accepted",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cc"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e8",
+          "name": "notifier_edited",
+          "display_name": "Notifier edited",
+          "description": "A notifier was edited",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429ce"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e9",
+          "name": "notifier_removed",
+          "display_name": "Notifier removed",
+          "description": "A notifier was removed",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429ce"
+        },
+        {
+          "id": "595cf85e6bb8f100167429ec",
+          "name": "variable_bulk_edited",
+          "display_name": "Variables bulk edited",
+          "description": "Some variables was bulk edited",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cf"
+        },
+        {
+          "id": "595cf85e6bb8f100167429ea",
+          "name": "variable_added",
+          "display_name": "Variable added",
+          "description": "A variable was added",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cf"
+        },
+        {
+          "id": "595cf85d6bb8f100167429d2",
+          "name": "app_restarted",
+          "display_name": "App restarted",
+          "description": "An app was restarted",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429de",
+          "name": "addon_plan_changed",
+          "display_name": "Addon plan changed",
+          "description": "An addon plan was changed",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cb"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e6",
+          "name": "domain_removed",
+          "display_name": "Domain removed",
+          "description": "A domain was removed",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cd"
+        },
+        {
+          "id": "595cf85e6bb8f100167429ee",
+          "name": "github_link",
+          "display_name": "Github link",
+          "description": "A GitHub repo was linked to an app",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429d0"
+        },
+        {
+          "id": "595cf85d6bb8f100167429d4",
+          "name": "app_scaled",
+          "display_name": "App scaled",
+          "description": "An app was scaled",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429d7",
+          "name": "app_deleted",
+          "display_name": "App deleted",
+          "description": "A command was ran in an app",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e5",
+          "name": "domain_edited",
+          "display_name": "Domain edited",
+          "description": "A domain was edited",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cd"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e3",
+          "name": "collaborator_removed",
+          "display_name": "Collaborator removed",
+          "description": "A collaborator was removed",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cc"
+        },
+        {
+          "id": "595cf85e6bb8f100167429ed",
+          "name": "variable_removed",
+          "display_name": "Variable removed",
+          "description": "A variable was removed",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cf"
+        },
+        {
+          "id": "595cf85e6bb8f100167429da",
+          "name": "app_alert_triggered",
+          "display_name": "App alert triggered",
+          "description": "An app alert was triggered",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429d8",
+          "name": "app_transferred",
+          "display_name": "App transferred",
+          "description": "An app was transferred",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429dc",
+          "name": "addon_resumed",
+          "display_name": "Addon resumed",
+          "description": "An addon was provisioned",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cb"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e4",
+          "name": "domain_added",
+          "display_name": "Domain added",
+          "description": "A domain was added",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cd"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e7",
+          "name": "notifier_added",
+          "display_name": "Notifier added",
+          "description": "A notifier was added",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429ce"
+        },
+        {
+          "id": "595cf85e6bb8f100167429dd",
+          "name": "addon_suspended",
+          "display_name": "Addon suspended",
+          "description": "An addon was suspended",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cb"
+        },
+        {
+          "id": "595cf85e6bb8f100167429eb",
+          "name": "variable_edited",
+          "display_name": "Variable edited",
+          "description": "A variable was edited",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cf"
+        },
+        {
+          "id": "595cf85e6bb8f100167429ef",
+          "name": "github_unlink",
+          "display_name": "Github unlink",
+          "description": "A GitHub repo was unlinked to an app",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429d0"
+        },
+        {
+          "id": "595cf85d6bb8f100167429d3",
+          "name": "app_crashed",
+          "display_name": "App crashed",
+          "description": "An app was crashed",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85d6bb8f100167429d5",
+          "name": "app_stopped",
+          "display_name": "App stopped",
+          "description": "An app was stopped",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429d6",
+          "name": "app_command_ran",
+          "display_name": "App command ran",
+          "description": "A command was ran in an app",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "595cf85e6bb8f100167429db",
+          "name": "addon_provisioned",
+          "display_name": "Addon provisioned",
+          "description": "An addon was provisioned",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429cb"
+        },
+        {
+          "id": "595cf85e6bb8f100167429e1",
+          "name": "collaborator_invited",
+          "display_name": "Collaborator invited",
+          "description": "A collaborator was invited",
+          "template": null,
+          "category_id": "595cf85d6bb8f100167429cc"
+        },
+        {
+          "id": "59c2797bc094990048778884",
+          "name": "app_crashed_repeated",
+          "display_name": "App crashed repeated",
+          "description": "An app was crashed. This event is sent on each crash.",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429ca"
+        },
+        {
+          "id": "5de654023e6b3b000f1dd75d",
+          "name": "addon_updated",
+          "display_name": "Addon Updated",
+          "description": "An addon has been updated",
+          "template": "",
+          "category_id": "595cf85d6bb8f100167429cb"
+        }
+      ]
+    }
+  }
+}

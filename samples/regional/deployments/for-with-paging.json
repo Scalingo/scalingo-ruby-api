@@ -1,0 +1,35 @@
+{
+  "path": "/apps/example-running-application/deployments?page=3",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:27:16 GMT",
+      "Etag": "W/\"914b185f7f1b599c84d1d578b2b39153\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "deployments": [
+
+      ],
+      "meta": {
+        "pagination": {
+          "current_page": 3,
+          "next_page": null,
+          "previous_page": 2,
+          "total_pages": 1,
+          "total_count": 1
+        }
+      }
+    }
+  }
+}

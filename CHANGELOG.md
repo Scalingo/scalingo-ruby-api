@@ -1,3 +1,7 @@
+## 3.0.0.beta1 - 2020/06/12
+
+* Full rewrite of the gem, **zero** backwards compatibility. Refer to the `README` for more information.
+
 ## 2.0.1 - 2019/12/11
 
 * Bugfix: payload was not correctly serialized to JSON for POST/PUT/PATCH queries

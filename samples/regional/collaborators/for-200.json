@@ -1,0 +1,34 @@
+{
+  "path": "/apps/5ed12f4c884fef000f5e5047/collaborators",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:50:39 GMT",
+      "Etag": "W/\"ce6999ba62a118218a598eba342018a1\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "collaborators": [
+        {
+          "id": "5ed12f4df112e2000f9f93f2",
+          "email": "collaborator@null.scalingo.com",
+          "username": "collaborator",
+          "status": "accepted",
+          "invitation_link": "https://my.st-sc.fr/apps/collaboration?token=",
+          "app_id": "5ed12f4c884fef000f5e5047",
+          "user_id": "us-d5b215fa-0fcc-4d61-ba8f-24e94597490f"
+        }
+      ]
+    }
+  }
+}

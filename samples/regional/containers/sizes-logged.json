@@ -1,0 +1,116 @@
+{
+  "path": "/features/container_sizes",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:27:44 GMT",
+      "Etag": "W/\"30e33a7afe7a41cc528bfeaeb2af8750\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "container_sizes": [
+        {
+          "id": "2f6fb9e0-a23e-4c7b-b06d-3a00c3ec9d4f",
+          "human_cpu": "low CPU priority",
+          "name": "S",
+          "human_name": "S",
+          "memory": 268435456,
+          "ordinal": 2,
+          "hourly_price": 10,
+          "thirtydays_price": 720,
+          "pids_limit": 128,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-s"
+        },
+        {
+          "id": "c8d9eec1-c1fb-4349-8f74-0eee76c1d6dd",
+          "human_cpu": "standard CPU priority",
+          "name": "M",
+          "human_name": "M",
+          "memory": 536870912,
+          "ordinal": 3,
+          "hourly_price": 20,
+          "thirtydays_price": 1440,
+          "pids_limit": 256,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-m"
+        },
+        {
+          "id": "8cd5b2c4-952a-41bc-98bb-2e6f23c9cc2f",
+          "human_cpu": "standard CPU priority",
+          "name": "L",
+          "human_name": "L",
+          "memory": 1073741824,
+          "ordinal": 4,
+          "hourly_price": 40,
+          "thirtydays_price": 2880,
+          "pids_limit": 512,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-l"
+        },
+        {
+          "id": "528077c6-cea1-4240-85b0-b87108c3b7ca",
+          "human_cpu": "high CPU priority",
+          "name": "XL",
+          "human_name": "XL",
+          "memory": 2147483648,
+          "ordinal": 5,
+          "hourly_price": 80,
+          "thirtydays_price": 5760,
+          "pids_limit": 1024,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-xl"
+        },
+        {
+          "id": "85b8676f-f9d3-4a6e-91a3-4132211325d0",
+          "human_cpu": "high CPU priority",
+          "name": "2XL",
+          "human_name": "2XL",
+          "memory": 4294967296,
+          "ordinal": 6,
+          "hourly_price": 160,
+          "thirtydays_price": 11520,
+          "pids_limit": 2048,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-2xl"
+        },
+        {
+          "id": "47cc2149-a965-47d8-a4e1-55cb33a18bda",
+          "human_cpu": "very high CPU priority",
+          "name": "3XL",
+          "human_name": "3XL",
+          "memory": 8589934592,
+          "ordinal": 7,
+          "hourly_price": 320,
+          "thirtydays_price": 23040,
+          "pids_limit": 4096,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-3xl"
+        },
+        {
+          "id": "526f629a-f532-45a9-a16e-66d65ec20411",
+          "human_cpu": "very high CPU priority",
+          "name": "4XL",
+          "human_name": "4XL",
+          "memory": 17179869184,
+          "ordinal": 8,
+          "hourly_price": 480,
+          "thirtydays_price": 46080,
+          "pids_limit": 8182,
+          "swap": null,
+          "sku": "ovh-st-fr1-app-4xl"
+        }
+      ]
+    }
+  }
+}

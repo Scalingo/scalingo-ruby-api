@@ -1,0 +1,19 @@
+{
+  "path": "/apps/5ed12291f112e2000f9f93ed/notifiers/no-a0354d81-4a89-49c3-9ee3-3a1b41678703",
+  "method": "delete",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Date": "Fri, 29 May 2020 14:56:21 GMT",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": ""
+  }
+}

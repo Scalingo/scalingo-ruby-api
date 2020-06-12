@@ -1,0 +1,18 @@
+{
+  "url": "https://logs-staging.scalingo.com/apps/5ed0fe5d884fef000f5e4fd1/logs?n=2&token=ZU5KAqQMdulCUukmHKd6iSAWJRdfNGsGL_5FZQkWJVRAmEW4JkR_LZPMQaPvDKLe",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 14:18:01 GMT",
+      "Content-Type": "text/plain; charset=utf-8",
+      "Connection": "keep-alive"
+    },
+    "body": "2020-05-29 15:27:58.120261663 +0200 CEST [web-2] \r\n2020-05-29 15:28:10.718153340 +0200 CEST [manager] container [web-2] (5ed10ddc4ffb09636fb1b5a8) has stopped\r\n"
+  }
+}

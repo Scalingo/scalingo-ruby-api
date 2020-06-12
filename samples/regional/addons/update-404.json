@@ -1,0 +1,30 @@
+{
+  "path": "/apps/5ed10967884fef000f5e4fff/addons/ad-6733873b-1628-4b8e-8e74-c30f1c3f3b63",
+  "method": "patch",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "addon": {
+        "plan_id": "wrong-plan-id"
+      }
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:09:00 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "resource": "plan",
+      "error": "not found"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "app_id": "5ed12291f112e2000f9f93ed",
+  "id": "no-a0354d81-4a89-49c3-9ee3-3a1b41678703",
+  "not_found_id": "not-found",
+  "create": {
+    "valid": {
+      "platform_id": "59c27732c094990021f325dc",
+      "name": "my notifier",
+      "active": false
+    },
+    "not_found": {
+      "wrong": "params"
+    },
+    "invalid": {
+      "platform_id": "59c27732c094990021f325dc"
+    }
+  },
+  "update": {
+    "valid": {
+      "name": "some other name"
+    }
+  }
+}

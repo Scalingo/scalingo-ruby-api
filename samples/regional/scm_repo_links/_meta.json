@@ -1,0 +1,22 @@
+{
+  "app_id": "example-running-application",
+  "create": {
+    "valid": {
+      "source": "https://github.com/Scalingo/sample-go-martini",
+      "branch": "master",
+      "auto_deploy_enabled": false,
+      "deploy_review_apps_enabled": false,
+      "delete_on_close_enabled": false,
+      "hours_before_delete_on_close": 0
+    }
+  },
+  "update": {
+    "valid": {
+      "branch": "prod",
+      "auto_deploy_enabled": true
+    }
+  },
+  "deploy": {
+    "valid": "master"
+  }
+}

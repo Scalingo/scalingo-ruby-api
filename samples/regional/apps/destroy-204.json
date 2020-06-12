@@ -1,0 +1,19 @@
+{
+  "path": "/apps/5ed12fa6f112e2000f9f93f7?current_name=some-example-app",
+  "method": "delete",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:52:15 GMT",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": ""
+  }
+}

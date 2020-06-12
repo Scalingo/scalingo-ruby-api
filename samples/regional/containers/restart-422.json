@@ -1,0 +1,33 @@
+{
+  "path": "/apps/example-running-application/restart",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "scope": [
+        "wrong"
+      ]
+    }
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:27:55 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "errors": {
+        "scope": [
+          "'wrong' → no such process type"
+        ]
+      }
+    }
+  }
+}

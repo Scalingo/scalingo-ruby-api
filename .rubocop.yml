@@ -1,0 +1,16 @@
+inherit_from: []
+
+inherit_gem:
+  standard: config/base.yml
+
+require:
+  - standard
+  - rubocop-performance
+
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/Alias:
+  Enabled: true
+  EnforcedStyle: prefer_alias_method

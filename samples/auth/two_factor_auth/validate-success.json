@@ -1,0 +1,49 @@
+{
+  "path": "/client/tfa/validate",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "tfa": {
+        "attempt": "975037"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:51:29 GMT",
+      "Etag": "W/\"d0e0f53b0bd356ed893581d0cd1520c4\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "tfa": {
+        "codes": [
+          "7c2f7b8eef39f6f0fecf50c6cba10bc861e841a642474d0e1df3127757c33c99",
+          "fdba714c148254297b68c73cafc93bda56acb40bdc607cf713e03dbb32a04ad7",
+          "9fade6177b7347af2182c5c876d65a9d999cf0c5d1600d970facbdebbab7010b",
+          "2951e3e7d4a7dc40541a75c5e809ceda45260eadf0ac71ecb21411aecdb0b85c",
+          "841d1b0a685b9413a66c5d9b893d77d01a62b2208f5c46eb8d1e4f4c86ab0689",
+          "9aceef68c0e4ad1ebca5f9d85bc673ea0d59539f1dafa8d2fe26ce42a17bc548",
+          "0cb2458616577b6ae27a3fbac5bffb900a3c870b50b7c16688634312c6a7d38c",
+          "074d2589afc44a573da3513f40143af68bc4569698f736f04a322a4b6769061e",
+          "5f59a1d55138adc8f270ff20bfe94cd99eda5c93a20fc13388f738fcd9ac5e92",
+          "bec0262c91b7dee6822bcfad9f97c55eccadc783090285ecc91c5792c89f2c00"
+        ],
+        "user": {
+          "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5",
+          "uuid": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5",
+          "enabled": true,
+          "provider": "totp"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,705 @@
+{
+  "path": "/addon_providers",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:08:57 GMT",
+      "Etag": "W/\"f294c250e74be39cf7d31ac16591f442\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "addon_providers": [
+        {
+          "name": "Dummy Log Addon",
+          "logo_url": "//storage.sbg1.cloud.ovh.net/v1/AUTH_be65d32d71a6435589a419eac98613f2/scalingo/scalingo-avatar.png",
+          "id": "dummy-log-addon",
+          "short_description": "Completely Dummy Log Output",
+          "description": "Completely Dummy log addon for testing purposes",
+          "category": {
+            "id": "586a6ae13e6b3b0011288ac4",
+            "name": "Default",
+            "position": 2
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "55e0519661646d0001010000",
+              "name": "plan1",
+              "display_name": "First plan",
+              "price": 0.0,
+              "description": "<p>Test Plan</p>\n",
+              "position": 0,
+              "on_demand": null,
+              "disabled": null,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-plan1"
+            }
+          ]
+        },
+        {
+          "name": "PostgreSQL",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_Postgresql.svg",
+          "id": "postgresql",
+          "short_description": "",
+          "description": "<div class=\"row text-center\" markdown=\"1\">\r\n<div class=\"col-xs-12\" markdown=\"1\">\r\n\r\n## Scalingo providing you PostgreSQL as a service!\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### The Magic of the Cloud\r\n\r\nCreate PostgreSQL databases on-demand. This add-on is **elastic**: scale up and down with ease, we bill by the minute. Never think about machines and never install software. We give you a connection string, and you are good to go!\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Optimal PostgreSQL Performance\r\n\r\nEnjoy SSD-like **performance** on our SAN-backed and dedicated PostgreSQL processes on all of our plans.\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Expert Care and Support\r\n\r\nGet advice from our team of experts.\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Backups\r\n\r\nYour data are backed up daily with the following conservation rule:\r\n* Everyday of 1 month\r\n* One per week during the 2nd and 3rd months\r\n* One per month during the 4th, 5th and 6th months\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6 col-lg-4\" markdown=\"1\">\r\n\r\n### High availability\r\n\r\nHigh availability options will be available in the coming weeks.\r\n\r\n</div>\r\n</div>",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "5d1e03873e6b3b000eefa827",
+              "name": "postgresql-sandbox",
+              "display_name": "Sandbox",
+              "price": 0.0,
+              "description": "<p>Pouet</p>\n",
+              "position": null,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-postgresql-sandbox"
+            },
+            {
+              "id": "5d1e03af3e6b3b000eefa82a",
+              "name": "postgresql-starter-512",
+              "display_name": "Starter 512M",
+              "price": 0.0,
+              "description": "<p>Biniou</p>\n",
+              "position": null,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-postgresql-starter-512"
+            },
+            {
+              "id": "5d1e03d93e6b3b000eefa82e",
+              "name": "postgresql-starter-1024",
+              "display_name": "Starter 1G",
+              "price": 0.0,
+              "description": "<p>Biniou</p>\n",
+              "position": null,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-postgresql-starter-1024"
+            },
+            {
+              "id": "5d1e04033e6b3b000eefa831",
+              "name": "postgresql-business-512",
+              "display_name": "Business 512M",
+              "price": 0.0,
+              "description": "<p>Cluster!</p>\n",
+              "position": null,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-postgresql-business-512"
+            },
+            {
+              "id": "5d1e04203e6b3b000eefa834",
+              "name": "postgresql-business-1024",
+              "display_name": "Business 1G",
+              "price": 0.0,
+              "description": "<p>Cluster!</p>\n",
+              "position": null,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-postgresql-business-1024"
+            },
+            {
+              "id": "5d6011183e6b3b000f01a4f5",
+              "name": "postgresql-starter-2048",
+              "display_name": "Starter 2G",
+              "price": 0.0,
+              "description": "<p>Pipo</p>\n",
+              "position": null,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-postgresql-starter-2048"
+            }
+          ]
+        },
+        {
+          "name": "Dummy Addon",
+          "logo_url": "//storage.sbg1.cloud.ovh.net/v1/AUTH_be65d32d71a6435589a419eac98613f2/scalingo/scalingo-avatar.png",
+          "id": "dummy-addon",
+          "short_description": "Completely Dummy",
+          "description": "Completely Dummy addon for testing purposes",
+          "category": {
+            "id": "586a6ae13e6b3b0011288ac4",
+            "name": "Default",
+            "position": 2
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "55489f5061646d0001010000",
+              "name": "plan1",
+              "display_name": "First plan",
+              "price": 0.0,
+              "description": "<p>First plan, do nothing</p>\n",
+              "position": 0,
+              "on_demand": null,
+              "disabled": null,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-plan1"
+            },
+            {
+              "id": "55489f5e61646d0001020000",
+              "name": "plan2",
+              "display_name": "Second plan",
+              "price": 0.0,
+              "description": "<p>Do nothing twice</p>\n",
+              "position": 2,
+              "on_demand": null,
+              "disabled": null,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-plan2"
+            },
+            {
+              "id": "5821de7e3e6b3b00149051ad",
+              "name": "crashing-plan",
+              "display_name": "Crashing Plan",
+              "price": 0.0,
+              "description": "<p>Third</p>\n",
+              "position": 3,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-crashing-plan"
+            }
+          ]
+        },
+        {
+          "name": "VPN Addon",
+          "logo_url": "//appcenter.software-univention.de/meta-inf/4.2/openvpn4ucs/openvpn4ucs_detail_logo.svg",
+          "id": "vpn-addon",
+          "short_description": "",
+          "description": "",
+          "category": {
+            "id": "586a6ae13e6b3b0011288ac4",
+            "name": "Default",
+            "position": 2
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "5a1563f73e6b3b00122bb419",
+              "name": "vpn-openvpn-standard",
+              "display_name": "OpenVPN",
+              "price": 0.0,
+              "description": "<p>OpenVPN</p>\n",
+              "position": 1,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-vpn-openvpn-standard"
+            },
+            {
+              "id": "5a1564083e6b3b00122bb41b",
+              "name": "vpn-ipsec-standard",
+              "display_name": "IPSec VPN",
+              "price": 0.0,
+              "description": "<p>VPN IPSec</p>\n",
+              "position": 1,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-vpn-ipsec-standard"
+            }
+          ]
+        },
+        {
+          "name": "Scalingo Docker Image",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_DockerImage_20162106105400.png",
+          "id": "scalingo-docker-image",
+          "short_description": "Get the docker images of the applications you've deployed on the platform",
+          "description": "Get the docker images of the applications you've deployed on the platform",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "Scalingo",
+          "provider_url": "https://scalingo.com",
+          "plans": [
+            {
+              "id": "575a71ba61646d000c010000",
+              "name": "base-plan",
+              "display_name": "Base Plan",
+              "price": 0.0,
+              "description": "<p>Descriptions</p>\n",
+              "position": 0,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-base-plan"
+            }
+          ]
+        },
+        {
+          "name": "MySQL",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_MySQL.svg",
+          "id": "mysql",
+          "short_description": "",
+          "description": "<div class=\"row text-center\" markdown=\"1\">\r\n<div class=\"col-xs-12\" markdown=\"1\">\r\n\r\n## Scalingo providing you MySQL as a service!\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### The Magic of the Cloud\r\n\r\nCreate MySQL databases on-demand. This add-on is **elastic**: scale up and down with ease, we bill by the minute. Never think about machines and never install software. We give you a connection string, and you are good to go!\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Optimal MySQL Performance\r\n\r\nEnjoy SSD-like **performance** on our SAN-backed and dedicated MySQL processes on all of our plans.\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Expert Care and Support\r\n\r\nGet advice from our team of experts.\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Backups\r\n\r\nYour data are backed up daily with the following conservation rule:\r\n* Everyday of 1 month\r\n* One per week during the 2nd and 3rd months\r\n* One per month during the 4th, 5th and 6th months\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6 col-lg-4\" markdown=\"1\">\r\n\r\n### High availability\r\n\r\nHigh availability options will be available in the coming weeks.\r\n\r\n</div>\r\n</div>",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "5e9589d43e6b3b000f1f57d3",
+              "name": "mysql-sandbox",
+              "display_name": "Sandbox",
+              "price": 0.0,
+              "description": "<ul>\n<li>Single Node</li>\n<li>No backups (you can do it yourself)</li>\n<li>192MB RAM</li>\n<li>Includes 192MB disk space (hard limit)</li>\n<li>Max connections: 13</li>\n<li>Community Support</li>\n</ul>\n",
+              "position": 0,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mysql-sandbox"
+            },
+            {
+              "id": "5e31afc23e6b3b000f708ce5",
+              "name": "mysql-starter-256",
+              "display_name": "Starter 256M",
+              "price": 3.6,
+              "description": "<ul>\n<li>Daily backup</li>\n<li>256MB RAM</li>\n<li>Includes 2.5GB disk space</li>\n<li>Single Node</li>\n<li>Max connections: 18</li>\n<li>Multiple Users</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 1,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mysql-starter-256"
+            },
+            {
+              "id": "5e95b8d93e6b3b000f1f57d7",
+              "name": "mysql-starter-512",
+              "display_name": "Starter 512M",
+              "price": 7.2,
+              "description": "<ul>\n<li>Daily backup</li>\n<li>512MB RAM</li>\n<li>Includes 5GB disk space</li>\n<li>Single Node</li>\n<li>Max connections: 30</li>\n<li>Multiple Users</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 2,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mysql-starter-512"
+            },
+            {
+              "id": "531c9b09646173000a030000",
+              "name": "1g",
+              "display_name": " 1G Database",
+              "price": 14.4,
+              "description": "<p>Daily backups<br>\n1GB RAM<br>\nIncludes 10GB disk space<br>\nMax connections: 62<br>\nMultiple Users<br>\nEmail Support<br>\nPrice for over plan disk space: 2€/GB<br>\nPrice displayed is computed for a total of 30 days</p>\n",
+              "position": 3,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-1g"
+            },
+            {
+              "id": "5e95ba9f3e6b3b000f1f57df",
+              "name": "mysql-business-512",
+              "display_name": "Business 512M",
+              "price": 20.0,
+              "description": "<ul>\n<li>Daily backups, Retention over 1 year</li>\n<li>High Available setup</li>\n<li>3 Nodes cluster</li>\n<li>512MB RAM per node</li>\n<li>Includes 5GB disk space per node</li>\n<li>Max connections: 30</li>\n<li>Multiple Users</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 4,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mysql-business-512"
+            },
+            {
+              "id": "5e95bad83e6b3b000f1f57e2",
+              "name": "mysql-business-1024",
+              "display_name": "Business 1G",
+              "price": 40.0,
+              "description": "<ul>\n<li>Daily backups, Retention over 1 year</li>\n<li>High Available setup</li>\n<li>3 Nodes cluster</li>\n<li>1GiB RAM per node</li>\n<li>Includes 5GB disk space per node</li>\n<li>Max connections: 30</li>\n<li>Multiple Users</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 5,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mysql-business-1024"
+            }
+          ]
+        },
+        {
+          "name": "TCP Load Balancer",
+          "logo_url": "http://1zkq0n152z6rnp4v81tnk1zh-wpengine.netdna-ssl.com/wp-content/uploads/2016/03/IOTlogopng503x503.png",
+          "id": "tcp-load-balancer",
+          "short_description": "Un addon TCP tmtc",
+          "description": "THE ADDON TMTC tmtc ",
+          "category": {
+            "id": "586a6ae13e6b3b0011288ac4",
+            "name": "Default",
+            "position": 2
+          },
+          "provider_name": "Scalingo",
+          "provider_url": "https://scalingo.com",
+          "plans": [
+            {
+              "id": "59de15cf3e6b3b001214ea90",
+              "name": "sandbox",
+              "display_name": "Sandbox",
+              "price": 0.0,
+              "description": "<p>200 pps<br>\n2000 Packet burst</p>\n",
+              "position": 1,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-sandbox"
+            },
+            {
+              "id": "59f8750e3e6b3b0010859de9",
+              "name": "1k",
+              "display_name": "1k pps",
+              "price": 10.0,
+              "description": "<p>1 000 pps<br>\n10 000 packets burst</p>\n",
+              "position": 2,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-1k"
+            },
+            {
+              "id": "59f875343e6b3b0010859deb",
+              "name": "10k",
+              "display_name": "10k pps",
+              "price": 1000.0,
+              "description": "<p>10 000 pps<br>\n100 000 packets burst</p>\n",
+              "position": 3,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-10k"
+            }
+          ]
+        },
+        {
+          "name": "MongoDB",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_MongoDB_20151203113100.svg",
+          "id": "mongodb",
+          "short_description": "",
+          "description": "<div class=\"row text-center\" markdown=\"1\">\r\n<div class=\"col-xs-12\" markdown=\"1\">\r\n\r\n## Scalingo providing you MongoDB as a service!\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### The Magic of the Cloud\r\n\r\nCreate MongoDB databases on-demand. This add-on is **elastic**: scale up and down with ease, we bill by the minute. Never think about machines and never install software. We give you a connection string, and you are good to go!\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Optimal MongoDB Performance\r\n\r\nEnjoy SSD-like **performance** on our SAN-backed and dedicated MongoDB processes on all of our plans.\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Expert Care and Support\r\n\r\nGet advice from our team of experts.\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Backups\r\n\r\nYour data are backed up daily with the following conservation rule:\r\n* Everyday of 1 month\r\n* One per week during the 2nd and 3rd months\r\n* One per month during the 4th, 5th and 6th months\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Oplog for single node instances\r\n\r\nAccessing the **oplog** is just a click away on our web dashboard!\r\nEnjoy real time features in the applications which require it.\r\nMeteor JS developers, that's for you!\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6 col-lg-4\" markdown=\"1\">\r\n\r\n### High availability\r\n\r\nHigh availability options will be available in the coming weeks.\r\n\r\n</div>\r\n</div>",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "5995bf383e6b3b001390a9d2",
+              "name": "mongo-sandbox",
+              "display_name": "Sandbox",
+              "price": 0.0,
+              "description": "<ul>\n<li>Single Node</li>\n<li>No backups (you can do it yourself)</li>\n<li>128MB RAM</li>\n<li>Includes 128MB disk space (hard limit)</li>\n<li>Community Support</li>\n</ul>\n",
+              "position": 0,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mongo-sandbox"
+            },
+            {
+              "id": "59b2a9cc3e6b3b00124da641",
+              "name": "mongo-starter-256",
+              "display_name": "Starter 256M",
+              "price": 7.2,
+              "description": "<p>Mongo Starter 256</p>\n",
+              "position": 2,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mongo-starter-256"
+            },
+            {
+              "id": "5bed7e6fc44b4700116a530d",
+              "name": "mongo-starter-1024",
+              "display_name": "Starter 1G",
+              "price": 14.4,
+              "description": "<p>1G</p>\n",
+              "position": 4,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mongo-starter-1024"
+            },
+            {
+              "id": "596e5ded3e6b3b001282f88d",
+              "name": "mongo-business-512",
+              "display_name": "Business 512MB",
+              "price": 10.0,
+              "description": "<ul>\n<li>Replicaset</li>\n<li>1 daily backup</li>\n<li>512MB RAM per instance</li>\n<li>includes 5GB disk space per node (soft limit)</li>\n<li>4 nodes (2 data, 1 arbiter, 1 backup)</li>\n<li>SSL Connection available</li>\n<li>Multiple Users</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 5,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mongo-business-512"
+            },
+            {
+              "id": "59b7d8a43e6b3b00124da648",
+              "name": "mongo-business-1024",
+              "display_name": "Business 1G",
+              "price": 20.0,
+              "description": "<ul>\n<li>Replicaset</li>\n<li>1 daily backup</li>\n<li>1GB RAM per instance</li>\n<li>includes 10GB disk space per node (soft limit)</li>\n<li>4 nodes (2 data, 1 arbiter, 1 backup)</li>\n<li>SSL Connection available</li>\n<li>Multiple Users</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 6,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-mongo-business-1024"
+            }
+          ]
+        },
+        {
+          "name": "Elasticsearch",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_Elasticsearch.svg",
+          "id": "elasticsearch",
+          "short_description": "",
+          "description": "<div class=\"row text-center\" markdown=\"1\">\r\n<div class=\"col-xs-12\" markdown=\"1\">\r\n\r\n## Scalingo providing you Elasticsearch as a service!\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### The Magic of the Cloud\r\n\r\nCreate Elasticsearch databases on-demand. This add-on is **elastic**: scale up and down with ease, we bill by the minute. Never think about machines and never install software. We give you a connection string, and you are good to go!\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Optimal Elasticsearch Performance\r\n\r\nEnjoy SSD-like **performance** on our SAN-backed and dedicated Elasticsearch processes on all of our plans.\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Expert Care and Support\r\n\r\nGet advice from our team of experts.\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Backups\r\n\r\nYour data are backed up daily with the following conservation rule:\r\n* Everyday of 1 month\r\n* One per week during the 2nd and 3rd months\r\n* One per month during the 4th, 5th and 6th months\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6 col-lg-4\" markdown=\"1\">\r\n\r\n### High availability\r\n\r\nHigh availability options will be available in the coming weeks.\r\n\r\n</div>\r\n</div>",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "5c1bbf5d3e6b3b0012974a97",
+              "name": "sandbox",
+              "display_name": "Sandbox",
+              "price": 0.0,
+              "description": "<p>sandbox plan: for hobbyits</p>\n",
+              "position": 1,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-sandbox"
+            },
+            {
+              "id": "5c1bbf733e6b3b0012974a98",
+              "name": "starter-1024",
+              "display_name": "Starter 1024",
+              "price": 10.0,
+              "description": "<p>Starter 1GB</p>\n",
+              "position": 2,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-starter-1024"
+            },
+            {
+              "id": "5c1bbf923e6b3b0012974a99",
+              "name": "starter-2048",
+              "display_name": "Starter 2048",
+              "price": 10.0,
+              "description": "<p>Starter 2GB</p>\n",
+              "position": 3,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-starter-2048"
+            },
+            {
+              "id": "5c1bbfa73e6b3b0012974a9a",
+              "name": "business-1024",
+              "display_name": "Business 1024",
+              "price": 100.0,
+              "description": "<p>Toto</p>\n",
+              "position": 5,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-business-1024"
+            },
+            {
+              "id": "5c1bbfbe3e6b3b0012974a9b",
+              "name": "business-2048",
+              "display_name": "Business 2048",
+              "price": 250.0,
+              "description": "<p>TotoMolo</p>\n",
+              "position": 6,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-business-2048"
+            },
+            {
+              "id": "5c34f89290da2a001233c454",
+              "name": "business-4096",
+              "display_name": "Business 4096M",
+              "price": 500.0,
+              "description": "<p>3 nodes 4G</p>\n",
+              "position": 10,
+              "on_demand": true,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-business-4096"
+            }
+          ]
+        },
+        {
+          "name": "Redis",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_Redis.svg",
+          "id": "redis",
+          "short_description": "",
+          "description": "<div class=\"row text-center\" markdown=\"1\">\r\n<div class=\"col-xs-12\" markdown=\"1\">\r\n\r\n## Scalingo providing you Redis as a Service!\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### The Magic of the Cloud\r\n\r\nCreate Redis instances on-demand. This add-on is **elastic**: scale up and down with ease, we bill by the minute. Never think about machines and never install software. We give you a connection string, and you are good to go!\r\n\r\n</div>\r\n\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Expert Care and Support\r\n\r\nGet advice from our team of experts.\r\n\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-6\" markdown=\"1\">\r\n\r\n### Backups\r\n\r\nYour data are backed up daily with the following conservation rule:\r\n* Everyday of 1 month\r\n* One per week during the 2nd and 3rd months\r\n* One per month during the 4th, 5th and 6th months\r\n\r\n</div>\r\n</div>\r\n\r\n<div class=\"row\" markdown=\"1\">\r\n\r\n<div class=\"col-xs-12 col-sm-6 col-lg-4\" markdown=\"1\">\r\n\r\n### High availability\r\n\r\nHigh availability options will be available in the coming weeks.\r\n\r\n</div>\r\n</div>",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "5cb093763e6b3b00117a36f0",
+              "name": "redis-sandbox",
+              "display_name": "Sandbox",
+              "price": 0.0,
+              "description": "<ul>\n<li>Single Node</li>\n<li>No backups (you can do it yourself)</li>\n<li>64MB RAM</li>\n<li>Includes 64 MB disk space (hard limit)</li>\n<li>Community Support</li>\n</ul>\n",
+              "position": 10,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-sandbox"
+            },
+            {
+              "id": "5cb093983e6b3b00117a36f2",
+              "name": "redis-starter-256",
+              "display_name": "Starter 256M",
+              "price": 7.2,
+              "description": "<ul>\n<li>1 daily backup</li>\n<li>256MB RAM</li>\n<li>Includes 2.5GB disk space</li>\n<li>Single Node</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 20,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-starter-256"
+            },
+            {
+              "id": "5cb093bc3e6b3b00117a36f4",
+              "name": "redis-starter-512",
+              "display_name": "Starter 512M",
+              "price": 14.4,
+              "description": "<ul>\n<li>1 daily backup</li>\n<li>512MB RAM</li>\n<li>Includes 5GB disk space</li>\n<li>Single Node</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 20,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-starter-512"
+            },
+            {
+              "id": "5cb093dd3e6b3b00117a36f6",
+              "name": "redis-starter-1024",
+              "display_name": "Starter 1G",
+              "price": 28.8,
+              "description": "<ul>\n<li>1 daily backup</li>\n<li>1GB RAM</li>\n<li>Includes 10GB disk space</li>\n<li>Single Node</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 40,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-starter-1024"
+            },
+            {
+              "id": "5cb093fd3e6b3b00117a36f8",
+              "name": "redis-business-256",
+              "display_name": "Business 256M",
+              "price": 14.4,
+              "description": "<ul>\n<li>Cluster</li>\n<li>High Availability</li>\n<li>1 daily backup</li>\n<li>256MB RAM per instance</li>\n<li>includes 2.5GB disk space per node (soft limit)</li>\n<li>2 nodes</li>\n<li>SSL/TLS Connection available</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 50,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-business-256"
+            },
+            {
+              "id": "5cb0943a3e6b3b00117a36fa",
+              "name": "redis-business-512",
+              "display_name": "Business 512M",
+              "price": 28.8,
+              "description": "<ul>\n<li>Cluster</li>\n<li>High Availability</li>\n<li>1 daily backup</li>\n<li>512MB RAM per instance</li>\n<li>includes 5GB disk space per node (soft limit)</li>\n<li>2 nodes</li>\n<li>SSL/TLS Connection available</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 70,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-business-512"
+            },
+            {
+              "id": "5cb094573e6b3b00117a36fc",
+              "name": "redis-business-1024",
+              "display_name": "Business 1G",
+              "price": 57.6,
+              "description": "<ul>\n<li>Cluster</li>\n<li>High Availability</li>\n<li>1 daily backup</li>\n<li>1GB RAM per instance</li>\n<li>includes 10GB disk space per node (soft limit)</li>\n<li>2 nodes</li>\n<li>SSL/TLS Connection available</li>\n<li>Email Support</li>\n<li>Price for over plan disk space: 2€/GB</li>\n<li>Price displayed is computed for a total of 30 days</li>\n</ul>\n",
+              "position": 90,
+              "on_demand": false,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-redis-business-1024"
+            }
+          ]
+        },
+        {
+          "name": "InfluxDB",
+          "logo_url": "//cdn.scalingo.com/addons/Scalingo_Influx_20160624151600.svg",
+          "id": "influxdb",
+          "short_description": "",
+          "description": "",
+          "category": {
+            "id": "54c6819f61646d0001000000",
+            "name": "Databases",
+            "position": 1
+          },
+          "provider_name": "",
+          "provider_url": "",
+          "plans": [
+            {
+              "id": "576c1d5e61646d000b010000",
+              "name": "free",
+              "display_name": "Free Tier",
+              "price": 0.0,
+              "description": "<p>Free Tier</p>\n",
+              "position": 1,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-free"
+            },
+            {
+              "id": "59440c833e6b3b001103ffad",
+              "name": "4g",
+              "display_name": "4G Database",
+              "price": 0.0,
+              "description": "<p>4G RAM Database</p>\n",
+              "position": 1,
+              "on_demand": null,
+              "disabled": false,
+              "disabled_alternative_plan_id": null,
+              "sku": "ovh-st-fr1-4g"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

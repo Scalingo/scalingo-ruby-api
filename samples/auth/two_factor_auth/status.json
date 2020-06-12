@@ -1,0 +1,29 @@
+{
+  "path": "/client/tfa",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:51:26 GMT",
+      "Etag": "W/\"665d72913e6740ad3d6e9d03d4c552c3\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "tfa": {
+        "id": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5",
+        "uuid": "us-676bb0c1-1ca9-4682-8ee1-257422e9eab5",
+        "enabled": false,
+        "provider": null
+      }
+    }
+  }
+}

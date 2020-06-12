@@ -1,0 +1,22 @@
+{
+  "app_id": "5ed10967884fef000f5e4fff",
+  "id": "ad-6733873b-1628-4b8e-8e74-c30f1c3f3b63",
+  "not_found_id": "wrong-addon-id",
+  "provision": {
+    "invalid": {
+      "addon_provider_id": "postgresql"
+    },
+    "valid": {
+      "addon_provider_id": "postgresql",
+      "plan_id": "5d1e03873e6b3b000eefa827"
+    }
+  },
+  "update": {
+    "invalid": {
+      "plan_id": "wrong-plan-id"
+    },
+    "valid": {
+      "plan_id": "5d1e03af3e6b3b000eefa82a"
+    }
+  }
+}

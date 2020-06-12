@@ -1,0 +1,52 @@
+{
+  "id": "5ed12fa6f112e2000f9f93f7",
+  "not_found_id": "wrong-id",
+  "create": {
+    "valid": {
+      "name": "some-example-app"
+    },
+    "invalid": {
+      "name": "wrong---"
+    }
+  },
+  "update": {
+    "valid": {
+      "force_https": true
+    },
+    "invalid": {
+      "stack_id": "stack-not-found"
+    }
+  },
+  "transfer": {
+    "valid": {
+      "current_name": "some-example-app",
+      "app": {
+        "owner": "collaborator@null.scalingo.com"
+      }
+    },
+    "invalid": {
+      "current_name": "some-example-app--",
+      "app": {
+        "owner": "not-existent@account.test"
+      }
+    }
+  },
+  "rename": {
+    "invalid": {
+      "current_name": "some-example-app",
+      "new_name": "some-example-app--"
+    },
+    "valid": {
+      "current_name": "some-example-app",
+      "new_name": "other-example-app"
+    }
+  },
+  "destroy": {
+    "invalid": {
+      "current_name": "some-example-app-wrong"
+    },
+    "valid": {
+      "current_name": "some-example-app"
+    }
+  }
+}

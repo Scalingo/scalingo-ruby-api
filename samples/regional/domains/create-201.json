@@ -1,0 +1,44 @@
+{
+  "path": "/apps/5ed10ae7f112e2000f9f93be/domains",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "domain": {
+        "name": "somedomain.scalingo.com"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:15:21 GMT",
+      "Etag": "W/\"a9d277ab377e9776938dd86462cf500c\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "domain": {
+        "id": "5ed10ae9884fef000f5e500b",
+        "app_id": "5ed10ae7f112e2000f9f93be",
+        "name": "somedomain.scalingo.com",
+        "created_at": "2020-05-29T13:15:21.050Z",
+        "ssl": false,
+        "letsencrypt": false,
+        "letsencrypt_status": "new",
+        "canonical": false,
+        "acme_dns_fqdn": null,
+        "acme_dns_value": null,
+        "acme_dns_error": {
+        },
+        "acme_challenge_error": null
+      }
+    }
+  }
+}

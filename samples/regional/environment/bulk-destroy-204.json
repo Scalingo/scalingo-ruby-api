@@ -1,0 +1,19 @@
+{
+  "path": "/apps/5ed10d73884fef000f5e5024/variables?variable_ids%5B%5D=5ed10d75f112e2000f9f93db&variable_ids%5B%5D=5ed10d75f112e2000f9f93dc&variable_ids%5B%5D=5ed10d75f112e2000f9f93dd&variable_ids%5B%5D=5ed10d75f112e2000f9f93de",
+  "method": "delete",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:26:14 GMT",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": ""
+  }
+}

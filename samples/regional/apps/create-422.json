@@ -1,0 +1,34 @@
+{
+  "path": "/apps",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "app": {
+        "name": "wrong---"
+      }
+    }
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "Date": "Fri, 29 May 2020 15:52:06 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "errors": {
+        "name": [
+          "can't end with an hyphen",
+          "can't contain 2 consecutive hyphens"
+        ]
+      }
+    }
+  }
+}

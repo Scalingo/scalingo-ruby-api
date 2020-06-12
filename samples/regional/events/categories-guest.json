@@ -1,0 +1,66 @@
+{
+  "path": "/event_categories",
+  "method": "get",
+  "request": {
+    "headers": {
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:57:46 GMT",
+      "Etag": "W/\"682d29b34798d9860d5d6e157fc58ac7\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "event_categories": [
+        {
+          "id": "595cf85d6bb8f100167429ca",
+          "name": "app_operations",
+          "display_name": "App operations",
+          "position": 1
+        },
+        {
+          "id": "595cf85d6bb8f100167429cb",
+          "name": "addons",
+          "display_name": "Addons",
+          "position": 2
+        },
+        {
+          "id": "595cf85d6bb8f100167429cc",
+          "name": "collaborators",
+          "display_name": "Collaborators",
+          "position": 3
+        },
+        {
+          "id": "595cf85d6bb8f100167429cd",
+          "name": "domains",
+          "display_name": "Domains",
+          "position": 4
+        },
+        {
+          "id": "595cf85d6bb8f100167429ce",
+          "name": "notifiers",
+          "display_name": "Notifiers",
+          "position": 5
+        },
+        {
+          "id": "595cf85d6bb8f100167429cf",
+          "name": "variables",
+          "display_name": "Variables",
+          "position": 6
+        },
+        {
+          "id": "595cf85d6bb8f100167429d0",
+          "name": "github",
+          "display_name": "GitHub",
+          "position": 7
+        }
+      ]
+    }
+  }
+}
