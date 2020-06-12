@@ -1,0 +1,44 @@
+{
+  "path": "/profiles",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "profile": {
+        "some": "attribute"
+      }
+    }
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "Date": "Fri, 12 Jun 2020 15:46:11 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache"
+    },
+    "json_body": {
+      "errors": {
+        "name": [
+          "can't be blank"
+        ],
+        "address_line1": [
+          "can't be blank"
+        ],
+        "address_zip": [
+          "can't be blank"
+        ],
+        "address_city": [
+          "can't be blank"
+        ],
+        "address_country": [
+          "can't be blank"
+        ]
+      }
+    }
+  }
+}

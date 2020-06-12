@@ -1,0 +1,47 @@
+{
+  "path": "/profiles/882d7733-923b-40dc-88e6-f1324e48c42a",
+  "method": "put",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "profile": {
+        "address_city": "New Somecity"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 12 Jun 2020 15:46:11 GMT",
+      "Etag": "W/\"885ba0ce422a076feb961e3bed89db0c\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate"
+    },
+    "json_body": {
+      "profile": {
+        "id": "882d7733-923b-40dc-88e6-f1324e48c42a",
+        "name": "Billing",
+        "email": null,
+        "address_line1": "Somewhere",
+        "address_line2": null,
+        "address_city": "New Somecity",
+        "balance": 0,
+        "address_zip": "12345",
+        "address_state": null,
+        "address_country": "FR",
+        "vat_number": null,
+        "company": null,
+        "payment_method": "sepa",
+        "created_at": "2020-05-29T13:01:46.217Z",
+        "updated_at": "2020-06-12T15:46:11.559Z",
+        "credit": 0,
+        "stripe_payment_method": null
+      }
+    }
+  }
+}

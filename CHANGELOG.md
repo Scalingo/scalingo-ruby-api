@@ -1,3 +1,8 @@
+## Unreleased
+
+* New API: billing api (#14)
+  * New endpoint: `profile`. Methods: `show`, `create`, `update`
+
 ## 3.0.0.beta1 - 2020/06/12
 
 * Full rewrite of the gem, **zero** backwards compatibility. Refer to the `README` for more information.
