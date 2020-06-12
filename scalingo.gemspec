@@ -4,15 +4,23 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "scalingo/version"
 
 Gem::Specification.new do |s|
-  s.name = "scalingo-ruby-api"
-  s.version = Scalingo::VERSION
-  s.authors = ["Leo Unbekandt", "Geoffroy Planquart", "Kevin Soltysiak"]
-  s.email = ["leo@scalingo.com", "geoffroy@planquart.fr", "kevin@scalingo.com"]
+  s.name        = "scalingo"
+  s.version     = Scalingo::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ["Leo Unbekandt", "Kevin Soltysiak"]
+  s.email       = ["leo@scalingo.com", "kevin@scalingo.com"]
+  s.homepage    = "https://www.scalingo.com"
+  s.summary     = "Ruby client for Scalingo APIs"
+  s.description = "Ruby client library for the web APIs of Scalingo, a european Platform-as-a-Service"
+  s.license     = "MIT"
 
-  s.homepage = "https://github.com/Scalingo/scalingo-ruby-api"
-  s.summary = "Ruby client for Scalingo's API"
-  s.description = "Ruby client library around the web APIs of scalingo.com"
-  s.license = "MIT"
+  s.metadata = {
+    'bug_tracker_uri'   => 'https://github.com/Scalingo/scalingo-ruby-api/issues',
+    'changelog_uri'     => 'https://github.com/Scalingo/scalingo-ruby-api/blob/master/CHANGELOG.md',
+    'documentation_uri' => 'https://developers.scalingo.com/',
+    'homepage_uri'      => 'https://www.scalingo.com/',
+    'source_code_uri'   => 'https://github.com/Scalingo/scalingo-ruby-api',
+  }
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
