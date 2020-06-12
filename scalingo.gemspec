@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"
 
   s.add_development_dependency "bundler", "~> 2.0"
-  s.add_development_dependency "rake", "~> 10.0"
+  s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "rubocop", "~> 0.83.0"
   s.add_development_dependency "standard", "~> 0.4.2"
