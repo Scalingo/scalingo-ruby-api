@@ -44,7 +44,7 @@ module Scalingo
     def sizes(headers = nil, &block)
       data = nil
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         "features/container_sizes",
         data,
         headers,

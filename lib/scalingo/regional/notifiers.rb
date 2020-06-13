@@ -83,7 +83,7 @@ module Scalingo
     def platforms(headers = nil, &block)
       data = nil
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         "notification_platforms",
         data,
         headers,
