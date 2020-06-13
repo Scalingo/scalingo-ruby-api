@@ -16,7 +16,7 @@ module Scalingo
       private
 
       def unpack(*args)
-        Response.unpack(*args)
+        Response.unpack(client, *args)
       end
     end
   end

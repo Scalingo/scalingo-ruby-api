@@ -17,8 +17,11 @@ module Scalingo
       File.join(project_root, "samples")
     end
 
-    def load_meta!
-      api, folder = described_class.to_s.underscore.split("/").last(2)
+    def load_meta!(api: nil, folder: nil)
+      guessed_api, guessed_folder = described_class.to_s.underscore.split("/").last(2)
+      api ||= guessed_api
+      folder ||= guessed_folder
+
       path = [samples_root, api, folder, "_meta.json"].compact.join("/")
 
       if File.exist?(path)
@@ -26,8 +29,11 @@ module Scalingo
       end
     end
 
-    def register_stubs!(pattern = "**/*")
-      api, folder = described_class.to_s.underscore.split("/").last(2)
+    def register_stubs!(pattern = "**/*", api: nil, folder: nil)
+      guessed_api, guessed_folder = described_class.to_s.underscore.split("/").last(2)
+      api ||= guessed_api
+      folder ||= guessed_folder
+
       endpoint = ENDPOINTS.fetch(api.to_sym)
 
       path = [samples_root, api, folder].compact.join("/")

@@ -1,7 +1,8 @@
 ## Unreleased
 
-* rename `BearerToken#expires_in` to `expires_at` (#16)
-* rename argument `allow_guest:` for `API::Endpoint#connection` to `fallback_to_guest:` (#16)
+* Rename `BearerToken#expires_in` to `expires_at` (#16)
+* Rename argument `allow_guest:` for `API::Endpoint#connection` to `fallback_to_guest:` (#16)
+* Response objects can access the operation directly using `.operation` (#15)
 * New API: billing api (#14)
   * New endpoint: `profile`. Methods: `show`, `create`, `update`
 

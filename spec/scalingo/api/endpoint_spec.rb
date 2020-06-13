@@ -22,7 +22,7 @@ RSpec.describe Scalingo::API::Endpoint do
 
   describe "unpack" do
     it "forwards unpack to Response" do
-      expect(Scalingo::API::Response).to receive(:unpack).with(:a, :b, :c).and_return(:d).once
+      expect(Scalingo::API::Response).to receive(:unpack).with(client, :a, :b, :c).and_return(:d).once
 
       expect(subject.send(:unpack, :a, :b, :c)).to eq :d
     end
