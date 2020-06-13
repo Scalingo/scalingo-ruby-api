@@ -51,6 +51,8 @@ module Scalingo
 
       if bearer_token
         self.token = expires_at ? BearerToken.new(bearer_token.to_s, expires_at: expires_at) : bearer_token
+
+        true
       end
     end
 
