@@ -1,2 +1,2 @@
-require "scalingo/config"
+require "scalingo/configuration"
 require "scalingo/client"
