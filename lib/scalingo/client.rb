@@ -4,6 +4,7 @@ require "faraday_middleware"
 require "scalingo/bearer_token"
 require "scalingo/errors"
 require "scalingo/auth"
+require "scalingo/billing"
 require "scalingo/regional"
 
 module Scalingo
@@ -56,6 +57,10 @@ module Scalingo
     ## API clients
     def auth
       @auth ||= Auth.new(self, Scalingo.config.urls.auth)
+    end
+
+    def billing
+      @billing ||= Billing.new(self, Scalingo.config.urls.billing)
     end
 
     def region

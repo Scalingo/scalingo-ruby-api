@@ -1,0 +1,41 @@
+{
+  "path": "/profile",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 12 Jun 2020 15:46:10 GMT",
+      "Etag": "W/\"d1a1d2eed6a6fc5fb399b497a4572e89\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate"
+    },
+    "json_body": {
+      "profile": {
+        "id": "882d7733-923b-40dc-88e6-f1324e48c42a",
+        "name": "Billing",
+        "email": null,
+        "address_line1": "Somewhere",
+        "address_line2": null,
+        "address_city": "Somecity",
+        "balance": 0,
+        "address_zip": "12345",
+        "address_state": null,
+        "address_country": "FR",
+        "vat_number": null,
+        "company": null,
+        "payment_method": "sepa",
+        "created_at": "2020-05-29T13:01:46.217Z",
+        "updated_at": "2020-06-12T15:45:43.535Z",
+        "credit": 0,
+        "stripe_payment_method": null
+      }
+    }
+  }
+}
