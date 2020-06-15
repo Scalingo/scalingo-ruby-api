@@ -83,7 +83,7 @@ module Scalingo
     def categories(headers = nil, &block)
       data = nil
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         "addon_categories",
         data,
         headers,
@@ -96,7 +96,7 @@ module Scalingo
     def providers(headers = nil, &block)
       data = nil
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         "addon_providers",
         data,
         headers,

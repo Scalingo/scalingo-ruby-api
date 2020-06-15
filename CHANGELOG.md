@@ -1,5 +1,7 @@
 ## Unreleased
 
+* rename `BearerToken#expires_in` to `expires_at` (#16)
+* rename argument `allow_guest:` for `API::Endpoint#connection` to `fallback_to_guest:` (#16)
 * New API: billing api (#14)
   * New endpoint: `profile`. Methods: `show`, `create`, `update`
 

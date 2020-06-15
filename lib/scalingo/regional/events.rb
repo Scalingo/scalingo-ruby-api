@@ -29,7 +29,7 @@ module Scalingo
     def types(headers = nil, &block)
       data = nil
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         "event_types",
         data,
         headers,
@@ -42,7 +42,7 @@ module Scalingo
     def categories(headers = nil, &block)
       data = nil
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         "event_categories",
         data,
         headers,

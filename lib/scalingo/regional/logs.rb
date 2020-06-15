@@ -3,7 +3,7 @@ module Scalingo
     def get(url, payload = {}, headers = nil, &block)
       data = payload.compact
 
-      response = connection(allow_guest: true).get(
+      response = connection(fallback_to_guest: true).get(
         url,
         data,
         headers,

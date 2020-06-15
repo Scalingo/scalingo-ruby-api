@@ -22,7 +22,7 @@ module Scalingo
       token.present? && !token.expired?
     end
 
-    def authenticate_with(access_token: nil, bearer_token: nil, expires_in: nil)
+    def authenticate_with(access_token: nil, bearer_token: nil, expires_at: nil)
       if !access_token && !bearer_token
         raise ArgumentError, "You must supply one of `access_token` or `bearer_token`"
       end
@@ -31,8 +31,8 @@ module Scalingo
         raise ArgumentError, "You cannot supply both `access_token` and `bearer_token`"
       end
 
-      if expires_in && !bearer_token
-        raise ArgumentError, "`expires_in` can only be used with `bearer_token`. `access_token` have a 1 hour expiration."
+      if expires_at && !bearer_token
+        raise ArgumentError, "`expires_at` can only be used with `bearer_token`. `access_token` have a 1 hour expiration."
       end
 
       if access_token
@@ -42,7 +42,7 @@ module Scalingo
         if response.successful?
           self.token = BearerToken.new(
             response.data[:token],
-            expires_in: expiration,
+            expires_at: expiration,
           )
         end
 
@@ -50,7 +50,9 @@ module Scalingo
       end
 
       if bearer_token
-        self.token = expires_in ? BearerToken.new(bearer_token.to_s, expires_in: expires_in) : bearer_token
+        self.token = expires_at ? BearerToken.new(bearer_token.to_s, expires_at: expires_at) : bearer_token
+
+        true
       end
     end
 

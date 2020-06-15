@@ -1,14 +1,14 @@
 module Scalingo
   class BearerToken
-    attr_reader :expires_in
+    attr_reader :expires_at
 
-    def initialize(value, expires_in: nil)
+    def initialize(value, expires_at: nil)
       @value = value
-      @expires_in = expires_in if expires_in
+      @expires_at = expires_at if expires_at
     end
 
     def expired?
-      expires_in && expires_in <= Time.now
+      expires_at && expires_at <= Time.now
     end
 
     def value
