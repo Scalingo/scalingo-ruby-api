@@ -65,6 +65,6 @@ module Scalingo
   end
 
   def self.configure
-    yield configuration
+    yield config
   end
 end

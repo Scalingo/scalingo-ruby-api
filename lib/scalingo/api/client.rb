@@ -30,10 +30,10 @@ module Scalingo
       ## Faraday objects
       def headers
         hash = {
-          "User-Agent" => Scalingo.config.user_agent
+          "User-Agent" => scalingo.config.user_agent
         }
 
-        if (extra = Scalingo.config.additional_headers).present?
+        if (extra = scalingo.config.additional_headers).present?
           extra.respond_to?(:call) ? hash.update(extra.call) : hash.update(extra)
         end
 
@@ -74,7 +74,7 @@ module Scalingo
 
         # Missing token handling. Token expiration is handled in the `value` method.
         unless scalingo.token&.value
-          if Scalingo.config.raise_on_missing_authentication
+          if scalingo.config.raise_on_missing_authentication
             raise Error::Unauthenticated
           else
             return unauthenticated_connection

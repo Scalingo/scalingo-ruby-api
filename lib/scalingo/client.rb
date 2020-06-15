@@ -11,11 +11,19 @@ module Scalingo
   class Client
     extend Forwardable
 
+    attr_reader :config
+
+    def initialize(attributes = {})
+      @config = Configuration.new(attributes, Scalingo.config)
+
+      define_regions!
+    end
+
     ## Authentication helpers / Token management
     attr_reader :token
 
     def token=(input)
-      @token = input.is_a?(BearerToken) ? input : BearerToken.new(input.to_s)
+      @token = input.is_a?(BearerToken) ? input : BearerToken.new(input.to_s, raise_on_expired: config.raise_on_expired_token)
     end
 
     def authenticated?
@@ -36,13 +44,14 @@ module Scalingo
       end
 
       if access_token
-        expiration = Time.now + Scalingo.config.exchanged_token_validity
+        expiration = Time.now + config.exchanged_token_validity
         response = auth.tokens.exchange(access_token)
 
         if response.successful?
           self.token = BearerToken.new(
             response.data[:token],
             expires_at: expiration,
+            raise_on_expired: config.raise_on_expired_token,
           )
         end
 
@@ -50,7 +59,17 @@ module Scalingo
       end
 
       if bearer_token
-        self.token = expires_at ? BearerToken.new(bearer_token.to_s, expires_at: expires_at) : bearer_token
+        self.token = if expires_at
+          token = bearer_token.is_a?(BearerToken) ? bearer_token.value : bearer_token.to_s
+
+          BearerToken.new(
+            token,
+            expires_at: expires_at,
+            raise_on_expired: config.raise_on_expired_token,
+          )
+        else
+          bearer_token
+        end
 
         true
       end
@@ -58,33 +77,15 @@ module Scalingo
 
     ## API clients
     def auth
-      @auth ||= Auth.new(self, Scalingo.config.urls.auth)
+      @auth ||= Auth.new(self, config.urls.auth)
     end
 
     def billing
-      @billing ||= Billing.new(self, Scalingo.config.urls.billing)
+      @billing ||= Billing.new(self, config.urls.billing)
     end
 
-    def region
-      public_send(Scalingo.config.default_region)
-    end
-
-    Scalingo.config.regions.each do |region|
-      if Scalingo.config.urls[region].blank?
-        raise ArgumentError, "Scalingo: no url configured for region #{region}"
-      end
-
-      define_method(region) do
-        region_client = instance_variable_get :"@#{region}"
-
-        unless region_client
-          region_client = Regional.new(self, Scalingo.config.urls[region])
-
-          instance_variable_set :"@#{region}", region_client
-        end
-
-        region_client
-      end
+    def region(name = nil)
+      public_send(name || config.default_region)
     end
 
     ## Delegations
@@ -108,5 +109,23 @@ module Scalingo
     def_delegator :region, :notifiers
     def_delegator :region, :operations
     def_delegator :region, :scm_repo_links
+
+    private
+
+    def define_regions!
+      config.regions.each do |region|
+        define_singleton_method(region) do
+          region_client = instance_variable_get :"@#{region}"
+
+          unless region_client
+            region_client = Regional.new(self, config.urls[region])
+
+            instance_variable_set :"@#{region}", region_client
+          end
+
+          region_client
+        end
+      end
+    end
   end
 end
