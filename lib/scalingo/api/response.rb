@@ -1,49 +1,27 @@
 module Scalingo
   module API
     class Response
-      def self.transform_object(object, resource_class: nil)
-        resource_class&.new(object) || object
-      end
+      def self.unpack(client, response, key: nil)
+        body = response.body
+        has_hash_body = body.present? && body.respond_to?(:key)
 
-      def self.transform_body(body, resource_class: nil)
-        case body
-        when Hash
-          transform_object(body, resource_class: resource_class)
-        when Array
-          body.map { |item| transform_object(item, resource_class: resource_class) }
-        else
-          body
-        end
-      end
-
-      def self.transform_meta(body)
-        if body.present? && body.respond_to?(:key) && body.key?(:meta)
-          body[:meta]
-        end
-      end
-
-      def self.unpack(response, key: nil, resource_class: nil)
-        data = if response.body.respond_to?(:key?) && key.present?
-          response.body[key]
-        else
-          response.body
-        end
-
-        parsed = transform_body(data, resource_class: resource_class)
-        meta = transform_meta(response.body)
+        data = has_hash_body && key.present? ? body[key] : body
+        meta = has_hash_body && body.key?(:meta) ? body[:meta] : nil
 
         new(
+          client: client,
           status: response.status,
           headers: response.headers,
-          data: parsed,
+          data: data,
           meta: meta,
-          full_body: response.body,
+          full_body: body,
         )
       end
 
-      attr_reader :status, :headers, :data, :full_body, :meta
+      attr_reader :client, :status, :headers, :data, :full_body, :meta
 
-      def initialize(status:, headers:, data:, full_body:, meta: nil)
+      def initialize(client:, status:, headers:, data:, full_body:, meta: nil)
+        @client = client
         @status = status
         @headers = headers
         @data = data
@@ -60,11 +38,17 @@ module Scalingo
       end
 
       def operation
+        if operation? && client.respond_to?(:operations)
+          client.operations.get(operation_url)
+        end
+      end
+
+      def operation_url
         headers[:location]
       end
 
       def operation?
-        operation.present
+        operation_url.present?
       end
     end
   end
