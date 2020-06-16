@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Rework configuration, add specs over it (#17)
 * Rename `BearerToken#expires_in` to `expires_at` (#16)
 * Rename argument `allow_guest:` for `API::Endpoint#connection` to `fallback_to_guest:` (#16)
 * Response objects can access the operation directly using `.operation` (#15)

@@ -77,11 +77,11 @@ module Scalingo
 
     ## API clients
     def auth
-      @auth ||= Auth.new(self, config.urls.auth)
+      @auth ||= Auth.new(self, config.auth)
     end
 
     def billing
-      @billing ||= Billing.new(self, config.urls.billing)
+      @billing ||= Billing.new(self, config.billing)
     end
 
     def region(name = nil)
@@ -113,12 +113,12 @@ module Scalingo
     private
 
     def define_regions!
-      config.regions.each do |region|
+      config.regions.each_pair do |region, _|
         define_singleton_method(region) do
           region_client = instance_variable_get :"@#{region}"
 
           unless region_client
-            region_client = Regional.new(self, config.urls[region])
+            region_client = Regional.new(self, config.regions.public_send(region))
 
             instance_variable_set :"@#{region}", region_client
           end

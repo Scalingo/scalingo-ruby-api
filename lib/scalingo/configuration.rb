@@ -5,14 +5,20 @@ require "ostruct"
 module Scalingo
   class Configuration
     ATTRIBUTES = [
-      # Known regions. Each region should have a corresponding entry in the urls settings below
+      # URL to the authentication API
+      :auth,
+
+      # URL to the billing API
+      :billing,
+
+      # List of regions under the form {"region_id": root_url}
       :regions,
 
-      # Default region
+      # Default region. Must match a key in `regions`
       :default_region,
 
-      # Endpoints URLS
-      :urls,
+      # Wether to use https or http
+      :https,
 
       # Configure the User Agent header
       :user_agent,
@@ -30,10 +36,28 @@ module Scalingo
 
       # These headers will be added to every request. Individual methods may override them.
       # This should be a hash or a callable object that returns a hash.
-      :additional_headers,
+      :additional_headers
     ]
 
     ATTRIBUTES.each { |attr| attr_accessor(attr) }
+
+    def self.default
+      new(
+        auth: "https://auth.scalingo.com/v1",
+        billing: "https://cashmachine.scalingo.com",
+        regions: {
+          agora_fr1: "https://api.agora-fr1.scalingo.com/v1",
+          osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
+          osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1"
+        },
+        default_region: :osc_fr1,
+        user_agent: "Scalingo Ruby Client v#{Scalingo::VERSION}",
+        exchanged_token_validity: 1.hour,
+        raise_on_missing_authentication: true,
+        raise_on_expired_token: false,
+        additional_headers: {},
+      )
+    end
 
     def initialize(attributes = {}, parent = nil)
       ATTRIBUTES.each do |name|
@@ -41,27 +65,31 @@ module Scalingo
       end
     end
 
-    def urls=(input)
-      @urls = OpenStruct.new(input)
+    def regions=(input)
+      if input.is_a?(OpenStruct)
+        @regions = input
+        return
+      end
+
+      if input.is_a?(Hash)
+        @regions = OpenStruct.new(input)
+        return
+      end
+
+      raise ArgumentError, "wrong type for argument"
+    end
+
+    def default_region=(input)
+      input = input.to_sym
+
+      raise ArgumentError, "No regions named `#{input}`" unless regions.respond_to?(input)
+
+      @default_region = input
     end
   end
 
   def self.config
-    @config ||= Configuration.new(
-      regions: %i[osc_fr1 osc_secnum_fr1],
-      default_region: :osc_fr1,
-      urls: {
-        auth: "https://auth.scalingo.com/v1",
-        billing: "https://cashmachine.scalingo.com/",
-        osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
-        osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1",
-      },
-      user_agent: "Scalingo Ruby Client v#{Scalingo::VERSION}",
-      exchanged_token_validity: 1.hour,
-      raise_on_missing_authentication: true,
-      raise_on_expired_token: false,
-      additional_headers: {},
-    )
+    @config ||= Configuration.default
   end
 
   def self.configure

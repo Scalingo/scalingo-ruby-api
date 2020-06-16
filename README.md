@@ -13,7 +13,7 @@ You can check the version 2 at [the v2 branch of this repository](https://github
 ### The road to 3.0.0
 
 This gem is still in beta version, but its API should not change a lot until a final release.
-However, configuration may change. An issue will be opened and pinned to follow up the work that remains to be done.
+[This issue tracks the remaining work](https://github.com/Scalingo/scalingo-ruby-api/issues/13).
 
 ## Installation
 
@@ -55,18 +55,29 @@ client.section.request(id, payload = {}, headers = nil, &block)
 
 ## Configuration
 
+You can refer to the code below to configure the gem globally.
+The values displayed match the default ones.
+
+:warning: Configuration is copied when instanciating a `Scalingo::Client` object;
+changing the configuration globally will therefore not affect already existing objects.
+
 ```ruby
 Scalingo.configure do |config|
-  # Known regions. Each region should have a corresponding entry in the urls settings below
-  config.regions = %i[osc_fr1 osc_secnum_fr1]
+  # Authentication API url
+  config.auth = "https://auth.scalingo.com/v1"
 
-  # Default region
-  config.defaul_region = :osc_fr1
+  # Billing API url
+  config.billing = "https://cashmachine.scalingo.com"
 
-  # Endpoints URLS
-  config.urls.auth = "https://auth.scalingo.com/v1"
-  config.urls.osc_fr1 = "https://api.osc-fr1.scalingo.com/v1"
-  config.urls.osc_secnum_fr1 = "https://api.osc-secnum-fr1.scalingo.com/v1"
+  # Known regions and their api's url
+  config.regions = {
+    agora_fr1: "https://api.agora-fr1.scalingo.com/v1",
+    osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
+    osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1"
+  }
+
+  # Default region. Must match an entry in `regions`
+  config.default_region = :osc_fr1
 
   # Configure the User Agent header
   config.user_agent = "Scalingo Ruby Client v#{Scalingo::VERSION}"
@@ -75,35 +86,29 @@ Scalingo.configure do |config|
   # Set to nil to never raise.
   config.exchanged_token_validity = 1.hour
 
-  # Raise an exception when trying to use an authenticated connection without a bearer token set
   # Having this setting to true prevents performing requests that would fail due to lack of authentication headers.
   config.raise_on_missing_authentication = true
+
+  # Raise an exception when the bearer token in use is supposed to be invalid
+  config.raise_on_expired_token = false
 
   # These headers will be added to every request. Individual methods may override them.
   # This should be a hash or a callable object that returns a hash.
   config.additional_headers = {}
-
-  # Raise an exception when the bearer token in use is supposed to be invalid
-  config.raise_on_expired_token = false
 end
 ```
 
-:warning: If you change the settings for the list of regions, you **cannot** use `require "scalingo"`; you must follow this template :
+You can also configure each client separately.
+Values not supplied will be copied from the global configuration.
 
 ```ruby
-
-require "scalingo/config"
-
-Scalingo.configure do |config|
-  config.regions = %i[my-regions]
-end
-
-require "scalingo/client"
+scalingo = Scalingo::Client.new(raise_on_expired_token: false)
 ```
 
 ## Response object
 
 Responses are parsed with the keys symbolized and then encapsulated in a `Scalingo::API::Response` object:
+
 * `response.status` containts the HTTP status code
 * `response.data` contains the "relevant" data, without the json root key (when relevant)
 * `response.full_data` contains the full response body
@@ -115,6 +120,14 @@ Some helper methods are defined on this object:
 * `response.paginated?` returns true if the reponse has metadata relative to pagination
 * `response.operation?` returns true if the response contains a header relative to an ongoing operation
 * `response.operation` returns the URL to query to get the status of the operation
+
+## Other details on the code architecture
+
+* `Scalingo::Client` instances hold configuration and the token used for authentication
+* `Scalingo::API::Client` subclasses (`Scalingo::Auth`, `Scalingo::Billing`, `Scalingo::Regional`) provides access to the APIs.
+You can use `connection` (returns a faraday instance) on those objects to perform any request freely.
+* `Scalingo::API::Endpoint` subclasses (`Scalingo::Auth::User`) instances belong to an api client (cf previous point).
+They provide quick and uniform access to expected requests.
 
 ## Examples
 
@@ -128,7 +141,7 @@ scalingo.authenticate_with(access_token: "my_access_token")
 scalingo.authenticate_with(bearer_token: "my_bearer_jwt")
 
 # Return your profile
-scalingo.self
+scalingo.user.self
 
 # List your SSH Keys
 scalingo.keys.all # OR scalingo.auth.keys.all
@@ -140,7 +153,7 @@ scalingo.keys.show("my-key-id")
 scalingo.apps.all # OR scalingo.region.apps.all
 
 # List your apps on osc-fr1
-scalingo.osc_fr1.apps.all
+scalingo.osc_fr1.apps.all # OR scalingo.region(:osc_fr1).apps.all
 
 # Preview the creation of an app on the default region
 scalingo.apps.create(name: "my-new-app", dry_run: true)
