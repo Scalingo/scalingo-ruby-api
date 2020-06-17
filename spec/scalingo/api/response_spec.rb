@@ -21,12 +21,14 @@ RSpec.describe Scalingo::API::Response do
 
   describe "self.unpack" do
     let(:body) { "" }
+    let(:success) { true }
 
     let(:response) {
       OpenStruct.new(
         body: body,
         status: status,
         headers: headers,
+        success?: success,
       )
     }
 
@@ -169,6 +171,19 @@ RSpec.describe Scalingo::API::Response do
 
           expect(object.meta).to eq({meta1: :value})
         end
+      end
+    end
+
+    context "with an error response" do
+      let(:success) { false }
+      let(:body) { {root: {key: :value}} }
+
+      it "does not dig in the response hash, even with a valid key" do
+        object = described_class.unpack(client, response, key: :root)
+
+        expect(object.data).to eq body
+        expect(object.full_body).to eq body
+        expect(object.meta).to eq nil
       end
     end
   end
