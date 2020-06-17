@@ -35,7 +35,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*_spec.rb"]
 
   s.add_dependency "activesupport", [">= 5", "< 7"]
-  s.add_dependency "activemodel", [">= 5", "< 7"]
   s.add_dependency "faraday", "~> 1.0.1"
   s.add_dependency "faraday_middleware", "~> 1.0.0"
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"

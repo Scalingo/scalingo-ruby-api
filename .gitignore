@@ -1,5 +1,5 @@
 *.swp
-
+Gemfile.lock
 coverage/
 /pkg
 
