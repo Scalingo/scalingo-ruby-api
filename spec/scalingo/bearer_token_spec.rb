@@ -3,8 +3,9 @@ require "spec_helper"
 RSpec.describe Scalingo::BearerToken do
   let(:value) { "my-token" }
   let(:expires_at) { nil }
+  let(:raise_on_expired) { false }
 
-  subject { described_class.new(value, expires_at: expires_at) }
+  subject { described_class.new(value, expires_at: expires_at, raise_on_expired: raise_on_expired) }
 
   describe "initialize" do
     it "stores the value" do
@@ -41,9 +42,7 @@ RSpec.describe Scalingo::BearerToken do
 
   describe "value" do
     context "when raising on expired token" do
-      before do
-        allow(Scalingo.config).to receive(:raise_on_expired_token).and_return(true)
-      end
+      let(:raise_on_expired) { true }
 
       it "raises when expired" do
         expect(subject).to receive(:expired?).and_return(true)
@@ -57,9 +56,7 @@ RSpec.describe Scalingo::BearerToken do
     end
 
     context "when not raising on expired token" do
-      before do
-        allow(Scalingo.config).to receive(:raise_on_expired_token).and_return(false)
-      end
+      let(:raise_on_expired) { false }
 
       it "returns the value when expired" do
         expect(subject).to receive(:expired?).and_return(true)

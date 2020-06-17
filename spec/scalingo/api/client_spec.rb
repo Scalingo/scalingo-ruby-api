@@ -46,7 +46,7 @@ RSpec.describe Scalingo::API::Client do
 
   describe "headers" do
     before do
-      expect(Scalingo.config).to receive(:user_agent).and_return(user_agent).once
+      expect(scalingo.config).to receive(:user_agent).and_return(user_agent).once
     end
 
     let(:user_agent) { "user agent" }
@@ -60,13 +60,13 @@ RSpec.describe Scalingo::API::Client do
     end
 
     it "allows additional headers to be globally configured" do
-      expect(Scalingo.config).to receive(:additional_headers).and_return(extra_hash)
+      expect(scalingo.config).to receive(:additional_headers).and_return(extra_hash)
 
       expect(subject.headers).to eq("User-Agent" => user_agent, "X-Other" => "other")
     end
 
     it "additional headers can be a block" do
-      expect(Scalingo.config).to receive(:additional_headers).and_return(extra_block)
+      expect(scalingo.config).to receive(:additional_headers).and_return(extra_block)
 
       expect(subject.headers).to eq("User-Agent" => user_agent, "X-Another" => "another")
     end
@@ -101,7 +101,7 @@ RSpec.describe Scalingo::API::Client do
       let(:scalingo) { scalingo_guest }
 
       it "raises if configured to" do
-        expect(Scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
+        expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
 
         expect {
           subject.authenticated_connection
@@ -109,7 +109,7 @@ RSpec.describe Scalingo::API::Client do
       end
 
       it "returns an unauthenticated connection if configured to not raise" do
-        expect(Scalingo.config).to receive(:raise_on_missing_authentication).and_return(false).once
+        expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(false).once
 
         expect(subject).to receive(:unauthenticated_connection).and_return(:object).once
         expect(subject.authenticated_connection).to eq(:object)
@@ -145,13 +145,13 @@ RSpec.describe Scalingo::API::Client do
 
       context "no fallback to guest" do
         it "raises when set to raise" do
-          expect(Scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
+          expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
 
           expect { subject.connection }.to raise_error(Scalingo::Error::Unauthenticated)
         end
 
         it "calls and return the unauthenticated_connection when set not to raise" do
-          expect(Scalingo.config).to receive(:raise_on_missing_authentication).and_return(false).once
+          expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(false).once
           expect(subject).to receive(:unauthenticated_connection).and_return(:conn)
           expect(subject.connection(fallback_to_guest: true)).to eq(:conn)
         end
