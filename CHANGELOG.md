@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 3.0.0.beta.2 - 2020/06/18
+
+* Bugfix: do not "dig" into the response body if it is not a 2XX (#18, #19)
 * Rework configuration, add specs over it (#17)
 * Rename `BearerToken#expires_in` to `expires_at` (#16)
 * Rename argument `allow_guest:` for `API::Endpoint#connection` to `fallback_to_guest:` (#16)
@@ -7,7 +10,7 @@
 * New API: billing api (#14)
   * New endpoint: `profile`. Methods: `show`, `create`, `update`
 
-## 3.0.0.beta1 - 2020/06/12
+## 3.0.0.beta.1 - 2020/06/12
 
 * Full rewrite of the gem, **zero** backwards compatibility. Refer to the `README` for more information.
 

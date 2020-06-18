@@ -18,7 +18,7 @@ This gem is still in beta version, but its API should not change a lot until a f
 ## Installation
 
 ```ruby
-gem "scalingo", "3.0.0.beta.1"
+gem "scalingo", "3.0.0.beta.2"
 ```
 
 And then execute:
@@ -111,7 +111,7 @@ Responses are parsed with the keys symbolized and then encapsulated in a `Scalin
 
 * `response.status` containts the HTTP status code
 * `response.data` contains the "relevant" data, without the json root key (when relevant)
-* `response.full_data` contains the full response body
+* `response.full_body` contains the full response body
 * `response.meta` contains the meta object, if there's any
 * `response.headers` containts all the response headers
 
@@ -119,7 +119,8 @@ Some helper methods are defined on this object:
 * `response.successful?` returns true when the code is 2XX
 * `response.paginated?` returns true if the reponse has metadata relative to pagination
 * `response.operation?` returns true if the response contains a header relative to an ongoing operation
-* `response.operation` returns the URL to query to get the status of the operation
+* `response.operation_url` returns the URL to query to get the status of the operation
+* `response.operation` performs a request to retrieve the operation
 
 ## Other details on the code architecture
 
