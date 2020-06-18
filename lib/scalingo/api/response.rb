@@ -5,8 +5,13 @@ module Scalingo
         body = response.body
         has_hash_body = body.present? && body.respond_to?(:key)
 
-        data = has_hash_body && key.present? && response.success? ? body[key] : body
-        meta = has_hash_body && body.key?(:meta) ? body[:meta] : nil
+        data = body
+        meta = nil
+
+        if has_hash_body
+          data = body[key] if response.success? && key.present?
+          meta = body[:meta]
+        end
 
         new(
           client: client,
