@@ -66,6 +66,8 @@ module Scalingo
         @unauthenticated_conn ||= Faraday.new(connection_options) { |conn|
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
+
+          conn.adapter(scalingo.config.faraday_adapter) if scalingo.config.faraday_adapter
         }
       end
 
@@ -89,6 +91,8 @@ module Scalingo
             auth_header = Faraday::Request::Authorization.header "Bearer", scalingo.token.value
             conn.headers[Faraday::Request::Authorization::KEY] = auth_header
           end
+
+          conn.adapter(scalingo.config.faraday_adapter) if scalingo.config.faraday_adapter
         }
       end
     end
