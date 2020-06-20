@@ -14,7 +14,7 @@ RSpec.describe Scalingo::Configuration do
   describe "regions" do
     it "can be assigned from a hash" do
       subject.regions = {
-        local_name: "some-url"
+        local_name: "some-url",
       }
 
       expect(subject.regions.local_name).to eq "some-url"

@@ -8,7 +8,7 @@ module Scalingo
       authorization = Faraday::Request::BasicAuthentication.header("", token)
 
       request_headers = {
-        Faraday::Request::Authorization::KEY => authorization
+        Faraday::Request::Authorization::KEY => authorization,
       }
 
       request_headers.update(headers) if headers

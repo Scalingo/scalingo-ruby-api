@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     "changelog_uri" => "https://github.com/Scalingo/scalingo-ruby-api/blob/master/CHANGELOG.md",
     "documentation_uri" => "https://developers.scalingo.com/",
     "homepage_uri" => "https://www.scalingo.com/",
-    "source_code_uri" => "https://github.com/Scalingo/scalingo-ruby-api"
+    "source_code_uri" => "https://github.com/Scalingo/scalingo-ruby-api",
   }
 
   # Specify which files should be added to the gem when it is released.

@@ -5,7 +5,7 @@ module Scalingo
   ENDPOINTS = {
     auth: "https://auth.scalingo.test",
     billing: "https://billing.scalingo.test",
-    regional: "https://regional.scalingo.test"
+    regional: "https://regional.scalingo.test",
   }
 
   module StubHelpers
@@ -64,7 +64,7 @@ module Scalingo
 
         response_options = {
           status: stub_data.dig(:response, :status) || 200,
-          headers: {}
+          headers: {},
         }
 
         if stub_data.dig(:response, :json_body).present?

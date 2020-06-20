@@ -30,7 +30,7 @@ module Scalingo
       ## Faraday objects
       def headers
         hash = {
-          "User-Agent" => scalingo.config.user_agent
+          "User-Agent" => scalingo.config.user_agent,
         }
 
         if (extra = scalingo.config.additional_headers).present?
@@ -43,7 +43,7 @@ module Scalingo
       def connection_options
         {
           url: url,
-          headers: headers
+          headers: headers,
         }
       end
 

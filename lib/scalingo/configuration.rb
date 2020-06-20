@@ -48,7 +48,7 @@ module Scalingo
         regions: {
           agora_fr1: "https://api.agora-fr1.scalingo.com/v1",
           osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
-          osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1"
+          osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1",
         },
         default_region: :osc_fr1,
         user_agent: "Scalingo Ruby Client v#{Scalingo::VERSION}",
