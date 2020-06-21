@@ -2,6 +2,7 @@
 
 * Bugfix: remove `https` configuration option (development artifact) (#20)
 * Improv: configure the faraday adapter to use (#20)
+* Improv: prettier `inspect` for common objects (#20)
 
 ## 3.0.0.beta.2 - 2020/06/18
 

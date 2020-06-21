@@ -9,6 +9,21 @@ module Scalingo
       @raise_on_expired = raise_on_expired
     end
 
+    def inspect
+      str = "<#{self.class}:0x#{object_id.to_s(16)} "
+
+      str << if expired?
+        "(expired) "
+      elsif expires_at.present?
+        "expires_at: #{expires_at} "
+      else
+        "(no expiration) "
+      end
+
+      str << %(value:"#{value}">)
+      str
+    end
+
     def raise_on_expired?
       @raise_on_expired
     end

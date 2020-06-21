@@ -34,6 +34,10 @@ module Scalingo
         @meta = meta
       end
 
+      def inspect
+        %(<#{self.class}:0x#{object_id.to_s(16)} status:#{@status} data:#{@data} meta:#{@meta}>)
+      end
+
       def successful?
         status >= 200 && status < 300
       end

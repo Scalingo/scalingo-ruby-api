@@ -27,6 +27,16 @@ module Scalingo
         end
       end
 
+      def inspect
+        str = %(<#{self.class}:0x#{object_id.to_s(16)} scalingo:#{@scalingo.inspect} url:"#{@url}" methods:)
+
+        methods = self.class.instance_methods - Scalingo::API::Client.instance_methods
+        str << methods.to_s
+
+        str << ">"
+        str
+      end
+
       ## Faraday objects
       def headers
         hash = {
