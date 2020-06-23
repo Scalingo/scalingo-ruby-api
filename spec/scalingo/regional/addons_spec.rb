@@ -99,6 +99,22 @@ RSpec.describe Scalingo::Regional::Addons do
     end
   end
 
+  describe_method "token" do
+    context "success" do
+      let(:arguments) { [meta[:app_id], meta[:id]] }
+      let(:stub_pattern) { "token-200" }
+
+      it_behaves_like "a singular object response"
+    end
+
+    context "not found" do
+      let(:arguments) { [meta[:app_id], meta[:not_found_id]] }
+      let(:stub_pattern) { "token-404" }
+
+      it_behaves_like "a not found response"
+    end
+  end
+
   describe_method "update" do
     context "success" do
       let(:arguments) { [meta[:app_id], meta[:id], meta[:update][:valid]] }

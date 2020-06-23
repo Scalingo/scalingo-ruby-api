@@ -80,6 +80,19 @@ module Scalingo
       unpack(response, key: :addon)
     end
 
+    def token(app_id, addon_id, headers = nil, &block)
+      data = nil
+
+      response = connection.post(
+        "apps/#{app_id}/addons/#{addon_id}/token",
+        data,
+        headers,
+        &block
+      )
+
+      unpack(response, key: :addon)
+    end
+
     def categories(headers = nil, &block)
       data = nil
 
