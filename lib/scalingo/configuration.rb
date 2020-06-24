@@ -17,9 +17,6 @@ module Scalingo
       # Default region. Must match a key in `regions`
       :default_region,
 
-      # Wether to use https or http
-      :https,
-
       # Configure the User Agent header
       :user_agent,
 
@@ -36,7 +33,10 @@ module Scalingo
 
       # These headers will be added to every request. Individual methods may override them.
       # This should be a hash or a callable object that returns a hash.
-      :additional_headers
+      :additional_headers,
+
+      # Specify an adapter for faraday. Leave nil for the default one (Net::HTTP)
+      :faraday_adapter,
     ]
 
     ATTRIBUTES.each { |attr| attr_accessor(attr) }
@@ -48,7 +48,7 @@ module Scalingo
         regions: {
           agora_fr1: "https://api.agora-fr1.scalingo.com/v1",
           osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
-          osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1"
+          osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1",
         },
         default_region: :osc_fr1,
         user_agent: "Scalingo Ruby Client v#{Scalingo::VERSION}",

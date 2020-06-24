@@ -27,10 +27,20 @@ module Scalingo
         end
       end
 
+      def inspect
+        str = %(<#{self.class}:0x#{object_id.to_s(16)} scalingo:#{@scalingo.inspect} url:"#{@url}" methods:)
+
+        methods = self.class.instance_methods - Scalingo::API::Client.instance_methods
+        str << methods.to_s
+
+        str << ">"
+        str
+      end
+
       ## Faraday objects
       def headers
         hash = {
-          "User-Agent" => scalingo.config.user_agent
+          "User-Agent" => scalingo.config.user_agent,
         }
 
         if (extra = scalingo.config.additional_headers).present?
@@ -43,7 +53,7 @@ module Scalingo
       def connection_options
         {
           url: url,
-          headers: headers
+          headers: headers,
         }
       end
 
@@ -66,6 +76,8 @@ module Scalingo
         @unauthenticated_conn ||= Faraday.new(connection_options) { |conn|
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
+
+          conn.adapter(scalingo.config.faraday_adapter) if scalingo.config.faraday_adapter
         }
       end
 
@@ -89,6 +101,8 @@ module Scalingo
             auth_header = Faraday::Request::Authorization.header "Bearer", scalingo.token.value
             conn.headers[Faraday::Request::Authorization::KEY] = auth_header
           end
+
+          conn.adapter(scalingo.config.faraday_adapter) if scalingo.config.faraday_adapter
         }
       end
     end

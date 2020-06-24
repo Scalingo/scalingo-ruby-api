@@ -14,7 +14,7 @@ RSpec.describe Scalingo::Configuration do
   describe "regions" do
     it "can be assigned from a hash" do
       subject.regions = {
-        local_name: "some-url"
+        local_name: "some-url",
       }
 
       expect(subject.regions.local_name).to eq "some-url"
@@ -50,6 +50,38 @@ RSpec.describe Scalingo::Configuration do
       end
 
       expect(object.user_agent).to eq "Agent"
+    end
+  end
+
+  describe "faraday adapter" do
+    let(:scalingo) { Scalingo::Client.new(config).tap { |s| s.authenticate_with(bearer_token: "some-token") } }
+    let(:client) { Scalingo::API::Client.new(scalingo, "http://example.test") }
+
+    context "when unspecified" do
+      let(:config) { {} }
+
+      it "uses the default one when unspecificied" do
+        expect(client.authenticated_connection.adapter).to eq Faraday::Adapter::NetHttp
+        expect(client.unauthenticated_connection.adapter).to eq Faraday::Adapter::NetHttp
+      end
+    end
+
+    context "when set to an unkown adapter" do
+      let(:config) { {faraday_adapter: :yo} }
+
+      it "uses the default one when unspecificied" do
+        expect { client.authenticated_connection.adapter }.to raise_error(Faraday::Error)
+        expect { client.unauthenticated_connection.adapter }.to raise_error(Faraday::Error)
+      end
+    end
+
+    context "when set to a valid adapter" do
+      let(:config) { {faraday_adapter: :test} }
+
+      it "uses the default one when unspecificied" do
+        expect(client.authenticated_connection.adapter).to eq Faraday::Adapter::Test
+        expect(client.unauthenticated_connection.adapter).to eq Faraday::Adapter::Test
+      end
     end
   end
 end

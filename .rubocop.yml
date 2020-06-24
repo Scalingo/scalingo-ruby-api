@@ -11,6 +11,14 @@ Style/TrailingCommaInArguments:
   Enabled: true
   EnforcedStyleForMultiline: consistent_comma
 
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+
 Style/Alias:
   Enabled: true
   EnforcedStyle: prefer_alias_method

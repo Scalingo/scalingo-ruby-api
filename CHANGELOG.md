@@ -1,5 +1,10 @@
 ## Unreleased
 
+* Bugfix: remove `https` configuration option (development artifact) (#20)
+* Improv: configure the faraday adapter to use (#20)
+* Improv: prettier `inspect` for common objects (#20)
+* New: Add `addons#token` endpoint (#20)
+
 ## 3.0.0.beta.2 - 2020/06/18
 
 * Bugfix: do not "dig" into the response body if it is not a 2XX (#18, #19)

@@ -1,0 +1,24 @@
+{
+  "path": "/apps/5ed10967884fef000f5e4fff/addons/wrong-addon-id/token",
+  "method": "post",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:08:59 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "resource": "addon",
+      "error": "not found"
+    }
+  }
+}

@@ -19,6 +19,19 @@ module Scalingo
       define_regions!
     end
 
+    def inspect
+      str = %(<#{self.class}:0x#{object_id.to_s(16)} version:"#{Scalingo::VERSION}" authenticated:)
+
+      str << if token.present?
+        (token.expired? ? "expired" : "true")
+      else
+        "false"
+      end
+
+      str << ">"
+      str
+    end
+
     ## Authentication helpers / Token management
     attr_reader :token
 

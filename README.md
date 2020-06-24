@@ -95,6 +95,9 @@ Scalingo.configure do |config|
   # These headers will be added to every request. Individual methods may override them.
   # This should be a hash or a callable object that returns a hash.
   config.additional_headers = {}
+
+  # Specify an adapter for faraday. Leave nil for the default one (Net::HTTP)
+  config.faraday_adapter = nil
 end
 ```
 
