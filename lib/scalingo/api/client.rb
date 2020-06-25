@@ -54,6 +54,7 @@ module Scalingo
       def headers
         hash = {
           "User-Agent" => config.user_agent,
+          "Accept" => "application/json",
         }
 
         if (extra = config.additional_headers).present?

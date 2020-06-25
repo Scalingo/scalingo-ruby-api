@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Change: Requests have the header `Accept: application/json` by default
 * Private API Change: `unpack` signature
 * Change: allow api clients standalone use (without a main scalingo client)
 * Change: remove regions-related configuration, except for the default region

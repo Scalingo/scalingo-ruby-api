@@ -102,20 +102,20 @@ RSpec.describe Scalingo::API::Client do
       proc { {"X-Another" => "another"} }
     }
 
-    it "only returns the user agent if nothing else is configured" do
-      expect(subject.headers).to eq("User-Agent" => user_agent)
+    it "only returns the user agent and accept if nothing else is configured" do
+      expect(subject.headers).to eq("Accept" => "application/json", "User-Agent" => user_agent)
     end
 
     it "allows additional headers to be globally configured" do
       expect(scalingo.config).to receive(:additional_headers).and_return(extra_hash)
 
-      expect(subject.headers).to eq("User-Agent" => user_agent, "X-Other" => "other")
+      expect(subject.headers).to eq("Accept" => "application/json", "User-Agent" => user_agent, "X-Other" => "other")
     end
 
     it "additional headers can be a block" do
       expect(scalingo.config).to receive(:additional_headers).and_return(extra_block)
 
-      expect(subject.headers).to eq("User-Agent" => user_agent, "X-Another" => "another")
+      expect(subject.headers).to eq("Accept" => "application/json", "User-Agent" => user_agent, "X-Another" => "another")
     end
   end
 
