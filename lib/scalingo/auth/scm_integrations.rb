@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_integrations)
+      unpack(:scm_integrations) { response }
     end
 
     def show(id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_integration)
+      unpack(:scm_integration) { response }
     end
 
     def create(payload, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_integration)
+      unpack(:scm_integration) { response }
     end
 
     def destroy(id, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
   end
 end

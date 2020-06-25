@@ -22,7 +22,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def types(headers = nil, &block)
@@ -35,7 +35,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :metrics)
+      unpack(:metrics) { response }
     end
   end
 end

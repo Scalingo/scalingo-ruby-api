@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :notifiers)
+      unpack(:notifiers) { response }
     end
 
     def find(app_id, notifier_id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :notifier)
+      unpack(:notifier) { response }
     end
 
     def create(app_id, payload = {}, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :notifier)
+      unpack(:notifier) { response }
     end
 
     def update(app_id, notifier_id, payload = {}, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :notifier)
+      unpack(:notifier) { response }
     end
 
     def destroy(app_id, notifier_id, headers = nil, &block)
@@ -64,7 +64,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def test(app_id, notifier_id, headers = nil, &block)
@@ -77,7 +77,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def platforms(headers = nil, &block)
@@ -90,7 +90,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :notification_platforms)
+      unpack(:notification_platforms) { response }
     end
   end
 end

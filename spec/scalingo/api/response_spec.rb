@@ -33,19 +33,19 @@ RSpec.describe Scalingo::API::Response do
     }
 
     it "passes the client supplied" do
-      object = described_class.unpack(:some_client, response)
+      object = described_class.unpack(:some_client) { response }
 
       expect(object.client).to eq :some_client
     end
 
     it "passes the response status" do
-      object = described_class.unpack(:client, response)
+      object = described_class.unpack(:client) { response }
 
       expect(object.status).to eq status
     end
 
     it "passes the response headers" do
-      object = described_class.unpack(:client, response)
+      object = described_class.unpack(:client) { response }
 
       expect(object.headers).to eq headers
     end
@@ -54,7 +54,7 @@ RSpec.describe Scalingo::API::Response do
       let(:body) { "" }
 
       it "without key" do
-        object = described_class.unpack(client, response)
+        object = described_class.unpack(client) { response }
 
         expect(object.data).to eq ""
         expect(object.full_body).to eq ""
@@ -62,7 +62,7 @@ RSpec.describe Scalingo::API::Response do
       end
 
       it "ignores key if supplied" do
-        object = described_class.unpack(client, response, key: :key)
+        object = described_class.unpack(client, key: :key) { response }
 
         expect(object.data).to eq ""
         expect(object.full_body).to eq ""
@@ -74,7 +74,7 @@ RSpec.describe Scalingo::API::Response do
       let(:body) { nil }
 
       it "without key" do
-        object = described_class.unpack(client, response)
+        object = described_class.unpack(client) { response }
 
         expect(object.data).to eq nil
         expect(object.full_body).to eq nil
@@ -82,7 +82,7 @@ RSpec.describe Scalingo::API::Response do
       end
 
       it "ignores key if supplied" do
-        object = described_class.unpack(client, response, key: :key)
+        object = described_class.unpack(client, key: :key) { response }
 
         expect(object.data).to eq nil
         expect(object.full_body).to eq nil
@@ -94,7 +94,7 @@ RSpec.describe Scalingo::API::Response do
       let(:body) { "this is a string body, probably due to an error" }
 
       it "without key" do
-        object = described_class.unpack(client, response)
+        object = described_class.unpack(client) { response }
 
         expect(object.data).to eq body
         expect(object.full_body).to eq body
@@ -102,7 +102,7 @@ RSpec.describe Scalingo::API::Response do
       end
 
       it "ignores key if supplied" do
-        object = described_class.unpack(client, response, key: :key)
+        object = described_class.unpack(client, key: :key) { response }
 
         expect(object.data).to eq body
         expect(object.full_body).to eq body
@@ -116,7 +116,7 @@ RSpec.describe Scalingo::API::Response do
       }
 
       it "without key" do
-        object = described_class.unpack(client, response)
+        object = described_class.unpack(client) { response }
 
         expect(object.data).to eq body
         expect(object.full_body).to eq body
@@ -124,7 +124,7 @@ RSpec.describe Scalingo::API::Response do
       end
 
       it "ignores key if supplied" do
-        object = described_class.unpack(client, response, key: :root)
+        object = described_class.unpack(client, key: :root) { response }
 
         expect(object.data).to eq body
         expect(object.full_body).to eq body
@@ -138,7 +138,7 @@ RSpec.describe Scalingo::API::Response do
       }
 
       it "without key" do
-        object = described_class.unpack(client, response)
+        object = described_class.unpack(client) { response }
 
         expect(object.data).to eq body
         expect(object.full_body).to eq body
@@ -146,7 +146,7 @@ RSpec.describe Scalingo::API::Response do
       end
 
       it "with valid key" do
-        object = described_class.unpack(client, response, key: :root)
+        object = described_class.unpack(client, key: :root) { response }
 
         expect(object.data).to eq({key: :value})
         expect(object.full_body).to eq body
@@ -154,7 +154,7 @@ RSpec.describe Scalingo::API::Response do
       end
 
       it "with invalid key" do
-        object = described_class.unpack(client, response, key: :other)
+        object = described_class.unpack(client, key: :other) { response }
 
         expect(object.data).to eq nil
         expect(object.full_body).to eq body
@@ -167,7 +167,7 @@ RSpec.describe Scalingo::API::Response do
         }
 
         it "extracts the meta object" do
-          object = described_class.unpack(client, response)
+          object = described_class.unpack(client) { response }
 
           expect(object.meta).to eq({meta1: :value})
         end
@@ -179,7 +179,7 @@ RSpec.describe Scalingo::API::Response do
       let(:body) { {root: {key: :value}} }
 
       it "does not dig in the response hash, even with a valid key" do
-        object = described_class.unpack(client, response, key: :root)
+        object = described_class.unpack(client, key: :root) { response }
 
         expect(object.data).to eq body
         expect(object.full_body).to eq body

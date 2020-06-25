@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :user)
+      unpack(:user) { response }
     end
 
     def update(payload, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :user)
+      unpack(:user) { response }
     end
   end
 end

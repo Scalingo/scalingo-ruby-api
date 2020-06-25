@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addons)
+      unpack(:addons) { response }
     end
 
     def find(app_id, addon_id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon)
+      unpack(:addon) { response }
     end
 
     def provision(app_id, payload = {}, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon)
+      unpack(:addon) { response }
     end
 
     def update(app_id, addon_id, payload = {}, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon)
+      unpack(:addon) { response }
     end
 
     def destroy(app_id, addon_id, headers = nil, &block)
@@ -64,7 +64,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def sso(app_id, addon_id, headers = nil, &block)
@@ -77,7 +77,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon)
+      unpack(:addon) { response }
     end
 
     def token(app_id, addon_id, headers = nil, &block)
@@ -90,7 +90,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon)
+      unpack(:addon) { response }
     end
 
     def categories(headers = nil, &block)
@@ -103,7 +103,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon_categories)
+      unpack(:addon_categories) { response }
     end
 
     def providers(headers = nil, &block)
@@ -116,7 +116,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :addon_providers)
+      unpack(:addon_providers) { response }
     end
   end
 end

@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :apps)
+      unpack(:apps) { response }
     end
 
     def find(id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :app)
+      unpack(:app) { response }
     end
 
     def create(payload = {}, headers = nil, &block)
@@ -44,7 +44,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :app)
+      unpack(:app) { response }
     end
 
     def update(id, payload = {}, headers = nil, &block)
@@ -57,7 +57,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :app)
+      unpack(:app) { response }
     end
 
     def logs_url(id, headers = nil, &block)
@@ -70,7 +70,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :logs_url)
+      unpack(:logs_url) { response }
     end
 
     def destroy(id, payload = {}, headers = nil, &block)
@@ -81,7 +81,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def rename(id, payload = {}, headers = nil, &block)
@@ -92,7 +92,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :app)
+      unpack(:app) { response }
     end
 
     def transfer(id, payload = {}, headers = nil, &block)
@@ -103,7 +103,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :app)
+      unpack(:app) { response }
     end
   end
 end

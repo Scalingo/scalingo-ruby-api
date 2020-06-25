@@ -16,7 +16,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :tfa)
+      unpack(:tfa) { response }
     end
 
     def initiate(provider = DEFAULT_PROVIDER, headers = nil, &block)
@@ -29,7 +29,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :tfa)
+      unpack(:tfa) { response }
     end
 
     def validate(attempt, headers = nil, &block)
@@ -42,7 +42,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :tfa)
+      unpack(:tfa) { response }
     end
 
     def disable(headers = nil, &block)
@@ -55,7 +55,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :tfa)
+      unpack(:tfa) { response }
     end
   end
 end

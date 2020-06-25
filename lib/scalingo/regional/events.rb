@@ -10,7 +10,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :events)
+      unpack(:events) { response }
     end
 
     def for(app_id, payload = {}, headers = nil, &block)
@@ -23,7 +23,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :events)
+      unpack(:events) { response }
     end
 
     def types(headers = nil, &block)
@@ -36,7 +36,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :event_types)
+      unpack(:event_types) { response }
     end
 
     def categories(headers = nil, &block)
@@ -49,7 +49,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :event_categories)
+      unpack(:event_categories) { response }
     end
   end
 end

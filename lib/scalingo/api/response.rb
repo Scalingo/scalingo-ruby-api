@@ -1,7 +1,9 @@
 module Scalingo
   module API
     class Response
-      def self.unpack(client, response, key: nil)
+      def self.unpack(client, key: nil, &block)
+        response = block.call
+
         body = response.body
         has_hash_body = body.present? && body.respond_to?(:key)
 

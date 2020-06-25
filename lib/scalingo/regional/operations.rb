@@ -20,7 +20,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :operation)
+      unpack(:operation) { response }
     end
   end
 end
