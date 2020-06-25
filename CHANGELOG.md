@@ -1,6 +1,7 @@
 ## Unreleased
 
 * Bugfix: remove `https` configuration option (development artifact) (#20)
+* Improv: handle timeouts. Breaks an internal API. (#21, #22)
 * Improv: configure the faraday adapter to use (#20)
 * Improv: prettier `inspect` for common objects (#20)
 * New: Add `addons#token` endpoint (#20)

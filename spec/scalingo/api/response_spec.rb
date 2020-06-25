@@ -186,6 +186,30 @@ RSpec.describe Scalingo::API::Response do
         expect(object.meta).to eq nil
       end
     end
+
+    context "with a timeout response" do
+      it "handles it gracefully" do
+        stub_request(:get, "http://example.local").to_timeout
+
+        expect(described_class).to receive(:timeout).once
+
+        described_class.unpack(:some_client) { Faraday.get("http://example.local") }
+      end
+    end
+  end
+
+  describe "self.timeout" do
+    subject { described_class.timeout(client) }
+
+    it "returns an empty-ish response" do
+      expect(subject).not_to be_successful
+      expect(subject).to be_timeout
+      expect(subject.status).to be_nil
+      expect(subject.headers).to be_nil
+      expect(subject.data).to be_nil
+      expect(subject.full_body).to be_nil
+      expect(subject.meta).to be_nil
+    end
   end
 
   describe "successful?" do
@@ -206,6 +230,11 @@ RSpec.describe Scalingo::API::Response do
 
     context "is false when 5XX" do
       let(:status) { 500 }
+      it { expect(subject.successful?).to be false }
+    end
+
+    context "is false when timeout" do
+      let(:status) { nil }
       it { expect(subject.successful?).to be false }
     end
   end

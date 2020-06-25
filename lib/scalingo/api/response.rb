@@ -1,8 +1,23 @@
 module Scalingo
   module API
     class Response
+      def self.timeout(client)
+        new(
+          client: client,
+          status: nil,
+          headers: nil,
+          data: nil,
+          meta: nil,
+          full_body: nil,
+        )
+      end
+
       def self.unpack(client, key: nil, &block)
-        response = block.call
+        begin
+          response = block.call
+        rescue Faraday::ConnectionFailed
+          return timeout(client)
+        end
 
         body = response.body
         has_hash_body = body.present? && body.respond_to?(:key)
@@ -41,7 +56,11 @@ module Scalingo
       end
 
       def successful?
-        status >= 200 && status < 300
+        status.present? && status >= 200 && status < 300
+      end
+
+      def timeout?
+        status.nil?
       end
 
       def paginated?
