@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_repo_link)
+      unpack(:scm_repo_link) { response }
     end
 
     def create(app_id, payload = {}, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_repo_link)
+      unpack(:scm_repo_link) { response }
     end
 
     def update(app_id, payload = {}, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_repo_link)
+      unpack(:scm_repo_link) { response }
     end
 
     def destroy(app_id, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :scm_repo_link)
+      unpack(:scm_repo_link) { response }
     end
 
     def deploy(app_id, branch, headers = nil, &block)
@@ -64,7 +64,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :deployment)
+      unpack(:deployment) { response }
     end
 
     def review_app(review_app, pull_request_id, headers = nil, &block)
@@ -77,7 +77,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :review_app)
+      unpack(:review_app) { response }
     end
 
     def branches(app_id, headers = nil, &block)
@@ -90,7 +90,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :branches)
+      unpack(:branches) { response }
     end
 
     def pulls(app_id, headers = nil, &block)
@@ -103,7 +103,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :pulls)
+      unpack(:pulls) { response }
     end
   end
 end

@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Private API Change: `unpack` signature
 * Change: allow api clients standalone use (without a main scalingo client)
 * Change: remove regions-related configuration, except for the default region
 * Bugfix: remove `https` configuration option (development artifact) (#20)

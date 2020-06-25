@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :containers)
+      unpack(:containers) { response }
     end
 
     def scale(app_id, formation, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :containers)
+      unpack(:containers) { response }
     end
 
     def restart(app_id, scope = [], headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def sizes(headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :container_sizes)
+      unpack(:container_sizes) { response }
     end
   end
 end

@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :variables)
+      unpack(:variables) { response }
     end
 
     def create(app_id, payload = {}, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :variable)
+      unpack(:variable) { response }
     end
 
     def update(app_id, variable_id, value, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :variable)
+      unpack(:variable) { response }
     end
 
     def destroy(app_id, variable_id, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def bulk_update(app_id, variables, headers = nil, &block)
@@ -64,7 +64,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :variables)
+      unpack(:variables) { response }
     end
 
     def bulk_destroy(app_id, variable_ids, headers = nil, &block)
@@ -77,7 +77,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
   end
 end

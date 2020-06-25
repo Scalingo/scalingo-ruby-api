@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :deployments)
+      unpack(:deployments) { response }
     end
 
     def find(app_id, deployment_id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :deployment)
+      unpack(:deployment) { response }
     end
 
     def logs(app_id, deployment_id, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :deployment)
+      unpack(:deployment) { response }
     end
   end
 end

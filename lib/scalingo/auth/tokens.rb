@@ -20,7 +20,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def all(headers = nil, &block)
@@ -33,7 +33,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :tokens)
+      unpack(:tokens) { response }
     end
 
     def create(payload, headers = nil, &block)
@@ -46,7 +46,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :token)
+      unpack(:token) { response }
     end
 
     def renew(id, headers = nil, &block)
@@ -59,7 +59,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :token)
+      unpack(:token) { response }
     end
 
     def destroy(id, headers = nil, &block)
@@ -72,7 +72,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
   end
 end

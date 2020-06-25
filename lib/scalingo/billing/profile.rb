@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :profile)
+      unpack(:profile) { response }
     end
 
     def create(payload = {}, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :profile)
+      unpack(:profile) { response }
     end
 
     def update(id, payload = {}, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :profile)
+      unpack(:profile) { response }
     end
 
     alias_method :self, :show

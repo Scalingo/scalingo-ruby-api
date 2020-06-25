@@ -10,7 +10,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def archives(app_id, headers = nil, &block)
@@ -23,7 +23,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :archives)
+      unpack(:archives) { response }
     end
 
     ## Helper method to avoid having to manually chain two operations

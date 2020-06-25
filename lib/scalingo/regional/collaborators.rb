@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :collaborators)
+      unpack(:collaborators) { response }
     end
 
     def destroy(app_id, collaborator_id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
 
     def invite(app_id, payload = {}, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :collaborator)
+      unpack(:collaborator) { response }
     end
 
     def accept(token, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
   end
 end

@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :domains)
+      unpack(:domains) { response }
     end
 
     def find(app_id, domain_id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :domain)
+      unpack(:domain) { response }
     end
 
     def create(app_id, payload = {}, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :domain)
+      unpack(:domain) { response }
     end
 
     def update(app_id, domain_id, payload = {}, headers = nil, &block)
@@ -51,7 +51,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :domain)
+      unpack(:domain) { response }
     end
 
     def destroy(app_id, domain_id, headers = nil, &block)
@@ -64,7 +64,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
   end
 end

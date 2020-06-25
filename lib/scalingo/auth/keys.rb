@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :keys)
+      unpack(:keys) { response }
     end
 
     def show(id, headers = nil, &block)
@@ -25,7 +25,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :key)
+      unpack(:key) { response }
     end
 
     def create(payload, headers = nil, &block)
@@ -38,7 +38,7 @@ module Scalingo
         &block
       )
 
-      unpack(response, key: :key)
+      unpack(:key) { response }
     end
 
     def destroy(id, headers = nil, &block)
@@ -50,7 +50,7 @@ module Scalingo
         &block
       )
 
-      unpack(response)
+      unpack { response }
     end
   end
 end
