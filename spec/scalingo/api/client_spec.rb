@@ -3,11 +3,11 @@ require "spec_helper"
 RSpec.describe Scalingo::API::Client do
   let(:url) { "http://localhost" }
 
-  subject { described_class.new(scalingo, url) }
+  subject { described_class.new(url, scalingo) }
 
   describe "initialize" do
     it "stores the scalingo client and the url" do
-      instance = described_class.new(:scalingo, :url)
+      instance = described_class.new(:url, :scalingo)
 
       expect(instance.scalingo).to eq(:scalingo)
       expect(instance.url).to eq(:url)
@@ -26,7 +26,7 @@ RSpec.describe Scalingo::API::Client do
       mock = double
 
       described_class.register_handler!(:handler, mock)
-      instance = described_class.new(:scalingo, :url)
+      instance = described_class.new(:url, :scalingo)
 
       # Only 1 instanciation should be done, no matter how many calls are done below
       expect(mock).to receive(:new).with(instance).and_return("1st").once

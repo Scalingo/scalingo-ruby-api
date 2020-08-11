@@ -106,12 +106,12 @@ module Scalingo
     extend RSpec::SharedContext
     let(:scalingo_guest) { Scalingo::Client.new }
     let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) } }
-    let(:auth) { Scalingo::Auth.new(scalingo, ENDPOINTS[:auth]) }
-    let(:auth_guest) { Scalingo::Auth.new(scalingo_guest, ENDPOINTS[:auth]) }
-    let(:billing) { Scalingo::Billing.new(scalingo, ENDPOINTS[:billing]) }
-    let(:billing_guest) { Scalingo::Billing.new(scalingo_guest, ENDPOINTS[:billing]) }
-    let(:regional) { Scalingo::Regional.new(scalingo, ENDPOINTS[:regional]) }
-    let(:regional_guest) { Scalingo::Regional.new(scalingo_guest, ENDPOINTS[:regional]) }
+    let(:auth) { Scalingo::Auth.new(ENDPOINTS[:auth], scalingo) }
+    let(:auth_guest) { Scalingo::Auth.new(ENDPOINTS[:auth], scalingo_guest) }
+    let(:billing) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo) }
+    let(:billing_guest) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo_guest) }
+    let(:regional) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo) }
+    let(:regional_guest) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo_guest) }
     let(:meta) { @meta }
 
     let(:endpoint) do

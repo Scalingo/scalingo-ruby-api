@@ -3,9 +3,9 @@ module Scalingo
     class Client
       attr_reader :scalingo, :url
 
-      def initialize(scalingo, url)
-        @scalingo = scalingo
+      def initialize(url, scalingo)
         @url = url
+        @scalingo = scalingo
       end
 
       def self.register_handlers!(handlers)
