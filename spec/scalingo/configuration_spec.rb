@@ -25,7 +25,7 @@ RSpec.describe Scalingo::Configuration do
 
   describe "faraday adapter" do
     let(:scalingo) { Scalingo::Client.new(config).tap { |s| s.authenticate_with(bearer_token: "some-token") } }
-    let(:client) { Scalingo::API::Client.new("http://example.test", scalingo) }
+    let(:client) { Scalingo::API::Client.new("http://example.test", scalingo: scalingo) }
 
     context "when unspecified" do
       let(:config) { {} }

@@ -1,11 +1,24 @@
+require "scalingo/token_holder"
+
 module Scalingo
   module API
     class Client
-      attr_reader :scalingo, :url
+      include TokenHolder
 
-      def initialize(url, scalingo)
+      attr_reader :config, :token_holder, :url
+
+      def initialize(url, scalingo: nil, config: {})
         @url = url
-        @scalingo = scalingo
+        parent_config = Scalingo.config
+
+        if scalingo
+          @token_holder = scalingo
+          parent_config = scalingo.config
+        else
+          @token_holder = self
+        end
+
+        @config = Configuration.new(config, parent_config)
       end
 
       def self.register_handlers!(handlers)
@@ -28,7 +41,7 @@ module Scalingo
       end
 
       def inspect
-        str = %(<#{self.class}:0x#{object_id.to_s(16)} scalingo:#{@scalingo.inspect} url:"#{@url}" methods:)
+        str = %(<#{self.class}:0x#{object_id.to_s(16)} url:"#{@url}" methods:)
 
         methods = self.class.instance_methods - Scalingo::API::Client.instance_methods
         str << methods.to_s
@@ -40,10 +53,10 @@ module Scalingo
       ## Faraday objects
       def headers
         hash = {
-          "User-Agent" => scalingo.config.user_agent,
+          "User-Agent" => config.user_agent,
         }
 
-        if (extra = scalingo.config.additional_headers).present?
+        if (extra = config.additional_headers).present?
           extra.respond_to?(:call) ? hash.update(extra.call) : hash.update(extra)
         end
 
@@ -77,7 +90,7 @@ module Scalingo
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
 
-          conn.adapter(scalingo.config.faraday_adapter) if scalingo.config.faraday_adapter
+          conn.adapter(config.faraday_adapter) if config.faraday_adapter
         }
       end
 
@@ -85,8 +98,8 @@ module Scalingo
         return @connection if @connection
 
         # Missing token handling. Token expiration is handled in the `value` method.
-        unless scalingo.token&.value
-          if scalingo.config.raise_on_missing_authentication
+        unless token_holder.token&.value
+          if config.raise_on_missing_authentication
             raise Error::Unauthenticated
           else
             return unauthenticated_connection
@@ -97,12 +110,12 @@ module Scalingo
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
 
-          if scalingo.token&.value
-            auth_header = Faraday::Request::Authorization.header "Bearer", scalingo.token.value
+          if token_holder.token&.value
+            auth_header = Faraday::Request::Authorization.header "Bearer", token_holder.token.value
             conn.headers[Faraday::Request::Authorization::KEY] = auth_header
           end
 
-          conn.adapter(scalingo.config.faraday_adapter) if scalingo.config.faraday_adapter
+          conn.adapter(config.faraday_adapter) if config.faraday_adapter
         }
       end
     end

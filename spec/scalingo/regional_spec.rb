@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Regional do
-  subject { described_class.new(:client, :url) }
+  subject { described_class.new("url") }
 
   %w[
     addons apps collaborators containers deployments domains environment events

@@ -3,14 +3,61 @@ require "spec_helper"
 RSpec.describe Scalingo::API::Client do
   let(:url) { "http://localhost" }
 
-  subject { described_class.new(url, scalingo) }
+  subject { described_class.new(url, scalingo: scalingo) }
 
   describe "initialize" do
-    it "stores the scalingo client and the url" do
-      instance = described_class.new(:url, :scalingo)
+    let(:config) { {default_region: :test} }
 
-      expect(instance.scalingo).to eq(:scalingo)
-      expect(instance.url).to eq(:url)
+    describe "with only url" do
+      subject { described_class.new(:url) }
+
+      it "stores the url" do
+        expect(subject.url).to eq(:url)
+      end
+
+      it "uses itself as token holder" do
+        expect(subject.token_holder).to eq(subject)
+      end
+
+      it "configuration is the global one" do
+        expect(Scalingo::Configuration).to receive(:new).with({}, Scalingo.config).and_return(:config).once
+
+        expect(subject.config).to eq(:config)
+      end
+    end
+
+    describe "with scalingo client supplied" do
+      subject { described_class.new(:url, scalingo: scalingo) }
+
+      it "uses the scalingo client as token holder" do
+        expect(subject.token_holder).to eq(scalingo)
+      end
+
+      it "configuration is herited from the scalingo client" do
+        expect(Scalingo::Configuration).to receive(:new).with({}, scalingo.config).once
+
+        subject
+      end
+    end
+
+    describe "with config supplied" do
+      subject { described_class.new(:url, config: config) }
+
+      it "configuration is herited from the global one" do
+        expect(Scalingo::Configuration).to receive(:new).with(config, Scalingo.config).and_return(:config).once
+
+        expect(subject.config).to eq(:config)
+      end
+    end
+
+    describe "with both supplied" do
+      subject { described_class.new(:url, scalingo: scalingo, config: config) }
+
+      it "configuration is herited from the scalingo one" do
+        expect(Scalingo::Configuration).to receive(:new).with(config, scalingo.config).once
+
+        subject
+      end
     end
   end
 
@@ -26,7 +73,7 @@ RSpec.describe Scalingo::API::Client do
       mock = double
 
       described_class.register_handler!(:handler, mock)
-      instance = described_class.new(:url, :scalingo)
+      instance = described_class.new(:url, scalingo: scalingo)
 
       # Only 1 instanciation should be done, no matter how many calls are done below
       expect(mock).to receive(:new).with(instance).and_return("1st").once
@@ -118,7 +165,7 @@ RSpec.describe Scalingo::API::Client do
 
     context "with bearer token" do
       it "has an authentication header set with a bearer scheme" do
-        expect(subject.connection.headers["Authorization"]).to eq "Bearer #{subject.scalingo.token.value}"
+        expect(subject.connection.headers["Authorization"]).to eq "Bearer #{subject.token_holder.token.value}"
       end
     end
   end

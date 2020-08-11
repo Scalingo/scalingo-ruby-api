@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Billing do
-  subject { described_class.new(:client, "url") }
+  subject { described_class.new("url") }
 
   %w[profile].each do |section|
     it "handles requests for #{section}" do

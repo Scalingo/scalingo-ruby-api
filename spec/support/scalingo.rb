@@ -8,6 +8,20 @@ module Scalingo
     regional: "https://regional.scalingo.test",
   }
 
+  class SpecClient < CoreClient
+    def auth
+      @auth ||= Auth.new(ENDPOINTS[:auth], scalingo: self)
+    end
+
+    def billing
+      @billing ||= Billing.new(ENDPOINTS[:billing], scalingo: self)
+    end
+
+    def regional
+      @regional ||= Regional.new(ENDPOINTS[:regional], scalingo: self)
+    end
+  end
+
   module StubHelpers
     def project_root
       File.expand_path("../..", File.dirname(__FILE__))
@@ -104,14 +118,14 @@ module Scalingo
 
   module Common
     extend RSpec::SharedContext
-    let(:scalingo_guest) { Scalingo::Client.new }
-    let(:scalingo) { Scalingo::Client.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) } }
-    let(:auth) { Scalingo::Auth.new(ENDPOINTS[:auth], scalingo) }
-    let(:auth_guest) { Scalingo::Auth.new(ENDPOINTS[:auth], scalingo_guest) }
-    let(:billing) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo) }
-    let(:billing_guest) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo_guest) }
-    let(:regional) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo) }
-    let(:regional_guest) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo_guest) }
+    let(:scalingo_guest) { Scalingo::SpecClient.new }
+    let(:scalingo) { Scalingo::SpecClient.new.tap { |c| c.authenticate_with(bearer_token: Scalingo::VALID_BEARER_TOKEN) } }
+    let(:auth) { Scalingo::Auth.new(ENDPOINTS[:auth], scalingo: scalingo) }
+    let(:auth_guest) { Scalingo::Auth.new(ENDPOINTS[:auth], scalingo: scalingo_guest) }
+    let(:billing) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo: scalingo) }
+    let(:billing_guest) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo: scalingo_guest) }
+    let(:regional) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo: scalingo) }
+    let(:regional_guest) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo: scalingo_guest) }
     let(:meta) { @meta }
 
     let(:endpoint) do

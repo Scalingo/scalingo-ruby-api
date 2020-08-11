@@ -1,12 +1,13 @@
 require "forwardable"
 require "faraday"
 require "faraday_middleware"
-require "scalingo/bearer_token"
+require "scalingo/token_holder"
 require "scalingo/errors"
 
 module Scalingo
   class CoreClient
     extend Forwardable
+    include TokenHolder
 
     attr_reader :config
 
@@ -41,16 +42,6 @@ module Scalingo
     end
 
     ## Authentication helpers / Token management
-    attr_reader :token
-
-    def token=(input)
-      @token = input.is_a?(BearerToken) ? input : BearerToken.new(input.to_s, raise_on_expired: config.raise_on_expired_token)
-    end
-
-    def authenticated?
-      token.present? && !token.expired?
-    end
-
     def authenticate_with(access_token: nil, bearer_token: nil, expires_at: nil)
       if !access_token && !bearer_token
         raise ArgumentError, "You must supply one of `access_token` or `bearer_token`"
@@ -80,17 +71,11 @@ module Scalingo
       end
 
       if bearer_token
-        self.token = if expires_at
-          token = bearer_token.is_a?(BearerToken) ? bearer_token.value : bearer_token.to_s
-
-          BearerToken.new(
-            token,
-            expires_at: expires_at,
-            raise_on_expired: config.raise_on_expired_token,
-          )
-        else
-          bearer_token
-        end
+        authenticate_with_bearer_token(
+          bearer_token,
+          expires_at: expires_at,
+          raise_on_expired_token: config.raise_on_expired_token,
+        )
 
         true
       end
