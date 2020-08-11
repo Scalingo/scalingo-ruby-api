@@ -63,20 +63,7 @@ changing the configuration globally will therefore not affect already existing o
 
 ```ruby
 Scalingo.configure do |config|
-  # Authentication API url
-  config.auth = "https://auth.scalingo.com/v1"
-
-  # Billing API url
-  config.billing = "https://cashmachine.scalingo.com"
-
-  # Known regions and their api's url
-  config.regions = {
-    agora_fr1: "https://api.agora-fr1.scalingo.com/v1",
-    osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
-    osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1"
-  }
-
-  # Default region. Must match an entry in `regions`
+  # Default region. Must be a supported region (agora_fr1, osc_fr1, osc_secnum_fr1)
   config.default_region = :osc_fr1
 
   # Configure the User Agent header

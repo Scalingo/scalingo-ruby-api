@@ -6,13 +6,13 @@ module Scalingo
   class Configuration
     ATTRIBUTES = [
       # URL to the authentication API
-      :auth,
+      # :auth,
 
       # URL to the billing API
-      :billing,
+      # :billing,
 
       # List of regions under the form {"region_id": root_url}
-      :regions,
+      # :regions,
 
       # Default region. Must match a key in `regions`
       :default_region,
@@ -43,13 +43,6 @@ module Scalingo
 
     def self.default
       new(
-        auth: "https://auth.scalingo.com/v1",
-        billing: "https://cashmachine.scalingo.com",
-        regions: {
-          agora_fr1: "https://api.agora-fr1.scalingo.com/v1",
-          osc_fr1: "https://api.osc-fr1.scalingo.com/v1",
-          osc_secnum_fr1: "https://api.osc-secnum-fr1.scalingo.com/v1",
-        },
         default_region: :osc_fr1,
         user_agent: "Scalingo Ruby Client v#{Scalingo::VERSION}",
         exchanged_token_validity: 1.hour,
@@ -63,28 +56,6 @@ module Scalingo
       ATTRIBUTES.each do |name|
         public_send("#{name}=", attributes.fetch(name, parent&.public_send(name)))
       end
-    end
-
-    def regions=(input)
-      if input.is_a?(OpenStruct)
-        @regions = input
-        return
-      end
-
-      if input.is_a?(Hash)
-        @regions = OpenStruct.new(input)
-        return
-      end
-
-      raise ArgumentError, "wrong type for argument"
-    end
-
-    def default_region=(input)
-      input = input.to_sym
-
-      raise ArgumentError, "No regions named `#{input}`" unless regions.respond_to?(input)
-
-      @default_region = input
     end
   end
 

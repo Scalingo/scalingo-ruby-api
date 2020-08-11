@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Change: remove regions-related configuration, except for the default region
 * Bugfix: remove `https` configuration option (development artifact) (#20)
 * Improv: configure the faraday adapter to use (#20)
 * Improv: prettier `inspect` for common objects (#20)
