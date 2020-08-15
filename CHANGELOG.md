@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.0.0.beta.3 - 2020/08/15
+
 * Change: Requests have the header `Accept: application/json` by default
 * Private API Change: `unpack` signature
 * Change: allow api clients standalone use (without a main scalingo client)
