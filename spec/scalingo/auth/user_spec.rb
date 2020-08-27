@@ -22,4 +22,10 @@ RSpec.describe Scalingo::Auth::User do
       it_behaves_like "an unprocessable request"
     end
   end
+
+  describe_method "stop_free_trial" do
+    let(:stub_pattern) { "stop-free-trial" }
+
+    it_behaves_like "a successful response"
+  end
 end
