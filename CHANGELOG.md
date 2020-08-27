@@ -1,5 +1,7 @@
 ## Unreleased
 
+* New: User#stop_free_trial method
+
 ## 3.0.0.beta.3 - 2020/08/15
 
 * Change: Requests have the header `Accept: application/json` by default

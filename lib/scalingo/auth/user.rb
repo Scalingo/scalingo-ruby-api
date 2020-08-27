@@ -27,5 +27,18 @@ module Scalingo
 
       unpack(:user) { response }
     end
+
+    def stop_free_trial(headers = nil, &block)
+      data = nil
+
+      response = connection.post(
+        "users/stop_free_trial",
+        data,
+        headers,
+        &block
+      )
+
+      unpack { response }
+    end
   end
 end
