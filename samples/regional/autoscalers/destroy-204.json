@@ -1,0 +1,20 @@
+{
+  "path": "/apps/example-running-application/autoscalers/sc-5418fe67-885d-4e50-8cbe-9a9a2d2d690a",
+  "method": "delete",
+  "request": {
+    "headers": {
+      "Accept": "application/json",
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Date": "Fri, 28 Aug 2020 11:48:32 GMT",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": ""
+  }
+}

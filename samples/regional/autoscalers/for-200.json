@@ -1,0 +1,41 @@
+{
+  "path": "/apps/example-running-application/autoscalers",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Accept": "application/json",
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 28 Aug 2020 11:48:30 GMT",
+      "Etag": "W/\"78d382e1680bcf4d9ff9e58c906714ba\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "autoscalers": [
+        {
+          "created_at": "2020-08-28T11:48:29.963Z",
+          "updated_at": "2020-08-28T11:48:29.963Z",
+          "id": "sc-5418fe67-885d-4e50-8cbe-9a9a2d2d690a",
+          "app_id": "5f48ecb6f112e2000ef34f14",
+          "container_type": "web",
+          "alert_id_scale_up": "al-ecf1cff6-c415-4e7b-8a86-e0ef697b2d87",
+          "alert_id_scale_down": "al-6ef726e8-d69b-44e1-8d67-3acef2a4802d",
+          "min_containers": 3,
+          "max_containers": 7,
+          "last_scale": "0001-01-01T00:00:00Z",
+          "disabled": false,
+          "metric": "rpm_per_container",
+          "target": 150
+        }
+      ]
+    }
+  }
+}

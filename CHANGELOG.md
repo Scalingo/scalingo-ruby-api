@@ -1,5 +1,6 @@
 ## Unreleased
 
+* New: Regional API autoscalers endpoints
 * New: User#stop_free_trial method
 
 ## 3.0.0.beta.3 - 2020/08/15
