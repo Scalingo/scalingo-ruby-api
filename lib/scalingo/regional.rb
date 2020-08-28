@@ -4,6 +4,7 @@ module Scalingo
   class Regional < API::Client
     require "scalingo/regional/addons"
     require "scalingo/regional/apps"
+    require "scalingo/regional/autoscalers"
     require "scalingo/regional/collaborators"
     require "scalingo/regional/containers"
     require "scalingo/regional/deployments"
@@ -19,6 +20,7 @@ module Scalingo
     register_handlers!(
       addons: Addons,
       apps: Apps,
+      autoscalers: Autoscalers,
       collaborators: Collaborators,
       containers: Containers,
       deployments: Deployments,

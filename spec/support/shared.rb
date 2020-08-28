@@ -46,6 +46,13 @@ RSpec.shared_examples "a client error" do
   end
 end
 
+RSpec.shared_examples "a server error" do
+  it "is a generic server error" do
+    expect(response).not_to be_successful
+    expect(response.status).to eq 500
+  end
+end
+
 RSpec.shared_examples "an unprocessable request" do
   it "cannot be found" do
     expect(response).not_to be_successful

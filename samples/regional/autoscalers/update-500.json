@@ -1,0 +1,30 @@
+{
+  "path": "/apps/example-running-application/autoscalers/sc-5418fe67-885d-4e50-8cbe-9a9a2d2d690a",
+  "method": "patch",
+  "request": {
+    "headers": {
+      "Accept": "application/json",
+      "Authorization": "Bearer the-bearer-token",
+      "Content-Type": "application/json"
+    },
+    "json_body": {
+      "autoscaler": {
+        "metric": "unknown"
+      }
+    }
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Date": "Fri, 28 Aug 2020 11:48:31 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-cache",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "error": "Internal error occured, we're on it!"
+    }
+  }
+}
