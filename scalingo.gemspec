@@ -42,8 +42,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "rspec", "~> 3.0"
-  s.add_development_dependency "rubocop", "~> 0.83.0"
-  s.add_development_dependency "standard", "~> 0.4.2"
+  s.add_development_dependency "standard", "~> 0.10.1"
   s.add_development_dependency "pry", "~> 0.13.1"
-  s.add_development_dependency "webmock", "~> 3.8.0"
+  s.add_development_dependency "webmock", "~> 3.10.0"
 end
