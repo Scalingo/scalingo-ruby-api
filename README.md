@@ -10,15 +10,10 @@ will therefore be `3.x.x`.
 
 You can check the version 2 at [the v2 branch of this repository](https://github.com/Scalingo/scalingo-ruby-api/tree/v2)
 
-### The road to 3.0.0
-
-This gem is still in beta version, but its API should not change a lot until a final release.
-[This issue tracks the remaining work](https://github.com/Scalingo/scalingo-ruby-api/issues/13).
-
 ## Installation
 
 ```ruby
-gem "scalingo", "3.0.0.beta.2"
+gem "scalingo", "3.0.0"
 ```
 
 And then execute:

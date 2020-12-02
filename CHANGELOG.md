@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.0.0
+
 * New: Regional API autoscalers endpoints
 * New: User#stop_free_trial method
 
