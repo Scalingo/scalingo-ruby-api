@@ -144,3 +144,23 @@ scalingo.osc_fr1.apps.all # OR scalingo.region(:osc_fr1).apps.all
 # Preview the creation of an app on the default region
 scalingo.apps.create(name: "my-new-app", dry_run: true)
 ```
+
+## Development
+
+### Install
+
+```bash
+bundle
+```
+
+### Run tests
+
+```bash
+bundle exec rake test
+```
+
+### Release a new version
+
+```bash
+# TODO
+```
