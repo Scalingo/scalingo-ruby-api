@@ -7,6 +7,14 @@ require:
   - standard
   - rubocop-performance
 
+AllCops:
+  SuggestExtensions: false
+  Exclude:
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+
 Style/TrailingCommaInArguments:
   Enabled: true
   EnforcedStyleForMultiline: consistent_comma

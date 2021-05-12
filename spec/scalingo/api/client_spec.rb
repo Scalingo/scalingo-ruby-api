@@ -79,11 +79,11 @@ RSpec.describe Scalingo::API::Client do
       expect(mock).to receive(:new).with(instance).and_return("1st").once
 
       # Not yet loaded...
-      expect(instance.instance_variable_get(:"@handler")).to eq(nil)
+      expect(instance.instance_variable_get(:@handler)).to eq(nil)
       instance.handler
 
       # Memoized...
-      expect(instance.instance_variable_get(:"@handler")).not_to eq(nil)
+      expect(instance.instance_variable_get(:@handler)).not_to eq(nil)
 
       # More calls won't try to perform more instanciations
       instance.handler
