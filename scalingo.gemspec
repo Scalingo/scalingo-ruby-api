@@ -35,8 +35,8 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*_spec.rb"]
 
   s.add_dependency "activesupport", [">= 5", "< 7"]
-  s.add_dependency "faraday", "~> 1.0.1"
-  s.add_dependency "faraday_middleware", "~> 1.0.0"
+  s.add_dependency "faraday", "~> 1.0"
+  s.add_dependency "faraday_middleware", "~> 1.0"
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"
 
   s.add_development_dependency "bundler", "~> 2.0"
@@ -44,6 +44,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "standard", "~> 1.1.0"
   s.add_development_dependency "rubocop-rspec"
-  s.add_development_dependency "pry", "~> 0.13.1"
-  s.add_development_dependency "webmock", "~> 3.10.0"
+  s.add_development_dependency "pry", "~> 0.14.1"
+  s.add_development_dependency "webmock", "~> 3.12.2"
 end
