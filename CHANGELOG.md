@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Internals: allow `unpack` to dig into nested structures
+
 ## 3.0.0
 
 * New: Regional API autoscalers endpoints

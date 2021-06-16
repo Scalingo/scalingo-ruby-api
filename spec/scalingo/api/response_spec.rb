@@ -161,6 +161,22 @@ RSpec.describe Scalingo::API::Response do
         expect(object.meta).to eq nil
       end
 
+      it "with valid keys" do
+        object = described_class.unpack(client, keys: [:root, :key]) { response }
+
+        expect(object.data).to eq(:value)
+        expect(object.full_body).to eq body
+        expect(object.meta).to eq nil
+      end
+
+      it "with invalid keys" do
+        object = described_class.unpack(client, keys: [:root, :other]) { response }
+
+        expect(object.data).to eq nil
+        expect(object.full_body).to eq body
+        expect(object.meta).to eq nil
+      end
+
       context "with meta" do
         let(:body) {
           {root: {key: :value}, meta: {meta1: :value}}
