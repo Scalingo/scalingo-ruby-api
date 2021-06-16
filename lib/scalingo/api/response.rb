@@ -1,7 +1,7 @@
 module Scalingo
   module API
     class Response
-      def self.unpack(client, key: nil, &block)
+      def self.unpack(client, key: nil, keys: nil, &block)
         response = block.call
 
         body = response.body
@@ -11,7 +11,10 @@ module Scalingo
         meta = nil
 
         if has_hash_body
-          data = body[key] if response.success? && key.present?
+          keys = [key] if key.present?
+
+          data = body.dig(*keys) if response.success? && keys.present?
+
           meta = body[:meta]
         end
 

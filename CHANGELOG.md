@@ -1,4 +1,6 @@
-## Unreleased
+## 3.0.1
+
+* Internals: allow `unpack` to dig into nested structures
 
 ## 3.0.0
 

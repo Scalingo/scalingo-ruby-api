@@ -25,8 +25,8 @@ module Scalingo
 
       private
 
-      def unpack(key = nil, &block)
-        Response.unpack(client, key: key, &block)
+      def unpack(*keys, &block)
+        Response.unpack(client, keys: keys, &block)
       end
     end
   end
