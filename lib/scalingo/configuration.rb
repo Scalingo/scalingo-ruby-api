@@ -1,3 +1,4 @@
+require "active_support"
 require "active_support/core_ext/numeric/time"
 require "scalingo/version"
 require "ostruct"
