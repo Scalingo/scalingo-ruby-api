@@ -1,3 +1,9 @@
+## Unreleased
+
+## 3.1.0
+
+* Compat: support for ActiveSupport (and therefore Rails) 7, @Intrepidd
+
 ## 3.0.1
 
 * Internals: allow `unpack` to dig into nested structures
