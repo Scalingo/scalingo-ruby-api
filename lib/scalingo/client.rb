@@ -20,13 +20,6 @@ module Scalingo
       )
     end
 
-    def agora_fr1
-      @agora_fr1 ||= Regional.new(
-        "https://api.agora-fr1.scalingo.com/v1",
-        scalingo: self,
-      )
-    end
-
     def osc_fr1
       @osc_fr1 ||= Regional.new(
         "https://api.osc-fr1.scalingo.com/v1",
