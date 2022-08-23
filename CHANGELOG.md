@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Removal: `Scalingo::Client#agora_fr1` had been removed since the region no longer exists.
+
 ## 3.1.0
 
 * Compat: support for ActiveSupport (and therefore Rails) 7, @Intrepidd
