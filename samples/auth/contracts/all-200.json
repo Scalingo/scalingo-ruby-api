@@ -1,0 +1,43 @@
+{
+  "path": "/contracts",
+  "method": "get",
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 12:04:34 GMT",
+      "Etag": "W/\"a25a51e7d9b0eb8cf01dde6663ca886f\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "contracts": [
+        {
+          "id": "9a33b135-0e36-4e96-95d2-5ca4771e095f",
+          "name": {
+            "fr": "Testy 1",
+            "en": "Terms of Service"
+          },
+          "short": {
+            "fr": "CGV",
+            "en": "ToS"
+          },
+          "blog_article": {
+            "fr": null,
+            "en": null
+          },
+          "version": "1",
+          "required": false,
+          "required_for": [],
+          "published_at": "2014-12-30T00:00:00Z",
+          "enroll_at": "2014-12-30T00:00:00Z",
+          "latest": true,
+          "next_version_id": null,
+          "documents": []
+        }
+      ]
+    }
+  }
+}
