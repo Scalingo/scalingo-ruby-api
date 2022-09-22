@@ -3,4 +3,5 @@ Gemfile.lock
 coverage/
 /pkg
 
+.idea
 .rspec_status
