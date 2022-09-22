@@ -7,6 +7,7 @@ module Scalingo
     require "scalingo/auth/tokens"
     require "scalingo/auth/two_factor_auth"
     require "scalingo/auth/user"
+    require "scalingo/auth/contracts"
 
     register_handlers!(
       keys: Keys,
@@ -14,6 +15,7 @@ module Scalingo
       tokens: Tokens,
       two_factor_auth: TwoFactorAuth,
       user: User,
+      contracts: Contracts,
     )
 
     alias_method :tfa, :two_factor_auth
