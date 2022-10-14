@@ -1,0 +1,8 @@
+dependencies = []
+description = "Ruby API client"
+destination_server = []
+flags = ["global", "scalingo-app"]
+languages = ["ruby"]
+owner = "kevin@scalingo.com"
+team = "UFS"
+version = "1.1.0"
