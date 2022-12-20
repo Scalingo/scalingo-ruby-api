@@ -1,7 +1,7 @@
 require "scalingo/api/client"
 
 module Scalingo
-  class RegionalDatabaseAPI < API::Client
+  class RegionalDatabase < API::Client
     require "scalingo/regional_database/databases"
     require "scalingo/regional_database/backups"
 
