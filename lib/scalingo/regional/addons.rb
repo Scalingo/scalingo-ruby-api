@@ -80,6 +80,21 @@ module Scalingo
       unpack(:addon) { response }
     end
 
+    def authenticate(app_id, addon_id, headers = nil, &block)
+      response = token(app_id, addon_id, headers, &block)
+      return response unless response.status == 200
+
+      token = response.data[:token]
+      client.token_holder.authenticate_database_with_bearer_token(
+        addon_id,
+        token,
+        expires_at: Time.now + 1.hour,
+        raise_on_expired_token: client.config.raise_on_expired_token
+      )
+
+      response
+    end
+
     def token(app_id, addon_id, headers = nil, &block)
       data = nil
 
