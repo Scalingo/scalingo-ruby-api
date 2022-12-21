@@ -12,6 +12,7 @@ module Scalingo
       end
 
       def_delegator :client, :connection
+      def_delegator :client, :database_connection
 
       def inspect
         str = %(<#{self.class}:0x#{object_id.to_s(16)} base_url:"#{@client.url}" endpoints:)

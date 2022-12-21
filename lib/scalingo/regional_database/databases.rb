@@ -5,7 +5,7 @@ module Scalingo
     def find(id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      response = database_connection(id).get(
         "databases/#{id}",
         data,
         headers,

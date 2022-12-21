@@ -39,14 +39,14 @@ module Scalingo
 
     def db_api_osc_fr1
       @db_api_osc_fr1 ||= RegionalDatabase.new(
-        "https://db-api.osc-fr1.scalingo.com",
+        "https://db-api.osc-fr1.scalingo.com/api",
         scalingo: self,
       )
     end
 
     def db_api_osc_secnum_fr1
       @db_api_osc_secnum_fr1 ||= RegionalDatabase.new(
-        "https://db-api.osc-fr1.scalingo.com",
+        "https://db-api.osc-fr1.scalingo.com/api",
         scalingo: self,
       )
     end

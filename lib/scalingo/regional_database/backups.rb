@@ -5,27 +5,27 @@ module Scalingo
     def for(addon_id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
-        "databases/#{addonn_id}/backups",
+      response = database_connection(addon_id).get(
+        "databases/#{addon_id}/backups",
         data,
         headers,
         &block
       )
 
-      unpack(:addons) { response }
+      unpack(:database_backups) { response }
     end
 
-    def find(addon_id, backup_id, headers = nil, &block)
+    def archive(addon_id, backup_id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
-        "databases/#{addon_id}/backups/#{backup_id}",
+      response = database_connection(addon_id).get(
+        "databases/#{addon_id}/backups/#{backup_id}/archive",
         data,
         headers,
         &block
       )
 
-      unpack(:backup) { response }
+      unpack { response }
     end
   end
 end
