@@ -27,7 +27,7 @@ module Scalingo
         scalingo: self,
       )
     end
-    alias_method apps_api_osc_fr1 osc_fr1
+    alias_method :apps_api_osc_fr1, :osc_fr1
 
     def osc_secnum_fr1
       @osc_secnum_fr1 ||= Regional.new(
@@ -35,7 +35,7 @@ module Scalingo
         scalingo: self,
       )
     end
-    alias_method apps_api_osc_secnum_fr1 osc_secnum_fr1
+    alias_method :apps_api_osc_secnum_fr1, :osc_secnum_fr1
 
     def db_api_osc_fr1
       @db_api_osc_fr1 ||= RegionalDatabase.new(
