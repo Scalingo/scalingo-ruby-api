@@ -119,7 +119,7 @@ module Scalingo
       def database_connection(database_id)
         raise Error::Unauthenticated unless token_holder.authenticated_for_database?(database_id)
 
-        @database_connections ||= Hash.new
+        @database_connections ||= {}
         @database_connections[database_id] ||= Faraday.new(connection_options) { |conn|
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json

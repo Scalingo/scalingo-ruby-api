@@ -2,7 +2,10 @@ require "spec_helper"
 
 RSpec.describe Scalingo::TokenHolder do
   subject(:token_holder_dummy_class) do
-    Class.new { include(Scalingo::TokenHolder); attr_accessor :config }
+    Class.new {
+      include(Scalingo::TokenHolder)
+      attr_accessor :config
+    }
   end
 
   describe "authenticate_with_bearer_token" do
@@ -21,7 +24,7 @@ RSpec.describe Scalingo::TokenHolder do
 
       it "set the auth token" do
         expect(token_holder.authenticated?).to be false
-        subject()
+        subject
         expect(token_holder.authenticated?).to be true
       end
     end
@@ -34,7 +37,7 @@ RSpec.describe Scalingo::TokenHolder do
         token_holder.authenticate_with_bearer_token(token, expires_at: 1.hour.ago, raise_on_expired_token: false)
         expect(token_holder.authenticated?).to be false
 
-        subject()
+        subject
         expect(token_holder.authenticated?).to be true
       end
     end
@@ -58,7 +61,7 @@ RSpec.describe Scalingo::TokenHolder do
 
       it "set the database auth token" do
         expect(token_holder.authenticated_for_database?(database_id)).to be false
-        subject()
+        subject
         expect(token_holder.authenticated_for_database?(database_id)).to be true
       end
     end
@@ -70,7 +73,7 @@ RSpec.describe Scalingo::TokenHolder do
       it "refresh the database token" do
         token_holder.authenticate_database_with_bearer_token(database_id, token, expires_at: 1.hour.ago, raise_on_expired_token: false)
         expect(token_holder.authenticated_for_database?(database_id)).to be false
-        subject()
+        subject
         expect(token_holder.authenticated_for_database?(database_id)).to be true
       end
     end

@@ -189,7 +189,7 @@ RSpec.describe Scalingo::API::Client do
           database_id,
           "1234",
           expires_at: Time.now + 1.hour,
-          raise_on_expired_token: false
+          raise_on_expired_token: false,
         )
         expect(subject.database_connection(database_id).headers["Authorization"]).to eq "Bearer #{subject.token_holder.database_tokens[database_id].value}"
       end
@@ -202,7 +202,7 @@ RSpec.describe Scalingo::API::Client do
           database_id_2,
           "1234",
           expires_at: Time.now + 1.hour,
-          raise_on_expired_token: false
+          raise_on_expired_token: false,
         )
         expect {
           subject.database_connection(database_id)

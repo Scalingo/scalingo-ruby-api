@@ -89,7 +89,7 @@ module Scalingo
         addon_id,
         token,
         expires_at: Time.now + 1.hour,
-        raise_on_expired_token: client.config.raise_on_expired_token
+        raise_on_expired_token: client.config.raise_on_expired_token,
       )
 
       response

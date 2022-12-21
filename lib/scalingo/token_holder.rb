@@ -12,7 +12,7 @@ module Scalingo
     end
 
     def add_database_token(database_id, token)
-      @database_tokens ||= Hash.new
+      @database_tokens ||= {}
       @database_tokens[database_id] = bearer_token(token)
     end
 
