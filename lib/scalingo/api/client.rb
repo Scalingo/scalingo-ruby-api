@@ -75,15 +75,11 @@ module Scalingo
       # this method may return the unauthenticated connection
       # even with `fallback_to_guest: false`
       def connection(fallback_to_guest: false)
-        if fallback_to_guest
-          begin
-            authenticated_connection
-          rescue Error::Unauthenticated
-            unauthenticated_connection
-          end
-        else
-          authenticated_connection
-        end
+        authenticated_connection
+      rescue Error::Unauthenticated
+        raise unless fallback_to_guest
+
+        unauthenticated_connection
       end
 
       def unauthenticated_connection
