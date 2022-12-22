@@ -38,4 +38,21 @@ RSpec.describe Scalingo::RegionalDatabase::Backups do
       it_behaves_like "a client error"
     end
   end
+
+  describe_method "archive" do
+    context "success" do
+      let(:arguments) { [meta[:addon_id], meta[:backup_id]] }
+      let(:stub_pattern) { "archive-200" }
+      let(:expected_keys) { %i[download_url] }
+
+      it_behaves_like "a singular object response"
+    end
+
+    context "failure" do
+      let(:arguments) { [meta[:addon_id], meta[:backup_id]] }
+      let(:stub_pattern) { "archive-400" }
+
+      it_behaves_like "a client error"
+    end
+  end
 end
