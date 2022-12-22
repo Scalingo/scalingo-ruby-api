@@ -16,7 +16,7 @@ module Scalingo
       @database_tokens[database_id] = bearer_token(token)
     end
 
-    def authenticated?(database_id: "")
+    def authenticated?
       valid?(token)
     end
 
