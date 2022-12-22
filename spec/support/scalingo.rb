@@ -6,6 +6,7 @@ module Scalingo
     auth: "https://auth.scalingo.test",
     billing: "https://billing.scalingo.test",
     regional: "https://regional.scalingo.test",
+    regional_database: "https://regional-database.scalingo.test",
   }
 
   class SpecClient < CoreClient
@@ -126,6 +127,7 @@ module Scalingo
     let(:billing_guest) { Scalingo::Billing.new(ENDPOINTS[:billing], scalingo: scalingo_guest) }
     let(:regional) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo: scalingo) }
     let(:regional_guest) { Scalingo::Regional.new(ENDPOINTS[:regional], scalingo: scalingo_guest) }
+    let(:regionaldatabase) { Scalingo::RegionalDatabase.new(ENDPOINTS[:regional_database], scalingo: scalingo) }
     let(:meta) { @meta }
 
     let(:endpoint) do

@@ -75,15 +75,11 @@ module Scalingo
       # this method may return the unauthenticated connection
       # even with `fallback_to_guest: false`
       def connection(fallback_to_guest: false)
-        if fallback_to_guest
-          begin
-            authenticated_connection
-          rescue Error::Unauthenticated
-            unauthenticated_connection
-          end
-        else
-          authenticated_connection
-        end
+        authenticated_connection
+      rescue Error::Unauthenticated
+        raise unless fallback_to_guest
+
+        unauthenticated_connection
       end
 
       def unauthenticated_connection
@@ -113,6 +109,24 @@ module Scalingo
 
           if token_holder.token&.value
             auth_header = Faraday::Request::Authorization.header "Bearer", token_holder.token.value
+            conn.headers[Faraday::Request::Authorization::KEY] = auth_header
+          end
+
+          conn.adapter(config.faraday_adapter) if config.faraday_adapter
+        }
+      end
+
+      def database_connection(database_id)
+        raise Error::Unauthenticated unless token_holder.authenticated_for_database?(database_id)
+
+        @database_connections ||= {}
+        @database_connections[database_id] ||= Faraday.new(connection_options) { |conn|
+          conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
+          conn.request :json
+
+          bearer_token = token_holder.database_tokens[database_id]&.value
+          if bearer_token
+            auth_header = Faraday::Request::Authorization.header "Bearer", bearer_token
             conn.headers[Faraday::Request::Authorization::KEY] = auth_header
           end
 

@@ -170,6 +170,47 @@ RSpec.describe Scalingo::API::Client do
     end
   end
 
+  describe "database_connection" do
+    let(:database_id) { "db-id-1234" }
+
+    context "without bearer token" do
+      let(:scalingo) { scalingo_guest }
+
+      it "raises" do
+        expect {
+          subject.database_connection(database_id)
+        }.to raise_error(Scalingo::Error::Unauthenticated)
+      end
+    end
+
+    context "with bearer token" do
+      it "has an authentication header set with a bearer scheme" do
+        scalingo.authenticate_database_with_bearer_token(
+          database_id,
+          "1234",
+          expires_at: Time.now + 1.hour,
+          raise_on_expired_token: false,
+        )
+        expect(subject.database_connection(database_id).headers["Authorization"]).to eq "Bearer #{subject.token_holder.database_tokens[database_id].value}"
+      end
+    end
+
+    context "with wrong bearer token" do
+      it "raises" do
+        database_id_2 = "db-id-5678"
+        scalingo.authenticate_database_with_bearer_token(
+          database_id_2,
+          "1234",
+          expires_at: Time.now + 1.hour,
+          raise_on_expired_token: false,
+        )
+        expect {
+          subject.database_connection(database_id)
+        }.to raise_error(Scalingo::Error::Unauthenticated)
+      end
+    end
+  end
+
   describe "connection" do
     context "logged" do
       context "no fallback to guest" do

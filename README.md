@@ -5,7 +5,7 @@ A ruby wrapper for the Scalingo API
 ### Migration from v2
 
 This gem is changing its name from `scalingo-ruby-api` to `scalingo`,
-and the versionning does **not** reset; the first major version of `scalingo`
+and the versioning does **not** reset; the first major version of `scalingo`
 will therefore be `3.x.x`.
 
 You can check the version 2 at [the v2 branch of this repository](https://github.com/Scalingo/scalingo-ruby-api/tree/v2)
@@ -143,6 +143,37 @@ scalingo.osc_fr1.apps.all # OR scalingo.region(:osc_fr1).apps.all
 
 # Preview the creation of an app on the default region
 scalingo.apps.create(name: "my-new-app", dry_run: true)
+```
+
+### Interacting with databases
+
+Requests to the [database API](https://developers.scalingo.com/databases/) requires
+extra authentication for each addon you want to interact with. [Addon authentication
+tokens are valid for one hour](https://developers.scalingo.com/addons#get-addon-token).
+
+Supported regions for database API are `db_api_osc_fr1` and `db_api_osc_secnum_fr1`.
+
+```ruby
+require "scalingo"
+
+scalingo = Scalingo::Client.new
+scalingo.authenticate_with(access_token: "my_access_token")
+
+# First, authenticate using the `addons` API
+scalingo.osc_fr1.addons.authenticate!(app_id, addon_id)
+
+# Once authenticated for that specific addon, you can interact with
+# database and backup APIs.
+# IDs of databases are the IDs of the corresponding addons
+
+# get all information for a given database
+scalingo.db_api_osc_fr1.databases.find(addon_id)
+
+# get all backups for a given database
+scalingo.db_api_osc_fr1.backups.for(addon_id)
+
+# get URL to download backup archive
+scalingo.db_api_osc_fr1.backups.archive(addon_id, backup_id)
 ```
 
 ## Development

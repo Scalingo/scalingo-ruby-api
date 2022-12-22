@@ -1,0 +1,24 @@
+{
+  "path": "/databases/ad-5ed10967884fef000f5e4fff/backups/5bb95a904ffb096e9a2831b8/archive",
+  "method": "get",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer the-bearer-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "Fri, 29 May 2020 13:08:59 GMT",
+      "Etag": "W/\"a9504bb2f6f87c65ff68074ae787831e\"",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "json_body": {
+      "download_url": "https://regional-database.scalingo.test/databases/ad-5ed10967884fef000f5e4fff/backups/5bb95a904ffb096e9a2831b8/download?token=token1234"
+    }
+  }
+}
