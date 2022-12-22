@@ -160,7 +160,7 @@ scalingo = Scalingo::Client.new
 scalingo.authenticate_with(access_token: "my_access_token")
 
 # First, authenticate using the `addons` API
-scalingo.osc_fr1.addons.authenticate(app_id, addon_id)
+scalingo.osc_fr1.addons.authenticate!(app_id, addon_id)
 
 # Once authenticated for that specific addon, you can interact with
 # database and backup APIs.

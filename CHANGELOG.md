@@ -1,7 +1,7 @@
 ## Unreleased
 
 * Removal: `Scalingo::Client#agora_fr1` had been removed since the region no longer exists.
-* New: Add `addons#authenticate` endpoint
+* New: Add `addons#authenticate!` endpoint
 * New API: database API
 * New API: backup API
 

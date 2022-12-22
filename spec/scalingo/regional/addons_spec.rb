@@ -115,7 +115,7 @@ RSpec.describe Scalingo::Regional::Addons do
     end
   end
 
-  describe_method "authenticate" do
+  describe_method "authenticate!" do
     context "success" do
       let(:arguments) { [meta[:app_id], meta[:id]] }
       let(:stub_pattern) { "token-200" }

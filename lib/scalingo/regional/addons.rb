@@ -80,7 +80,7 @@ module Scalingo
       unpack(:addon) { response }
     end
 
-    def authenticate(app_id, addon_id, headers = nil, &block)
+    def authenticate!(app_id, addon_id, headers = nil, &block)
       response = token(app_id, addon_id, headers, &block)
       return response unless response.status == 200
 
