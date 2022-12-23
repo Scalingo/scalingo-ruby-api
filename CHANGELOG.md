@@ -1,6 +1,6 @@
 ## Unreleased
 
-## 4.0.0
+## 3.2.0 - 2022-12-23
 
 * Removal: `Scalingo::Client#agora_fr1` had been removed since the region no longer exists.
 * New: Add `addons#authenticate!` endpoint
