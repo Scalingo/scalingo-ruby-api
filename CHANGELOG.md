@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.3.0 - 2023-01-03
+
 * Bugfix: response of Backups#create was not properly unpacked ([#44](https://github.com/Scalingo/scalingo-ruby-api/issues/44))
 * New: Add default region for database API ([#45](https://github.com/Scalingo/scalingo-ruby-api/issues/44))
 
