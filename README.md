@@ -174,6 +174,10 @@ scalingo.db_api_osc_fr1.backups.for(addon_id)
 
 # get URL to download backup archive
 scalingo.db_api_osc_fr1.backups.archive(addon_id, backup_id)
+
+# you can omit the region to use the default one
+scalingo.databases.find(addon_id)
+
 ```
 
 ## Development

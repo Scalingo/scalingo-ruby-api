@@ -41,6 +41,10 @@ module Scalingo
       public_send(name || config.default_region)
     end
 
+    def database_region(name = nil)
+      public_send(name || "db_api_#{config.default_region}")
+    end
+
     ## Authentication helpers / Token management
     def authenticate_with(access_token: nil, bearer_token: nil, expires_at: nil)
       if !access_token && !bearer_token
@@ -102,5 +106,8 @@ module Scalingo
     def_delegator :region, :notifiers
     def_delegator :region, :operations
     def_delegator :region, :scm_repo_links
+
+    def_delegator :database_region, :databases
+    def_delegator :database_region, :backups
   end
 end
