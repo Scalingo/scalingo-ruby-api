@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Bugfix: response of Backups#create was not properly unpacked ([#44](https://github.com/Scalingo/scalingo-ruby-api/issues/44))
+
 ## 3.2.0 - 2022-12-23
 
 * Removal: `Scalingo::Client#agora_fr1` had been removed since the region no longer exists.
