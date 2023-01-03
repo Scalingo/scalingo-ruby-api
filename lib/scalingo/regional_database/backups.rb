@@ -12,7 +12,7 @@ module Scalingo
         &block
       )
 
-      unpack { response }
+      unpack (:database_backup) { response }
     end
 
     def for(addon_id, headers = nil, &block)
