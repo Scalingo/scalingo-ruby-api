@@ -1,6 +1,6 @@
 {
-  "path": "/databases/63bfe3b600deff4f0516cc12",
-  "method": "get",
+  "path": "/databases/63bfe3b600deff4f0516cc12/upgrade",
+  "method": "post",
   "request": {
     "headers": {
       "Authorization": "Bearer the-bearer-token"
