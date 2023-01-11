@@ -191,7 +191,7 @@ bundle
 ### Run tests
 
 ```bash
-bundle exec rake test
+bundle exec rspec
 ```
 
 ### Release a new version
