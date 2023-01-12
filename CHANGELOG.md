@@ -1,5 +1,7 @@
 ## Unreleased
 
+* New: Add support for database API upgrade endpoint ([#51](https://github.com/Scalingo/scalingo-ruby-api/pull/51))
+
 ## 3.3.0 - 2023-01-03
 
 * Bugfix: response of Backups#create was not properly unpacked ([#44](https://github.com/Scalingo/scalingo-ruby-api/issues/44))

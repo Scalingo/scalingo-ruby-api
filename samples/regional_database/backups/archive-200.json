@@ -1,5 +1,5 @@
 {
-  "path": "/databases/ad-5ed10967884fef000f5e4fff/backups/5bb95a904ffb096e9a2831b8/archive",
+  "path": "/databases/63bfe3b600deff4f0516cc12/backups/5bb95a904ffb096e9a2831b8/archive",
   "method": "get",
   "request": {
     "headers": {
@@ -18,7 +18,7 @@
       "Referrer-Policy": "strict-origin-when-cross-origin"
     },
     "json_body": {
-      "download_url": "https://regional-database.scalingo.test/databases/ad-5ed10967884fef000f5e4fff/backups/5bb95a904ffb096e9a2831b8/download?token=token1234"
+      "download_url": "https://regional-database.scalingo.test/databases/63bfe3b600deff4f0516cc12/backups/5bb95a904ffb096e9a2831b8/download?token=token1234"
     }
   }
 }
