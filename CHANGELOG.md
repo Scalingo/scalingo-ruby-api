@@ -1,6 +1,8 @@
 ## Unreleased
 
-* New: Add support for database API upgrade endpoint ([#51](https://github.com/Scalingo/scalingo-ruby-api/pull/51))
+## 3.4.0 - 2023-01-26
+
+* New: Add `databases#upgrade` endpoint for database API ([#51](https://github.com/Scalingo/scalingo-ruby-api/pull/51))
 
 ## 3.3.0 - 2023-01-03
 
