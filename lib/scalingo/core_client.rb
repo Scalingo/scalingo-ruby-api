@@ -1,6 +1,5 @@
 require "forwardable"
 require "faraday"
-require "faraday_middleware"
 require "scalingo/token_holder"
 require "scalingo/errors"
 

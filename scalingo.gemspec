@@ -33,8 +33,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "activesupport", [">= 5", "< 8"]
-  s.add_dependency "faraday", "~> 1.0"
-  s.add_dependency "faraday_middleware", "~> 1.0"
+  s.add_dependency "faraday", "~> 2.0"
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"
 
   s.add_development_dependency "bundler", "~> 2.0"
@@ -43,5 +42,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "standard", "~> 1.32"
   s.add_development_dependency "rubocop-rspec"
   s.add_development_dependency "pry", "~> 0.14.1"
-  s.add_development_dependency "webmock", "~> 3.12.2"
+  s.add_development_dependency "webmock", "~> 3.19"
 end

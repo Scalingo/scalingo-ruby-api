@@ -5,7 +5,7 @@ module Scalingo
     def exchange(token, headers = nil, &block)
       data = nil
 
-      authorization = Faraday::Request::BasicAuthentication.header("", token)
+      authorization = Faraday::Utils.basic_header_from("", token)
 
       request_headers = {
         Faraday::Request::Authorization::KEY => authorization
