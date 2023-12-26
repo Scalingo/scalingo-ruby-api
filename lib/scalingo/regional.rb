@@ -31,7 +31,7 @@ module Scalingo
       metrics: Metrics,
       notifiers: Notifiers,
       operations: Operations,
-      scm_repo_links: ScmRepoLinks,
+      scm_repo_links: ScmRepoLinks
     )
   end
 end

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     "changelog_uri" => "https://github.com/Scalingo/scalingo-ruby-api/blob/master/CHANGELOG.md",
     "documentation_uri" => "https://developers.scalingo.com/",
     "homepage_uri" => "https://www.scalingo.com/",
-    "source_code_uri" => "https://github.com/Scalingo/scalingo-ruby-api",
+    "source_code_uri" => "https://github.com/Scalingo/scalingo-ruby-api"
   }
 
   # Specify which files should be added to the gem when it is released.
@@ -32,8 +32,6 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.test_files = Dir["spec/**/*_spec.rb"]
-
   s.add_dependency "activesupport", [">= 5", "< 8"]
   s.add_dependency "faraday", "~> 1.0"
   s.add_dependency "faraday_middleware", "~> 1.0"
@@ -42,7 +40,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "rspec", "~> 3.0"
-  s.add_development_dependency "standard", "~> 1.1.0"
+  s.add_development_dependency "standard", "~> 1.32"
   s.add_development_dependency "rubocop-rspec"
   s.add_development_dependency "pry", "~> 0.14.1"
   s.add_development_dependency "webmock", "~> 3.12.2"

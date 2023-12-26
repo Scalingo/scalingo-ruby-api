@@ -29,11 +29,11 @@ module Scalingo
 
       def self.register_handler!(method_name, klass)
         define_method(method_name) do
-          value = instance_variable_get("@#{method_name}")
+          value = instance_variable_get(:"@#{method_name}")
 
           if value.nil?
             value = klass.new(self)
-            instance_variable_set("@#{method_name}", value)
+            instance_variable_set(:"@#{method_name}", value)
           end
 
           value
@@ -54,7 +54,7 @@ module Scalingo
       def headers
         hash = {
           "User-Agent" => config.user_agent,
-          "Accept" => "application/json",
+          "Accept" => "application/json"
         }
 
         if (extra = config.additional_headers).present?
@@ -67,7 +67,7 @@ module Scalingo
       def connection_options
         {
           url: url,
-          headers: headers,
+          headers: headers
         }
       end
 

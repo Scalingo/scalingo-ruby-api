@@ -55,7 +55,7 @@ module Scalingo
       BearerToken.new(
         token,
         expires_at: expires_at,
-        raise_on_expired: raise_on_expired_token,
+        raise_on_expired: raise_on_expired_token
       )
     end
   end
