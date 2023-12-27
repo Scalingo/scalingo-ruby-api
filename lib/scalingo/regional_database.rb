@@ -7,7 +7,7 @@ module Scalingo
 
     register_handlers!(
       databases: Databases,
-      backups: Backups,
+      backups: Backups
     )
   end
 end

@@ -164,8 +164,13 @@ RSpec.describe Scalingo::API::Client do
     end
 
     context "with bearer token" do
+      before { stub_request(:any, "localhost") }
+
       it "has an authentication header set with a bearer scheme" do
-        expect(subject.connection.headers["Authorization"]).to eq "Bearer #{subject.token_holder.token.value}"
+        request_headers = subject.connection.get("/").env.request_headers
+        expected = "Bearer #{subject.token_holder.token.value}"
+
+        expect(request_headers["Authorization"]).to eq(expected)
       end
     end
   end
@@ -184,14 +189,20 @@ RSpec.describe Scalingo::API::Client do
     end
 
     context "with bearer token" do
+      before { stub_request(:any, "localhost") }
+
       it "has an authentication header set with a bearer scheme" do
         scalingo.authenticate_database_with_bearer_token(
           database_id,
           "1234",
           expires_at: Time.now + 1.hour,
-          raise_on_expired_token: false,
+          raise_on_expired_token: false
         )
-        expect(subject.database_connection(database_id).headers["Authorization"]).to eq "Bearer #{subject.token_holder.database_tokens[database_id].value}"
+
+        request_headers = subject.database_connection(database_id).get("/").env.request_headers
+        expected = "Bearer #{subject.token_holder.database_tokens[database_id].value}"
+
+        expect(request_headers["Authorization"]).to eq(expected)
       end
     end
 
@@ -202,7 +213,7 @@ RSpec.describe Scalingo::API::Client do
           database_id_2,
           "1234",
           expires_at: Time.now + 1.hour,
-          raise_on_expired_token: false,
+          raise_on_expired_token: false
         )
         expect {
           subject.database_connection(database_id)

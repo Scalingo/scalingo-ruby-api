@@ -13,7 +13,7 @@ module Scalingo
       scm_integrations: ScmIntegrations,
       tokens: Tokens,
       two_factor_auth: TwoFactorAuth,
-      user: User,
+      user: User
     )
 
     alias_method :tfa, :two_factor_auth

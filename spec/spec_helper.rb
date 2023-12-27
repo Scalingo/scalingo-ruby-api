@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "scalingo"
+require "active_support/all"
 
 pattern = File.join(File.expand_path(__dir__), "support", "**", "*.rb")
 

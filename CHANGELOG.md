@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Change: update Faraday to 2.x, released about two years ago. The public API of this gem doesn't change, therefore this is not a major release. However, if you manipulate directly faraday's objects, you may encounter breaking changes. Refer to [Faraday's website](https://lostisland.github.io/faraday/) for how to migrate.
+
 ## 3.4.0 - 2023-01-26
 
 * New: Add `databases#upgrade` endpoint for database API ([#51](https://github.com/Scalingo/scalingo-ruby-api/pull/51))

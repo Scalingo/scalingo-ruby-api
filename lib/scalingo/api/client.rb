@@ -29,11 +29,11 @@ module Scalingo
 
       def self.register_handler!(method_name, klass)
         define_method(method_name) do
-          value = instance_variable_get("@#{method_name}")
+          value = instance_variable_get(:"@#{method_name}")
 
           if value.nil?
             value = klass.new(self)
-            instance_variable_set("@#{method_name}", value)
+            instance_variable_set(:"@#{method_name}", value)
           end
 
           value
@@ -54,7 +54,7 @@ module Scalingo
       def headers
         hash = {
           "User-Agent" => config.user_agent,
-          "Accept" => "application/json",
+          "Accept" => "application/json"
         }
 
         if (extra = config.additional_headers).present?
@@ -67,7 +67,7 @@ module Scalingo
       def connection_options
         {
           url: url,
-          headers: headers,
+          headers: headers
         }
       end
 
@@ -106,11 +106,7 @@ module Scalingo
         @connection = Faraday.new(connection_options) { |conn|
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
-
-          if token_holder.token&.value
-            auth_header = Faraday::Request::Authorization.header "Bearer", token_holder.token.value
-            conn.headers[Faraday::Request::Authorization::KEY] = auth_header
-          end
+          conn.request :authorization, "Bearer", -> { token_holder.token&.value }
 
           conn.adapter(config.faraday_adapter) if config.faraday_adapter
         }
@@ -123,12 +119,7 @@ module Scalingo
         @database_connections[database_id] ||= Faraday.new(connection_options) { |conn|
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
-
-          bearer_token = token_holder.database_tokens[database_id]&.value
-          if bearer_token
-            auth_header = Faraday::Request::Authorization.header "Bearer", bearer_token
-            conn.headers[Faraday::Request::Authorization::KEY] = auth_header
-          end
+          conn.request :authorization, "Bearer", -> { token_holder.database_tokens[database_id]&.value }
 
           conn.adapter(config.faraday_adapter) if config.faraday_adapter
         }

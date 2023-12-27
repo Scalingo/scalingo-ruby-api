@@ -37,7 +37,7 @@ module Scalingo
       :additional_headers,
 
       # Specify an adapter for faraday. Leave nil for the default one (Net::HTTP)
-      :faraday_adapter,
+      :faraday_adapter
     ]
 
     ATTRIBUTES.each { |attr| attr_accessor(attr) }
@@ -49,13 +49,13 @@ module Scalingo
         exchanged_token_validity: 1.hour,
         raise_on_missing_authentication: true,
         raise_on_expired_token: false,
-        additional_headers: {},
+        additional_headers: {}
       )
     end
 
     def initialize(attributes = {}, parent = nil)
       ATTRIBUTES.each do |name|
-        public_send("#{name}=", attributes.fetch(name, parent&.public_send(name)))
+        public_send(:"#{name}=", attributes.fetch(name, parent&.public_send(name)))
       end
     end
   end

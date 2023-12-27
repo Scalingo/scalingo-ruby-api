@@ -6,7 +6,7 @@ module Scalingo
     auth: "https://auth.scalingo.test",
     billing: "https://billing.scalingo.test",
     regional: "https://regional.scalingo.test",
-    regional_database: "https://regional-database.scalingo.test",
+    regional_database: "https://regional-database.scalingo.test"
   }
 
   class SpecClient < CoreClient
@@ -59,8 +59,7 @@ module Scalingo
         url = stub_data[:url] || File.join(endpoint, stub_data[:path])
         method = (stub_data[:method] || :get).to_sym
 
-        request_options = {
-        }
+        request_options = {}
 
         if stub_data[:request].present?
           req = stub_data[:request]
@@ -79,7 +78,7 @@ module Scalingo
 
         response_options = {
           status: stub_data.dig(:response, :status) || 200,
-          headers: {},
+          headers: {}
         }
 
         if stub_data.dig(:response, :json_body).present?
@@ -142,7 +141,7 @@ module Scalingo
       if described_class < Scalingo::API::Endpoint
         api = described_class.to_s.split("::")[-2].downcase
 
-        described_class.new(send("#{api}_guest"))
+        described_class.new(send(:"#{api}_guest"))
       end
     end
 

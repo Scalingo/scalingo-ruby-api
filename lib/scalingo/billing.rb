@@ -5,7 +5,7 @@ module Scalingo
     require "scalingo/billing/profile"
 
     register_handlers!(
-      profile: Profile,
+      profile: Profile
     )
   end
 end

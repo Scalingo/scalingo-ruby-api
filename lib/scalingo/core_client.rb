@@ -1,6 +1,5 @@
 require "forwardable"
 require "faraday"
-require "faraday_middleware"
 require "scalingo/token_holder"
 require "scalingo/errors"
 
@@ -67,7 +66,7 @@ module Scalingo
           self.token = BearerToken.new(
             response.data[:token],
             expires_at: expiration,
-            raise_on_expired: config.raise_on_expired_token,
+            raise_on_expired: config.raise_on_expired_token
           )
         end
 
@@ -78,7 +77,7 @@ module Scalingo
         authenticate_with_bearer_token(
           bearer_token,
           expires_at: expires_at,
-          raise_on_expired_token: config.raise_on_expired_token,
+          raise_on_expired_token: config.raise_on_expired_token
         )
 
         true

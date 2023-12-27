@@ -15,7 +15,7 @@ RSpec.describe Scalingo::API::Response do
       headers: headers,
       data: data,
       full_body: full_body,
-      meta: meta_object,
+      meta: meta_object
     )
   }
 
@@ -28,7 +28,7 @@ RSpec.describe Scalingo::API::Response do
         body: body,
         status: status,
         headers: headers,
-        success?: success,
+        success?: success
       )
     }
 
