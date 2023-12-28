@@ -1,6 +1,10 @@
 ## Unreleased
 
+## 3.5.0 - 2023-12-28
+
 * Change: update Faraday to 2.x, released about two years ago. The public API of this gem doesn't change, therefore this is not a major release. However, if you manipulate directly faraday's objects, you may encounter breaking changes. Refer to [Faraday's website](https://lostisland.github.io/faraday/) for how to migrate.
+* Compat: drop support for Ruby < 3. The lib is still expected to work for the time being.
+* Compat: include Ruby 3.3 in the test matrix
 
 ## 3.4.0 - 2023-01-26
 
