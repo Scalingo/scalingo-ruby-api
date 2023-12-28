@@ -2,7 +2,7 @@ RSpec.shared_examples "a successful response" do |code = 200|
   let(:expected_code) { code }
   let(:custom_headers) { {"X-Custom-Header" => "custom"} }
 
-  it "should be successful" do
+  it "is successful" do
     expect(response).to be_successful
     expect(response.status).to eq code
   end
@@ -66,7 +66,7 @@ RSpec.shared_examples "a singular object response" do |code = 200|
   let(:expected_type) { Object } unless method_defined?(:expected_type)
   let(:expected_keys) { %i[id] } unless method_defined?(:expected_keys)
 
-  it "should be an object of the expected type (and if applicable, the expected keys)" do
+  it "is an object of the expected type (and if applicable, the expected keys)" do
     expect(response.data).to be_a_kind_of(expected_type)
 
     if response.data.respond_to?(:key?)
@@ -80,7 +80,7 @@ end
 RSpec.shared_examples "an empty response" do |code = 204|
   it_behaves_like "a successful response", code
 
-  it "should be empty" do
+  it "is empty" do
     expect(response.data).to eq("")
   end
 end
@@ -92,15 +92,15 @@ RSpec.shared_examples "a collection response" do |code = 200|
   let(:expected_type) { Object } unless method_defined?(:expected_type)
   let(:expected_keys) { %i[id] } unless method_defined?(:expected_keys)
 
-  it "should be an array" do
+  it "is an array" do
     expect(response.data).to be_a_kind_of(Array)
   end
 
-  it "should have the number of expected elements" do
+  it "contains the number of expected elements" do
     expect(response.data.size).to eq(expected_count)
   end
 
-  it "items should be of the expected type (and if applicable, the expected keys)" do
+  it "items are of the expected type (and if applicable, the expected keys)" do
     response.data.each do |item|
       expect(item).to be_a_kind_of(expected_type)
 
@@ -114,16 +114,13 @@ RSpec.shared_examples "a collection response" do |code = 200|
 end
 
 RSpec.shared_examples "a paginated collection" do |code = 200|
-  it "should be paginated" do
+  it "is paginated" do
     expect(response).to be_paginated
   end
 end
 
 RSpec.shared_examples "a non-paginated collection" do |code = 200|
-  it "should not be paginated" do
+  it "is not paginated" do
     expect(response).not_to be_paginated
   end
-end
-
-RSpec.shared_examples "a method with a configurable request" do
 end
