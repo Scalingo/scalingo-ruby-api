@@ -18,6 +18,7 @@ jobs:
       with:
         ruby-version: "3.1"
         bundler-cache: true
+        rubygems: "latest"
     - name: Publish to RubyGems
       run: |
         mkdir -p $HOME/.gem
