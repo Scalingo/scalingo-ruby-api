@@ -7,14 +7,16 @@ on:
 
 jobs:
   build:
+    name: Build + Publish
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0
+        ruby-version: 3.1
         bundler-cache: true
     - name: Publish to RubyGems
       run: |
