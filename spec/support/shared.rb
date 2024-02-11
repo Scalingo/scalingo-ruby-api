@@ -1,6 +1,5 @@
 RSpec.shared_examples "a successful response" do |code = 200|
   let(:expected_code) { code }
-  let(:custom_headers) { {"X-Custom-Header" => "custom"} }
 
   it "is successful" do
     expect(response).to be_success
@@ -10,25 +9,19 @@ RSpec.shared_examples "a successful response" do |code = 200|
   # Checking that the method accepts a block and passes the faraday object
   it "can configure the request via a block" do
     expect { |block|
+      args = [method_name]
+
+      # A few methods use positional arguments
       if arguments.is_a?(Array)
-        subject.public_send(*[method_name, *arguments].compact, &block)
-      else
-        subject.public_send(*[method_name, arguments].compact, &block)
+        args += arguments
+      elsif arguments
+        args << arguments
       end
-    }.to yield_with_args(Faraday::Request)
-  end
 
-  # Leverages the block version to check that the headers can also be set with an argument
-  it "can configure headers via the last argument" do
-    checker = proc { |conn|
-      expect(conn.headers["X-Custom-Header"]).to eq "custom"
-    }
+      args.compact!
 
-    if arguments.is_a?(Array)
-      subject.public_send(*[method_name, *arguments, custom_headers].compact, &checker)
-    else
-      subject.public_send(*[method_name, arguments, custom_headers].compact, &checker)
-    end
+      subject.public_send(*args, **params, body: body, &block)
+    }.to yield_with_args(Faraday::Request, Hash)
   end
 end
 

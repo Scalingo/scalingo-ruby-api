@@ -99,16 +99,27 @@ module Scalingo
         raise NameError, "No method named `#{method_name}` for class #{described_class}"
       end
 
+      # Helper method to quickly define a context for a method with default let values
       context(method_name) do
         let(:method_name) { method_name }
+        let(:basic) { nil }
+        let(:params) { {} }
+        let(:body) { nil }
         let(:arguments) { nil }
 
         let(:response) {
+          args = [method_name]
+
+          # A few methods use positional arguments
           if arguments.is_a?(Array)
-            subject.public_send(*[method_name, *arguments].compact)
-          else
-            subject.public_send(*[method_name, arguments].compact)
+            args += arguments
+          elsif arguments
+            args << arguments
           end
+
+          args.compact!
+
+          subject.public_send(*args, body: body, basic: basic, **params)
         }
 
         instance_exec(&block)
