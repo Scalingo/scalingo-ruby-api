@@ -45,6 +45,7 @@ RSpec.describe Scalingo::Regional::Addons do
     context "success" do
       let(:arguments) { [meta[:app_id], meta[:provision][:valid]] }
       let(:stub_pattern) { "provision-201" }
+      let(:expected_keys) { %i[addon message] }
 
       it_behaves_like "a singular object response", 201
     end
@@ -139,6 +140,7 @@ RSpec.describe Scalingo::Regional::Addons do
     context "success" do
       let(:arguments) { [meta[:app_id], meta[:id], meta[:update][:valid]] }
       let(:stub_pattern) { "update-200" }
+      let(:expected_keys) { %i[addon message] }
 
       it_behaves_like "a singular object response"
     end

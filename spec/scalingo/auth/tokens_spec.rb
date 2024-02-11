@@ -9,8 +9,8 @@ RSpec.describe Scalingo::Auth::Tokens do
       let(:stub_pattern) { "exchange-200" }
 
       it "is successful" do
-        expect(response).to be_successful
-        expect(response.data[:token]).to be_present
+        expect(response).to be_success
+        expect(response.body).to be_present
       end
     end
 

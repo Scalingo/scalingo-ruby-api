@@ -33,7 +33,7 @@ RSpec.describe Scalingo::Regional::Logs do
       let(:stub_pattern) { "archives-200" }
 
       it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
+      it_behaves_like "a cursor paginated collection"
     end
   end
 end

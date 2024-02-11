@@ -52,7 +52,7 @@ RSpec.describe Scalingo::Client do
       it "is successful with valid token" do
         fake_response = OpenStruct.new(
           successful?: true,
-          data: {token: "response token"}
+          data: "response token"
         )
 
         expect(subject.auth.tokens).to receive(:exchange).and_return(fake_response)

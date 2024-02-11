@@ -32,30 +32,30 @@ RSpec.shared_examples "a successful response" do |code = 200|
   end
 end
 
-RSpec.shared_examples "a not found response" do
-  it "cannot be found" do
-    expect(response).not_to be_successful
-    expect(response.status).to eq 404
-  end
-end
-
 RSpec.shared_examples "a client error" do
   it "is a generic client error" do
-    expect(response).not_to be_successful
+    expect(response).to be_client_error
     expect(response.status).to eq 400
   end
 end
 
 RSpec.shared_examples "a server error" do
   it "is a generic server error" do
-    expect(response).not_to be_successful
+    expect(response).to be_server_error
     expect(response.status).to eq 500
+  end
+end
+
+RSpec.shared_examples "a not found response" do
+  it "cannot be found" do
+    expect(response).to be_client_error
+    expect(response.status).to eq 404
   end
 end
 
 RSpec.shared_examples "an unprocessable request" do
   it "cannot be found" do
-    expect(response).not_to be_successful
+    expect(response).to be_client_error
     expect(response.status).to eq 422
   end
 end
@@ -116,6 +116,12 @@ end
 RSpec.shared_examples "a paginated collection" do |code = 200|
   it "is paginated" do
     expect(response).to be_paginated
+  end
+end
+
+RSpec.shared_examples "a cursor paginated collection" do |code = 200|
+  it "is cursor paginated" do
+    expect(response).to be_cursor_paginated
   end
 end
 
