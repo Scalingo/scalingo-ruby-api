@@ -9,20 +9,21 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
 
   describe_method "initiate" do
     context "success" do
-      let(:arguments) { Scalingo::Auth::TwoFactorAuth::DEFAULT_PROVIDER }
+      let(:body) { meta[:initiate][:valid] }
       let(:stub_pattern) { "initiate-success" }
 
       it_behaves_like "a singular object response", 201
     end
 
     context "wrong provider" do
-      let(:arguments) { meta[:initiate][:invalid] }
+      let(:body) { meta[:initiate][:invalid] }
       let(:stub_pattern) { "initiate-wrong-provider" }
 
       it_behaves_like "a client error"
     end
 
     context "already enabled" do
+      let(:body) { meta[:initiate][:valid] }
       let(:stub_pattern) { "initiate-already-enabled" }
 
       it_behaves_like "a client error"
@@ -31,7 +32,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
 
   describe_method "validate" do
     context "success" do
-      let(:arguments) { meta[:validate][:valid] }
+      let(:body) { meta[:validate][:valid] }
       let(:stub_pattern) { "validate-success" }
       let(:expected_keys) { %i[codes user] }
 
@@ -39,14 +40,14 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth do
     end
 
     context "wrong provider" do
-      let(:arguments) { meta[:validate][:invalid] }
+      let(:body) { meta[:validate][:invalid] }
       let(:stub_pattern) { "validate-wrong" }
 
       it_behaves_like "a client error"
     end
 
     context "already enabled" do
-      let(:arguments) { meta[:validate][:invalid] }
+      let(:body) { meta[:validate][:invalid] }
       let(:stub_pattern) { "validate-not-initiated" }
 
       it_behaves_like "a client error"

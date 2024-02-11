@@ -60,7 +60,7 @@ module Scalingo
 
       if access_token
         expiration = Time.now + config.exchanged_token_validity
-        response = auth.tokens.exchange(access_token)
+        response = auth.tokens.exchange(basic: {password: access_token})
 
         if response.success?
           self.token = BearerToken.new(

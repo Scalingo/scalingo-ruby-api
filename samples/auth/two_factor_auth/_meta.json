@@ -1,10 +1,11 @@
 {
   "attempt": null,
   "initiate": {
-    "invalid": "wrong-provider"
+    "valid": {"provider": "totp"},
+    "invalid": {"provider": "wrong-provider"}
   },
   "validate": {
-    "valid": "975037",
-    "invalid": "wrong-attempt"
+    "valid": {"attempt": "975037"},
+    "invalid": {"attempt": "wrong-attempt"}
   }
 }
