@@ -3,7 +3,7 @@ RSpec.shared_examples "a successful response" do |code = 200|
   let(:custom_headers) { {"X-Custom-Header" => "custom"} }
 
   it "is successful" do
-    expect(response).to be_successful
+    expect(response).to be_success
     expect(response.status).to eq code
   end
 
@@ -67,11 +67,11 @@ RSpec.shared_examples "a singular object response" do |code = 200|
   let(:expected_keys) { %i[id] } unless method_defined?(:expected_keys)
 
   it "is an object of the expected type (and if applicable, the expected keys)" do
-    expect(response.data).to be_a_kind_of(expected_type)
+    expect(response.body).to be_a_kind_of(expected_type)
 
-    if response.data.respond_to?(:key?)
+    if response.body.respond_to?(:key?)
       expected_keys.each do |key|
-        expect(response.data.key?(key)).to be true
+        expect(response.body.key?(key)).to be true
       end
     end
   end
@@ -81,7 +81,7 @@ RSpec.shared_examples "an empty response" do |code = 204|
   it_behaves_like "a successful response", code
 
   it "is empty" do
-    expect(response.data).to eq("")
+    expect(response.body).to eq("")
   end
 end
 
@@ -93,15 +93,15 @@ RSpec.shared_examples "a collection response" do |code = 200|
   let(:expected_keys) { %i[id] } unless method_defined?(:expected_keys)
 
   it "is an array" do
-    expect(response.data).to be_a_kind_of(Array)
+    expect(response.body).to be_a_kind_of(Array)
   end
 
   it "contains the number of expected elements" do
-    expect(response.data.size).to eq(expected_count)
+    expect(response.body.size).to eq(expected_count)
   end
 
   it "items are of the expected type (and if applicable, the expected keys)" do
-    response.data.each do |item|
+    response.body.each do |item|
       expect(item).to be_a_kind_of(expected_type)
 
       if item.respond_to?(:key?)

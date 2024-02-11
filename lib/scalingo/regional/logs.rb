@@ -26,9 +26,9 @@ module Scalingo
     def for(app_id, payload = {}, headers = nil, &block)
       logs_response = scalingo.apps.logs_url(app_id)
 
-      return logs_response unless logs_response.successful?
+      return logs_response unless logs_response.success?
 
-      get(logs_response.data, payload, headers, &block)
+      get(logs_response.body, payload, headers, &block)
     end
   end
 end

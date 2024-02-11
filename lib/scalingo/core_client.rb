@@ -62,15 +62,15 @@ module Scalingo
         expiration = Time.now + config.exchanged_token_validity
         response = auth.tokens.exchange(access_token)
 
-        if response.successful?
+        if response.success?
           self.token = BearerToken.new(
-            response.data,
+            response.body,
             expires_at: expiration,
             raise_on_expired: config.raise_on_expired_token
           )
         end
 
-        return response.successful?
+        return response.success?
       end
 
       if bearer_token

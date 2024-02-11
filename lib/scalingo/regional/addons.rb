@@ -72,7 +72,7 @@ module Scalingo
       response = token(app_id, addon_id, headers, &block)
       return response unless response.status == 200
 
-      token = response.data[:token]
+      token = response.body[:token]
       client.token_holder.authenticate_database_with_bearer_token(
         addon_id,
         token,
