@@ -3,10 +3,20 @@
 require "bundler/setup"
 require "scalingo"
 
+begin
+  require "dotenv"
+  Dotenv.load(".env.local")
+rescue LoadError
+  puts("dotenv not available - no .env.local loading")
+end
+
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require "pry"
 
-Pry.start
+client = Scalingo::Client.new
+client.authenticate_with(access_token: ENV["SCALINGO_API_TOKEN"]) if ENV["SCALINGO_API_TOKEN"].present?
+
+Pry.start(binding, quiet: true)
