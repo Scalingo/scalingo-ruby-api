@@ -17,6 +17,8 @@
     }
   },
   "deploy": {
-    "valid": "master"
+    "valid": {
+      "branch": "master"
+    }
   }
 }

@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Domains do
   describe_method "for" do
     context "success" do
-      let(:arguments) { meta[:app_id] }
+      let(:params) { meta.slice(:app_id) }
       let(:stub_pattern) { "for-200" }
 
       it_behaves_like "a collection response"
@@ -13,14 +13,14 @@ RSpec.describe Scalingo::Regional::Domains do
 
   describe_method "find" do
     context "success" do
-      let(:arguments) { [meta[:app_id], meta[:id]] }
+      let(:params) { meta.slice(:app_id, :id) }
       let(:stub_pattern) { "find-200" }
 
       it_behaves_like "a singular object response"
     end
 
     context "not found" do
-      let(:arguments) { [meta[:app_id], meta[:not_found_id]] }
+      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
       let(:stub_pattern) { "find-404" }
 
       it_behaves_like "a not found response"
@@ -29,14 +29,16 @@ RSpec.describe Scalingo::Regional::Domains do
 
   describe_method "create" do
     context "success" do
-      let(:arguments) { [meta[:app_id], meta[:create][:valid]] }
+      let(:params) { meta.slice(:app_id) }
+      let(:body) { meta[:create][:valid] }
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a singular object response", 201
     end
 
     context "failure" do
-      let(:arguments) { [meta[:app_id], meta[:create][:invalid]] }
+      let(:params) { meta.slice(:app_id) }
+      let(:body) { meta[:create][:invalid] }
       let(:stub_pattern) { "create-422" }
 
       it_behaves_like "an unprocessable request"
@@ -45,21 +47,24 @@ RSpec.describe Scalingo::Regional::Domains do
 
   describe_method "update" do
     context "success" do
-      let(:arguments) { [meta[:app_id], meta[:id], meta[:update][:valid]] }
+      let(:params) { meta.slice(:app_id, :id) }
+      let(:body) { meta[:update][:valid] }
       let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a singular object response"
     end
 
     context "not found" do
-      let(:arguments) { [meta[:app_id], meta[:not_found_id], meta[:update][:valid]] }
+      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
+      let(:body) { meta[:update][:valid] }
       let(:stub_pattern) { "update-404" }
 
       it_behaves_like "a not found response"
     end
 
     context "failure" do
-      let(:arguments) { [meta[:app_id], meta[:id], meta[:update][:invalid]] }
+      let(:params) { meta.slice(:app_id, :id) }
+      let(:body) { meta[:update][:invalid] }
       let(:stub_pattern) { "update-422" }
 
       it_behaves_like "an unprocessable request"
@@ -68,14 +73,14 @@ RSpec.describe Scalingo::Regional::Domains do
 
   describe_method "destroy" do
     context "success" do
-      let(:arguments) { [meta[:app_id], meta[:id]] }
+      let(:params) { meta.slice(:app_id, :id) }
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "an empty response"
     end
 
     context "not found" do
-      let(:arguments) { [meta[:app_id], meta[:not_found_id]] }
+      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
       let(:stub_pattern) { "destroy-404" }
 
       it_behaves_like "a not found response"

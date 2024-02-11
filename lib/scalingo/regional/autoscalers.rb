@@ -2,59 +2,10 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class Regional::Autoscalers < API::Endpoint
-    def for(app_id, headers = nil, &block)
-      data = nil
-
-      connection.get(
-        "apps/#{app_id}/autoscalers",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def find(app_id, autoscaler_id, headers = nil, &block)
-      data = nil
-
-      connection.get(
-        "apps/#{app_id}/autoscalers/#{autoscaler_id}",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def create(app_id, payload = {}, headers = nil, &block)
-      data = {autoscaler: payload}
-
-      connection.post(
-        "apps/#{app_id}/autoscalers",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def update(app_id, autoscaler_id, payload = {}, headers = nil, &block)
-      data = {autoscaler: payload}
-
-      connection.patch(
-        "apps/#{app_id}/autoscalers/#{autoscaler_id}",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def destroy(app_id, autoscaler_id, headers = nil, &block)
-      data = nil
-
-      connection.delete(
-        "apps/#{app_id}/autoscalers/#{autoscaler_id}",
-        data,
-        headers,
-        &block
-      )
-    end
+    get :for, "apps/{app_id}/autoscalers"
+    get :find, "apps/{app_id}/autoscalers/{id}"
+    post :create, "apps/{app_id}/autoscalers", root_key: :autoscaler
+    patch :update, "apps/{app_id}/autoscalers/{id}", root_key: :autoscaler
+    delete :destroy, "apps/{app_id}/autoscalers/{id}"
   end
 end
