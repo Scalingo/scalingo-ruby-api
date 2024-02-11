@@ -1,5 +1,6 @@
 require "scalingo/token_holder"
 require "scalingo/faraday/response"
+require "scalingo/faraday/unpack_middleware"
 require "active_support/core_ext/hash"
 
 module Scalingo
@@ -86,6 +87,7 @@ module Scalingo
 
       def unauthenticated_connection
         @unauthenticated_conn ||= Faraday.new(connection_options) { |conn|
+          conn.response :unpack
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
 
@@ -106,6 +108,7 @@ module Scalingo
         end
 
         @connection = Faraday.new(connection_options) { |conn|
+          conn.response :unpack
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
           conn.request :authorization, "Bearer", -> { token_holder.token&.value }
@@ -119,6 +122,7 @@ module Scalingo
 
         @database_connections ||= {}
         @database_connections[database_id] ||= Faraday.new(connection_options) { |conn|
+          conn.response :unpack
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
           conn.request :authorization, "Bearer", -> { token_holder.database_tokens[database_id]&.value }

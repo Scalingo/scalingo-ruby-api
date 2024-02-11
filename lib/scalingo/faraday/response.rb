@@ -25,5 +25,33 @@ module Faraday
     def error?
       !success?
     end
+
+    def meta
+      env[:response_meta]
+    end
+
+    def meta?
+      meta.present?
+    end
+
+    def pagination
+      return unless meta?
+
+      meta[:pagination]
+    end
+
+    def paginated?
+      pagination.present?
+    end
+
+    def cursor_pagination
+      return unless meta?
+
+      meta[:cursor_pagination]
+    end
+
+    def cursor_paginated?
+      cursor_pagination.present?
+    end
   end
 end
