@@ -1,7 +1,8 @@
 require "faraday"
 require "faraday/response"
 
-# Some additional methods for Faraday::Response in order to enhance expressiveness
+# Note: the file is scalingo/faraday/response but we're reopning Faraday::Response:
+# we define additional methods for Faraday::Response in order to enhance expressiveness
 module Faraday
   class Response
     def client_error?
