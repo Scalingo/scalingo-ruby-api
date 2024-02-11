@@ -1,4 +1,6 @@
 require "scalingo/token_holder"
+require "scalingo/faraday/response"
+require "active_support/core_ext/hash"
 
 module Scalingo
   module API
