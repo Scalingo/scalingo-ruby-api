@@ -3,27 +3,23 @@ module Scalingo
     def get(url, payload = {}, headers = nil, &block)
       data = payload.compact
 
-      response = connection(fallback_to_guest: true).get(
+      connection(fallback_to_guest: true).get(
         url,
         data,
         headers,
         &block
       )
-
-      unpack { response }
     end
 
     def archives(app_id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "apps/#{app_id}/logs_archives",
         data,
         headers,
         &block
       )
-
-      unpack(:archives) { response }
     end
 
     ## Helper method to avoid having to manually chain two operations

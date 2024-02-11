@@ -64,7 +64,7 @@ module Scalingo
 
         if response.successful?
           self.token = BearerToken.new(
-            response.data[:token],
+            response.data,
             expires_at: expiration,
             raise_on_expired: config.raise_on_expired_token
           )

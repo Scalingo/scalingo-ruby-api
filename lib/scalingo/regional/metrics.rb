@@ -16,27 +16,23 @@ module Scalingo
         url = "#{url}/#{payload[:container_index]}" if payload[:container_index]
       end
 
-      response = connection.get(
+      connection.get(
         url,
         data,
         headers,
         &block
       )
-
-      unpack { response }
     end
 
     def types(headers = nil, &block)
       data = nil
 
-      response = connection(fallback_to_guest: true).get(
+      connection(fallback_to_guest: true).get(
         "features/metrics",
         data,
         headers,
         &block
       )
-
-      unpack(:metrics) { response }
     end
   end
 end

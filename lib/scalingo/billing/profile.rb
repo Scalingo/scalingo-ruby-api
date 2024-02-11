@@ -5,40 +5,34 @@ module Scalingo
     def show(headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "profile",
         data,
         headers,
         &block
       )
-
-      unpack(:profile) { response }
     end
 
     def create(payload = {}, headers = nil, &block)
       data = {profile: payload}
 
-      response = connection.post(
+      connection.post(
         "profiles",
         data,
         headers,
         &block
       )
-
-      unpack(:profile) { response }
     end
 
     def update(id, payload = {}, headers = nil, &block)
       data = {profile: payload}
 
-      response = connection.put(
+      connection.put(
         "profiles/#{id}",
         data,
         headers,
         &block
       )
-
-      unpack(:profile) { response }
     end
 
     alias_method :self, :show

@@ -9,53 +9,45 @@ module Scalingo
     def status(headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "client/tfa",
         data,
         headers,
         &block
       )
-
-      unpack(:tfa) { response }
     end
 
     def initiate(provider = DEFAULT_PROVIDER, headers = nil, &block)
       data = {tfa: {provider: provider}}
 
-      response = connection.post(
+      connection.post(
         "client/tfa",
         data,
         headers,
         &block
       )
-
-      unpack(:tfa) { response }
     end
 
     def validate(attempt, headers = nil, &block)
       data = {tfa: {attempt: attempt}}
 
-      response = connection.post(
+      connection.post(
         "client/tfa/validate",
         data,
         headers,
         &block
       )
-
-      unpack(:tfa) { response }
     end
 
     def disable(headers = nil, &block)
       data = nil
 
-      response = connection.delete(
+      connection.delete(
         "client/tfa",
         data,
         headers,
         &block
       )
-
-      unpack(:tfa) { response }
     end
   end
 end
