@@ -17,7 +17,7 @@ RSpec.describe Scalingo::Billing::Profile do
 
   describe_method "create" do
     context "success" do
-      let(:arguments) { meta[:create][:valid] }
+      let(:body) { meta[:create][:valid] }
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a singular object response", 201
@@ -30,7 +30,7 @@ RSpec.describe Scalingo::Billing::Profile do
     end
 
     context "unprocessable" do
-      let(:arguments) { meta[:create][:invalid] }
+      let(:body) { meta[:create][:invalid] }
       let(:stub_pattern) { "create-422" }
 
       it_behaves_like "an unprocessable request"
@@ -39,14 +39,16 @@ RSpec.describe Scalingo::Billing::Profile do
 
   describe_method "update" do
     context "success" do
-      let(:arguments) { [meta[:id], meta[:update][:valid]] }
+      let(:params) { {id: meta[:id]} }
+      let(:body) { meta[:update][:valid] }
       let(:stub_pattern) { "update-200" }
 
       it_behaves_like "a singular object response"
     end
 
     context "unprocessable" do
-      let(:arguments) { [meta[:id], meta[:update][:invalid]] }
+      let(:params) { {id: meta[:id]} }
+      let(:body) { meta[:update][:invalid] }
       let(:stub_pattern) { "update-422" }
 
       it_behaves_like "an unprocessable request"
