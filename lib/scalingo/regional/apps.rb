@@ -5,27 +5,23 @@ module Scalingo
     def all(headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "apps",
         data,
         headers,
         &block
       )
-
-      unpack(:apps) { response }
     end
 
     def find(id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "apps/#{id}",
         data,
         headers,
         &block
       )
-
-      unpack(:app) { response }
     end
 
     def create(payload = {}, headers = nil, &block)
@@ -37,73 +33,61 @@ module Scalingo
       request_headers["X-Dry-Run"] = "true" if dry_run
       request_headers.update(headers) if headers
 
-      response = connection.post(
+      connection.post(
         "apps",
         data,
         request_headers,
         &block
       )
-
-      unpack(:app) { response }
     end
 
     def update(id, payload = {}, headers = nil, &block)
       data = {app: payload}
 
-      response = connection.patch(
+      connection.patch(
         "apps/#{id}",
         data,
         headers,
         &block
       )
-
-      unpack(:app) { response }
     end
 
     def logs_url(id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "apps/#{id}/logs",
         data,
         headers,
         &block
       )
-
-      unpack(:logs_url) { response }
     end
 
     def destroy(id, payload = {}, headers = nil, &block)
-      response = connection.delete(
+      connection.delete(
         "apps/#{id}",
         payload,
         headers,
         &block
       )
-
-      unpack { response }
     end
 
     def rename(id, payload = {}, headers = nil, &block)
-      response = connection.post(
+      connection.post(
         "apps/#{id}/rename",
         payload,
         headers,
         &block
       )
-
-      unpack(:app) { response }
     end
 
     def transfer(id, payload = {}, headers = nil, &block)
-      response = connection.patch(
+      connection.patch(
         "apps/#{id}",
         payload,
         headers,
         &block
       )
-
-      unpack(:app) { response }
     end
   end
 end

@@ -1,5 +1,4 @@
 require "forwardable"
-require "scalingo/api/response"
 
 module Scalingo
   module API
@@ -22,12 +21,6 @@ module Scalingo
         str << methods.to_s
         str << ">"
         str
-      end
-
-      private
-
-      def unpack(*keys, &block)
-        Response.unpack(client, keys: keys, &block)
       end
     end
   end

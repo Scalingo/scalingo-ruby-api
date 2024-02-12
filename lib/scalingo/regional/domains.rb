@@ -5,66 +5,56 @@ module Scalingo
     def for(app_id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "apps/#{app_id}/domains",
         data,
         headers,
         &block
       )
-
-      unpack(:domains) { response }
     end
 
     def find(app_id, domain_id, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         "apps/#{app_id}/domains/#{domain_id}",
         data,
         headers,
         &block
       )
-
-      unpack(:domain) { response }
     end
 
     def create(app_id, payload = {}, headers = nil, &block)
       data = {domain: payload}
 
-      response = connection.post(
+      connection.post(
         "apps/#{app_id}/domains",
         data,
         headers,
         &block
       )
-
-      unpack(:domain) { response }
     end
 
     def update(app_id, domain_id, payload = {}, headers = nil, &block)
       data = {domain: payload}
 
-      response = connection.patch(
+      connection.patch(
         "apps/#{app_id}/domains/#{domain_id}",
         data,
         headers,
         &block
       )
-
-      unpack(:domain) { response }
     end
 
     def destroy(app_id, domain_id, headers = nil, &block)
       data = nil
 
-      response = connection.delete(
+      connection.delete(
         "apps/#{app_id}/domains/#{domain_id}",
         data,
         headers,
         &block
       )
-
-      unpack { response }
     end
   end
 end

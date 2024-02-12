@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"
 
   s.add_development_dependency "bundler", "~> 2.0"
+  s.add_development_dependency "dotenv"
   s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "standard", "~> 1.32"

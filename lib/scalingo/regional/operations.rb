@@ -13,14 +13,12 @@ module Scalingo
     def get(url, headers = nil, &block)
       data = nil
 
-      response = connection.get(
+      connection.get(
         url,
         data,
         headers,
         &block
       )
-
-      unpack(:operation) { response }
     end
   end
 end

@@ -61,6 +61,7 @@ RSpec.describe Scalingo::Regional::Apps do
     context "success" do
       let(:arguments) { meta[:id] }
       let(:stub_pattern) { "logs_url" }
+      let(:expected_keys) { %i[app logs_url] }
 
       it_behaves_like "a singular object response"
     end

@@ -31,7 +31,6 @@ RSpec.describe Scalingo::Regional::Collaborators do
     context "success" do
       let(:arguments) { meta[:accept][:valid] }
       let(:stub_pattern) { "accept-200" }
-      let(:expected_keys) { %i[app] }
 
       it_behaves_like "a singular object response"
     end
