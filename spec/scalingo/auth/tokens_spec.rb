@@ -5,7 +5,7 @@ RSpec.describe Scalingo::Auth::Tokens do
     subject { auth_guest.tokens }
 
     context "with a valid token" do
-      let(:arguments) { meta[:exchange][:valid] }
+      let(:basic) { {password: meta[:exchange][:valid]} }
       let(:stub_pattern) { "exchange-200" }
 
       it "is successful" do
@@ -15,7 +15,7 @@ RSpec.describe Scalingo::Auth::Tokens do
     end
 
     context "with an invalid token" do
-      let(:arguments) { meta[:exchange][:invalid] }
+      let(:basic) { {password: meta[:exchange][:invalid]} }
       let(:stub_pattern) { "exchange-401" }
 
       it "is rejected with an valid token" do
@@ -33,7 +33,7 @@ RSpec.describe Scalingo::Auth::Tokens do
 
   describe_method "create" do
     context "success" do
-      let(:arguments) { meta[:create][:valid] }
+      let(:body) { meta[:create][:valid] }
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a singular object response", 201
@@ -42,14 +42,14 @@ RSpec.describe Scalingo::Auth::Tokens do
 
   describe_method "renew" do
     context "success" do
-      let(:arguments) { meta[:id] }
+      let(:params) { {id: meta[:id]} }
       let(:stub_pattern) { "renew-200" }
 
       it_behaves_like "a singular object response"
     end
 
     context "not found" do
-      let(:arguments) { meta[:not_found_id] }
+      let(:params) { {id: meta[:not_found_id]} }
       let(:stub_pattern) { "renew-404" }
 
       it_behaves_like "a not found response"
@@ -58,14 +58,14 @@ RSpec.describe Scalingo::Auth::Tokens do
 
   describe_method "destroy" do
     context "success" do
-      let(:arguments) { meta[:id] }
+      let(:params) { {id: meta[:id]} }
       let(:stub_pattern) { "destroy-204" }
 
       it_behaves_like "an empty response"
     end
 
     context "not found" do
-      let(:arguments) { meta[:not_found_id] }
+      let(:params) { {id: meta[:not_found_id]} }
       let(:stub_pattern) { "destroy-404" }
 
       it_behaves_like "a not found response"

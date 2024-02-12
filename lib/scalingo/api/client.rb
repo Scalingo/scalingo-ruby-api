@@ -47,9 +47,7 @@ module Scalingo
       def inspect
         str = %(<#{self.class}:0x#{object_id.to_s(16)} url:"#{@url}" methods:)
 
-        methods = self.class.instance_methods - Scalingo::API::Client.instance_methods
-        str << methods.to_s
-
+        str << self.class.instance_methods(false).to_s
         str << ">"
         str
       end

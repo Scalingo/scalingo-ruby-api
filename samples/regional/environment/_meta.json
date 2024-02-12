@@ -12,7 +12,9 @@
     }
   },
   "update": {
-    "valid": "newvalue",
+    "valid": {
+      "value": "newvalue"
+    },
     "bulk": [
       {
         "name": "name1",

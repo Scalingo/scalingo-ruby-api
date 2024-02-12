@@ -7,14 +7,14 @@ RSpec.describe Scalingo::RegionalDatabase::Backups do
 
   describe_method "create" do
     context "success" do
-      let(:arguments) { [meta[:addon_id]] }
+      let(:params) { meta.slice(:addon_id) }
       let(:stub_pattern) { "create-201" }
 
       it_behaves_like "a singular object response", 201
     end
 
     context "failure" do
-      let(:arguments) { [meta[:addon_id]] }
+      let(:params) { meta.slice(:addon_id) }
       let(:stub_pattern) { "create-400" }
 
       it_behaves_like "a client error"
@@ -23,7 +23,7 @@ RSpec.describe Scalingo::RegionalDatabase::Backups do
 
   describe_method "for" do
     context "success" do
-      let(:arguments) { [meta[:addon_id]] }
+      let(:params) { meta.slice(:addon_id) }
       let(:stub_pattern) { "for-200" }
       let(:expected_count) { 3 }
 
@@ -32,7 +32,7 @@ RSpec.describe Scalingo::RegionalDatabase::Backups do
     end
 
     context "failure" do
-      let(:arguments) { [meta[:addon_id]] }
+      let(:params) { meta.slice(:addon_id) }
       let(:stub_pattern) { "for-400" }
 
       it_behaves_like "a client error"
@@ -41,7 +41,7 @@ RSpec.describe Scalingo::RegionalDatabase::Backups do
 
   describe_method "archive" do
     context "success" do
-      let(:arguments) { [meta[:addon_id], meta[:backup_id]] }
+      let(:params) { meta.slice(:addon_id, :id) }
       let(:stub_pattern) { "archive-200" }
       let(:expected_keys) { %i[download_url] }
 
@@ -49,7 +49,7 @@ RSpec.describe Scalingo::RegionalDatabase::Backups do
     end
 
     context "failure" do
-      let(:arguments) { [meta[:addon_id], meta[:backup_id]] }
+      let(:params) { meta.slice(:addon_id, :id) }
       let(:stub_pattern) { "archive-400" }
 
       it_behaves_like "a client error"

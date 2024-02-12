@@ -7,14 +7,14 @@ RSpec.describe Scalingo::RegionalDatabase::Databases do
 
   describe_method "find" do
     context "success" do
-      let(:arguments) { [meta[:id]] }
+      let(:params) { meta.slice(:id) }
       let(:stub_pattern) { "find-200" }
 
       it_behaves_like "a singular object response"
     end
 
     context "failure" do
-      let(:arguments) { [meta[:id]] }
+      let(:params) { meta.slice(:id) }
       let(:stub_pattern) { "find-400" }
 
       it_behaves_like "a client error"
@@ -23,14 +23,14 @@ RSpec.describe Scalingo::RegionalDatabase::Databases do
 
   describe_method "upgrade" do
     context "success" do
-      let(:arguments) { [meta[:id]] }
+      let(:params) { meta.slice(:id) }
       let(:stub_pattern) { "upgrade-202" }
 
       it_behaves_like "a singular object response", 202
     end
 
     context "failure" do
-      let(:arguments) { [meta[:id]] }
+      let(:params) { meta.slice(:id) }
       let(:stub_pattern) { "upgrade-400" }
 
       it_behaves_like "a client error"

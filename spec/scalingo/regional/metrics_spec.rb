@@ -3,14 +3,14 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Metrics do
   describe_method "types" do
     context "guest" do
-      subject { guest_endpoint }
-
+      let(:connected) { false }
       let(:stub_pattern) { "types-guest" }
 
       it_behaves_like "a singular object response"
     end
 
     context "logged" do
+      let(:connected) { true }
       let(:stub_pattern) { "types-logged" }
 
       it_behaves_like "a singular object response"
@@ -21,7 +21,7 @@ RSpec.describe Scalingo::Regional::Metrics do
     let(:expected_keys) { %i[time value] }
 
     context "cpu" do
-      let(:arguments) { [meta[:app_id], meta[:for][:valid_cpu]] }
+      let(:params) { meta.slice(:app_id).merge(meta[:for][:valid_cpu]) }
       let(:expected_count) { 181 }
       let(:stub_pattern) { "for-valid-cpu-200" }
 
@@ -30,14 +30,14 @@ RSpec.describe Scalingo::Regional::Metrics do
     end
 
     context "router" do
-      let(:arguments) { [meta[:app_id], meta[:for][:valid_router]] }
+      let(:params) { meta.slice(:app_id).merge(meta[:for][:valid_router]) }
       let(:stub_pattern) { "for-valid-router-404" }
 
       it_behaves_like "a not found response"
     end
 
     context "invalid" do
-      let(:arguments) { [meta[:app_id], meta[:for][:invalid]] }
+      let(:params) { meta.slice(:app_id).merge(meta[:for][:invalid]) }
       let(:stub_pattern) { "for-invalid-400" }
 
       it_behaves_like "a client error"

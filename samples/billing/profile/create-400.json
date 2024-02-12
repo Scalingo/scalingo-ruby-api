@@ -3,12 +3,7 @@
   "method": "post",
   "request": {
     "headers": {
-      "Authorization": "Bearer the-bearer-token",
-      "Content-Type": "application/json"
-    },
-    "json_body": {
-      "profile": {
-      }
+      "Authorization": "Bearer the-bearer-token"
     }
   },
   "response": {

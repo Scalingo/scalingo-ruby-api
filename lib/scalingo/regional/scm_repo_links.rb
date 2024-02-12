@@ -2,92 +2,13 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class Regional::ScmRepoLinks < API::Endpoint
-    def show(app_id, headers = nil, &block)
-      data = nil
-
-      connection.get(
-        "apps/#{app_id}/scm_repo_link",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def create(app_id, payload = {}, headers = nil, &block)
-      data = {scm_repo_link: payload}
-
-      connection.post(
-        "apps/#{app_id}/scm_repo_link",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def update(app_id, payload = {}, headers = nil, &block)
-      data = {scm_repo_link: payload}
-
-      connection.patch(
-        "apps/#{app_id}/scm_repo_link",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def destroy(app_id, headers = nil, &block)
-      data = nil
-
-      connection.delete(
-        "apps/#{app_id}/scm_repo_link",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def deploy(app_id, branch, headers = nil, &block)
-      data = {branch: branch}
-
-      connection.post(
-        "apps/#{app_id}/scm_repo_link/manual_deploy",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def review_app(review_app, pull_request_id, headers = nil, &block)
-      data = {pull_request_id: pull_request_id}
-
-      connection.post(
-        "apps/#{app_id}/scm_repo_link/manual_review_app",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def branches(app_id, headers = nil, &block)
-      data = nil
-
-      connection.get(
-        "apps/#{app_id}/scm_repo_link/branches",
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def pulls(app_id, headers = nil, &block)
-      data = nil
-
-      connection.get(
-        "apps/#{app_id}/scm_repo_link/pulls",
-        data,
-        headers,
-        &block
-      )
-    end
+    get :show, "/apps/{app_id}/scm_repo_link"
+    get :branches, "/apps/{app_id}/scm_repo_link/branches"
+    get :pulls, "/apps/{app_id}/scm_repo_link/pulls"
+    post :create, "/apps/{app_id}/scm_repo_link", root_key: :scm_repo_link
+    post :deploy, "/apps/{app_id}/scm_repo_link/manual_deploy"
+    post :review_app, "/apps/{app_id}/scm_repo_link/manual_review_app"
+    patch :update, "/apps/{app_id}/scm_repo_link", root_key: :scm_repo_link
+    delete :destroy, "/apps/{app_id}/scm_repo_link"
   end
 end

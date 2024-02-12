@@ -1,34 +1,21 @@
 module Scalingo
   class Regional::Logs < API::Endpoint
-    def get(url, payload = {}, headers = nil, &block)
-      data = payload.compact
+    get :archives, "apps/{app_id}/logs_archives"
 
-      connection(fallback_to_guest: true).get(
-        url,
-        data,
-        headers,
-        &block
-      )
-    end
-
-    def archives(app_id, headers = nil, &block)
-      data = nil
-
-      connection.get(
-        "apps/#{app_id}/logs_archives",
-        data,
-        headers,
-        &block
-      )
+    def get(url, **params, &block)
+      request(:get, url, **params) do |req|
+        block&.call(req, params)
+        req.params[:n] = params[:n] if params[:n].present?
+      end
     end
 
     ## Helper method to avoid having to manually chain two operations
-    def for(app_id, payload = {}, headers = nil, &block)
-      logs_response = scalingo.apps.logs_url(app_id)
+    def for(**params, &block)
+      logs_response = scalingo.apps.logs_url(**params)
 
       return logs_response unless logs_response.success?
 
-      get(logs_response.body, payload, headers, &block)
+      get(logs_response.body, **params, &block)
     end
   end
 end

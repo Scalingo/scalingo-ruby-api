@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Events do
   describe_method "categories" do
     context "guest" do
-      subject { guest_endpoint }
+      let(:params) { {connected: false} }
 
       let(:expected_count) { 7 }
       let(:stub_pattern) { "categories-guest" }
@@ -13,6 +13,8 @@ RSpec.describe Scalingo::Regional::Events do
     end
 
     context "logged" do
+      let(:params) { {connected: true} }
+
       let(:expected_count) { 7 }
       let(:stub_pattern) { "categories-logged" }
 
@@ -23,7 +25,7 @@ RSpec.describe Scalingo::Regional::Events do
 
   describe_method "types" do
     context "guest" do
-      subject { guest_endpoint }
+      let(:params) { {connected: false} }
 
       let(:expected_count) { 33 }
       let(:stub_pattern) { "types-guest" }
@@ -33,6 +35,7 @@ RSpec.describe Scalingo::Regional::Events do
     end
 
     context "logged" do
+      let(:params) { {connected: true} }
       let(:expected_count) { 33 }
       let(:stub_pattern) { "types-logged" }
 
@@ -43,7 +46,6 @@ RSpec.describe Scalingo::Regional::Events do
 
   describe_method "all" do
     context "success" do
-      let(:arguments) { {} }
       let(:expected_count) { 30 }
       let(:stub_pattern) { "all-200" }
 
@@ -54,7 +56,7 @@ RSpec.describe Scalingo::Regional::Events do
 
   describe_method "for" do
     context "success" do
-      let(:arguments) { [meta[:app_id], {}] }
+      let(:params) { meta.slice(:app_id) }
       let(:expected_count) { 18 }
       let(:stub_pattern) { "for-200" }
 
