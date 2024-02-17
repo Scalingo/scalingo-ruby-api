@@ -1,58 +1,43 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::RegionalDatabase::Backups do
+RSpec.describe Scalingo::RegionalDatabase::Backups, type: :endpoint do
+  let(:addon_id) { "the-addon-id" }
+
   before do
-    scalingo.add_database_token(meta[:addon_id], "the-bearer-token")
+    scalingo_client.add_database_token(addon_id, "the-bearer-token")
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:params) { meta.slice(:addon_id) }
-      let(:stub_pattern) { "create-201" }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {addon_id: addon_id} }
 
-    context "failure" do
-      let(:params) { meta.slice(:addon_id) }
-      let(:stub_pattern) { "create-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :addon_id
 
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/databases/the-addon-id/backups")) }
   end
 
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:addon_id) }
-      let(:stub_pattern) { "for-200" }
-      let(:expected_count) { 3 }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    let(:params) { {addon_id: addon_id} }
+    let(:body) { {field: "value"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:addon_id) }
-      let(:stub_pattern) { "for-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :addon_id
 
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/databases/the-addon-id/backups")) }
   end
 
-  describe_method "archive" do
-    context "success" do
-      let(:params) { meta.slice(:addon_id, :id) }
-      let(:stub_pattern) { "archive-200" }
-      let(:expected_keys) { %i[download_url] }
+  describe "archive" do
+    subject(:response) { instance.archive(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {addon_id: addon_id, id: "backup-id"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:addon_id, :id) }
-      let(:stub_pattern) { "archive-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :addon_id, :id
 
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/databases/the-addon-id/backups/backup-id/archive")) }
   end
 end

@@ -1,39 +1,31 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::RegionalDatabase::Databases do
+RSpec.describe Scalingo::RegionalDatabase::Databases, type: :endpoint do
+  let(:id) { "database-id" }
+
   before do
-    scalingo.add_database_token(meta[:id], "the-bearer-token")
+    scalingo_client.add_database_token(id, "the-bearer-token")
   end
 
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:stub_pattern) { "find-200" }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: id} }
 
-    context "failure" do
-      let(:params) { meta.slice(:id) }
-      let(:stub_pattern) { "find-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/databases/database-id")) }
   end
 
-  describe_method "upgrade" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:stub_pattern) { "upgrade-202" }
+  describe "upgrade" do
+    subject(:response) { instance.upgrade(**arguments) }
 
-      it_behaves_like "a singular object response", 202
-    end
+    let(:params) { {id: id} }
 
-    context "failure" do
-      let(:params) { meta.slice(:id) }
-      let(:stub_pattern) { "upgrade-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/databases/database-id/upgrade")) }
   end
 end
