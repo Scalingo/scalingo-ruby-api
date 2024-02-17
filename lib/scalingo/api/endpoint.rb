@@ -40,11 +40,14 @@ module Scalingo
       def_delegator :client, :connection
       def_delegator :client, :database_connection
 
-      # Perform a request to the API
-      def request(method, path, body: nil, root_key: nil, connected: true, basic: nil, dry_run: false, **params, &block)
-        # path can be an URI template
-        # see https://github.com/sporkmonger/addressable?tab=readme-ov-file#uri-templates
-        # see https://www.rfc-editor.org/rfc/rfc6570.txt
+      # Perform a request to the API.
+      # path can be an URI template; and faraday expect valid URIs - the parser raises when templates aren't fully expanded.
+      # therefore, we have to take care of the expansion before passing the path to faraday.
+      # note: This method is not unit-tested directly, but integrations tests are covering it extensively.
+      # @see https://github.com/sporkmonger/addressable?tab=readme-ov-file#uri-templates
+      # @see https://www.rfc-editor.org/rfc/rfc6570.txt
+      # @see https://github.com/lostisland/faraday/issues/1487
+      def request(method, path, body: nil, root_key: nil, connected: true, basic: nil, dry_run: false, params_as_body: false, **params, &block)
         template = Addressable::Template.new(path)
 
         # If the template has keys, we need to expand it with the params
@@ -82,8 +85,17 @@ module Scalingo
         # We can specify basic auth credentials if needed
         conn.request :authorization, :basic, basic[:user], basic[:password] if basic.present?
 
-        # Finally, perform the request
-        conn.public_send(method, actual_path, request_body, &block)
+        # Finally, perform the request.
+        # Faraday sends params as query string for GET/HEAD/DELETE requests and as request body for the others;
+        # in some rare cases (variables bulk-delete) we need to send them as actual body.
+        if Faraday::METHODS_WITH_QUERY.include?(method.to_s) && params_as_body
+          conn.public_send(method, actual_path) do |req|
+            req.body = request_body
+            block&.call(req) || req
+          end
+        else
+          conn.public_send(method, actual_path, request_body, &block)
+        end
       end
 
       def inspect
