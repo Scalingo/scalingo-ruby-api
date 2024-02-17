@@ -20,14 +20,5 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.include Scalingo::StubHelpers
-  config.include Scalingo::Common
-  config.extend Scalingo::DescribedMethod
-
-  config.before(:example) do |example|
-    if defined?(stub_pattern)
-      load_meta!
-      register_stubs!(stub_pattern)
-    end
-  end
+  config.include_context "default endpoint context", type: :endpoint
 end
