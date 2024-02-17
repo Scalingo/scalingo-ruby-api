@@ -1,35 +1,24 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Operations do
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "find-200" }
+RSpec.describe Scalingo::Regional::Operations, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a singular object response"
-    end
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "find-404" }
+    let(:params) { {app_id: app_id, id: "op-id"} }
 
-      it_behaves_like "a not found response"
-    end
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/operations/op-id")) }
   end
 
-  describe_method "get" do
-    context "success" do
-      let(:arguments) { "apps/#{meta[:app_id]}/operations/#{meta[:id]}" }
-      let(:stub_pattern) { "find-200" }
+  describe "get" do
+    subject(:response) { instance.get("http://localhost/any-url") }
 
-      it_behaves_like "a singular object response"
-    end
+    include_examples "requires authentication"
 
-    context "failure" do
-      let(:arguments) { "apps/#{meta[:app_id]}/operations/#{meta[:not_found_id]}" }
-      let(:stub_pattern) { "find-404" }
-
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, "http://localhost/any-url") }
   end
 end

@@ -1,40 +1,71 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Logs do
-  describe_method "get" do
-    context "guest" do
-      let(:arguments) { meta[:urls][:guest] }
-      let(:params) { {connected: false} }
-      let(:stub_pattern) { "get-guest-200" }
+RSpec.describe Scalingo::Regional::Logs, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a singular object response"
-    end
+  describe "archives" do
+    subject(:response) { instance.archives(**arguments) }
 
-    context "logged" do
-      let(:arguments) { meta[:urls][:logged] }
-      let(:params) { {connected: true} }
-      let(:stub_pattern) { "get-logged-200" }
+    let(:params) { {app_id: app_id} }
 
-      it_behaves_like "a singular object response"
-    end
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/logs_archives")) }
+  end
+
+  describe "get" do
+    subject(:response) { instance.get("http://localhost/any-url", **arguments) }
+
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:get, "http://localhost/any-url") }
 
     context "with limit" do
-      let(:arguments) { meta[:urls][:with_limit] }
-      let(:params) { meta[:options] }
-      let(:stub_pattern) { "get-with-limit-200" }
+      let(:params) { {n: 3} }
 
-      it_behaves_like "a singular object response"
+      it { is_expected.to have_requested(:get, "http://localhost/any-url?n=3") }
+    end
+
+    context "with other params" do
+      let(:params) { {z: 7} }
+
+      it { is_expected.to have_requested(:get, "http://localhost/any-url") }
     end
   end
 
-  describe_method "archives" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:expected_count) { 0 }
-      let(:stub_pattern) { "archives-200" }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a cursor paginated collection"
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    let(:params) { {app_id: app_id} }
+
+    context "with a successful call for the logs url" do
+      before do
+        stub_request(:get, api_path.merge("/apps/my-app-id/logs")).to_return(
+          status: 200,
+          body: "http://localhost/signed-url"
+        )
+      end
+
+      it { is_expected.to have_requested(:get, "http://localhost/signed-url") }
+    end
+
+    context "with a failed call for the logs url" do
+      before do
+        stub_request(:get, api_path.merge("/apps/my-app-id/logs")).to_return(
+          status: 404,
+          body: "http://localhost/signed-url"
+        )
+      end
+
+      it "returns the first response" do
+        expect(subject).not_to have_requested(:get, "http://localhost/signed-url")
+        expect(subject.status).to eq 404
+        expect(subject.env.url).to eq api_path.merge("/apps/my-app-id/logs")
+      end
     end
   end
 end

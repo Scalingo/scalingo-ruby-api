@@ -1,56 +1,44 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Deployments do
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
+RSpec.describe Scalingo::Regional::Deployments, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      context "with pages" do
-        let(:params) { meta.slice(:app_id).merge(query: {page: 3}) }
-        let(:stub_pattern) { "for-with-pages" }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-        it_behaves_like "a collection response"
-        it_behaves_like "a paginated collection"
-      end
+    let(:params) { {app_id: app_id} }
 
-      context "without pages" do
-        let(:stub_pattern) { "for-without-pages" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-        it_behaves_like "a collection response"
-        it_behaves_like "a paginated collection"
-      end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments")) }
+
+    context "with query params" do
+      let(:params) { {app_id: app_id, query: {page: 2}} }
+
+      it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments?page=2")) }
     end
   end
 
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "find-200" }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "deployment-id"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "find-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments/deployment-id")) }
   end
 
-  describe_method "logs" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "logs-200" }
+  describe "logs" do
+    subject(:response) { instance.logs(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "deployment-id"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "logs-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments/deployment-id/output")) }
   end
 end

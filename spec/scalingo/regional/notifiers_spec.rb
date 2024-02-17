@@ -1,117 +1,79 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Notifiers do
-  describe_method "platforms" do
-    context "guest" do
-      let(:params) { {connected: false} }
-      let(:expected_count) { 4 }
-      let(:stub_pattern) { "platforms-guest" }
+RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+  describe "platforms" do
+    subject(:response) { instance.platforms(**arguments) }
 
-    context "logged" do
-      let(:params) { {connected: true} }
-      let(:expected_count) { 4 }
-      let(:stub_pattern) { "platforms-logged" }
-
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/notification_platforms")) }
   end
 
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "for-200" }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/notifiers")) }
   end
 
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "find-200" }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "find-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/notifiers")).with(body: {notifier: body}) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {app_id: app_id, id: "notifier-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:not_found] }
-      let(:stub_pattern) { "create-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
-
-    context "failure" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:invalid] }
-      let(:stub_pattern) { "create-422" }
-
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/notifiers/notifier-id")) }
   end
 
-  describe_method "test" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "test-200" }
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "notifier-id"} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "test-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/notifiers/notifier-id")).with(body: {notifier: body}) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "test" do
+    subject(:response) { instance.test(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "notifier-id"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
+
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/notifiers/notifier-id/test")) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "destroy-204" }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {app_id: app_id, id: "notifier-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "destroy-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/notifiers/notifier-id")) }
   end
 end

@@ -1,67 +1,47 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Events do
-  describe_method "categories" do
-    context "guest" do
-      let(:params) { {connected: false} }
+RSpec.describe Scalingo::Regional::Events, type: :endpoint do
+  describe "types" do
+    subject(:response) { instance.types(**arguments) }
 
-      let(:expected_count) { 7 }
-      let(:stub_pattern) { "categories-guest" }
+    it { is_expected.to have_requested(:get, api_path.merge("/event_types")) }
+  end
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+  describe "categories" do
+    subject(:response) { instance.categories(**arguments) }
 
-    context "logged" do
-      let(:params) { {connected: true} }
+    it { is_expected.to have_requested(:get, api_path.merge("/event_categories")) }
+  end
 
-      let(:expected_count) { 7 }
-      let(:stub_pattern) { "categories-logged" }
+  describe "all" do
+    subject(:response) { instance.all(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:get, api_path.merge("/events")) }
+
+    context "with query string" do
+      let(:params) { {query: {page: 2}} }
+
+      it { is_expected.to have_requested(:get, api_path.merge("/events?page=2")) }
     end
   end
 
-  describe_method "types" do
-    context "guest" do
-      let(:params) { {connected: false} }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-      let(:expected_count) { 33 }
-      let(:stub_pattern) { "types-guest" }
+    let(:app_id) { "my-app-id" }
+    let(:params) { {app_id: app_id} }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-    context "logged" do
-      let(:params) { {connected: true} }
-      let(:expected_count) { 33 }
-      let(:stub_pattern) { "types-logged" }
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/events")) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
-  end
+    context "with query string" do
+      let(:params) { {app_id: app_id, query: {page: 2}} }
 
-  describe_method "all" do
-    context "success" do
-      let(:expected_count) { 30 }
-      let(:stub_pattern) { "all-200" }
-
-      it_behaves_like "a collection response"
-      it_behaves_like "a paginated collection"
-    end
-  end
-
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:expected_count) { 18 }
-      let(:stub_pattern) { "for-200" }
-
-      it_behaves_like "a collection response"
-      it_behaves_like "a paginated collection"
+      it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/events?page=2")) }
     end
   end
 end

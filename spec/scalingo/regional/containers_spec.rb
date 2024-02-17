@@ -1,71 +1,46 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Containers do
-  describe_method "sizes" do
-    context "guest" do
-      let(:params) { {connected: false} }
+RSpec.describe Scalingo::Regional::Containers, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      let(:expected_count) { 7 }
-      let(:stub_pattern) { "sizes-guest" }
+  describe "sizes" do
+    subject(:response) { instance.sizes(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
-
-    context "logged" do
-      let(:expected_count) { 7 }
-      let(:stub_pattern) { "sizes-logged" }
-
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/features/container_sizes")) }
   end
 
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:expected_count) { 2 }
-      let(:expected_keys) { %i[name] }
-      let(:stub_pattern) { "for-200" }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/containers")) }
   end
 
-  describe_method "restart" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:restart][:valid] }
-      let(:stub_pattern) { "restart-202" }
+  describe "scale" do
+    subject(:response) { instance.scale(**arguments) }
 
-      it_behaves_like "a singular object response", 202
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
 
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:restart][:invalid] }
-      let(:stub_pattern) { "restart-422" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scale")).with(body: {containers: body}) }
   end
 
-  describe_method "scale" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:scale][:valid] }
-      let(:stub_pattern) { "scale-202" }
+  describe "restart" do
+    subject(:response) { instance.restart(**arguments) }
 
-      it_behaves_like "a singular object response", 202
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
 
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:scale][:invalid] }
-      let(:stub_pattern) { "scale-422" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/restart")).with(body: {scope: body}) }
   end
 end

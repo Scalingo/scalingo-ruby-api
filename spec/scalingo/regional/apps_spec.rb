@@ -1,157 +1,96 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Apps do
-  describe_method "all" do
-    let(:expected_count) { 2 }
-    let(:stub_pattern) { "all" }
+RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
+  describe "all" do
+    subject(:response) { instance.all(**arguments) }
 
-    it_behaves_like "a collection response"
-    it_behaves_like "a non-paginated collection"
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps")) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:body) { {field: "value"} }
 
-    context "dry run" do
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:post, api_path.merge("/apps")).with(body: {app: body}) }
+
+    context "when dry-running" do
       let(:params) { {dry_run: true} }
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201-dry-run" }
 
-      it_behaves_like "a singular object response", 201
-    end
-
-    context "failure" do
-      let(:body) { meta[:create][:invalid] }
-      let(:stub_pattern) { "create-422" }
-
-      it_behaves_like "an unprocessable request"
+      it { is_expected.to have_requested(:post, api_path.merge("/apps")).with(headers: {"X-Dry-Run" => true}, body: {app: body}) }
     end
   end
 
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:stub_pattern) { "find-200" }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: "my-app-id"} }
 
-    context "not found" do
-      let(:params) { {id: meta[:not_found_id]} }
-      let(:stub_pattern) { "find-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id")) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "logs_url" do
+    subject(:response) { instance.logs_url(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: "my-app-id"} }
 
-    context "invalid stack" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:update][:invalid] }
-      let(:stub_pattern) { "update-stack-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/logs")) }
   end
 
-  describe_method "logs_url" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:stub_pattern) { "logs_url" }
-      let(:expected_keys) { %i[app logs_url] }
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: "my-app-id"} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
+
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id")).with(body: {app: body}) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:destroy][:valid] }
-      let(:stub_pattern) { "destroy-204" }
+  describe "rename" do
+    subject(:response) { instance.rename(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {id: "my-app-id"} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { {id: meta[:not_found_id]} }
-      let(:body) { meta[:destroy][:valid] }
-      let(:stub_pattern) { "destroy-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
-
-    context "unprocessable" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:destroy][:invalid] }
-      let(:stub_pattern) { "destroy-422" }
-
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/rename")).with(body: body) }
   end
 
-  describe_method "rename" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:rename][:valid] }
-      let(:stub_pattern) { "rename-200" }
+  describe "transfer" do
+    subject(:response) { instance.transfer(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: "my-app-id"} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { {id: meta[:not_found_id]} }
-      let(:body) { meta[:rename][:valid] }
-      let(:stub_pattern) { "rename-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
-
-    context "unprocessable" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:rename][:invalid] }
-      let(:stub_pattern) { "rename-422" }
-
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id")).with(body: body) }
   end
 
-  describe_method "transfer" do
-    context "success" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:transfer][:valid] }
-      let(:stub_pattern) { "transfer-200" }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: "my-app-id"} }
 
-    context "not found" do
-      let(:params) { {id: meta[:not_found_id]} }
-      let(:body) { meta[:transfer][:valid] }
-      let(:stub_pattern) { "transfer-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
-
-    context "unprocessable" do
-      let(:params) { meta.slice(:id) }
-      let(:body) { meta[:transfer][:invalid] }
-      let(:stub_pattern) { "transfer-422" }
-
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id")) }
   end
 end

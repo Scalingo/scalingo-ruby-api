@@ -1,83 +1,75 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Environment do
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "for-200" }
+RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/variables")) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:invalid] }
-      let(:stub_pattern) { "create-422" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/variables")).with(body: {variable: body}) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "variable-id"} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/variables/variable-id")).with(body: {variable: body}) }
   end
 
-  describe_method "bulk_update" do
-    let(:params) { meta.slice(:app_id) }
-    let(:body) { meta[:update][:bulk] }
-    let(:expected_count) { 4 }
-    let(:stub_pattern) { "bulk-update-200" }
+  describe "bulk_update" do
+    subject(:response) { instance.bulk_update(**arguments) }
 
-    it_behaves_like "a collection response"
-    it_behaves_like "a non-paginated collection"
+    let(:params) { {app_id: app_id} }
+    let(:body) { [{field: "value"}] }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/variables")).with(body: {variables: body}) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "destroy-204" }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {app_id: app_id, id: "variable-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "destroy-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/variables/variable-id")) }
   end
 
-  describe_method "bulk_destroy" do
-    let(:params) { meta.slice(:app_id) }
-    let(:body) { meta[:destroy][:bulk] }
-    let(:stub_pattern) { "bulk-destroy-204" }
+  describe "bulk_destroy" do
+    subject(:response) { instance.bulk_destroy(**arguments) }
 
-    it_behaves_like "an empty response"
+    let(:params) { {app_id: app_id} }
+    let(:body) { [1, 2, 3] }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/variables")).with(body: {variable_ids: body}) }
   end
 end

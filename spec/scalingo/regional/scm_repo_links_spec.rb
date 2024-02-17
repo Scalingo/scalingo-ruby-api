@@ -1,51 +1,97 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::ScmRepoLinks do
-  describe_method "show" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "show-200" }
+RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a singular object response"
-    end
+  describe "show" do
+    subject(:response) { instance.show(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/scm_repo_link")) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "branches" do
+    subject(:response) { instance.branches(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/scm_repo_link/branches")) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "pulls" do
+    subject(:response) { instance.pulls(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/scm_repo_link/pulls")) }
   end
 
-  describe_method "deploy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:deploy][:valid] }
-      let(:stub_pattern) { "manual-deploy-200" }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scm_repo_link")).with(body: {scm_repo_link: body}) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "destroy-204" }
+  describe "deploy" do
+    subject(:response) { instance.deploy(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scm_repo_link/manual_deploy")).with(body: body) }
+  end
+
+  describe "review_app" do
+    subject(:response) { instance.review_app(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scm_repo_link/manual_review_app")).with(body: body) }
+  end
+
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/scm_repo_link")).with(body: {scm_repo_link: body}) }
+  end
+
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/scm_repo_link")) }
   end
 end

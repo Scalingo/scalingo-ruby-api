@@ -7,6 +7,6 @@ module Scalingo
     patch :update, "apps/{app_id}/variables/{id}", root_key: :variable
     put :bulk_update, "apps/{app_id}/variables", root_key: :variables
     delete :destroy, "apps/{app_id}/variables/{id}"
-    delete :bulk_destroy, "apps/{app_id}/variables", root_key: :variable_ids
+    delete :bulk_destroy, "apps/{app_id}/variables", root_key: :variable_ids, params_as_body: true
   end
 end

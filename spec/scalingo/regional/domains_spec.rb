@@ -1,89 +1,62 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Domains do
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "for-200" }
+RSpec.describe Scalingo::Regional::Domains, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/domains")) }
   end
 
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "find-200" }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "find-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/domains")).with(body: {domain: body}) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {app_id: app_id, id: "domain-id"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:create][:invalid] }
-      let(:stub_pattern) { "create-422" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/domains/domain-id")) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "domain-id"} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
-
-    context "failure" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:body) { meta[:update][:invalid] }
-      let(:stub_pattern) { "update-422" }
-
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/domains/domain-id")).with(body: {domain: body}) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "destroy-204" }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {app_id: app_id, id: "domain-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "destroy-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/domains/domain-id")) }
   end
 end

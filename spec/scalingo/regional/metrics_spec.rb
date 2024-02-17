@@ -1,46 +1,34 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Metrics do
-  describe_method "types" do
-    context "guest" do
-      let(:connected) { false }
-      let(:stub_pattern) { "types-guest" }
+RSpec.describe Scalingo::Regional::Metrics, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a singular object response"
-    end
+  describe "types" do
+    subject(:response) { instance.types(**arguments) }
 
-    context "logged" do
-      let(:connected) { true }
-      let(:stub_pattern) { "types-logged" }
-
-      it_behaves_like "a singular object response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/features/metrics")) }
   end
 
-  describe_method "for" do
-    let(:expected_keys) { %i[time value] }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-    context "cpu" do
-      let(:params) { meta.slice(:app_id).merge(meta[:for][:valid_cpu]) }
-      let(:expected_count) { 181 }
-      let(:stub_pattern) { "for-valid-cpu-200" }
+    let(:params) { {app_id: app_id, metric: "some-metric"} }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :metric
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/stats/some-metric")) }
+
+    context "with container type" do
+      let(:params) { {app_id: app_id, metric: "some-metric", container_type: "web"} }
+
+      it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/stats/some-metric/web")) }
     end
 
-    context "router" do
-      let(:params) { meta.slice(:app_id).merge(meta[:for][:valid_router]) }
-      let(:stub_pattern) { "for-valid-router-404" }
+    context "with container type and index" do
+      let(:params) { {app_id: app_id, metric: "some-metric", container_type: "web", container_index: "7"} }
 
-      it_behaves_like "a not found response"
-    end
-
-    context "invalid" do
-      let(:params) { meta.slice(:app_id).merge(meta[:for][:invalid]) }
-      let(:stub_pattern) { "for-invalid-400" }
-
-      it_behaves_like "a client error"
+      it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/stats/some-metric/web/7")) }
     end
   end
 end

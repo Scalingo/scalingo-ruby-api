@@ -1,175 +1,96 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Addons do
-  describe_method "categories" do
-    context "guest" do
-      let(:params) { {connected: false} }
-      let(:expected_count) { 2 }
-      let(:stub_pattern) { "categories-guest" }
+RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+  describe "providers" do
+    subject(:response) { instance.providers(**arguments) }
 
-    context "logged" do
-      let(:params) { {connected: true} }
-      let(:expected_count) { 2 }
-      let(:stub_pattern) { "categories-logged" }
-
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/addon_providers")) }
   end
 
-  describe_method "providers" do
-    context "guest" do
-      let(:params) { {connected: false} }
-      let(:expected_count) { 9 }
-      let(:stub_pattern) { "providers-guest" }
+  describe "categories" do
+    subject(:response) { instance.categories(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
-
-    context "logged" do
-      let(:params) { {connected: true} }
-      let(:expected_count) { 11 }
-      let(:stub_pattern) { "providers-logged" }
-
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/addon_categories")) }
   end
 
-  describe_method "provision" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:provision][:valid] }
-      let(:stub_pattern) { "provision-201" }
-      let(:expected_keys) { %i[addon message] }
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {app_id: app_id} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:provision][:invalid] }
-      let(:stub_pattern) { "provision-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/addons")) }
   end
 
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "for-200" }
+  describe "provision" do
+    subject(:response) { instance.provision(**arguments) }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/addons")).with(body: {addon: body}) }
   end
 
-  describe_method "find" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "find-200" }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "addon-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "find-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/addons/addon-id")) }
   end
 
-  describe_method "sso" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "sso-200" }
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "addon-id"} }
+    let(:body) { {field: "value"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "sso-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/addons/addon-id")).with(body: {addon: body}) }
   end
 
-  describe_method "token" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "token-200" }
+  describe "sso" do
+    subject(:response) { instance.sso(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "addon-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "token-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/addons/addon-id/sso")) }
   end
 
-  describe_method "authenticate!" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "token-200" }
+  describe "token" do
+    subject(:response) { instance.token(**arguments) }
 
-      it_behaves_like "a singular object response"
-      it "authenticates" do
-        response
-        expect(scalingo.authenticated_for_database?(meta[:id])).to be true
-      end
-    end
+    let(:params) { {app_id: app_id, id: "addon-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "token-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/addons/addon-id/token")) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
-      let(:expected_keys) { %i[addon message] }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id, id: "addon-id"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:body) { meta[:update][:invalid] }
-      let(:stub_pattern) { "update-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
-  end
-
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "destroy-204" }
-
-      it_behaves_like "an empty response"
-    end
-
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "destroy-404" }
-
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/addons/addon-id")) }
   end
 end

@@ -1,70 +1,50 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Regional::Collaborators do
-  describe_method "for" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:stub_pattern) { "for-200" }
+RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
+  let(:app_id) { "my-app-id" }
 
-      it_behaves_like "a collection response"
-      it_behaves_like "a non-paginated collection"
-    end
+  describe "for" do
+    subject(:response) { instance.for(**arguments) }
+
+    let(:params) { {app_id: app_id} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
+
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/collaborators")) }
   end
 
-  describe_method "invite" do
-    context "success" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:invite][:valid] }
-      let(:stub_pattern) { "invite-201" }
+  describe "accept" do
+    subject(:response) { instance.accept(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:params) { {app_id: app_id, token: "some-token"} }
 
-    context "failure" do
-      let(:params) { meta.slice(:app_id) }
-      let(:body) { meta[:invite][:invalid] }
-      let(:stub_pattern) { "invite-422" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :token
 
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/apps/collaboration?token=some-token")) }
   end
 
-  describe_method "accept" do
-    context "success" do
-      let(:body) { meta[:accept][:valid] }
-      let(:stub_pattern) { "accept-200" }
+  describe "invite" do
+    subject(:response) { instance.invite(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {app_id: app_id} }
+    let(:body) { {field: "value"} }
 
-    context "already collaborating" do
-      let(:body) { meta[:accept][:valid] }
-      let(:stub_pattern) { "accept-400" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id
 
-      it_behaves_like "a client error"
-    end
-
-    context "not found" do
-      let(:body) { meta[:accept][:invalid] }
-      let(:stub_pattern) { "accept-404" }
-
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/collaborators")).with(body: {collaborator: body}) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { meta.slice(:app_id, :id) }
-      let(:stub_pattern) { "destroy-204" }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {app_id: app_id, id: "collaborator-id"} }
 
-    context "not found" do
-      let(:params) { meta.slice(:app_id).merge(id: meta[:not_found_id]) }
-      let(:stub_pattern) { "destroy-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")) }
   end
 end
