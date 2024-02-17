@@ -1,57 +1,41 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Billing::Profile do
-  describe_method "show" do
-    context "existing" do
-      let(:stub_pattern) { "show-200" }
+RSpec.describe Scalingo::Billing::Profile, type: :endpoint do
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:body) { {field: "value"} }
 
-    context "not yet created" do
-      let(:stub_pattern) { "show-404" }
+    include_examples "requires authentication"
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/profiles")).with(body: {profile: body}) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "show" do
+    subject(:response) { instance.show(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    include_examples "requires authentication"
 
-    context "already existing" do
-      let(:stub_pattern) { "create-400" }
-
-      it_behaves_like "a client error"
-    end
-
-    context "unprocessable" do
-      let(:body) { meta[:create][:invalid] }
-      let(:stub_pattern) { "create-422" }
-
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/profile")) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:params) { {id: meta[:id]} }
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "self" do
+    subject(:response) { instance.self(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    include_examples "requires authentication"
 
-    context "unprocessable" do
-      let(:params) { {id: meta[:id]} }
-      let(:body) { meta[:update][:invalid] }
-      let(:stub_pattern) { "update-422" }
+    it { is_expected.to have_requested(:get, api_path.merge("/profile")) }
+  end
 
-      it_behaves_like "an unprocessable request"
-    end
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
+
+    let(:params) { {id: "profile-id"} }
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
+
+    it { is_expected.to have_requested(:put, api_path.merge("/profiles/profile-id")).with(body: {profile: body}) }
   end
 end
