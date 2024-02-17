@@ -1,70 +1,39 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Auth::TwoFactorAuth do
-  describe_method "status" do
-    let(:stub_pattern) { "status" }
+RSpec.describe Scalingo::Auth::TwoFactorAuth, type: :endpoint do
+  describe "status" do
+    subject(:response) { instance.status(**arguments) }
 
-    it_behaves_like "a singular object response"
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:get, api_path.merge("/client/tfa")) }
   end
 
-  describe_method "initiate" do
-    context "success" do
-      let(:body) { meta[:initiate][:valid] }
-      let(:stub_pattern) { "initiate-success" }
+  describe "initiate" do
+    subject(:response) { instance.initiate(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:body) { {provider: "value"} }
 
-    context "wrong provider" do
-      let(:body) { meta[:initiate][:invalid] }
-      let(:stub_pattern) { "initiate-wrong-provider" }
+    include_examples "requires authentication"
 
-      it_behaves_like "a client error"
-    end
-
-    context "already enabled" do
-      let(:body) { meta[:initiate][:valid] }
-      let(:stub_pattern) { "initiate-already-enabled" }
-
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/client/tfa")).with(body: {tfa: body}) }
   end
 
-  describe_method "validate" do
-    context "success" do
-      let(:body) { meta[:validate][:valid] }
-      let(:stub_pattern) { "validate-success" }
-      let(:expected_keys) { %i[codes user] }
+  describe "validate" do
+    subject(:response) { instance.validate(**arguments) }
 
-      it_behaves_like "a singular object response", 201
-    end
+    let(:body) { {attempt: "value"} }
 
-    context "wrong provider" do
-      let(:body) { meta[:validate][:invalid] }
-      let(:stub_pattern) { "validate-wrong" }
+    include_examples "requires authentication"
 
-      it_behaves_like "a client error"
-    end
-
-    context "already enabled" do
-      let(:body) { meta[:validate][:invalid] }
-      let(:stub_pattern) { "validate-not-initiated" }
-
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:post, api_path.merge("/client/tfa/validate")).with(body: {tfa: body}) }
   end
 
-  describe_method "disable" do
-    context "success" do
-      let(:stub_pattern) { "disable-success" }
+  describe "disable" do
+    subject(:response) { instance.disable(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    include_examples "requires authentication"
 
-    context "not enabled" do
-      let(:stub_pattern) { "disable-not-initiated" }
-
-      it_behaves_like "a client error"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/client/tfa")) }
   end
 end

@@ -1,74 +1,54 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Auth::Tokens do
-  describe_method "exchange" do
-    subject { auth_guest.tokens }
+RSpec.describe Scalingo::Auth::Tokens, type: :endpoint do
+  describe "all" do
+    subject(:response) { instance.all(**arguments) }
 
-    context "with a valid token" do
-      let(:basic) { {password: meta[:exchange][:valid]} }
-      let(:stub_pattern) { "exchange-200" }
+    include_examples "requires authentication"
 
-      it "is successful" do
-        expect(response).to be_success
-        expect(response.body).to be_present
-      end
-    end
-
-    context "with an invalid token" do
-      let(:basic) { {password: meta[:exchange][:invalid]} }
-      let(:stub_pattern) { "exchange-401" }
-
-      it "is rejected with an valid token" do
-        expect(response.status).to eq 401
-      end
-    end
+    it { is_expected.to have_requested(:get, api_path.merge("/tokens")) }
   end
 
-  describe_method "all" do
-    let(:stub_pattern) { "all-200" }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
-    it_behaves_like "a collection response"
-    it_behaves_like "a non-paginated collection"
+    let(:body) { {field: "value"} }
+
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:post, api_path.merge("/tokens")).with(body: {token: body}) }
   end
 
-  describe_method "create" do
-    context "success" do
-      let(:body) { meta[:create][:valid] }
-      let(:stub_pattern) { "create-201" }
+  describe "exchange" do
+    subject(:response) { instance.exchange(**arguments) }
 
-      it_behaves_like "a singular object response", 201
+    let(:basic) { {user: nil, password: "yo"} }
+    let(:expected_headers) do
+      {"Authorization" => Faraday::Utils.basic_header_from(nil, "yo")}
     end
+
+    it { is_expected.to have_requested(:post, api_path.merge("/tokens/exchange")).with(headers: expected_headers) }
   end
 
-  describe_method "renew" do
-    context "success" do
-      let(:params) { {id: meta[:id]} }
-      let(:stub_pattern) { "renew-200" }
+  describe "renew" do
+    subject(:response) { instance.renew(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:params) { {id: "token-id"} }
 
-    context "not found" do
-      let(:params) { {id: meta[:not_found_id]} }
-      let(:stub_pattern) { "renew-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:patch, api_path.merge("/tokens/token-id/renew")) }
   end
 
-  describe_method "destroy" do
-    context "success" do
-      let(:params) { {id: meta[:id]} }
-      let(:stub_pattern) { "destroy-204" }
+  describe "destroy" do
+    subject(:response) { instance.destroy(**arguments) }
 
-      it_behaves_like "an empty response"
-    end
+    let(:params) { {id: "token-id"} }
 
-    context "not found" do
-      let(:params) { {id: meta[:not_found_id]} }
-      let(:stub_pattern) { "destroy-404" }
+    include_examples "requires authentication"
+    include_examples "requires some params", :id
 
-      it_behaves_like "a not found response"
-    end
+    it { is_expected.to have_requested(:delete, api_path.merge("/tokens/token-id")) }
   end
 end

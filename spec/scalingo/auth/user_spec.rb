@@ -1,31 +1,29 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::Auth::User do
-  describe_method "self" do
-    let(:stub_pattern) { "self" }
+RSpec.describe Scalingo::Auth::User, type: :endpoint do
+  describe "self" do
+    subject(:response) { instance.self(**arguments) }
 
-    it_behaves_like "a singular object response"
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:get, api_path.merge("/users/self")) }
   end
 
-  describe_method "update" do
-    context "success" do
-      let(:body) { meta[:update][:valid] }
-      let(:stub_pattern) { "update-200" }
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
 
-      it_behaves_like "a singular object response"
-    end
+    let(:body) { {field: "value"} }
 
-    context "unprocessable" do
-      let(:body) { meta[:update][:invalid] }
-      let(:stub_pattern) { "update-422" }
+    include_examples "requires authentication"
 
-      it_behaves_like "an unprocessable request"
-    end
+    it { is_expected.to have_requested(:put, api_path.merge("/users/account")).with(body: {user: body}) }
   end
 
-  describe_method "stop_free_trial" do
-    let(:stub_pattern) { "stop-free-trial" }
+  describe "stop free trial" do
+    subject(:response) { instance.stop_free_trial(**arguments) }
 
-    it_behaves_like "a successful response"
+    include_examples "requires authentication"
+
+    it { is_expected.to have_requested(:post, api_path.merge("/users/stop_free_trial")) }
   end
 end
