@@ -2,6 +2,12 @@ require "spec_helper"
 
 RSpec.describe Scalingo::API::Client do
   let(:url) { "http://localhost" }
+  let(:bearer_token) { "bearer-token" }
+  let(:scalingo) do
+    scalingo_client = Scalingo::Client.new
+    scalingo_client.authenticate_with(bearer_token: bearer_token) if bearer_token
+    scalingo_client
+  end
 
   subject { described_class.new(url, scalingo: scalingo) }
 
@@ -145,7 +151,7 @@ RSpec.describe Scalingo::API::Client do
 
   describe "authenticated_connection" do
     context "without bearer token" do
-      let(:scalingo) { scalingo_guest }
+      let(:bearer_token) { nil }
 
       it "raises if configured to" do
         expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
@@ -179,7 +185,7 @@ RSpec.describe Scalingo::API::Client do
     let(:database_id) { "db-id-1234" }
 
     context "without bearer token" do
-      let(:scalingo) { scalingo_guest }
+      let(:bearer_token) { nil }
 
       it "raises" do
         expect {
@@ -240,7 +246,7 @@ RSpec.describe Scalingo::API::Client do
     end
 
     context "not logged" do
-      let(:scalingo) { scalingo_guest }
+      let(:bearer_token) { nil }
 
       context "no fallback to guest" do
         it "raises when set to raise" do
