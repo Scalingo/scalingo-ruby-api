@@ -14,6 +14,7 @@ module Scalingo
       @config = Configuration.new(attributes, Scalingo.config)
     end
 
+    # :nocov:
     def inspect
       str = %(<#{self.class}:0x#{object_id.to_s(16)} version:"#{Scalingo::VERSION}" authenticated:)
 
@@ -26,6 +27,7 @@ module Scalingo
       str << ">"
       str
     end
+    # :nocov:
 
     ## Sub-clients accessors
     def auth

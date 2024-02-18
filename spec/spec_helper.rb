@@ -1,6 +1,15 @@
 require "bundler/setup"
-require "scalingo"
 require "active_support/all"
+
+if ENV["COVERAGE"]
+  require "simplecov"
+
+  SimpleCov.start do
+    enable_coverage :branch
+  end
+end
+
+require "scalingo"
 
 pattern = File.join(File.expand_path(__dir__), "support", "**", "*.rb")
 

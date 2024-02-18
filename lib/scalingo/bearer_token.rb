@@ -9,6 +9,7 @@ module Scalingo
       @raise_on_expired = raise_on_expired
     end
 
+    # :nocov:
     def inspect
       str = "<#{self.class}:0x#{object_id.to_s(16)} "
 
@@ -23,6 +24,7 @@ module Scalingo
       str << %(value:"#{value}">)
       str
     end
+    # :nocov:
 
     def raise_on_expired?
       @raise_on_expired

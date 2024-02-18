@@ -98,6 +98,7 @@ module Scalingo
         end
       end
 
+      # :nocov:
       def inspect
         str = %(<#{self.class}:0x#{object_id.to_s(16)} base_url:"#{@client.url}" endpoints:)
 
@@ -105,6 +106,7 @@ module Scalingo
         str << ">"
         str
       end
+      # :nocov:
     end
   end
 end
