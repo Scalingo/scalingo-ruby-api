@@ -3,6 +3,7 @@ require:
   - standard-custom
   - standard-performance
   - rubocop-performance
+  - rubocop-rspec
 
 inherit_gem:
   standard: config/base.yml

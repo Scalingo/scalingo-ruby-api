@@ -1,6 +1,8 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::API::Client do
+  subject { described_class.new(url, scalingo: scalingo) }
+
   let(:url) { "http://localhost" }
   let(:bearer_token) { "bearer-token" }
   let(:scalingo) do
@@ -8,8 +10,6 @@ RSpec.describe Scalingo::API::Client do
     scalingo_client.authenticate_with(bearer_token: bearer_token) if bearer_token
     scalingo_client
   end
-
-  subject { described_class.new(url, scalingo: scalingo) }
 
   describe "initialize" do
     let(:config) { {default_region: :test} }

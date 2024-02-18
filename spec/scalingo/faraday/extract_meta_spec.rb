@@ -13,6 +13,8 @@ RSpec.shared_examples "no meta extraction" do
 end
 
 RSpec.describe Scalingo::ExtractMeta do
+  subject { client.get("/") }
+
   let(:headers) { {"Content-Type" => content_type}.compact }
   let(:content_type) { "application/json" }
   let(:body) { nil }
@@ -26,8 +28,6 @@ RSpec.describe Scalingo::ExtractMeta do
       end
     end
   end
-
-  subject { client.get("/") }
 
   context "with a non-json response" do
     let(:content_type) { "text/html" }

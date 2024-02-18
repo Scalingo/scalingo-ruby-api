@@ -70,7 +70,7 @@ RSpec.describe Scalingo::Client do
         expect(subject.auth.tokens).to receive(:exchange).and_return(fake_response)
 
         expect(subject.authenticate_with(access_token: "access token")).to be false
-        expect(subject.token).to be nil
+        expect(subject.token).to be_nil
       end
     end
 
