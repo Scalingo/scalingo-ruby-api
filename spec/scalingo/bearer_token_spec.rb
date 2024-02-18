@@ -12,7 +12,7 @@ RSpec.describe Scalingo::BearerToken do
       instance = described_class.new(:value)
 
       expect(instance.value).to eq(:value)
-      expect(instance.expires_at).to eq nil
+      expect(instance.expires_at).to be_nil
     end
 
     it "stores the expiration" do
