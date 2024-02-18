@@ -1,4 +1,4 @@
-RSpec.shared_context "default endpoint context" do
+RSpec.shared_context "with the default endpoint context" do
   subject do
     response # need to be defined in the including context
     WebMock # returning this lets us use the one-liner `have_requested` syntax

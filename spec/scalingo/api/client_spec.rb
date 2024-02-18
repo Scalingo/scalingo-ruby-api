@@ -99,7 +99,7 @@ RSpec.describe Scalingo::API::Client do
 
   describe "headers" do
     before do
-      expect(scalingo.config).to receive(:user_agent).and_return(user_agent).once
+      allow(scalingo.config).to receive(:user_agent).and_return(user_agent)
     end
 
     let(:user_agent) { "user agent" }
@@ -229,8 +229,8 @@ RSpec.describe Scalingo::API::Client do
   end
 
   describe "connection" do
-    context "logged" do
-      context "no fallback to guest" do
+    context "when logged" do
+      context "without fallback to guest" do
         it "calls and return the authenticated_connection" do
           expect(subject).to receive(:authenticated_connection).and_return(:conn)
           expect(subject.connection).to eq(:conn)
@@ -245,10 +245,10 @@ RSpec.describe Scalingo::API::Client do
       end
     end
 
-    context "not logged" do
+    context "when not logged" do
       let(:bearer_token) { nil }
 
-      context "no fallback to guest" do
+      context "without fallback to guest" do
         it "raises when set to raise" do
           expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
 

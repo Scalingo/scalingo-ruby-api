@@ -37,10 +37,10 @@ RSpec.describe Scalingo::Regional::Logs, type: :endpoint do
   describe "for" do
     subject(:response) { instance.for(**arguments) }
 
+    let(:params) { {app_id: app_id} }
+
     include_examples "requires authentication"
     include_examples "requires some params", :app_id
-
-    let(:params) { {app_id: app_id} }
 
     context "with a successful call for the logs url" do
       before do

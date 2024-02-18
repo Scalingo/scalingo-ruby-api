@@ -20,7 +20,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.include_context "default endpoint context", type: :endpoint
+  config.include_context "with the default endpoint context", type: :endpoint
 
   config.before(:each, type: :endpoint) do
     stub_request(:any, /localhost/)
