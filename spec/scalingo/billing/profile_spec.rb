@@ -11,14 +11,6 @@ RSpec.describe Scalingo::Billing::Profile, type: :endpoint do
     it { is_expected.to have_requested(:post, api_path.merge("/profiles")).with(body: {profile: body}) }
   end
 
-  describe "show" do
-    subject(:response) { instance.show(**arguments) }
-
-    include_examples "requires authentication"
-
-    it { is_expected.to have_requested(:get, api_path.merge("/profile")) }
-  end
-
   describe "find" do
     subject(:response) { instance.find(**arguments) }
 
