@@ -1,8 +1,23 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-set -vx
+#!/usr/bin/env ruby
+require "fileutils"
 
-bundle install
+# path to your application root.
+GEM_ROOT = File.expand_path("..", __dir__)
 
-# Do any other automated setup that you need to do here
+def system!(*args)
+  system(*args, exception: true)
+end
+
+FileUtils.chdir GEM_ROOT do
+  # This script is a way to set up or update your development environment automatically.
+  # This script is idempotent, so that you can run it at any time and get an expectable outcome.
+  # Add necessary setup steps to this file.
+
+  puts "== Installing dependencies =="
+  system! "gem install bundler --conservative"
+  system("bundle check") || system!("bundle install")
+
+  # Creating useful but unversioned env files
+  puts "\n== Creating .env.*.local files =="
+  FileUtils.touch(".env.local")
+end
