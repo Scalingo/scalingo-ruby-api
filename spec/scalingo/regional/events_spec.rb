@@ -13,8 +13,8 @@ RSpec.describe Scalingo::Regional::Events, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/event_categories")) }
   end
 
-  describe "all" do
-    subject(:response) { instance.all(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     include_examples "requires authentication"
 
@@ -25,23 +25,18 @@ RSpec.describe Scalingo::Regional::Events, type: :endpoint do
 
       it { is_expected.to have_requested(:get, api_path.merge("/events?page=2")) }
     end
-  end
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+    context "with app_id" do
+      let(:app_id) { "my-app-id" }
+      let(:params) { {app_id: app_id} }
 
-    let(:app_id) { "my-app-id" }
-    let(:params) { {app_id: app_id} }
+      it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/events")) }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+      context "with query string" do
+        let(:params) { {app_id: app_id, query: {page: 2}} }
 
-    it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/events")) }
-
-    context "with query string" do
-      let(:params) { {app_id: app_id, query: {page: 2}} }
-
-      it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/events?page=2")) }
+        it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/events?page=2")) }
+      end
     end
   end
 end
