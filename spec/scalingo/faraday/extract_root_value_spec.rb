@@ -2,6 +2,8 @@ require "spec_helper"
 require "scalingo/faraday/extract_root_value"
 
 RSpec.describe Scalingo::ExtractRootValue do
+  subject { client.get("/") }
+
   let(:status) { 200 }
   let(:body) { {a: 1} }
 
@@ -13,8 +15,6 @@ RSpec.describe Scalingo::ExtractRootValue do
       end
     end
   end
-
-  subject { client.get("/") }
 
   context "with a non-successful response" do
     let(:status) { 300 }

@@ -1,18 +1,18 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::BearerToken do
+  subject { described_class.new(value, expires_at: expires_at, raise_on_expired: raise_on_expired) }
+
   let(:value) { "my-token" }
   let(:expires_at) { nil }
   let(:raise_on_expired) { false }
-
-  subject { described_class.new(value, expires_at: expires_at, raise_on_expired: raise_on_expired) }
 
   describe "initialize" do
     it "stores the value" do
       instance = described_class.new(:value)
 
       expect(instance.value).to eq(:value)
-      expect(instance.expires_at).to eq nil
+      expect(instance.expires_at).to be_nil
     end
 
     it "stores the expiration" do
@@ -31,11 +31,13 @@ RSpec.describe Scalingo::BearerToken do
 
     context "with the expiration in the future" do
       let(:expires_at) { Time.current + 1.hour }
+
       it { expect(subject).not_to be_expired }
     end
 
     context "with the expiration in the past" do
       let(:expires_at) { Time.current - 1.minute }
+
       it { expect(subject).to be_expired }
     end
   end

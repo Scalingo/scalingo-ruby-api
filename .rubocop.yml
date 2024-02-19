@@ -3,6 +3,7 @@ require:
   - standard-custom
   - standard-performance
   - rubocop-performance
+  - rubocop-rspec
 
 inherit_gem:
   standard: config/base.yml
@@ -18,3 +19,43 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
+
+# Line-base counting is not reliable enough
+RSpec/ExampleLength:
+  Enabled: false
+
+# Deprecated cop, will be removed
+RSpec/FilePath:
+  Enabled: false
+
+# Not convinced by how strict this cop is by default
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+# Really not convinced by this one
+RSpec/NamedSubject:
+  Enabled: false
+
+# Default is 3, but 4 is used and relevant (class / method / global state / local state)
+RSpec/NestedGroups:
+  Max: 4
+
+# Not always relevant for libs
+RSpec/SpecFilePathFormat:
+  Exclude:
+    - 'spec/scalingo/faraday/**/*'
+
+# Not sure about this one - requires more research
+RSpec/MessageSpies:
+  Enabled: false
+
+# Not sure about this one - requires more research
+RSpec/StubbedMock:
+  Enabled: false
+
+# Not sure about this one - requires more research
+RSpec/SubjectStub:
+  Enabled: false

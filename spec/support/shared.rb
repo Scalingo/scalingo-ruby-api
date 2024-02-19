@@ -1,4 +1,9 @@
-RSpec.shared_context "default endpoint context" do
+RSpec.shared_context "with the default endpoint context" do
+  subject do
+    response # need to be defined in the including context
+    WebMock # returning this lets us use the one-liner `have_requested` syntax
+  end
+
   let(:bearer_token) { "Bearer token" }
 
   let(:arguments) do
@@ -22,11 +27,6 @@ RSpec.shared_context "default endpoint context" do
 
   let(:api_client) { described_class.module_parent.new(api_path.to_s, scalingo: scalingo_client) }
   let(:instance) { described_class.new(api_client) }
-
-  subject do
-    response # need to be defined in the including context
-    WebMock # returning this lets us use the one-liner `have_requested` syntax
-  end
 end
 
 RSpec.shared_examples "requires authentication" do

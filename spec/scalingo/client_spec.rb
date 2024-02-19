@@ -5,7 +5,7 @@ RSpec.describe Scalingo::Client do
 
   describe "token" do
     it "wraps the token in a BearerToken" do
-      expect(subject.token).to eq nil
+      expect(subject.token).to be_nil
 
       subject.token = "my-token"
       expect(subject.token).to be_a(Scalingo::BearerToken)
@@ -70,7 +70,7 @@ RSpec.describe Scalingo::Client do
         expect(subject.auth.tokens).to receive(:exchange).and_return(fake_response)
 
         expect(subject.authenticate_with(access_token: "access token")).to be false
-        expect(subject.token).to be nil
+        expect(subject.token).to be_nil
       end
     end
 
@@ -78,15 +78,15 @@ RSpec.describe Scalingo::Client do
       it "only sets the bearer token according to the arguments" do
         expect(subject.authenticate_with(bearer_token: "my token")).to be true
         expect(subject.token.value).to eq "my token"
-        expect(subject.token.expires_at).to eq nil
+        expect(subject.token.expires_at).to be_nil
 
         expect(subject.authenticate_with(bearer_token: Scalingo::BearerToken.new("my token"))).to be true
         expect(subject.token.value).to eq "my token"
-        expect(subject.token.expires_at).to eq nil
+        expect(subject.token.expires_at).to be_nil
 
         expect(subject.authenticate_with(bearer_token: "my token", expires_at: Time.now + 1.hour)).to be true
         expect(subject.token.value).to eq "my token"
-        expect(subject.token.expires_at).not_to eq nil
+        expect(subject.token.expires_at).not_to be_nil
       end
     end
   end

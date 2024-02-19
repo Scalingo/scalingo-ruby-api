@@ -1,15 +1,16 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::API::Client do
+  subject { described_class.new(url, scalingo: scalingo) }
+
   let(:url) { "http://localhost" }
   let(:bearer_token) { "bearer-token" }
+  let(:configuration) { {} }
   let(:scalingo) do
-    scalingo_client = Scalingo::Client.new
+    scalingo_client = Scalingo::Client.new(configuration)
     scalingo_client.authenticate_with(bearer_token: bearer_token) if bearer_token
     scalingo_client
   end
-
-  subject { described_class.new(url, scalingo: scalingo) }
 
   describe "initialize" do
     let(:config) { {default_region: :test} }
@@ -85,11 +86,11 @@ RSpec.describe Scalingo::API::Client do
       expect(mock).to receive(:new).with(instance).and_return("1st").once
 
       # Not yet loaded...
-      expect(instance.instance_variable_get(:@handler)).to eq(nil)
+      expect(instance.instance_variable_get(:@handler)).to be_nil
       instance.handler
 
       # Memoized...
-      expect(instance.instance_variable_get(:@handler)).not_to eq(nil)
+      expect(instance.instance_variable_get(:@handler)).not_to be_nil
 
       # More calls won't try to perform more instanciations
       instance.handler
@@ -98,10 +99,7 @@ RSpec.describe Scalingo::API::Client do
   end
 
   describe "headers" do
-    before do
-      expect(scalingo.config).to receive(:user_agent).and_return(user_agent).once
-    end
-
+    let(:configuration) { {user_agent: user_agent} }
     let(:user_agent) { "user agent" }
     let(:extra_hash) { {"X-Other" => "other"} }
     let(:extra_block) {
@@ -229,8 +227,8 @@ RSpec.describe Scalingo::API::Client do
   end
 
   describe "connection" do
-    context "logged" do
-      context "no fallback to guest" do
+    context "when logged" do
+      context "without fallback to guest" do
         it "calls and return the authenticated_connection" do
           expect(subject).to receive(:authenticated_connection).and_return(:conn)
           expect(subject.connection).to eq(:conn)
@@ -245,10 +243,10 @@ RSpec.describe Scalingo::API::Client do
       end
     end
 
-    context "not logged" do
+    context "when not logged" do
       let(:bearer_token) { nil }
 
-      context "no fallback to guest" do
+      context "without fallback to guest" do
         it "raises when set to raise" do
           expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
 

@@ -1,9 +1,9 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::API::Endpoint do
-  let(:client) { double }
-
   subject { described_class.new(client) }
+
+  let(:client) { double }
 
   describe "initialize" do
     it "stores the client" do
