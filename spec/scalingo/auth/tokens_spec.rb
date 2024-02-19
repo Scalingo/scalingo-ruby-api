@@ -1,8 +1,8 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Auth::Tokens, type: :endpoint do
-  describe "all" do
-    subject(:response) { instance.all(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     include_examples "requires authentication"
 
@@ -38,11 +38,11 @@ RSpec.describe Scalingo::Auth::Tokens, type: :endpoint do
     include_examples "requires authentication"
     include_examples "requires some params", :id
 
-    it { is_expected.to have_requested(:patch, api_path.merge("/tokens/token-id/renew")) }
+    it { is_expected.to have_requested(:put, api_path.merge("/tokens/token-id/renew")) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {id: "token-id"} }
 

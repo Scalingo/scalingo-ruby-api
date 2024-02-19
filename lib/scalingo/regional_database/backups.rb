@@ -2,8 +2,8 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class RegionalDatabase::Backups < API::Endpoint
-    get :for, "databases/{addon_id}/backups"
-    get :archive, "databases/{addon_id}/backups/{id}/archive"
+    get :list, "databases/{addon_id}/backups"
     post :create, "databases/{addon_id}/backups"
+    get :archive, "databases/{addon_id}/backups/{id}/archive"
   end
 end

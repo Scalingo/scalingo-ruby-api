@@ -3,8 +3,8 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Deployments, type: :endpoint do
   let(:app_id) { "my-app-id" }
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id} }
 

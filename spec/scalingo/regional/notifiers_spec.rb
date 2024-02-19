@@ -9,8 +9,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/notification_platforms")) }
   end
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id} }
 
@@ -52,7 +52,7 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
     include_examples "requires authentication"
     include_examples "requires some params", :app_id, :id
 
-    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/notifiers/notifier-id")).with(body: {notifier: body}) }
+    it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/notifiers/notifier-id")).with(body: {notifier: body}) }
   end
 
   describe "test" do
@@ -66,8 +66,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/notifiers/notifier-id/test")) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {app_id: app_id, id: "notifier-id"} }
 

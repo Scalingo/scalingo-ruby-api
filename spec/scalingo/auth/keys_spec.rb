@@ -1,8 +1,8 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Auth::Keys, type: :endpoint do
-  describe "all" do
-    subject(:response) { instance.all(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     include_examples "requires authentication"
 
@@ -19,8 +19,8 @@ RSpec.describe Scalingo::Auth::Keys, type: :endpoint do
     it { is_expected.to have_requested(:post, api_path.merge("/keys")).with(body: {key: body}) }
   end
 
-  describe "show" do
-    subject(:response) { instance.show(**arguments) }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
     let(:params) { {id: "key-id"} }
 
@@ -30,8 +30,8 @@ RSpec.describe Scalingo::Auth::Keys, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/keys/key-id")) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {id: "key-id"} }
 

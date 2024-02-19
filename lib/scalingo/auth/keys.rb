@@ -2,9 +2,9 @@ require "scalingo/api/endpoint"
 
 module Scalingo
   class Auth::Keys < API::Endpoint
-    get :all, "keys"
-    get :show, "keys/{id}"
+    get :list, "keys"
+    get :find, "keys/{id}"
     post :create, "keys", root_key: :key
-    delete :destroy, "keys/{id}"
+    delete :delete, "keys/{id}"
   end
 end
