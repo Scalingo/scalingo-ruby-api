@@ -5,8 +5,9 @@ RSpec.describe Scalingo::API::Client do
 
   let(:url) { "http://localhost" }
   let(:bearer_token) { "bearer-token" }
+  let(:configuration) { {} }
   let(:scalingo) do
-    scalingo_client = Scalingo::Client.new
+    scalingo_client = Scalingo::Client.new(configuration)
     scalingo_client.authenticate_with(bearer_token: bearer_token) if bearer_token
     scalingo_client
   end
@@ -98,10 +99,7 @@ RSpec.describe Scalingo::API::Client do
   end
 
   describe "headers" do
-    before do
-      allow(scalingo.config).to receive(:user_agent).and_return(user_agent)
-    end
-
+    let(:configuration) { {user_agent: user_agent} }
     let(:user_agent) { "user agent" }
     let(:extra_hash) { {"X-Other" => "other"} }
     let(:extra_block) {
