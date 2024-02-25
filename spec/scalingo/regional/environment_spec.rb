@@ -3,8 +3,8 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
   let(:app_id) { "my-app-id" }
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id} }
 
@@ -35,7 +35,7 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
     include_examples "requires authentication"
     include_examples "requires some params", :app_id, :id
 
-    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/variables/variable-id")).with(body: {variable: body}) }
+    it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/variables/variable-id")).with(body: {variable: body}) }
   end
 
   describe "bulk_update" do
@@ -50,8 +50,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/variables")).with(body: {variables: body}) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {app_id: app_id, id: "variable-id"} }
 

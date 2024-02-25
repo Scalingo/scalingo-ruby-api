@@ -3,8 +3,8 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
   let(:app_id) { "my-app-id" }
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id} }
 
@@ -25,8 +25,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/apps/collaboration?token=some-token")) }
   end
 
-  describe "invite" do
-    subject(:response) { instance.invite(**arguments) }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
@@ -37,8 +37,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/collaborators")).with(body: {collaborator: body}) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {app_id: app_id, id: "collaborator-id"} }
 

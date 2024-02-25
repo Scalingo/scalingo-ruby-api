@@ -4,7 +4,7 @@ require "active_support/core_ext/hash/indifferent_access"
 
 module Scalingo
   class Regional::Metrics < API::Endpoint
+    get :list, "/apps/{app_id}/stats/{metric}{/container_type}{/container_index}", optional: [:container_type, :container_index]
     get :types, "/features/metrics"
-    get :for, "/apps/{app_id}/stats/{metric}{/container_type}{/container_index}", optional: [:container_type, :container_index]
   end
 end

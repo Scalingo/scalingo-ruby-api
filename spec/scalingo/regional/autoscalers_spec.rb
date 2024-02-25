@@ -3,8 +3,8 @@ require "spec_helper"
 RSpec.describe Scalingo::Regional::Autoscalers, type: :endpoint do
   let(:app_id) { "my-app-id" }
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id} }
 
@@ -46,11 +46,11 @@ RSpec.describe Scalingo::Regional::Autoscalers, type: :endpoint do
     include_examples "requires authentication"
     include_examples "requires some params", :app_id, :id
 
-    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/autoscalers/autoscaler-id")).with(body: {autoscaler: body}) }
+    it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/autoscalers/autoscaler-id")).with(body: {autoscaler: body}) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {app_id: app_id, id: "autoscaler-id"} }
 

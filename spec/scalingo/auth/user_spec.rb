@@ -1,8 +1,8 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::Auth::User, type: :endpoint do
-  describe "self" do
-    subject(:response) { instance.self(**arguments) }
+  describe "find" do
+    subject(:response) { instance.find(**arguments) }
 
     include_examples "requires authentication"
 

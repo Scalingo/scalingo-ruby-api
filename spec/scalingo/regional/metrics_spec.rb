@@ -9,8 +9,8 @@ RSpec.describe Scalingo::Regional::Metrics, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/features/metrics")) }
   end
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id, metric: "some-metric"} }
 

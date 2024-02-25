@@ -14,8 +14,8 @@ RSpec.describe Scalingo::Regional::Operations, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/operations/op-id")) }
   end
 
-  describe "get" do
-    subject(:response) { instance.get("http://localhost/any-url") }
+  describe "fetch" do
+    subject(:response) { instance.fetch("http://localhost/any-url") }
 
     include_examples "requires authentication"
 

@@ -7,8 +7,8 @@ RSpec.describe Scalingo::RegionalDatabase::Backups, type: :endpoint do
     scalingo_client.add_database_token(addon_id, "the-bearer-token")
   end
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {addon_id: addon_id} }
 

@@ -15,8 +15,8 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/addon_categories")) }
   end
 
-  describe "for" do
-    subject(:response) { instance.for(**arguments) }
+  describe "list" do
+    subject(:response) { instance.list(**arguments) }
 
     let(:params) { {app_id: app_id} }
 
@@ -26,8 +26,8 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/addons")) }
   end
 
-  describe "provision" do
-    subject(:response) { instance.provision(**arguments) }
+  describe "create" do
+    subject(:response) { instance.create(**arguments) }
 
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
@@ -58,7 +58,7 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
     include_examples "requires authentication"
     include_examples "requires some params", :app_id, :id
 
-    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/addons/addon-id")).with(body: {addon: body}) }
+    it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/addons/addon-id")).with(body: {addon: body}) }
   end
 
   describe "sso" do
@@ -83,8 +83,8 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/addons/addon-id/token")) }
   end
 
-  describe "destroy" do
-    subject(:response) { instance.destroy(**arguments) }
+  describe "delete" do
+    subject(:response) { instance.delete(**arguments) }
 
     let(:params) { {app_id: app_id, id: "addon-id"} }
 
