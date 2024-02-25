@@ -90,4 +90,11 @@ RSpec.describe Scalingo::Client do
       end
     end
   end
+
+  describe "self" do
+    it "returns the authenticated user" do
+      expect(subject.auth.user).to receive(:find).and_return(:user)
+      expect(subject.self).to eq :user
+    end
+  end
 end

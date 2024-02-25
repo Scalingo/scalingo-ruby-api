@@ -50,5 +50,10 @@ module Scalingo
         scalingo: self
       )
     end
+
+    ## Helpers
+    def self
+      auth.user.find
+    end
   end
 end
