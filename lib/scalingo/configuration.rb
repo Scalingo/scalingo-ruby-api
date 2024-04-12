@@ -15,10 +15,6 @@ module Scalingo
       # Set to nil to never raise.
       :exchanged_token_validity,
 
-      # Raise an exception when trying to use an authenticated connection without a bearer token set
-      # Having this setting to true prevents performing requests that would fail due to lack of authentication headers.
-      :raise_on_missing_authentication,
-
       # Raise an exception when the bearer token in use is supposed to be invalid
       :raise_on_expired_token,
 
@@ -37,7 +33,6 @@ module Scalingo
         default_region: :osc_fr1,
         user_agent: "Scalingo Ruby Client v#{Scalingo::VERSION}",
         exchanged_token_validity: 1.hour,
-        raise_on_missing_authentication: true,
         raise_on_expired_token: false,
         additional_headers: {}
       )

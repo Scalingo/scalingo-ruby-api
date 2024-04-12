@@ -77,19 +77,8 @@ module Scalingo
         }
       end
 
-      # Note: when `config.raise_on_missing_authentication` is set to false,
-      # this method may return the unauthenticated connection
-      # even with `fallback_to_guest: false`
-      def connection(fallback_to_guest: false)
-        authenticated_connection
-      rescue Error::Unauthenticated
-        raise unless fallback_to_guest
-
-        unauthenticated_connection
-      end
-
-      def unauthenticated_connection
-        @unauthenticated_conn ||= Faraday.new(connection_options) { |conn|
+      def guest_connection
+        @guest_connection ||= Faraday.new(connection_options) { |conn|
           conn.response :extract_root_value
           conn.response :extract_meta
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
@@ -99,17 +88,11 @@ module Scalingo
         }
       end
 
-      def authenticated_connection
+      def connection
         return @connection if @connection
 
         # Missing token handling. Token expiration is handled in the `value` method.
-        unless token_holder.token&.value
-          if config.raise_on_missing_authentication
-            raise Error::Unauthenticated
-          else
-            return unauthenticated_connection
-          end
-        end
+        raise Error::Unauthenticated unless token_holder.token&.value&.present?
 
         @connection = Faraday.new(connection_options) { |conn|
           conn.response :extract_root_value

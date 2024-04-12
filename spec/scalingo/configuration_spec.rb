@@ -31,8 +31,8 @@ RSpec.describe Scalingo::Configuration do
       let(:config) { {} }
 
       it "uses the default one when unspecificied" do
-        expect(client.authenticated_connection.adapter).to eq Faraday::Adapter::NetHttp
-        expect(client.unauthenticated_connection.adapter).to eq Faraday::Adapter::NetHttp
+        expect(client.connection.adapter).to eq Faraday::Adapter::NetHttp
+        expect(client.guest_connection.adapter).to eq Faraday::Adapter::NetHttp
       end
     end
 
@@ -40,8 +40,8 @@ RSpec.describe Scalingo::Configuration do
       let(:config) { {faraday_adapter: :yo} }
 
       it "uses the default one when unspecificied" do
-        expect { client.authenticated_connection.adapter }.to raise_error(Faraday::Error)
-        expect { client.unauthenticated_connection.adapter }.to raise_error(Faraday::Error)
+        expect { client.connection.adapter }.to raise_error(Faraday::Error)
+        expect { client.guest_connection.adapter }.to raise_error(Faraday::Error)
       end
     end
 
@@ -49,8 +49,8 @@ RSpec.describe Scalingo::Configuration do
       let(:config) { {faraday_adapter: :test} }
 
       it "uses the default one when unspecificied" do
-        expect(client.authenticated_connection.adapter).to eq Faraday::Adapter::Test
-        expect(client.unauthenticated_connection.adapter).to eq Faraday::Adapter::Test
+        expect(client.connection.adapter).to eq Faraday::Adapter::Test
+        expect(client.guest_connection.adapter).to eq Faraday::Adapter::Test
       end
     end
   end
