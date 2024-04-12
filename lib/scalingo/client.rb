@@ -2,7 +2,7 @@ require "scalingo/core_client"
 require "scalingo/auth"
 require "scalingo/billing"
 require "scalingo/regional"
-require "scalingo/regional_database"
+require "scalingo/database"
 
 module Scalingo
   class Client < CoreClient
