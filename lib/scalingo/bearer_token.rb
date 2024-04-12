@@ -1,12 +1,15 @@
+require "jwt"
+
 module Scalingo
   class BearerToken
     attr_reader :expires_at
     attr_writer :raise_on_expired
 
-    def initialize(value, expires_at: nil, raise_on_expired: false)
+    def initialize(value, raise_on_expired: false)
       @value = value
-      @expires_at = expires_at if expires_at
       @raise_on_expired = raise_on_expired
+
+      read_expiration!
     end
 
     # :nocov:
@@ -38,6 +41,14 @@ module Scalingo
       raise Error::ExpiredToken if expired? && raise_on_expired?
 
       @value
+    end
+
+    private
+
+    def read_expiration!
+      payload, _ = JWT.decode(@value, nil, false)
+
+      @expires_at = Time.at(payload["exp"]) if payload["exp"]
     end
   end
 end

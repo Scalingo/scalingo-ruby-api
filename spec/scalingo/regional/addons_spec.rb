@@ -90,9 +90,11 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
       end
 
       context "with a valid response" do
+        let(:token) { Scalingo.generate_test_jwt(duration: 1.hour) }
+
         before do
           stub_request(:post, "http://localhost/apps/my-app-id/addons/addon-id/token").to_return(
-            body: {addon: {id: "addon-id", token: "some-token"}}.to_json,
+            body: {addon: {id: "addon-id", token: jwt}}.to_json,
             status: 200,
             headers: {content_type: "application/json"}
           )
@@ -101,7 +103,7 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
         it "returns a database client" do
           expect(subject).to be_a(Scalingo::Database)
           expect(subject).to be_authenticated
-          expect(subject.token.value).to eq "some-token"
+          expect(subject.token.value).to eq(jwt)
         end
       end
 

@@ -4,7 +4,7 @@ RSpec.describe Scalingo::API::Client do
   subject { described_class.new(url, scalingo: scalingo) }
 
   let(:url) { "http://localhost" }
-  let(:bearer_token) { "bearer-token" }
+  let(:bearer_token) { Scalingo.generate_test_jwt(duration: 1.hour) }
   let(:configuration) { {} }
   let(:scalingo) do
     scalingo_client = Scalingo::Client.new(configuration)
