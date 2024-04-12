@@ -1,20 +1,10 @@
 require "active_support"
 require "active_support/core_ext/numeric/time"
 require "scalingo/version"
-require "ostruct"
 
 module Scalingo
   class Configuration
     ATTRIBUTES = [
-      # URL to the authentication API
-      # :auth,
-
-      # URL to the billing API
-      # :billing,
-
-      # List of regions under the form {"region_id": root_url}
-      # :regions,
-
       # Default region. Must match a key in `regions`
       :default_region,
 
