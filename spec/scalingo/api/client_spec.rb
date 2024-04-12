@@ -66,6 +66,13 @@ RSpec.describe Scalingo::API::Client do
         subject
       end
     end
+
+    describe "region" do
+      it "keeps track of the region if supplied" do
+        instance = described_class.new(:url, region: "my-region")
+        expect(instance.region).to eq("my-region")
+      end
+    end
   end
 
   describe "self.register_handler(s)!" do

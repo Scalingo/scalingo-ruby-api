@@ -9,10 +9,12 @@ module Scalingo
     class Client
       include TokenHolder
 
-      attr_reader :config, :token_holder, :url
+      attr_reader :config, :token_holder, :url, :region
 
-      def initialize(url, scalingo: nil, config: {})
+      def initialize(url, scalingo: nil, region: nil, config: {})
         @url = url
+        @region = region
+
         parent_config = Scalingo.config
 
         if scalingo

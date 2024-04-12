@@ -25,7 +25,7 @@ RSpec.shared_context "with the default endpoint context" do
 
   let(:api_path) { URI.parse("http://localhost") }
 
-  let(:api_client) { described_class.module_parent.new(api_path.to_s, scalingo: scalingo_client) }
+  let(:api_client) { described_class.module_parent.new(api_path.to_s, scalingo: scalingo_client, region: :some_region) }
   let(:instance) { described_class.new(api_client) }
 end
 
