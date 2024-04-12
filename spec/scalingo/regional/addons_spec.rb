@@ -81,6 +81,38 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
     include_examples "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/addons/addon-id/token")) }
+
+    describe "database_client_for" do
+      subject(:db_client) { instance.database_client_for(**params) }
+
+      before do
+        allow(Scalingo::Client::URLS).to receive(:fetch).with(:database).and_return({some_region: "http://localhost"})
+      end
+
+      context "with a valid response" do
+        before do
+          stub_request(:post, "http://localhost/apps/my-app-id/addons/addon-id/token").to_return(
+            body: {addon: {id: "addon-id", token: "some-token"}}.to_json,
+            status: 200,
+            headers: {content_type: "application/json"}
+          )
+        end
+
+        it "returns a database client" do
+          expect(subject).to be_a(Scalingo::Database)
+          expect(subject).to be_authenticated
+          expect(subject.token.value).to eq "some-token"
+        end
+      end
+
+      context "with invalid params" do
+        before do
+          stub_request(:post, "http://localhost/apps/my-app-id/addons/addon-id/token").to_return(status: 404)
+        end
+
+        it { is_expected.to be_nil }
+      end
+    end
   end
 
   describe "delete" do

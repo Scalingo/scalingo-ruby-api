@@ -12,18 +12,16 @@ module Scalingo
     get :categories, "addon_categories", connected: false
     get :providers, "addon_providers", connected: false
 
-    def authenticate!(**params, &block)
-      response = token(**params, &block)
-      return response unless response.status == 200
+    def database_client_for(app_id:, id:)
+      response = token(app_id: app_id, id: id)
 
-      client.token_holder.authenticate_database_with_bearer_token(
-        params[:id],
-        response.body[:token],
-        expires_at: Time.now + 1.hour,
-        raise_on_expired_token: client.config.raise_on_expired_token
-      )
+      return nil unless response.status == 200
 
-      response
+      db_url = Scalingo::Client::URLS.fetch(:database).fetch(client.region)
+
+      db_client = Scalingo::Database.new(db_url, region: client.region)
+      db_client.token = response.body.fetch(:token)
+      db_client
     end
   end
 end
