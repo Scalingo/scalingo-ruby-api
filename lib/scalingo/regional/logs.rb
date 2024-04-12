@@ -14,8 +14,6 @@ module Scalingo
       params[:id] = params.delete(:app_id) if params[:app_id].present?
       logs_response = client.apps.logs_url(**params)
 
-      return logs_response unless logs_response.success?
-
       fetch(logs_response.body, **params, &block)
     end
   end

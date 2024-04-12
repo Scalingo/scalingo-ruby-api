@@ -110,7 +110,9 @@ RSpec.describe Scalingo::Regional::Addons, type: :endpoint do
           stub_request(:post, "http://localhost/apps/my-app-id/addons/addon-id/token").to_return(status: 404)
         end
 
-        it { is_expected.to be_nil }
+        it "raises an exception" do
+          expect { subject }.to raise_error(Faraday::ResourceNotFound)
+        end
       end
     end
   end

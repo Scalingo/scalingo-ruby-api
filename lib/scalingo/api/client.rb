@@ -82,6 +82,7 @@ module Scalingo
           conn.response :extract_root_value
           conn.response :extract_meta
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
+          conn.response :raise_error
           conn.request :json
 
           conn.adapter(config.faraday_adapter) if config.faraday_adapter
@@ -99,6 +100,7 @@ module Scalingo
           conn.response :extract_meta
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
+          conn.response :raise_error
           conn.request :authorization, "Bearer", -> { token_holder.token&.value }
 
           conn.adapter(config.faraday_adapter) if config.faraday_adapter
