@@ -1,11 +1,10 @@
 require "spec_helper"
 
 RSpec.describe Scalingo::BearerToken do
-  subject { described_class.new(value, raise_on_expired: raise_on_expired) }
+  subject { described_class.new(value) }
 
   let(:duration) { 1.hour }
   let(:value) { Scalingo.generate_test_jwt(duration: duration) }
-  let(:raise_on_expired) { false }
 
   context "without duration" do
     let(:duration) { nil }
@@ -46,32 +45,14 @@ RSpec.describe Scalingo::BearerToken do
   end
 
   describe "value" do
-    context "when raising on expired token" do
-      let(:raise_on_expired) { true }
-
-      it "raises when expired" do
-        expect(subject).to receive(:expired?).and_return(true)
-        expect { subject.value }.to raise_error(Scalingo::Error::ExpiredToken)
-      end
-
-      it "returns the value when not expired" do
-        expect(subject).to receive(:expired?).and_return(false)
-        expect(subject.value).to eq(value)
-      end
+    it "raises when expired" do
+      expect(subject).to receive(:expired?).and_return(true)
+      expect { subject.value }.to raise_error(Scalingo::Error::ExpiredToken)
     end
 
-    context "when not raising on expired token" do
-      let(:raise_on_expired) { false }
-
-      it "returns the value when expired" do
-        expect(subject).to receive(:expired?).and_return(true)
-        expect(subject.value).to eq(value)
-      end
-
-      it "returns the value when not expired" do
-        expect(subject).to receive(:expired?).and_return(false)
-        expect(subject.value).to eq(value)
-      end
+    it "returns the value when not expired" do
+      expect(subject).to receive(:expired?).and_return(false)
+      expect(subject.value).to eq(value)
     end
   end
 end

@@ -3,26 +3,29 @@ require "spec_helper"
 RSpec.describe Scalingo::Client do
   subject { described_class.new }
 
+  let(:timed_jwt) { Scalingo.generate_test_jwt(duration: 1.hour) }
+  let(:other_jwt) { Scalingo.generate_test_jwt(duration: nil) }
+
   describe "token" do
     it "wraps the token in a BearerToken" do
       expect(subject.token).to be_nil
 
-      subject.token = "my-token"
+      subject.token = timed_jwt
       expect(subject.token).to be_a(Scalingo::BearerToken)
-      expect(subject.token.value).to eq "my-token"
+      expect(subject.token.value).to eq(timed_jwt)
 
-      subject.token = Scalingo::BearerToken.new("other-token")
+      subject.token = Scalingo::BearerToken.new(other_jwt)
       expect(subject.token).to be_a(Scalingo::BearerToken)
-      expect(subject.token.value).to eq "other-token"
+      expect(subject.token.value).to eq(other_jwt)
     end
 
     it "can query the authentication status" do
       expect(subject).not_to be_authenticated
 
-      subject.token = "my-token"
+      subject.token = timed_jwt
       expect(subject).to be_authenticated
 
-      subject.token = Scalingo::BearerToken.new("other-token")
+      subject.token = Scalingo::BearerToken.new(other_jwt)
       allow(subject.token).to receive(:expired?).and_return(false)
       expect(subject).to be_authenticated
 
@@ -42,24 +45,18 @@ RSpec.describe Scalingo::Client do
       }.to raise_error(ArgumentError)
     end
 
-    it "raises if expires_at is supplied for an access_token" do
-      expect {
-        subject.authenticate_with(access_token: :a, expires_at: :b)
-      }.to raise_error(ArgumentError)
-    end
-
     context "with access token" do
       it "is successful with valid token" do
         fake_response = OpenStruct.new(
           success?: true,
-          body: "response token"
+          body: timed_jwt
         )
 
         expect(subject.auth.tokens).to receive(:exchange).and_return(fake_response)
 
         expect(subject.authenticate_with(access_token: "access token")).to be true
-        expect(subject.token.value).to eq "response token"
-        expect(subject.token.expires_at).to be_within(1.second).of(Time.current + Scalingo.config.exchanged_token_validity)
+        expect(subject.token.value).to eq(timed_jwt)
+        expect(subject.token.expires_at).to be_within(3.seconds).of(Time.current + 1.hour)
       end
 
       it "fails with invalid token" do
@@ -76,17 +73,17 @@ RSpec.describe Scalingo::Client do
 
     context "with bearer token" do
       it "only sets the bearer token according to the arguments" do
-        expect(subject.authenticate_with(bearer_token: "my token")).to be true
-        expect(subject.token.value).to eq "my token"
-        expect(subject.token.expires_at).to be_nil
-
-        expect(subject.authenticate_with(bearer_token: Scalingo::BearerToken.new("my token"))).to be true
-        expect(subject.token.value).to eq "my token"
-        expect(subject.token.expires_at).to be_nil
-
-        expect(subject.authenticate_with(bearer_token: "my token", expires_at: Time.now + 1.hour)).to be true
-        expect(subject.token.value).to eq "my token"
+        expect(subject.authenticate_with(bearer_token: timed_jwt)).to be true
+        expect(subject.token.value).to eq(timed_jwt)
         expect(subject.token.expires_at).not_to be_nil
+
+        expect(subject.authenticate_with(bearer_token: Scalingo::BearerToken.new(timed_jwt))).to be true
+        expect(subject.token.value).to eq(timed_jwt)
+        expect(subject.token.expires_at).not_to be_nil
+
+        expect(subject.authenticate_with(bearer_token: other_jwt)).to be true
+        expect(subject.token.value).to eq(other_jwt)
+        expect(subject.token.expires_at).to be_nil
       end
     end
   end

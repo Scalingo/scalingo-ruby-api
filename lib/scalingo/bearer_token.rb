@@ -3,11 +3,9 @@ require "jwt"
 module Scalingo
   class BearerToken
     attr_reader :expires_at
-    attr_writer :raise_on_expired
 
-    def initialize(value, raise_on_expired: false)
+    def initialize(value)
       @value = value
-      @raise_on_expired = raise_on_expired
 
       read_expiration!
     end
@@ -29,16 +27,12 @@ module Scalingo
     end
     # :nocov:
 
-    def raise_on_expired?
-      @raise_on_expired
-    end
-
     def expired?
       expires_at && expires_at <= Time.now
     end
 
     def value
-      raise Error::ExpiredToken if expired? && raise_on_expired?
+      raise Error::ExpiredToken if expired?
 
       @value
     end
