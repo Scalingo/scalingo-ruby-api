@@ -1,4 +1,4 @@
-## Unreleased
+## 4.0.beta1 - 2024-04-15
 
 * Breaking change: exceptions are raised on error responses (4xx, 5xx) and other errors (connection issue, timeouts)
     * Trying to reach an endpoint without having the client authenticated will raise an exception without attempting the request
