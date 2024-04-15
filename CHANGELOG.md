@@ -1,7 +1,13 @@
 ## Unreleased
 
-** Breaking change: automatic digging of the value if the reponse body is an object with a single key
-** Breaking change: remove `Scalingo::API::Reponse` in favor of `Faraday::Response`
+* Breaking change: rework DB api exposition
+* Specs: rewrite all specs
+* Breaking change: endpoint methods declaration is simplified:
+    * based on URI templates
+    * argument and method names are unified
+    * one "main" internal method, `Endpoint#request`
+* Breaking change: automatic digging of the value if the reponse body is an object with a single key
+* Breaking change: remove `Scalingo::API::Reponse` in favor of `Faraday::Response`
 
 ## 3.5.0 - 2023-12-28
 
