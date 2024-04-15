@@ -1,5 +1,9 @@
-## Unreleased
+## 4.0.beta1 - 2024-04-15
 
+* Breaking change: exceptions are raised on error responses (4xx, 5xx) and other errors (connection issue, timeouts)
+    * Trying to reach an endpoint without having the client authenticated will raise an exception without attempting the request
+    * Same when the token is expired. Expiration date is read from the token directly
+    * Associated configuration options have been removed
 * Breaking change: rework DB api exposition
 * Specs: rewrite all specs
 * Breaking change: endpoint methods declaration is simplified:

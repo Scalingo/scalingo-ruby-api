@@ -15,8 +15,6 @@ module Scalingo
     def database_client_for(app_id:, id:)
       response = token(app_id: app_id, id: id)
 
-      return nil unless response.status == 200
-
       db_url = Scalingo::Client::URLS.fetch(:database).fetch(client.region)
 
       db_client = Scalingo::Database.new(db_url, region: client.region)

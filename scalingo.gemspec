@@ -32,9 +32,11 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_dependency "addressable", [">= 2.8.0", "< 3"]
   s.add_dependency "activesupport", [">= 5", "< 8"]
   s.add_dependency "faraday", "~> 2.0"
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"
+  s.add_dependency "jwt"
 
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "dotenv"

@@ -4,7 +4,7 @@ RSpec.shared_context "with the default endpoint context" do
     WebMock # returning this lets us use the one-liner `have_requested` syntax
   end
 
-  let(:bearer_token) { "Bearer token" }
+  let(:bearer_token) { Scalingo.generate_test_jwt(duration: 1.hour) }
 
   let(:arguments) do
     args = {}

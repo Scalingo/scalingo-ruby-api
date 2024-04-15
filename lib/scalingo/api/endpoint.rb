@@ -79,7 +79,7 @@ module Scalingo
         request_body = {root_key => body} if request_body && root_key
 
         # We can use the client in either connected or unconnected mode
-        conn = connected ? client.authenticated_connection : client.unauthenticated_connection
+        conn = connected ? client.connection : client.guest_connection
 
         # We can specify basic auth credentials if needed
         conn.request :authorization, :basic, basic[:user], basic[:password] if basic.present?

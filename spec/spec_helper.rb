@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "active_support/all"
+require "active_support/testing/time_helpers"
+require "ostruct"
 
 if ENV["COVERAGE"]
   require "simplecov"
@@ -29,6 +31,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include_context "with the default endpoint context", type: :endpoint
 
   config.before(:each, type: :endpoint) do

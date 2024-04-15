@@ -8,8 +8,8 @@ RSpec.describe Scalingo::TokenHolder do
     }
   end
 
-  describe "authenticate_with_bearer_token" do
-    subject { token_holder.authenticate_with_bearer_token(token, expires_at: expires_at, raise_on_expired_token: false) }
+  describe "#token=" do
+    subject { token_holder.token = token }
 
     let(:token_holder) do
       holder = token_holder_dummy_class.new
@@ -19,8 +19,7 @@ RSpec.describe Scalingo::TokenHolder do
     end
 
     context "without expiration date" do
-      let(:token) { "1234" }
-      let(:expires_at) { nil }
+      let(:token) { Scalingo.generate_test_jwt }
 
       it "set the auth token" do
         expect(token_holder.authenticated?).to be false
@@ -30,15 +29,15 @@ RSpec.describe Scalingo::TokenHolder do
     end
 
     context "with an expiration date" do
-      let(:token) { "1234" }
-      let(:expires_at) { Time.now + 1.hour }
+      let(:token) { Scalingo.generate_test_jwt(duration: 1.hour) }
 
       it "refresh the auth token" do
-        token_holder.authenticate_with_bearer_token(token, expires_at: 1.hour.ago, raise_on_expired_token: false)
-        expect(token_holder.authenticated?).to be false
-
-        subject
+        token_holder.token = token
         expect(token_holder.authenticated?).to be true
+
+        travel_to(Time.current + 2.hours) do
+          expect(token_holder.authenticated?).to be false
+        end
       end
     end
   end

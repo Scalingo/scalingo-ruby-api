@@ -55,16 +55,11 @@ RSpec.describe Scalingo::Regional::Logs, type: :endpoint do
 
     context "with a failed call for the logs url" do
       before do
-        stub_request(:get, api_path.merge("/apps/my-app-id/logs")).to_return(
-          status: 404,
-          body: "http://localhost/signed-url"
-        )
+        stub_request(:get, api_path.merge("/apps/my-app-id/logs")).to_return(status: 404)
       end
 
-      it "returns the first response" do
-        expect(subject).not_to have_requested(:get, "http://localhost/signed-url")
-        expect(subject.status).to eq 404
-        expect(subject.env.url).to eq api_path.merge("/apps/my-app-id/logs")
+      it "raises an exception" do
+        expect { subject }.to raise_error(Faraday::ResourceNotFound)
       end
     end
   end

@@ -1,3 +1,3 @@
 module Scalingo
-  VERSION = "3.5.0"
+  VERSION = "4.0.beta1"
 end

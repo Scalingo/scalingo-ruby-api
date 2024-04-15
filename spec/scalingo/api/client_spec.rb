@@ -4,7 +4,7 @@ RSpec.describe Scalingo::API::Client do
   subject { described_class.new(url, scalingo: scalingo) }
 
   let(:url) { "http://localhost" }
-  let(:bearer_token) { "bearer-token" }
+  let(:bearer_token) { Scalingo.generate_test_jwt(duration: 1.hour) }
   let(:configuration) { {} }
   let(:scalingo) do
     scalingo_client = Scalingo::Client.new(configuration)
@@ -139,38 +139,27 @@ RSpec.describe Scalingo::API::Client do
     end
   end
 
-  describe "unauthenticated_connection" do
+  describe "guest_connection" do
     it "returns a memoized object" do
       expect(Faraday).to receive(:new).with(subject.connection_options).and_return("faraday").once
 
-      expect(subject.unauthenticated_connection).to eq "faraday"
+      expect(subject.guest_connection).to eq "faraday"
 
-      subject.unauthenticated_connection
-      subject.unauthenticated_connection
+      subject.guest_connection
+      subject.guest_connection
     end
 
     it "has no authentication header set" do
-      expect(subject.unauthenticated_connection.headers.key?("Authorization")).not_to be true
+      expect(subject.guest_connection.headers.key?("Authorization")).not_to be true
     end
   end
 
-  describe "authenticated_connection" do
+  describe "connection" do
     context "without bearer token" do
       let(:bearer_token) { nil }
 
-      it "raises if configured to" do
-        expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
-
-        expect {
-          subject.authenticated_connection
-        }.to raise_error(Scalingo::Error::Unauthenticated)
-      end
-
-      it "returns an unauthenticated connection if configured to not raise" do
-        expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(false).once
-
-        expect(subject).to receive(:unauthenticated_connection).and_return(:object).once
-        expect(subject.authenticated_connection).to eq(:object)
+      it "raises an exception" do
+        expect { subject.connection }.to raise_error(Scalingo::Error::Unauthenticated)
       end
     end
 
@@ -182,49 +171,6 @@ RSpec.describe Scalingo::API::Client do
         expected = "Bearer #{subject.token_holder.token.value}"
 
         expect(request_headers["Authorization"]).to eq(expected)
-      end
-    end
-  end
-
-  describe "connection" do
-    context "when logged" do
-      context "without fallback to guest" do
-        it "calls and return the authenticated_connection" do
-          expect(subject).to receive(:authenticated_connection).and_return(:conn)
-          expect(subject.connection).to eq(:conn)
-        end
-      end
-
-      context "with fallback to guest" do
-        it "calls and return the authenticated_connection" do
-          expect(subject).to receive(:authenticated_connection).and_return(:conn)
-          expect(subject.connection(fallback_to_guest: true)).to eq(:conn)
-        end
-      end
-    end
-
-    context "when not logged" do
-      let(:bearer_token) { nil }
-
-      context "without fallback to guest" do
-        it "raises when set to raise" do
-          expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(true).once
-
-          expect { subject.connection }.to raise_error(Scalingo::Error::Unauthenticated)
-        end
-
-        it "calls and return the unauthenticated_connection when set not to raise" do
-          expect(scalingo.config).to receive(:raise_on_missing_authentication).and_return(false).once
-          expect(subject).to receive(:unauthenticated_connection).and_return(:conn)
-          expect(subject.connection(fallback_to_guest: true)).to eq(:conn)
-        end
-      end
-
-      context "with fallback to guest" do
-        it "calls and return the unauthenticated_connection" do
-          expect(subject).to receive(:unauthenticated_connection).and_return(:conn)
-          expect(subject.connection(fallback_to_guest: true)).to eq(:conn)
-        end
       end
     end
   end
