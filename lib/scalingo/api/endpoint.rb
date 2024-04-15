@@ -38,7 +38,6 @@ module Scalingo
       end
 
       def_delegator :client, :connection
-      def_delegator :client, :database_connection
 
       # Perform a request to the API.
       # path can be an URI template; and faraday expect valid URIs - the parser raises when templates aren't fully expanded.

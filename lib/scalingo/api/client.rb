@@ -9,10 +9,12 @@ module Scalingo
     class Client
       include TokenHolder
 
-      attr_reader :config, :token_holder, :url
+      attr_reader :config, :token_holder, :url, :region
 
-      def initialize(url, scalingo: nil, config: {})
+      def initialize(url, scalingo: nil, region: nil, config: {})
         @url = url
+        @region = region
+
         parent_config = Scalingo.config
 
         if scalingo
@@ -115,21 +117,6 @@ module Scalingo
           conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
           conn.request :json
           conn.request :authorization, "Bearer", -> { token_holder.token&.value }
-
-          conn.adapter(config.faraday_adapter) if config.faraday_adapter
-        }
-      end
-
-      def database_connection(database_id)
-        raise Error::Unauthenticated unless token_holder.authenticated_for_database?(database_id)
-
-        @database_connections ||= {}
-        @database_connections[database_id] ||= Faraday.new(connection_options) { |conn|
-          conn.response :extract_root_value
-          conn.response :extract_meta
-          conn.response :json, content_type: /\bjson$/, parser_options: {symbolize_names: true}
-          conn.request :json
-          conn.request :authorization, "Bearer", -> { token_holder.database_tokens[database_id]&.value }
 
           conn.adapter(config.faraday_adapter) if config.faraday_adapter
         }

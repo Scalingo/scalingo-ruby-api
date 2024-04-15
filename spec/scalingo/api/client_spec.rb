@@ -66,6 +66,13 @@ RSpec.describe Scalingo::API::Client do
         subject
       end
     end
+
+    describe "region" do
+      it "keeps track of the region if supplied" do
+        instance = described_class.new(:url, region: "my-region")
+        expect(instance.region).to eq("my-region")
+      end
+    end
   end
 
   describe "self.register_handler(s)!" do
@@ -175,53 +182,6 @@ RSpec.describe Scalingo::API::Client do
         expected = "Bearer #{subject.token_holder.token.value}"
 
         expect(request_headers["Authorization"]).to eq(expected)
-      end
-    end
-  end
-
-  describe "database_connection" do
-    let(:database_id) { "db-id-1234" }
-
-    context "without bearer token" do
-      let(:bearer_token) { nil }
-
-      it "raises" do
-        expect {
-          subject.database_connection(database_id)
-        }.to raise_error(Scalingo::Error::Unauthenticated)
-      end
-    end
-
-    context "with bearer token" do
-      before { stub_request(:any, "localhost") }
-
-      it "has an authentication header set with a bearer scheme" do
-        scalingo.authenticate_database_with_bearer_token(
-          database_id,
-          "1234",
-          expires_at: Time.now + 1.hour,
-          raise_on_expired_token: false
-        )
-
-        request_headers = subject.database_connection(database_id).get("/").env.request_headers
-        expected = "Bearer #{subject.token_holder.database_tokens[database_id].value}"
-
-        expect(request_headers["Authorization"]).to eq(expected)
-      end
-    end
-
-    context "with wrong bearer token" do
-      it "raises" do
-        database_id_2 = "db-id-5678"
-        scalingo.authenticate_database_with_bearer_token(
-          database_id_2,
-          "1234",
-          expires_at: Time.now + 1.hour,
-          raise_on_expired_token: false
-        )
-        expect {
-          subject.database_connection(database_id)
-        }.to raise_error(Scalingo::Error::Unauthenticated)
       end
     end
   end

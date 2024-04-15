@@ -1,11 +1,7 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::RegionalDatabase::Databases, type: :endpoint do
+RSpec.describe Scalingo::Database::Databases, type: :endpoint do
   let(:id) { "database-id" }
-
-  before do
-    scalingo_client.add_database_token(id, "the-bearer-token")
-  end
 
   describe "find" do
     subject(:response) { instance.find(**arguments) }

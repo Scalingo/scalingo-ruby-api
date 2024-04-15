@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::RegionalDatabase do
+RSpec.describe Scalingo::Database do
   subject { described_class.new("url") }
 
   %w[databases backups].each do |section|

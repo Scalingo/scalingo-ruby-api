@@ -1,11 +1,7 @@
 require "spec_helper"
 
-RSpec.describe Scalingo::RegionalDatabase::Backups, type: :endpoint do
+RSpec.describe Scalingo::Database::Backups, type: :endpoint do
   let(:addon_id) { "the-addon-id" }
-
-  before do
-    scalingo_client.add_database_token(addon_id, "the-bearer-token")
-  end
 
   describe "list" do
     subject(:response) { instance.list(**arguments) }
