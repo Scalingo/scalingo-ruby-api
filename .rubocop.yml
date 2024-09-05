@@ -24,9 +24,8 @@ AllCops:
 RSpec/ExampleLength:
   Enabled: false
 
-# Deprecated cop, will be removed
-RSpec/FilePath:
-  Enabled: false
+RSpec/SpecFilePathSuffix:
+  Enabled: true
 
 # Not convinced by how strict this cop is by default
 RSpec/MultipleExpectations:

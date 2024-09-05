@@ -5,4 +5,5 @@ updates:
     schedule:
       interval: "monthly"
     reviewers:
+      - "aurelien-reeves-scalingo"
       - "ksol"
