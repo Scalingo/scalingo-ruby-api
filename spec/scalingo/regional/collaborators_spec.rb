@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/collaborators")) }
   end
@@ -19,8 +19,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
 
     let(:params) { {app_id: app_id, token: "some-token"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :token
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :token
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/collaboration?token=some-token")) }
   end
@@ -31,8 +31,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/collaborators")).with(body: {collaborator: body}) }
   end
@@ -42,8 +42,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "collaborator-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")) }
   end
@@ -53,8 +53,8 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "collaborator-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")) }
   end

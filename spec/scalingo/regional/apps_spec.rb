@@ -4,7 +4,7 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
   describe "list" do
     subject(:response) { instance.list(**arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps")) }
   end
@@ -14,7 +14,7 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
 
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps")).with(body: {app: body}) }
 
@@ -30,8 +30,8 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
 
     let(:params) { {id: "my-app-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id")) }
   end
@@ -41,8 +41,8 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
 
     let(:params) { {id: "my-app-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/logs")) }
   end
@@ -53,8 +53,8 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
     let(:params) { {id: "my-app-id"} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id")).with(body: {app: body}) }
   end
@@ -65,8 +65,8 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
     let(:params) { {id: "my-app-id"} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/rename")).with(body: body) }
   end
@@ -77,8 +77,8 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
     let(:params) { {id: "my-app-id"} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id")).with(body: body) }
   end
@@ -88,8 +88,8 @@ RSpec.describe Scalingo::Regional::Apps, type: :endpoint do
 
     let(:params) { {id: "my-app-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id")) }
   end

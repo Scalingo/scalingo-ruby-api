@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Regional::Logs, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/logs_archives")) }
   end
@@ -17,7 +17,7 @@ RSpec.describe Scalingo::Regional::Logs, type: :endpoint do
   describe "fetch" do
     subject(:response) { instance.fetch("http://localhost/any-url", **arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:get, "http://localhost/any-url") }
 
@@ -39,8 +39,8 @@ RSpec.describe Scalingo::Regional::Logs, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     context "with a successful call for the logs url" do
       before do

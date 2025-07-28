@@ -14,8 +14,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/notifiers")) }
   end
@@ -26,8 +26,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/notifiers")).with(body: {notifier: body}) }
   end
@@ -37,8 +37,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "notifier-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/notifiers/notifier-id")) }
   end
@@ -49,8 +49,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
     let(:params) { {app_id: app_id, id: "notifier-id"} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/notifiers/notifier-id")).with(body: {notifier: body}) }
   end
@@ -60,8 +60,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "notifier-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/notifiers/notifier-id/test")) }
   end
@@ -71,8 +71,8 @@ RSpec.describe Scalingo::Regional::Notifiers, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "notifier-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/notifiers/notifier-id")) }
   end

@@ -4,7 +4,7 @@ RSpec.describe Scalingo::Auth::User, type: :endpoint do
   describe "find" do
     subject(:response) { instance.find(**arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:get, api_path.merge("/users/self")) }
   end
@@ -14,7 +14,7 @@ RSpec.describe Scalingo::Auth::User, type: :endpoint do
 
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:put, api_path.merge("/users/account")).with(body: {user: body}) }
   end
@@ -22,7 +22,7 @@ RSpec.describe Scalingo::Auth::User, type: :endpoint do
   describe "stop free trial" do
     subject(:response) { instance.stop_free_trial(**arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:post, api_path.merge("/users/stop_free_trial")) }
   end
