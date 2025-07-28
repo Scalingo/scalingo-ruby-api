@@ -52,10 +52,11 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
     subject(:response) { instance.update(**arguments) }
 
     let(:params) { {app_id: app_id, id: "collaborator-id"} }
+    let(:body) { {field: "value"} }
 
     it_behaves_like "requires authentication"
     it_behaves_like "requires some params", :app_id, :id
 
-    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")) }
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")).with(body: {collaborator: body}) }
   end
 end
