@@ -47,4 +47,15 @@ RSpec.describe Scalingo::Regional::Collaborators, type: :endpoint do
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")) }
   end
+
+  describe "update" do
+    subject(:response) { instance.update(**arguments) }
+
+    let(:params) { {app_id: app_id, id: "collaborator-id"} }
+
+    include_examples "requires authentication"
+    include_examples "requires some params", :app_id, :id
+
+    it { is_expected.to have_requested(:patch, api_path.merge("/apps/my-app-id/collaborators/collaborator-id")) }
+  end
 end
