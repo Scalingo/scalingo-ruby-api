@@ -1,5 +1,7 @@
 ## To be released
 
+## 4.0.0 - 2025-07-29
+
 * New: add collaborator update method
 
 ## 4.0.beta1 - 2024-04-15
