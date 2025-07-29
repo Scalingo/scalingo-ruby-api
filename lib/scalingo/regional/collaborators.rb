@@ -6,5 +6,6 @@ module Scalingo
     post :create, "apps/{app_id}/collaborators", root_key: "collaborator"
     delete :delete, "apps/{app_id}/collaborators/{id}"
     get :accept, "apps/collaboration?token={token}"
+    patch :update, "apps/{app_id}/collaborators/{id}", root_key: "collaborator"
   end
 end

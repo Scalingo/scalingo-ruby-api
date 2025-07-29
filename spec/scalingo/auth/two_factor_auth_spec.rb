@@ -4,7 +4,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth, type: :endpoint do
   describe "status" do
     subject(:response) { instance.status(**arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:get, api_path.merge("/client/tfa")) }
   end
@@ -14,7 +14,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth, type: :endpoint do
 
     let(:body) { {provider: "value"} }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:post, api_path.merge("/client/tfa")).with(body: {tfa: body}) }
   end
@@ -24,7 +24,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth, type: :endpoint do
 
     let(:body) { {attempt: "value"} }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:post, api_path.merge("/client/tfa/validate")).with(body: {tfa: body}) }
   end
@@ -32,7 +32,7 @@ RSpec.describe Scalingo::Auth::TwoFactorAuth, type: :endpoint do
   describe "disable" do
     subject(:response) { instance.disable(**arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:delete, api_path.merge("/client/tfa")) }
   end

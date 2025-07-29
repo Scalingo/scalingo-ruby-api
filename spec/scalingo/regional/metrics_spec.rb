@@ -14,8 +14,8 @@ RSpec.describe Scalingo::Regional::Metrics, type: :endpoint do
 
     let(:params) { {app_id: app_id, metric: "some-metric"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :metric
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :metric
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/stats/some-metric")) }
 

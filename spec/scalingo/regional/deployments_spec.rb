@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Regional::Deployments, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments")) }
 
@@ -25,8 +25,8 @@ RSpec.describe Scalingo::Regional::Deployments, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "deployment-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments/deployment-id")) }
   end
@@ -36,8 +36,8 @@ RSpec.describe Scalingo::Regional::Deployments, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "deployment-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/deployments/deployment-id/output")) }
   end

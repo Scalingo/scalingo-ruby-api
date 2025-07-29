@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/variables")) }
   end
@@ -20,8 +20,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/variables")).with(body: {variable: body}) }
   end
@@ -32,8 +32,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
     let(:params) { {app_id: app_id, id: "variable-id"} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/variables/variable-id")).with(body: {variable: body}) }
   end
@@ -44,8 +44,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { [{field: "value"}] }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/variables")).with(body: {variables: body}) }
   end
@@ -55,8 +55,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "variable-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/variables/variable-id")) }
   end
@@ -67,8 +67,8 @@ RSpec.describe Scalingo::Regional::Environment, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { [1, 2, 3] }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/variables")).with(body: {variable_ids: body}) }
   end

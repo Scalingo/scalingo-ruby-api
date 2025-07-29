@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Regional::Domains, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/domains")) }
   end
@@ -20,8 +20,8 @@ RSpec.describe Scalingo::Regional::Domains, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/domains")).with(body: {domain: body}) }
   end
@@ -31,8 +31,8 @@ RSpec.describe Scalingo::Regional::Domains, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "domain-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/domains/domain-id")) }
   end
@@ -43,8 +43,8 @@ RSpec.describe Scalingo::Regional::Domains, type: :endpoint do
     let(:params) { {app_id: app_id, id: "domain-id"} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/domains/domain-id")).with(body: {domain: body}) }
   end
@@ -54,8 +54,8 @@ RSpec.describe Scalingo::Regional::Domains, type: :endpoint do
 
     let(:params) { {app_id: app_id, id: "domain-id"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id, :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id, :id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/domains/domain-id")) }
   end

@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Database::Databases, type: :endpoint do
 
     let(:params) { {id: id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:get, api_path.merge("/databases/database-id")) }
   end
@@ -19,8 +19,8 @@ RSpec.describe Scalingo::Database::Databases, type: :endpoint do
 
     let(:params) { {id: id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :id
 
     it { is_expected.to have_requested(:post, api_path.merge("/databases/database-id/upgrade")) }
   end

@@ -8,8 +8,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/scm_repo_link")) }
   end
@@ -19,8 +19,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/scm_repo_link/branches")) }
   end
@@ -30,8 +30,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:get, api_path.merge("/apps/my-app-id/scm_repo_link/pulls")) }
   end
@@ -42,8 +42,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scm_repo_link")).with(body: {scm_repo_link: body}) }
   end
@@ -54,8 +54,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scm_repo_link/manual_deploy")).with(body: body) }
   end
@@ -66,8 +66,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:post, api_path.merge("/apps/my-app-id/scm_repo_link/manual_review_app")).with(body: body) }
   end
@@ -78,8 +78,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
     let(:params) { {app_id: app_id} }
     let(:body) { {field: "value"} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:put, api_path.merge("/apps/my-app-id/scm_repo_link")).with(body: {scm_repo_link: body}) }
   end
@@ -89,8 +89,8 @@ RSpec.describe Scalingo::Regional::ScmRepoLinks, type: :endpoint do
 
     let(:params) { {app_id: app_id} }
 
-    include_examples "requires authentication"
-    include_examples "requires some params", :app_id
+    it_behaves_like "requires authentication"
+    it_behaves_like "requires some params", :app_id
 
     it { is_expected.to have_requested(:delete, api_path.merge("/apps/my-app-id/scm_repo_link")) }
   end

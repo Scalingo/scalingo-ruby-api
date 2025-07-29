@@ -33,30 +33,30 @@ RSpec.describe Scalingo::ExtractMeta do
     let(:content_type) { "text/html" }
     let(:body) { "string".to_json }
 
-    include_examples "no meta extraction"
+    it_behaves_like "no meta extraction"
   end
 
   context "without a body" do
-    include_examples "no meta extraction"
+    it_behaves_like "no meta extraction"
   end
 
   context "with a non indexable body" do
     let(:body) { "string".to_json }
 
-    include_examples "no meta extraction"
+    it_behaves_like "no meta extraction"
   end
 
   context "with a non hash indexable body" do
     let(:body) { [1, 2, 3].to_json }
 
-    include_examples "no meta extraction"
+    it_behaves_like "no meta extraction"
   end
 
   context "with a hash" do
     context "without a meta key" do
       let(:body) { {a: 1, b: 2}.to_json }
 
-      include_examples "no meta extraction"
+      it_behaves_like "no meta extraction"
     end
 
     context "with a generic meta key" do

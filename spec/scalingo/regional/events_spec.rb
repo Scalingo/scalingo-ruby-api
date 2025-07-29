@@ -16,7 +16,7 @@ RSpec.describe Scalingo::Regional::Events, type: :endpoint do
   describe "list" do
     subject(:response) { instance.list(**arguments) }
 
-    include_examples "requires authentication"
+    it_behaves_like "requires authentication"
 
     it { is_expected.to have_requested(:get, api_path.merge("/events")) }
 
