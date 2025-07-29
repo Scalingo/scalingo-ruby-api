@@ -1,3 +1,7 @@
+## To be released
+
+* New: add collaborator update method
+
 ## 4.0.beta1 - 2024-04-15
 
 * Breaking change: exceptions are raised on error responses (4xx, 5xx) and other errors (connection issue, timeouts)
