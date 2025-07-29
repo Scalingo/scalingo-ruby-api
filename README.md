@@ -150,3 +150,21 @@ bundle
 ```bash
 bundle exec rspec
 ```
+
+## Deploy a new version
+
+In order to deploy a new version, you first need to tag that version. For that, two files need to be updated:
+- The CHANGELOG, to include the list of the changes you are releasing
+- `lib/scalingo/version.rb` with the version number
+
+Once the PR is merged, you need to tag the version. EG:
+
+```bash
+git checkout master
+git pull
+git tag v4.0.beta3
+git push origin master --tags
+```
+
+When the tags are pushed, you need to go [here](https://github.com/Scalingo/scalingo-ruby-api/releases) and create a new
+release with the new tag. Once this is done, a GitHub Action will take care of publishing the new version.
