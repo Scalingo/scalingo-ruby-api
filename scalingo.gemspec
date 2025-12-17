@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "addressable", [">= 2.8.0", "< 3"]
-  s.add_dependency "activesupport", [">= 5", "< 8.1"]
+  s.add_dependency "activesupport", [">= 5", "< 9"]
   s.add_dependency "faraday", "~> 2.0"
   s.add_dependency "multi_json", ">= 1.0.3", "~> 1.0"
   s.add_dependency "jwt"
