@@ -4,6 +4,7 @@ RSpec.describe Scalingo::TokenHolder do
   subject(:token_holder_dummy_class) do
     Class.new {
       include(Scalingo::TokenHolder)
+
       attr_accessor :config
     }
   end
