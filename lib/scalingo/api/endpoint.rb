@@ -5,6 +5,7 @@ module Scalingo
   module API
     class Endpoint
       extend Forwardable
+
       attr_reader :client
 
       # Add a handler for a given endpoint

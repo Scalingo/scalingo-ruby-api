@@ -18,7 +18,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0
+        ruby-version: 3.2
         bundler-cache: true
     - name: Rubocop checks
       run: bundle exec rubocop
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['3.1', '3.2', '3.3', '3.4']
+        ruby-version: ['3.2', '3.3', '3.4']
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby
