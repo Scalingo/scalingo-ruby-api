@@ -1,8 +1,16 @@
 ## To be released
 
+## 4.0.beta4 - 2026-02-26
+
+* Added support for Ruby on Rails 8.x ([PR#73](https://github.com/Scalingo/scalingo-ruby-api/pull/73) by [@zaratan](https://github.com/zaratan))
+
 ## 4.0.beta3 - 2025-07-29
 
 * New: add collaborator update method
+
+## 4.0.beta2 - 2025-03-07
+
+* Added support for Ruby on Rails 8.0 ([PR#67](https://github.com/Scalingo/scalingo-ruby-api/pull/67) by [@zaratan](https://github.com/zaratan))
 
 ## 4.0.beta1 - 2024-04-15
 
@@ -18,10 +26,6 @@
     * one "main" internal method, `Endpoint#request`
 * Breaking change: automatic digging of the value if the reponse body is an object with a single key
 * Breaking change: remove `Scalingo::API::Reponse` in favor of `Faraday::Response`
-
-## 4.0.beta2 - 2025-03-07
-
-* Added support for Ruby on Rails 8.0 ([PR#67](https://github.com/Scalingo/scalingo-ruby-api/pull/67) by [@zaratan](https://github.com/zaratan))
 
 ## 3.6.0 - 2025-03-07
 
