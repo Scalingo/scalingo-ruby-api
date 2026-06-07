@@ -1,5 +1,7 @@
 ## To be released
 
+* Change: remove the unused `multi_json` runtime dependency. JSON is handled by Faraday's `:json` middleware (stdlib `JSON`), so the gem never called `MultiJson`.
+
 ## 4.0.beta4 - 2026-02-26
 
 * Added support for Ruby on Rails 8.x ([PR#73](https://github.com/Scalingo/scalingo-ruby-api/pull/73) by [@zaratan](https://github.com/zaratan))
