@@ -1,5 +1,6 @@
 ## To be released
 
+* Added support for app firewall rules
 * Change: remove the unused `multi_json` runtime dependency. JSON is handled by Faraday's `:json` middleware (stdlib `JSON`), so the gem never called `MultiJson`.
 
 ## 4.0.beta4 - 2026-02-26

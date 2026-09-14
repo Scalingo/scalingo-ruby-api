@@ -4,7 +4,7 @@ RSpec.describe Scalingo::Regional do
   subject { described_class.new("url") }
 
   %w[
-    addons apps autoscalers collaborators containers deployments domains
+    addons app_firewall_rules apps autoscalers collaborators containers deployments domains
     environment events logs metrics notifiers operations scm_repo_links
   ].each do |section|
     it "handles requests for #{section}" do

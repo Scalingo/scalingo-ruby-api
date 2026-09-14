@@ -76,6 +76,7 @@ module Scalingo
     def_delegator :auth, :user
 
     def_delegator :region, :addons
+    def_delegator :region, :app_firewall_rules
     def_delegator :region, :apps
     def_delegator :region, :collaborators
     def_delegator :region, :containers
