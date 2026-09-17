@@ -3,6 +3,7 @@ require "scalingo/api/client"
 module Scalingo
   class Regional < API::Client
     require "scalingo/regional/addons"
+    require "scalingo/regional/app_firewall_rules"
     require "scalingo/regional/apps"
     require "scalingo/regional/autoscalers"
     require "scalingo/regional/collaborators"
@@ -19,6 +20,7 @@ module Scalingo
 
     register_handlers!(
       addons: Addons,
+      app_firewall_rules: AppFirewallRules,
       apps: Apps,
       autoscalers: Autoscalers,
       collaborators: Collaborators,
